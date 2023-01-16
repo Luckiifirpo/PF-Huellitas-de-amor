@@ -1,0 +1,32 @@
+
+Entidad: Animal
+Atributos:
+-Fecha de publicacion del aviso
+-Especie
+-Nombre
+-Edad
+-Peso
+-Tamaño
+-Genero
+-Raza (en caso de tener)
+-Descripción (Comportamiento, aspectos de salud, entre otros)
+-Foto
+
+Entidad: Usuario
+Atributos:
+-Nombre
+-Apellidos
+-Edad
+-Dirección
+-Correo electrónico
+-Trabaja?
+
+Entidad: Adopción
+Atributos:
+-Fecha de adopción
+-Estado
+
+Relaciones:
+-Animal-Usuario (1 a *): Un usuario puede adoptar muchos animales, pero un animal sólo puede ser adoptado por un usuario.
+-Usuario-Adopción (1 a *): Un usuario puede realizar muchas adopciones, pero una adopción sólo puede ser realizada por un usuario.
+-Animal-Adopción (* a 1): Muchos animales pueden ser adoptados, pero una adopción sólo puede ser realizada por cada animal.
