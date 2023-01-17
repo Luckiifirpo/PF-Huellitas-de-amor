@@ -8,5 +8,40 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    publication: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    species: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    age: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    weight: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    size: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    race: {
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false, 
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    }
   });
 };

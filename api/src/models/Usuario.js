@@ -8,5 +8,25 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    surname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    age: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    direction: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    work: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, 
+    }
   });
 };
