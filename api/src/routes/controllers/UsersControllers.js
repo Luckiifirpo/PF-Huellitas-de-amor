@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Usuario, Animal } = require('../db');
+const { Usuario, Animal } = require('../../db');
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
