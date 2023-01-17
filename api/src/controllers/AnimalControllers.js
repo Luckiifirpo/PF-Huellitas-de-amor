@@ -21,7 +21,7 @@ const getAllAnimal = async (req, res) => {
             return res.send(animal);
         }
     } catch (error) {
-        
+        res.status(404).send(error.message);
     }
 }
 
