@@ -34,6 +34,12 @@ const { Adopcion, Animal, Usuario } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+Usuario.hasMany(Animal, {foreignKey: 'idUsuario'});
+Animal.belongsTo(Usuario, {foreignKey: 'idUsuario'});
+Usuario.hasMany(Adopcion, {foreignKey: 'idUsuario'});
+Adopcion.belongsTo(Usuario, {foreignKey: 'idUsuario'});
+Animal.hasOne(Adopcion, {foreignKey: 'idAnimal'});
+Adopcion.belongsTo(Animal, {foreignKey: 'idAnimal'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
