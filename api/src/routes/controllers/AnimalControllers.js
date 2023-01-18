@@ -27,15 +27,19 @@ const getAllAnimal = async (req, res) => {
 
 const getDetail = async(req,res) => {
     const { id } = req.params;
-
-    if(id){
-        const animalId = await Animal.findOne({
-            where: {
-                id: id
-            }
-        });
-        return res.send(animalId);
+    try {
+        if(id){
+            const animalId = await Animal.findOne({
+                where: {
+                    id: id
+                }
+            });
+            return res.send(animalId);
+        }
+    } catch (error) {
+        res.status(400).send({error})
     }
+
 }
 
 const postAnimal = async (req, res) => {
@@ -56,7 +60,7 @@ const postAnimal = async (req, res) => {
     });
 
     try {
-        res.status(200).send(createdAnimal)
+        res.status(201).send(createdAnimal)
     } catch (error) {
         res.status(400).send({error: error.message})
     }
@@ -82,16 +86,16 @@ const updateAnimal = async (req, res) => {
         const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
 
         const animal = await Animal.findByPk(id)
-        animal.name = name;
-        animal.publication = publication;
-        animal.species = species;
-        animal.age = age;
-        animal.weight = weight;
-        animal.size = size;
-        animal.gender = gender;
-        animal.race = race;
-        animal.description = description;
-        animal.image = image;
+        animal.name = name || animal.name;
+        animal.publication = publication || animal.publication;
+        animal.species = species || animal.species;
+        animal.age = age || animal.age;
+        animal.weight = weight || animal.weight;
+        animal.size = size || animal.size;
+        animal.gender = gender || animal.gender;
+        animal.race = race || animal.race;
+        animal.description = description || animal.description;
+        animal.image = image || animal.image;
         await animal.save()
 
         res.json(animal)
