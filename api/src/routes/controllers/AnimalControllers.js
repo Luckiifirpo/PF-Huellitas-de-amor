@@ -62,8 +62,49 @@ const postAnimal = async (req, res) => {
     }
 }
 
+const deleteAnimal = async (req, res) => {
+    try{
+        const { id } = req.params
+        await Animal.destroy({
+            where: {
+                id
+            }
+        })
+        res.sendStatus(204)
+    } catch(error){ 
+        return res.status(500).json({message: error.message})
+    }
+}
+
+const updateAnimal = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+
+        const animal = await Animal.findByPk(id)
+        animal.name = name;
+        animal.publication = publication;
+        animal.species = species;
+        animal.age = age;
+        animal.weight = weight;
+        animal.size = size;
+        animal.gender = gender;
+        animal.race = race;
+        animal.description = description;
+        animal.image = image;
+        await animal.save()
+
+        res.json(animal)
+
+    } catch(error){
+        return res.status(500).json({message: error.message})
+    }
+}
+
 module.exports = {
     getAllAnimal,
     getDetail,
-    postAnimal
+    postAnimal,
+    deleteAnimal,
+    updateAnimal
 }

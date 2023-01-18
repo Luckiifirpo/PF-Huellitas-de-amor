@@ -45,7 +45,43 @@ const postUser = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    try{
+        const { id } = req.params
+        await Usuario.destroy({
+            where: {
+                id
+            }
+        })
+        res.sendStatus(204)
+    } catch(error){ 
+        return res.status(500).json({message: error.message})
+    }
+}
+
+const updateUser = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const { name, surname, age, direction, email, work} = req.body;
+
+        const usuario = await Animal.findByPk(id)
+        usuario.name = name;
+        usuario.surname = surname;
+        usuario.age = age;
+        usuario.direction = direction;
+        usuario.email = email;
+        usuario.work = work;
+        await usuario.save();
+
+        res.json(usuario)
+    } catch(error){
+        return res.status(500).json({message: error.message})
+    }
+}
+
 module.exports = {
     getAllUsers,
-    postUser
+    postUser,
+    deleteUser,
+    updateUser
 }
