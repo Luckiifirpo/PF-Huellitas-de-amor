@@ -25,8 +25,22 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    try{
+        const { id } = req.params
+        await Usuario.destroy({
+            where: {
+                id
+            }
+        })
+        res.sendStatus(204)
+    } catch(error){ 
+        return res.status(500).json({message: error.message})
+    }
+}
 
 
 module.exports = {
-    getAllUsers
+    getAllUsers,
+    deleteUser
 }
