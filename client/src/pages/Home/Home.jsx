@@ -4,15 +4,15 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import Avatar from '@mui/material/Avatar'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import perritoHome from '../assets/image/image_home.png'
-import gatitoHome from '../assets/image/image_quienssomos.png'
-import banner3 from '../assets/image/banner3.png'
-import banner4 from '../assets/image/banner4.png'
+import perritoHome from '../../assets/image/image_home.png'
+import gatitoHome from '../../assets/image/image_quienssomos.png'
+import banner3 from '../../assets/image/banner3.png'
+import banner4 from '../../assets/image/banner4.png'
+import style from "./Home.module.css"
 
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
         </Grid>
       </Container>
 
-      <Box className="background-fancy">
+      <Box className={style['background-fancy']}>
         <Container >
           <Grid container spacing={2} alignItems="center">
             <Grid item md={6} sx={{color:'#fff'}}>
@@ -94,7 +94,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Container>
-      <Box className="background-image-home-contact">
+      <Box className={style['background-image-home-contact']}>
         <Container>
           <Grid container>
             <Grid item md={8} sx={{marginTop:'20px'}}>

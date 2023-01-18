@@ -1,11 +1,13 @@
 import React from 'react'
 import { Box, Container, Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
+import style from "./Footer.module.css"
+
 const Footer = () => {
   return (
-    <Box className="bg-footer">
+    <Box className={style['bg-footer']}>
         <Container>
-            <Grid container justifyContent="space-between" className="footer">
+            <Grid container justifyContent="space-between" className={style.footer}>
                 <Grid item md={4}>
                     <Box>
                         <Typography component={Link}>

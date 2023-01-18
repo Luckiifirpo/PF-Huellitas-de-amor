@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from '../assets/image/logo.svg'
+import Logo from '../../assets/image/logo.svg'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Container from '@mui/material/Container'
 
