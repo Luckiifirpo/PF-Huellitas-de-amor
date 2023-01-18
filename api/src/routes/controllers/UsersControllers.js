@@ -64,7 +64,7 @@ const updateUser = async (req, res) => {
         const { id } = req.params;
         const { name, surname, age, direction, email, work} = req.body;
 
-        const usuario = await Animal.findByPk(id)
+        const usuario = await Usuario.findByPk(id)
         usuario.name = name;
         usuario.surname = surname;
         usuario.age = age;
