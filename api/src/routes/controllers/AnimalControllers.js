@@ -1,5 +1,5 @@
-const { Op } = require('sequelize');
-const { Animal } = require('../db');
+const {Op, Animal} = require("../../db")
+
 
 const getAllAnimal = async (req, res) => {
     const { name } = req.query;
@@ -38,7 +38,32 @@ const getDetail = async(req,res) => {
     }
 }
 
+const postAnimal = async (req, res) => {
+    const {id, name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+
+    const createdAnimal = await Animal.create({
+       id,
+       name,
+       publication,
+       species,
+       age,
+       weight,
+       size,
+       gender,
+       race,
+       description,
+       image,
+    });
+
+    try {
+        res.status(200).send(createdAnimal)
+    } catch (error) {
+        res.status(400).send({error: error.message})
+    }
+}
+
 module.exports = {
     getAllAnimal,
-    getDetail
+    getDetail,
+    postAnimal
 }
