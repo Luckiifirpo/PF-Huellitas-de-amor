@@ -62,8 +62,23 @@ const postAnimal = async (req, res) => {
     }
 }
 
+const deleteAnimal = async (req, res) => {
+    try{
+        const { id } = req.params
+        await Animal.destroy({
+            where: {
+                id
+            }
+        })
+        res.sendStatus(204)
+    } catch(error){ 
+        return res.status(500).json({message: error.message})
+    }
+}
+
 module.exports = {
     getAllAnimal,
     getDetail,
-    postAnimal
+    postAnimal,
+    deleteAnimal
 }
