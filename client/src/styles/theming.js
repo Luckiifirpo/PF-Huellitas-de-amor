@@ -12,8 +12,12 @@ const theme = createTheme({
         info: {
           main: '#FFAB13',
           contrastText: '#fff',
+        },
+        warning:{
+          main: '#FFFFFF'
         }
       },
+      
       typography: {
         fontFamily: [
           'Manjari'
