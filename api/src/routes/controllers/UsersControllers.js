@@ -25,8 +25,27 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+const postUser = async (req, res) => {
+    const {id, name, surname, age, direction, email, work} = req.body
 
+    const newUser = await Usuario.create({
+        id,
+        name,
+        surname,
+        age,
+        direction,
+        email,
+        work,
+    })
+
+    try {
+        res.status(200).send(newUser)
+    } catch (error) {
+        res.status(400).send({error: error.message})
+    }
+}
 
 module.exports = {
-    getAllUsers
+    getAllUsers,
+    postUser
 }
