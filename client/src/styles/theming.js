@@ -10,6 +10,11 @@ const theme = createTheme({
           main: '#3B57A9',
         },
       },
+      typography: {
+        fontFamily: [
+          'Manjari'
+        ].join(','),
+      },
 })
 
 export default theme;
