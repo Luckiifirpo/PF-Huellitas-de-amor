@@ -4,30 +4,6 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-<<<<<<< HEAD
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-# package-lock.json ignore
-package-lock.json
-#.env ignore
-.env
-=======
 lerna-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
@@ -129,4 +105,3 @@ dist
 
 # package-lock.json
 package-lock.json
->>>>>>> 924341a8418e4936a85755eefd5b9a4d6dd1610a
