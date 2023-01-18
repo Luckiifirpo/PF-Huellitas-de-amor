@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home"
-import Adoptions from "../pages/Adoptions"
-import AboutUs from "../pages/AboutUs"
-import Donations from "../pages/Donations"
-import Contact from "../pages/Contact"
+import Home from "../pages/Home/Home"
+import Adoptions from "../pages/Adoptions/Adoptions"
+import AboutUs from "../pages/AboutUs/AboutUs"
+import Donations from "../pages/Donations/Donations"
+import Contact from "../pages/Contact/Contact"
 import LayoutMain from "../layout/LayoutMain";
 
 function App() {

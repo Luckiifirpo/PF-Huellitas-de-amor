@@ -1,0 +1,17 @@
+.bg-footer {
+    padding: 100px 0;
+    background-color: #FF3041;
+    border-radius: 60% 0px 0px 0px;
+}
+
+.footer  {
+    color:#fff;
+}
+.footer a {
+    color:#FFAB13;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+}
