@@ -12,6 +12,7 @@ import perritoHome from '../../assets/image/image_home.png'
 import gatitoHome from '../../assets/image/image_quienssomos.png'
 import banner3 from '../../assets/image/banner3.png'
 import banner4 from '../../assets/image/banner4.png'
+import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
 
 
@@ -69,6 +70,9 @@ const Home = () => {
             <img src={banner3} alt='banner home' />
           </Grid>
           <Grid item md={6}>
+          <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
+              adopciones
+            </Typography>
             <Typography component="p" sx={{margin:'10px 0px'}}>
               Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos
             </Typography>
@@ -80,7 +84,7 @@ const Home = () => {
       <Container>
         <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
-            <img src={banner4} alt='banner home' />
+            <img src={banner4} alt='banner home' className={style.bannerContent} />
           </Grid>
           <Grid item md={6}>
             <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
@@ -94,19 +98,23 @@ const Home = () => {
           </Grid>
         </Grid>
       </Container>
-      <Box className={style['background-image-home-contact']}>
+      <Box>
         <Container>
           <Grid container>
-            <Grid item md={8} sx={{marginTop:'20px'}}>
+            <Grid item md={4} sx={{marginTop:'20px'}}>
               <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-                para más información
+              más información
               </Typography>
               <Typography component="p" sx={{margin:'10px 0px'}}>
               Envíanos un mensaje con todas tus dudas e inquietudes, estamos para ayudarte.
               </Typography>
               <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>contacto</Button>
             </Grid>
+            <Grid item md={8} sx={{marginBottom:'-10px'}}>
+              <img src={banner5} alt='fondo perro'/>
+            </Grid>
           </Grid>
+
         </Container>
       </Box>
     </>

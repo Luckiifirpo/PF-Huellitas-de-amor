@@ -1,7 +1,7 @@
 .bg-footer {
     padding: 100px 0;
     background-color: #FF3041;
-    border-radius: 60% 0px 0px 0px;
+    border-radius: 200px 0px 0px 0px;
 }
 
 .footer  {
@@ -14,4 +14,9 @@
     flex-direction: column;
     gap: 10px;
     font-size: 1.2rem;
+}
+
+.newsletter{
+    border:none;
+    color:#fff;
 }
