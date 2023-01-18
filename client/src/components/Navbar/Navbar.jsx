@@ -36,6 +36,10 @@ const navItems = [
   {
     name:'Contacto',
     route:'/contacto'
+  }, 
+  {
+    name:'Prueba',
+    route:'/prueba'
   }
 ];
 
