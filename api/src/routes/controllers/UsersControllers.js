@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
-const {generateId} = require("../utils/utils")
+const {generateId} = require("../utils/utils"); 
+const bcryptjs = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -27,8 +28,9 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const { name, surname, age, direction, email, work} = req.body
-
+    const { name, surname, age, direction, email, work, password} = req.body
+    const salt = await bcryptjs.genSalt(10);
+    password = await bcryptjs.hash(password, salt);
     const newUser = await Usuario.create({
         id: generateId(),
         name,
@@ -37,6 +39,7 @@ const postUser = async (req, res) => {
         direction,
         email,
         work,
+        password
     })
 
     try {
