@@ -1,0 +1,22 @@
+.logo{
+    width: 115px;
+    height: auto;
+}
+
+.input_width{
+    width: 300px;
+}
+
+.divider{
+    width: 350px;
+    margin: 10px 0px !important;
+}
+
+.auth_button{
+    display: flex;
+    justify-content: flex-start !important;
+}
+
+.link{
+    color: #3B57A9;
+}

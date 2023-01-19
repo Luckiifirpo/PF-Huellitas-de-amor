@@ -1,5 +1,5 @@
-const {Op, Animal} = require("../../db")
-
+const {Op, Animal, Usuario} = require("../../db")
+const {generateId} = require("../utils/utils")
 
 const getAllAnimal = async (req, res) => {
     const { name } = req.query;
@@ -27,22 +27,27 @@ const getAllAnimal = async (req, res) => {
 
 const getDetail = async(req,res) => {
     const { id } = req.params;
-
-    if(id){
-        const animalId = await Animal.findOne({
-            where: {
-                id: id
-            }
-        });
-        return res.send(animalId);
+    try {
+        if(id){
+            const animalId = await Animal.findOne({
+                where: {
+                    id: id
+                }
+            });
+            return res.send(animalId);
+        }
+    } catch (error) {
+        res.status(400).send({error})
     }
+
 }
 
 const postAnimal = async (req, res) => {
-    const {id, name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+    const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
 
     const createdAnimal = await Animal.create({
-       id,
+       id: generateId(),
+       isAdopted: false,
        name,
        publication,
        species,
@@ -56,7 +61,7 @@ const postAnimal = async (req, res) => {
     });
 
     try {
-        res.status(200).send(createdAnimal)
+        res.status(201).send(createdAnimal)
     } catch (error) {
         res.status(400).send({error: error.message})
     }
@@ -79,19 +84,20 @@ const deleteAnimal = async (req, res) => {
 const updateAnimal = async (req, res) => {
     try{
         const { id } = req.params;
-        const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+        const { name, publication, species, age, weight, size, gender, race, description, image, isAdopted} = req.body;
 
         const animal = await Animal.findByPk(id)
-        animal.name = name;
-        animal.publication = publication;
-        animal.species = species;
-        animal.age = age;
-        animal.weight = weight;
-        animal.size = size;
-        animal.gender = gender;
-        animal.race = race;
-        animal.description = description;
-        animal.image = image;
+        animal.name = name || animal.name;
+        animal.publication = publication || animal.publication;
+        animal.species = species || animal.species;
+        animal.age = age || animal.age;
+        animal.weight = weight || animal.weight;
+        animal.size = size || animal.size;
+        animal.gender = gender || animal.gender;
+        animal.race = race || animal.race;
+        animal.description = description || animal.description;
+        animal.image = image || animal.image;
+        animal.isAdopted = isAdopted || animal.isAdopted
         await animal.save()
 
         res.json(animal)

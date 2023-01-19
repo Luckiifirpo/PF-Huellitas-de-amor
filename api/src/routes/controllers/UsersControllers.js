@@ -1,5 +1,7 @@
 const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
+const {generateId} = require("../utils/utils"); 
+const bcryptjs = require('bcryptjs');
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -26,16 +28,18 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const {id, name, surname, age, direction, email, work} = req.body
-
+    const { name, surname, age, direction, email, work, password} = req.body
+    const salt = await bcryptjs.genSalt(10);
+    const encrypted = await bcryptjs.hash(password, salt);
     const newUser = await Usuario.create({
-        id,
+        id: generateId(),
         name,
         surname,
         age,
         direction,
         email,
         work,
+        password: encrypted
     })
 
     try {
@@ -64,13 +68,13 @@ const updateUser = async (req, res) => {
         const { id } = req.params;
         const { name, surname, age, direction, email, work} = req.body;
 
-        const usuario = await Usuario.findByPk(id)
-        usuario.name = name;
-        usuario.surname = surname;
-        usuario.age = age;
-        usuario.direction = direction;
-        usuario.email = email;
-        usuario.work = work;
+        const usuario = await Animal.findByPk(id)
+        usuario.name = name || usuario.name;
+        usuario.surname = surname || usuario.surname;
+        usuario.age = age || usuario.age;
+        usuario.direction = direction || usuario.direction;
+        usuario.email = email || usuario.email;
+        usuario.work = work || usuario.work;
         await usuario.save();
 
         res.json(usuario)

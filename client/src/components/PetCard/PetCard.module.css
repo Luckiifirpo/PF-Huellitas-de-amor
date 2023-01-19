@@ -1,0 +1,25 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card *{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.additional_info{
+    margin: 5px 0px;
+    padding-left: 10px;
+}
+
+.additional_info li{
+    display: inline;
+    margin-right: 10px;
+}
+
+.additional_info li::before{
+    content: "●";
+    margin-right: 3px;
+}

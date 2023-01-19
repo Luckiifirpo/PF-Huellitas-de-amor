@@ -1,0 +1,10 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card *{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}

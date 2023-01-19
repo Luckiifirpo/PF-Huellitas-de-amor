@@ -14,9 +14,15 @@ import banner3 from '../../assets/image/banner3.png'
 import banner4 from '../../assets/image/banner4.png'
 import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
-
+import {useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate()
+ const  handlerAdopciones = (e) =>{
+navigate("/adopciones")
+
+   }
+
   return (
     <>
       <Container >
@@ -31,7 +37,7 @@ const Home = () => {
             <Typography component="p" sx={{margin:'10px 0px'}}>
               Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>¡Adoptame!</Button>
+            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerAdopciones(e)}>¡Adoptame!</Button>
           </Grid>
         </Grid>
       </Container>

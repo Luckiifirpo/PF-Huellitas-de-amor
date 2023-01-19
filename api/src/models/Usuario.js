@@ -7,7 +7,10 @@ module.exports = (sequelize) => {
     id:{
       type: DataTypes.UUID, 
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
+      validate:{
+        isUUID: 4,
+      }
     },
     name: {
       type: DataTypes.STRING,
@@ -18,8 +21,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     age: {
-      type: DataTypes.STRING,
-      allowNull: false, 
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      get(){
+        const age = this.getDataValue('age');
+        return age ? `${age} years old` : null;
+       }
     },
     direction: {
       type: DataTypes.STRING,
@@ -27,11 +34,18 @@ module.exports = (sequelize) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false, 
+      allowNull: false,
+      validate:{
+        isEmail: true,
+      }
     },
     work: {
       type: DataTypes.BOOLEAN,
       allowNull: false, 
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 };
