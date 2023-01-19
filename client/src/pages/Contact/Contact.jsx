@@ -22,16 +22,16 @@ const Contact = () => {
               alignItems="center"
               sx={{height:'100%'}}
             >
-              <Grid item md={6} sx={{height:'70%', background:'#fff', position:'relative', zIndex:'6', borderRadius:'10%', padding:'0px 100px', boxShadow: '0px 0px 21px 0px rgba(0,0,0,0.1)'}}>
-                <Box component="form" sx={{display:'flex',flexDirection:'column', gap:'15px', justifyContent:'center',height:'100%'}}>
-                  <Typography component="h1" variant="h3" align='center' sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
+              <Grid item md={6} >
+                <Box component="form" sx={{display:'flex',flexDirection:'column', gap:'15px', justifyContent:'center',height:'100%', margin:'0px 70px'}}>
+                  <Typography component="h1" variant="h4" align='center' sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
                     CONTACTANOS
                   </Typography>
                   <TextField label="Nombre" variant="standard" />
                   <TextField label="Correo" variant="standard" />
                   <TextField label="Mensaje" variant="standard" />
 
-                  <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>Enviar</Button>
+                  <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', marginTop:'30px'}}>Enviar</Button>
 
                 </Box>
               </Grid>
