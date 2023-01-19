@@ -16,18 +16,29 @@ module.exports = (sequelize) => {
     publication: {
       type: DataTypes.DATE,
       allowNull: false,
+      validate:{
+        isDate: true
+      }
     },
     species: {
       type: DataTypes.STRING,
       allowNull: false, 
     },
     age: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false, 
+      get(){
+        const age = this.getDataValue('age');
+        return age ? `${age} years old` : null;
+      }
     },
     weight: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      get(){
+        const weight = this.getDataValue('weight');
+        return weight ? `${weight} kg` : null;
+      }
     },
     size: {
       type: DataTypes.STRING,
@@ -39,6 +50,7 @@ module.exports = (sequelize) => {
     },
     race: {
       type: DataTypes.STRING,
+      defaultValue: "mestizo"
     },
     description: {
       type: DataTypes.TEXT,

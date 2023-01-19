@@ -30,7 +30,7 @@ const getAllUsers = async (req, res) => {
 const postUser = async (req, res) => {
     const { name, surname, age, direction, email, work, password} = req.body
     const salt = await bcryptjs.genSalt(10);
-    password = await bcryptjs.hash(password, salt);
+    const encrypted = await bcryptjs.hash(password, salt);
     const newUser = await Usuario.create({
         id: generateId(),
         name,
@@ -39,7 +39,7 @@ const postUser = async (req, res) => {
         direction,
         email,
         work,
-        password
+        password: encrypted
     })
 
     try {
