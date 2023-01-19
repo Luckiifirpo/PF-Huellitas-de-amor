@@ -32,6 +32,10 @@ module.exports = (sequelize) => {
     work: {
       type: DataTypes.BOOLEAN,
       allowNull: false, 
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 };
