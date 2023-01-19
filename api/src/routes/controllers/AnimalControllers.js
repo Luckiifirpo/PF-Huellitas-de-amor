@@ -1,4 +1,4 @@
-const {Op, Animal} = require("../../db")
+const {Op, Animal, Usuario} = require("../../db")
 const {generateId} = require("../utils/utils")
 
 const getAllAnimal = async (req, res) => {
@@ -47,6 +47,7 @@ const postAnimal = async (req, res) => {
 
     const createdAnimal = await Animal.create({
        id: generateId(),
+       isAdopted: false,
        name,
        publication,
        species,
@@ -83,7 +84,7 @@ const deleteAnimal = async (req, res) => {
 const updateAnimal = async (req, res) => {
     try{
         const { id } = req.params;
-        const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+        const { name, publication, species, age, weight, size, gender, race, description, image, isAdopted} = req.body;
 
         const animal = await Animal.findByPk(id)
         animal.name = name || animal.name;
@@ -96,6 +97,7 @@ const updateAnimal = async (req, res) => {
         animal.race = race || animal.race;
         animal.description = description || animal.description;
         animal.image = image || animal.image;
+        animal.isAdopted = isAdopted || animal.isAdopted
         await animal.save()
 
         res.json(animal)

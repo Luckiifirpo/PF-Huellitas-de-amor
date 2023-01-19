@@ -47,6 +47,9 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
       allowNull: false, 
+    },
+    isAdopted: {
+      type: DataTypes.BOOLEAN,
     }
   });
 };
