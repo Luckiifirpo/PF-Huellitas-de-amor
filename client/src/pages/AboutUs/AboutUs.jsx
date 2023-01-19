@@ -60,12 +60,11 @@ const testingData = [
 const AboutUs = () => {
   return (
     <div>
-      <Container>
+      <Container style={{ marginTop: 30, marginBottom: 30 }} >
         <Grid
           container
           spacing={2}
-          justifyContent="flex-start"
-          alignItems="baseline"
+          alignItems="flex-start"
         >
           <Grid item md={3}>
             <Typography
@@ -89,10 +88,10 @@ const AboutUs = () => {
             </Typography>
           </Grid>
           <Grid Grid item md={9}>
-            <Grid container spacing={2} alignItems="center">
+            <Grid container spacing={2} alignItems="flex-start">
               {testingData.map((testingData, key) => {
                 return (
-                  <Grid key={key} item md={4}>
+                  <Grid key={key} item md={4} alignSelf="stretch">
                     <TeamMemberCard data={testingData} />
                   </Grid>
                 );
