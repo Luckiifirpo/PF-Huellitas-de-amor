@@ -1,5 +1,5 @@
 const {Op, Animal} = require("../../db")
-
+const {generateId} = require("../utils/utils")
 
 const getAllAnimal = async (req, res) => {
     const { name } = req.query;
@@ -43,10 +43,10 @@ const getDetail = async(req,res) => {
 }
 
 const postAnimal = async (req, res) => {
-    const {id, name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+    const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
 
     const createdAnimal = await Animal.create({
-       id,
+       id: generateId(),
        name,
        publication,
        species,

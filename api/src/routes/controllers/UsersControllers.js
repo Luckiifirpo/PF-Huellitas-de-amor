@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
+const {generateId} = require("../utils/utils")
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -26,10 +27,10 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const {id, name, surname, age, direction, email, work} = req.body
+    const { name, surname, age, direction, email, work} = req.body
 
     const newUser = await Usuario.create({
-        id,
+        id: generateId(),
         name,
         surname,
         age,
