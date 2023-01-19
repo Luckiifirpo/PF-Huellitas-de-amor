@@ -5,6 +5,7 @@ import AboutUs from "../pages/AboutUs/AboutUs"
 import Donations from "../pages/Donations/Donations"
 import Contact from "../pages/Contact/Contact"
 import LayoutMain from "../layout/LayoutMain";
+import Login from "../pages/Login/Login";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/adopciones" element={<Adoptions/>}/>
           <Route path="/donaciones" element={<Donations/>}/>
           <Route path="/contacto" element={<Contact/>}/>
+          <Route path="/iniciar-sesion" element={<Login/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

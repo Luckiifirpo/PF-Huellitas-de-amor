@@ -1,8 +1,7 @@
-import { Button, Card, CardContent, Divider, Grid, List, ListItemButton, ListItemText, Pagination } from '@mui/material'
+import { Button, Card, CardContent, Divider, Grid, List, ListItemButton, ListItemText, Pagination, Paper, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import PetCard from '../../components/PetCard/PetCard'
-import style from "./Adoptions.module.css"
 
 const testingPetList = [
   {
@@ -99,37 +98,44 @@ const Adoptions = () => {
         <Grid container spacing={5} alignItems="flex-start">
           <Grid item lg={10}>
             <Grid container alignItems="center" justifyContent="center">
-              <Pagination style={{marginLeft: 300}} count={10} />
+              <Pagination style={{ marginLeft: 300 }} count={10} />
             </Grid>
           </Grid>
           <Grid item lg={2}>
-            <Button className={style.custom_buttom} variant="outlined" size="medium" disableRipple>
-              <span>Publicar</span>
-            </Button>
+            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>Publicar</Button>
           </Grid>
           <Grid item lg={3}>
-            <Card>
-              <CardContent>
-                <List>
-                  <ListItemButton selected={selectedAdoptionFilterIndex === 0}
-                    onClick={(event) => adoptionListItemClick(event, 0)}>
-                    <ListItemText primary="POR TAMAÑO" />
-                  </ListItemButton>
-                  <ListItemButton selected={selectedAdoptionFilterIndex === 1}
-                    onClick={(event) => adoptionListItemClick(event, 1)}>
-                    <ListItemText primary="POR EDAD" />
-                  </ListItemButton>
-                  <ListItemButton selected={selectedAdoptionFilterIndex === 2}
-                    onClick={(event) => adoptionListItemClick(event, 2)}>
-                    <ListItemText primary="POR PESO" />
-                  </ListItemButton>
-                  <Divider />
-                  <ListItemButton onClick={resetAdoptionFilterIndex}>
-                    <ListItemText primary="Reiniciar" />
-                  </ListItemButton>
-                </List>
-              </CardContent>
-            </Card>
+              <Typography
+                component="h4"
+                variant="h4"
+                sx={{
+                  color: "#FF3041",
+                  textTransform: "uppercase",
+                  fontWeight: "700",
+                }}
+              >
+                Adopciones
+              </Typography>
+            <Paper>
+              <List>
+                <ListItemButton selected={selectedAdoptionFilterIndex === 0}
+                  onClick={(event) => adoptionListItemClick(event, 0)}>
+                  <ListItemText primary="POR TAMAÑO" />
+                </ListItemButton>
+                <ListItemButton selected={selectedAdoptionFilterIndex === 1}
+                  onClick={(event) => adoptionListItemClick(event, 1)}>
+                  <ListItemText primary="POR EDAD" />
+                </ListItemButton>
+                <ListItemButton selected={selectedAdoptionFilterIndex === 2}
+                  onClick={(event) => adoptionListItemClick(event, 2)}>
+                  <ListItemText primary="POR PESO" />
+                </ListItemButton>
+                <Divider />
+                <ListItemButton onClick={resetAdoptionFilterIndex}>
+                  <ListItemText primary="Reiniciar" />
+                </ListItemButton>
+              </List>
+            </Paper>
           </Grid>
           <Grid item lg={9}>
             <Grid container spacing={2} alignItems="flex-start">
