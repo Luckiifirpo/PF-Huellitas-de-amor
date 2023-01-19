@@ -135,7 +135,7 @@ const Adoptions = () => {
             <Grid container spacing={2} alignItems="flex-start">
               {
                 testingPetList.map((petData, key) => {
-                  return <Grid key={key} item md={4}>
+                  return <Grid key={key} item md={4} alignSelf="stretch">
                     <PetCard data={petData} />
                   </Grid>
                 })
