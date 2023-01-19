@@ -9,7 +9,7 @@ const PetCard = (props) => {
 
     const { data } = props;
     return (
-        <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345 }}>
+        <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
             <CardActionArea>
                 <Link to={"/pet_info/" + data.id}>
                     <CardHeader avatar={
@@ -25,7 +25,7 @@ const PetCard = (props) => {
                         subheader={data.date.replace(/[-]/g, "/")}>
                     </CardHeader>
                     <CardMedia component="img"
-                        sx={{ maxHeight: 194 }}
+                        sx={{ height: 194 }}
                         image={data ? data.img : ""}
                         alt={(data ? data.name : "") + " image"}>
                     </CardMedia>
