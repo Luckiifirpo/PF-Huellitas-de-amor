@@ -13,7 +13,7 @@ const TeamMemberCard = (props) => {
             <CardActionArea>
                 <Link to={"/team_member_info/" + data.id}>
                     <CardMedia component="img"
-                        sx={{ maxHeight: 194 }}
+                        sx={{ height: 194 }}
                         image={data ? data.img : ""}
                         alt={(data ? data.name : "") + " image"}>
                     </CardMedia>
