@@ -6,6 +6,7 @@ import Donations from "../pages/Donations/Donations"
 import Contact from "../pages/Contact/Contact"
 import LayoutMain from "../layout/LayoutMain";
 import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/donaciones" element={<Donations/>}/>
           <Route path="/contacto" element={<Contact/>}/>
           <Route path="/iniciar-sesion" element={<Login/>}/>
+          <Route path="/registro-usuario" element={<SignUp/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

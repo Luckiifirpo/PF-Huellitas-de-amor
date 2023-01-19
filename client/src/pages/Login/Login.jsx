@@ -60,7 +60,7 @@ const Login = (props) => {
                                 </Grid>
                                 <Grid item display={"flex"} justifyContent={"space-around"} alignItems={"center"} className={style.input_width}>
                                     <Typography component="p" sx={{ margin: '10px 0px' }}>¿No estas registrado?</Typography>
-                                    <Link to={"/sign_up"} className={style.link}>Registrate</Link>
+                                    <Link to={"/registro-usuario"} className={style.link}>Registrate</Link>
                                 </Grid>
                             </Grid>
                         </Paper>
