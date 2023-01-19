@@ -1,7 +1,8 @@
-import { Grid } from '@mui/material'
+import { Button, Card, CardContent, Divider, Grid, List, ListItemButton, ListItemText, Pagination } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import PetCard from '../../components/PetCard/PetCard'
+import style from "./Adoptions.module.css"
 
 const testingPetList = [
   {
@@ -81,17 +82,66 @@ const testingPetList = [
 ]
 
 const Adoptions = () => {
+
+  const [selectedAdoptionFilterIndex, setSelectedAdoptionFilterIndex] = React.useState(-1);
+
+  const adoptionListItemClick = (event, index) => {
+    setSelectedAdoptionFilterIndex(index);
+  };
+
+  const resetAdoptionFilterIndex = (event) => {
+    setSelectedAdoptionFilterIndex(-1);
+  }
+
   return (
     <div>
-      <Container >
-        <Grid container spacing={2} alignItems="center">
-          {
-            testingPetList.map((petData, key) => {
-              return <Grid key={key} item md={4}>
-                <PetCard data={petData} />
-              </Grid>
-            })
-          }
+      <Container style={{ marginBottom: 30 }} >
+        <Grid container spacing={5} alignItems="flex-start">
+          <Grid item lg={10}>
+            <Grid container alignItems="center" justifyContent="center">
+              <Pagination style={{marginLeft: 300}} count={10} />
+            </Grid>
+          </Grid>
+          <Grid item lg={2}>
+            <Button className={style.custom_buttom} variant="outlined" size="medium" disableRipple>
+              <span>Publicar</span>
+            </Button>
+          </Grid>
+          <Grid item lg={3}>
+            <Card>
+              <CardContent>
+                <List>
+                  <ListItemButton selected={selectedAdoptionFilterIndex === 0}
+                    onClick={(event) => adoptionListItemClick(event, 0)}>
+                    <ListItemText primary="POR TAMAÑO" />
+                  </ListItemButton>
+                  <ListItemButton selected={selectedAdoptionFilterIndex === 1}
+                    onClick={(event) => adoptionListItemClick(event, 1)}>
+                    <ListItemText primary="POR EDAD" />
+                  </ListItemButton>
+                  <ListItemButton selected={selectedAdoptionFilterIndex === 2}
+                    onClick={(event) => adoptionListItemClick(event, 2)}>
+                    <ListItemText primary="POR PESO" />
+                  </ListItemButton>
+                  <Divider />
+                  <ListItemButton onClick={resetAdoptionFilterIndex}>
+                    <ListItemText primary="Reiniciar" />
+                  </ListItemButton>
+                </List>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item lg={9}>
+            <Grid container spacing={2} alignItems="flex-start">
+              {
+                testingPetList.map((petData, key) => {
+                  return <Grid key={key} item md={4}>
+                    <PetCard data={petData} />
+                  </Grid>
+                })
+              }
+            </Grid>
+          </Grid>
         </Grid>
       </Container>
 
