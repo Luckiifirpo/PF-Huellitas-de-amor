@@ -29,8 +29,8 @@ const Pet_Filters_Behavior = {
             case 3:
                 filtered_pets_data = filtered_pets_data.filter(e => {
                     return (
-                        e.species.toLowerCase() === "dog" &&
-                        e.species.toLowerCase() === "cat"
+                        e.species.toLowerCase() !== "dog" &&
+                        e.species.toLowerCase() !== "cat"
                     )
                 });
                 break;
