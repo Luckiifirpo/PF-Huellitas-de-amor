@@ -26,11 +26,15 @@ module.exports = (sequelize) => {
     },
     age: {
       type: DataTypes.INTEGER,
-      allowNull: false, 
-      get(){
-        const age = this.getDataValue('age');
-        return age ? `${age} years old` : null;
-      }
+      allowNull: false,
+    },
+    ageMonth: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    ageYears: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     weight: {
       type: DataTypes.INTEGER,
