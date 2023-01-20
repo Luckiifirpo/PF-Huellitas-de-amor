@@ -27,18 +27,18 @@ module.exports = (sequelize) => {
     age: {
       type: DataTypes.INTEGER,
       allowNull: false, 
-      get(){
-        const age = this.getDataValue('age');
-        return age ? `${age} years old` : null;
-      }
+      // get(){
+      //   const age = this.getDataValue('age');
+      //   return age ? `${age} years old` : null;
+      // }
     },
     weight: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      get(){
-        const weight = this.getDataValue('weight');
-        return weight ? `${weight} kg` : null;
-      }
+      // get(){
+      //   const weight = this.getDataValue('weight');
+      //   return weight ? `${weight} kg` : null;
+      // }
     },
     size: {
       type: DataTypes.STRING,
