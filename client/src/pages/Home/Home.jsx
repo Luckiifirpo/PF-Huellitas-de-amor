@@ -18,20 +18,18 @@ import {useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate()
-  const  handlerAdopciones = (e) =>{
-  navigate("/adopciones")
-  }
+ const  handlerAdopciones = (e) =>{
+navigate("/adopciones")
 
-  const  handlerDonar = (e) =>{
-  navigate("/donaciones")
-  }
+   }
 
-  const  handlerContacto = (e) =>{
-  navigate("/contacto")
-  }
-  const  handlerQuienesSomos = (e) =>{
-  navigate("/quienes-somos")
-  }
+   const  handlerDonar = (e) =>{
+    navigate("/donaciones")
+    }
+
+    const  handlerContacto = (e) =>{
+      navigate("/contacto")
+      }
 
   return (
     <>
@@ -62,7 +60,6 @@ const Home = () => {
               <Typography component="p" sx={{margin:'15px 0px'}}>
               Bienvenido! Somos Huellitas de amor una aplicación que se dedica a brindar información sobre animales en adopción. Aquí podrás adoptar y poner en adopción a una mascota que necesite un hogar y mucho amor. Contamos con una sección donde podrás hacer donaciones y recibir información. Súmate a nuestra comunidad a través de nuestras redes sociales!   
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', marginBottom:'20px'}} onClick={(e) => handlerQuienesSomos(e)}>Ver Más</Button>
               <Box sx={{display:'flex', gap:'10px', alignItems:'center'}}>
                   <FacebookIcon/>
                   <InstagramIcon/>

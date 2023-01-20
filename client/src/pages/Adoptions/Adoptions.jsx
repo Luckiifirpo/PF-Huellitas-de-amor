@@ -7,7 +7,6 @@ import Pet_Filters_Behavior from './Pet.Filters';
 import style from "./Adoptions.module.css"
 import testingPetList from "../../petList.json";
 import Pet_Sort_Behavior from './Pet.Sort'
-import {useNavigate } from "react-router-dom";
 
 const filterControlValues = {
   genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
@@ -123,11 +122,6 @@ const Adoptions = () => {
     setPetsData(pageChunks[page - 1]);
   }
 
-  const navigate = useNavigate()
-  const  handlerPostAdoption = (e) =>{
-    navigate("/dar-en-adopcion")
-    }
-
   return (
     <div>
       <Container style={{ marginBottom: 30 }} >
@@ -141,7 +135,7 @@ const Adoptions = () => {
             </Grid>
           </Grid>
           <Grid item lg={2} xs={12} display="flex" justifyContent="center">
-            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 } } onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
+            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>Publicar</Button>
           </Grid>
           <Grid item lg={3} md={4} xs={12}>
             <Typography
