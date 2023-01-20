@@ -102,7 +102,7 @@ const Adoptions = () => {
             </Grid>
           </Grid>
           <Grid item lg={2}>
-            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>Publicar</Button>
+            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5}}>Publicar</Button>
           </Grid>
           <Grid item lg={3}>
               <Typography
