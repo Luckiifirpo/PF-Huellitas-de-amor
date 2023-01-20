@@ -27,14 +27,19 @@ module.exports = (sequelize) => {
     age: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      get(){
+        const age = this.getDataValue('age');
+        const ageTime = this.getDataValue('ageTime');
+
+        return age ? `${age} ${ageTime} old` : null
+      }
     },
-    ageMonth: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    },
-    ageYears: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    ageTime:{
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [["months", "years"]]
+      }
     },
     weight: {
       type: DataTypes.INTEGER,
