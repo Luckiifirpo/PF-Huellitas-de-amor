@@ -8,6 +8,7 @@ import PostAdoption from "../components/PostAdoption/PostAdoption"
 import LayoutMain from "../layout/LayoutMain";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import Error404 from "../pages/Error404/Error404"
 
 function App() {
 
@@ -21,9 +22,10 @@ function App() {
           <Route path="/donaciones" element={<Donations/>}/>
           <Route path="/contacto" element={<Contact/>}/>
           <Route path="/dar-en-adopcion" element={<PostAdoption/>}/>
+        </Route>
           <Route path="/iniciar-sesion" element={<Login/>}/>
           <Route path="/registro-usuario" element={<SignUp/>}/>
-        </Route>
+          <Route  path="/*" element={<Error404/>}/>
       </Routes>
     </BrowserRouter>
   )
