@@ -1,7 +1,8 @@
 .bg-footer {
-    padding: 100px 0;
+    padding: 20px 0;
     background-color: #FF3041;
     border-radius: 200px 0px 0px 0px;
+    
 }
 
 .footer  {
@@ -12,11 +13,20 @@
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 51px;
     font-size: 1.2rem;
+    margin-left: 150px;
+    margin-top: 30px;
 }
 
 .newsletter{
     border:none;
     color:#fff;
+    margin-left: 150px;
+}
+
+.logo{
+    width: 100px;
+    margin-left: 200px;
+    margin-top: 30px;
 }
