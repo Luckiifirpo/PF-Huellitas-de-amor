@@ -23,6 +23,14 @@ navigate("/adopciones")
 
    }
 
+   const  handlerDonar = (e) =>{
+    navigate("/donaciones")
+    }
+
+    const  handlerContacto = (e) =>{
+      navigate("/contacto")
+      }
+
   return (
     <>
       <Container >
@@ -50,8 +58,7 @@ navigate("/adopciones")
                 Quienes somos
               </Typography>
               <Typography component="p" sx={{margin:'15px 0px'}}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip            
+              Bienvenido! Somos Huellitas de amor una aplicación que se dedica a brindar información sobre animales en adopción. Aquí podrás adoptar y poner en adopción a una mascota que necesite un hogar y mucho amor. Contamos con una sección donde podrás hacer donaciones y recibir información. Súmate a nuestra comunidad a través de nuestras redes sociales!   
               </Typography>
               <Box sx={{display:'flex', gap:'10px', alignItems:'center'}}>
                   <FacebookIcon/>
@@ -71,7 +78,7 @@ navigate("/adopciones")
       </Box>
     
       <Container >
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} alignItems="center" margin={'100px 0px'}>
           <Grid item md={6}>
             <img src={banner3} alt='banner home' />
           </Grid>
@@ -82,7 +89,7 @@ navigate("/adopciones")
             <Typography component="p" sx={{margin:'10px 0px'}}>
               Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>Ver más!</Button>
+            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerAdopciones(e)}>Ver más!</Button>
           </Grid>
         </Grid>
       </Container>
@@ -97,16 +104,15 @@ navigate("/adopciones")
               haz tu donación
             </Typography>
             <Typography component="p" sx={{margin:'10px 0px'}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+            Su generosa contribución puede hacer una diferencia en la vida de los animales que están en necesidad y ayudarlos a encontrar sus hogares para siempre. Al donar, te unirás a otros amantes de los animales que comparten la misma misión de proporcionar un refugio seguro para todas las mascotas.
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>DONA AHORA!</Button>
+            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerDonar(e)}>DONA AHORA!</Button>
           </Grid>
         </Grid>
       </Container>
       <Box>
         <Container>
-          <Grid container>
+          <Grid container marginTop={'80px'}>
             <Grid item md={4} sx={{marginTop:'20px'}}>
               <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
               más información
@@ -114,7 +120,7 @@ navigate("/adopciones")
               <Typography component="p" sx={{margin:'10px 0px'}}>
               Envíanos un mensaje con todas tus dudas e inquietudes, estamos para ayudarte.
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}}>contacto</Button>
+              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerContacto(e)}>contacto</Button>
             </Grid>
             <Grid item md={8} sx={{marginBottom:'-10px'}}>
               <img src={banner5} alt='fondo perro'/>
