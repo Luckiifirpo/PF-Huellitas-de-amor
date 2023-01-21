@@ -8,9 +8,50 @@ import style from './PostAdoption.module.css'
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
-import ImagePostAdoption from '../../assets/image/fondoPostAdoption.png'
+import ImagePostAdoption from '../../assets/image/fondoPostAdoption.png';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import {useState} from "react"
 
 const PostAdoption = () => {
+/**********************************************************/
+/*Todas estas lineas se agregaron para que funcione la subida de imagenes
+a cloudinary, esto se tiene que modificar ya que cloud_name y preset deben estar
+en un archivo .env, momentaneamente lo dejo asi para que puedan probar si gustan.
+
+Al momento de pasar a producción hay que eliminar los console.log
+
+También se modificaria cuando se añadan las actions y el reducer, ya que es ahi
+en donde debe hacerse para enviar el post a /animals */
+    const [file, setFile] = useState(null)
+
+    const cloud_name = 'dydncradb';
+    const preset = 'qeohapyd';
+
+    const upload = async (e) => {
+    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
+
+    const formData = new FormData();
+    formData.append('upload_preset', `${preset}`)
+    formData.append('file', file);
+
+    try {
+        const res = await fetch(cloudinaryUrl, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        console.log({urldelaimage: data.url})
+        return data.secure_url;
+
+    } catch (error) {
+        console.log({error});
+    }
+};
+/**********************************************************/
   return (
     <>
         <Box className={style.gridContact} sx={{marginBottom:'300px'}}>
@@ -39,11 +80,13 @@ const PostAdoption = () => {
                     </Box>
                 </Grid>
                 <Grid item md={6} >
-                    <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                        <Fab color="primary" aria-label="add">
-                            <AddAPhotoTwoToneIcon />
-                        </Fab>
-                    </Box>
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept="image/*" type="file" onChange={(e) => setFile(e.target.files[0])} />
+                        <PhotoCamera />
+                    </IconButton>
+                    {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
+                     si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
+                    {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
                     <Box component="form" sx={{display:'flex',flexDirection:'column', gap:'15px', justifyContent:'center',height:'100%', margin:' 0 150px 0 20px'}}>
                     <TextField label="Tamaño:" variant="standard" />
                     <TextField label="Género:" variant="standard" />
@@ -51,7 +94,7 @@ const PostAdoption = () => {
                     <TextField label="Desripción:" variant="standard" />
                     </Box>
                 </Grid>
-                <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', padding:'9px 150px'}}>
+                <Button onClick={upload} variant="contained" color='info' size="large" sx={{borderRadius:'20px', padding:'9px 150px'}}>
                     Publicar
                 </Button>
                 </Grid>
