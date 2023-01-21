@@ -32,10 +32,10 @@ const TeamMemberCard = (props) => {
                 </Link>
             </CardActionArea>
             <CardActions style={{paddingTop: 5}} disableSpacing>
-                <IconButton aria-label="github">
+                <IconButton aria-label="github" href={data.github}>
                     <GitHubIcon color='secondary'/>
                 </IconButton>
-                <IconButton aria-label="linkedin">
+                <IconButton aria-label="linkedin" href={data.linkedin}>
                     <LinkedInIcon color='secondary' />
                 </IconButton>
             </CardActions>
