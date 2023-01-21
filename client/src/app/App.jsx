@@ -9,23 +9,25 @@ import LayoutMain from "../layout/LayoutMain";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/Error404/Error404"
+import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route  path="/" element={<LayoutMain/>}>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/quienes-somos" element={<AboutUs/>}/>
-          <Route path="/adopciones" element={<Adoptions/>}/>
-          <Route path="/donaciones" element={<Donations/>}/>
-          <Route path="/contacto" element={<Contact/>}/>
-          <Route path="/dar-en-adopcion" element={<PostAdoption/>}/>
+        <Route path="/" element={<LayoutMain />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/quienes-somos" element={<AboutUs />} />
+          <Route path="/adopciones" element={<Adoptions />} />
+          <Route path="/donaciones" element={<Donations />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/dar-en-adopcion" element={<PostAdoption />} />
         </Route>
-          <Route path="/iniciar-sesion" element={<Login/>}/>
-          <Route path="/registro-usuario" element={<SignUp/>}/>
-          <Route  path="/*" element={<Error404/>}/>
+        <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
+        <Route path="/iniciar-sesion" element={<Login />} />
+        <Route path="/registro-usuario" element={<SignUp />} />
+        <Route path="/*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   )

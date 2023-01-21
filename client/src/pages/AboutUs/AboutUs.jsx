@@ -11,7 +11,7 @@ const testingData = [
     id: "0",
     name: "Armando Puertas de las Casas",
     description: "testing description for this component",
-    img: "5907.jpg",
+    img: "../../../assets/image/fotoTest/5907.jpg",
   },
   {
     id: "1",
