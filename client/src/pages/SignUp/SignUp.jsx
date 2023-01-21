@@ -7,8 +7,12 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
+import FormHelperText from '@mui/material/FormHelperText';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { useDispatch, useSelector } from "react-redux";
+import { createUsers } from "../../redux/userReducer";
+import { useNavigate } from "react-router-dom";
 import style from "./SignUp.module.css";
 
 
@@ -46,15 +50,21 @@ const SignUp = (props) => {
         age: '',
         direction: '',
         email: '',
-        work:null,
+        work:'',
         password: ''
     }
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: (values,{resetForm} ) => { 
+            dispatch(createUsers(values))
+            resetForm()
+            setTimeout(()=>{
+                navigate('/iniciar-sesion')
+            },1000)
         },
     });
 
@@ -148,16 +158,27 @@ const SignUp = (props) => {
                                         helperText={formik.touched.email && formik.errors.email}
                                         className={style.input_width} />
                                     </Grid>
-                                    <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginTop: "25px" }}>¿Tienes trabajo?</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="work"
-                                        value={formik.values.work} onChange={formik.handleChange}
+                                    <FormControl
+                                         
                                     >
-                                        <FormControlLabel value="si" control={<Radio />} label="Si" />
-                                        <FormControlLabel value="no" control={<Radio />} label="No" />
-                                    </RadioGroup>
+                                        <FormHelperText
+                                        error={formik.touched.work && Boolean(formik.errors.work)}
+                                        >
+                                        {formik.touched.work && formik.errors.work}
+                                        </FormHelperText>
+                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginTop: "25px" }}>¿Tienes trabajo?</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-row-radio-buttons-group-label"
+                                            name="work"
+                                            value={formik.values.work} 
+                                            onChange={formik.handleChange}
+                                           
+                                        >
+                                            <FormControlLabel value={true} control={<Radio />} label="Si" />
+                                            <FormControlLabel value={false} control={<Radio />} label="No" />
+                                        </RadioGroup>
+                                    </FormControl>
 
                     
                                     <Grid item>
