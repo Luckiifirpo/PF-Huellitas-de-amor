@@ -17,7 +17,6 @@ const { postPets } = petReducer.actions;
 export default petReducer.reducer;
 
 export const createPet = (obj) => async (dispatch) => {
-  console.log(obj)
   try {
     const response = await api.post("/animals", obj);
     dispatch(postPets(response.data));
