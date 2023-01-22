@@ -14,5 +14,4 @@ animalRouter.delete("/:id", deleteAnimal)
 
 animalRouter.put("/:id", updateAnimal)
 
-
 module.exports = animalRouter;
