@@ -23,6 +23,7 @@ const theme = createTheme({
           'Manjari'
         ].join(','),
       },
+
 })
 
 export default theme;
