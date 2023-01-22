@@ -54,11 +54,7 @@ const PostAdoption = (props) => {
     initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      dispatch(createPet(values));
-      resetForm();
-      setTimeout(() => {
-        navigate("/dar-en-adopcion");
-      }, 1000);
+      uploadData(values, resetForm);
     },
   });
   /**********************************************************/
@@ -75,7 +71,7 @@ en donde debe hacerse para enviar el post a /animals */
   const cloud_name = "dydncradb";
   const preset = "qeohapyd";
 
-  const upload = async (e) => {
+  const uploadData = async (values, resetForm) => {
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
 
     const formData = new FormData();
@@ -91,8 +87,15 @@ en donde debe hacerse para enviar el post a /animals */
       if (!res.ok) return null;
 
       const data = await res.json();
-      console.log({ urldelaimage: data.url });
-      return data.secure_url;
+      dispatch(createPet({
+        ...values,
+        image: data.secure_url
+      }));
+      resetForm();
+      setTimeout(() => {
+        navigate("/dar-en-adopcion");
+      }, 1000);
+
     } catch (error) {
       console.log({ error });
     }
@@ -272,7 +275,6 @@ en donde debe hacerse para enviar el post a /animals */
                 </Box>
               </Grid>
               <Button
-                onClick={upload}
                 type="submit"
                 variant="contained"
                 color="info"
