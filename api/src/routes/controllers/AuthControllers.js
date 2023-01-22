@@ -1,6 +1,7 @@
 const { Usuario } = require('../../db');
 const bcrypt = require('bcryptjs');
 
+
 const compare = async (passwordPlain, hashPassword) =>{
     return await bcrypt.compare(passwordPlain, hashPassword)
 }
@@ -22,6 +23,8 @@ const loginCtrl = async (req, res) => {
         return res.status(400).send({error: error.message})
     }
 }
+
+
 
 module.exports = {
     loginCtrl
