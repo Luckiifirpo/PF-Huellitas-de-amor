@@ -20,7 +20,6 @@ export const createPet = (obj) => async (dispatch) => {
   console.log(obj)
   try {
     const response = await api.post("/animals", obj);
-    console.log(response);
     dispatch(postPets(response.data));
   } catch (error) {
     console.log(error);
