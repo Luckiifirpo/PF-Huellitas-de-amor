@@ -6,23 +6,22 @@ export const petReducer = createSlice({
   initialState: {
     createPet: {},
   },
-  reducers:{
-    postPets(state,action){
-      state.createPet= action.payload
+  reducers: {
+    postPets(state, action) {
+      state.createPet = action.payload;
     },
   },
 });
-const {postPets} = petReducer.actions
+const { postPets } = petReducer.actions;
 
-export default petReducer.reducer
+export default petReducer.reducer;
 
-export const createPet = (obj) => async(dispatch) =>{
+export const createPet = (obj) => async (dispatch) => {
   try {
-const response = await api.post('/animals',obj);
-console.log(response)
-dispatch(postPets(response.data))
+    const response = await api.post("/animals", obj);
+    console.log(response);
+    dispatch(postPets(response.data));
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
-}
+};
