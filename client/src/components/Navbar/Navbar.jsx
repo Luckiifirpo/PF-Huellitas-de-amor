@@ -55,7 +55,7 @@ const Navbar = (props) => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
               <Button key={item.name} component={RouterLink} to={item.route}>
                 {item.name}
               </Button>

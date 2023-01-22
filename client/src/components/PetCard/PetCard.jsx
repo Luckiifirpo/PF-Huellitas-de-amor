@@ -20,7 +20,7 @@ const PetCard = (props) => {
                         </Avatar>
                     }
                         title={
-                            <h3 style={{margin: 0}}>{data ? data.name : ""}</h3>
+                            <h3 style={{ margin: 0 }}>{data ? data.name : ""}</h3>
                         }
                         subheader={data.date.replace(/[-]/g, "/")}>
                     </CardHeader>
@@ -29,22 +29,20 @@ const PetCard = (props) => {
                         image={data ? data.img : ""}
                         alt={(data ? data.name : "") + " image"}>
                     </CardMedia>
-                    <CardContent style={{paddingBottom: 5}}>
+                    <CardContent style={{ paddingBottom: 5 }}>
                         <Typography variant="body2" color="text.secondary">
                             {
                                 data ? data.description : null
                             }
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            <ul className={style.additional_info}>
-                                <li><span style={{ fontWeight: "bold" }}>age: </span><span>{data.age}</span></li>
-                                <li><span style={{ fontWeight: "bold" }}>genre: </span><span>{data.genre}</span></li>
-                            </ul>
-                        </Typography>
+                        <ul className={style.additional_info}>
+                            <li><span style={{ fontWeight: "bold" }}>age: </span><span>{data.age}</span></li>
+                            <li><span style={{ fontWeight: "bold" }}>genre: </span><span>{data.genre}</span></li>
+                        </ul>
                     </CardContent>
                 </Link>
             </CardActionArea>
-            <CardActions style={{paddingTop: 5}} disableSpacing>
+            <CardActions style={{ paddingTop: 5 }} disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
