@@ -64,7 +64,7 @@ const SignUp = (props) => {
             resetForm()
             setTimeout(()=>{
                 navigate('/iniciar-sesion')
-            },1000)
+            },500)
         },
     });
 
