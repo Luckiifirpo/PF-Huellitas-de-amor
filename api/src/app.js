@@ -22,7 +22,7 @@ server.use((req, res, next) => {
   next();
 });
 server.get("/", (req, res) => {
-  res.json("Conexion exitosa");
+  res.json({Mensaje:"Back levantado con exito"});
 });
 
 server.use('/', routes);
