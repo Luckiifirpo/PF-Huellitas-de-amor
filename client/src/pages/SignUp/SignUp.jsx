@@ -22,19 +22,19 @@ const validationSchema = yup.object({
         .email('Enter a valid email')
         .required('Email is required'),
     name: yup
-        .string('Enter your email')
-        .required('Email is required'),
+        .string('Enter your name')
+        .required('name is required'),
     surname: yup
-        .string('Enter your email')
-        .required('Email is required'),
+        .string('Enter your surname')
+        .required('surname is required'),
     age: yup
-        .string('Enter your email')
-        .required('Email is required'),
+        .string('Enter your age')
+        .required('age is required'),
     direction: yup
-        .string('Enter your email')
-        .required('Email is required'),
+        .string('Enter your address')
+        .required('address is required'),
     work: yup
-        .string('Enter your email')
+        .string('Are yoe working?')
         .required('work is required'),
     password: yup
         .string('Enter your password')
@@ -64,7 +64,7 @@ const SignUp = (props) => {
             resetForm()
             setTimeout(()=>{
                 navigate('/iniciar-sesion')
-            },1000)
+            },500)
         },
     });
 
