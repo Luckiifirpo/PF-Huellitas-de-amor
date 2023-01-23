@@ -7,7 +7,7 @@ import style from "./TeamMemberCard.module.css";
 const TeamMemberCard = (props) => {
 
     const { data } = props;
-
+   console.log(data.img)
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
             <CardActionArea>
@@ -32,10 +32,10 @@ const TeamMemberCard = (props) => {
                 </Link>
             </CardActionArea>
             <CardActions style={{paddingTop: 5}} disableSpacing>
-                <IconButton aria-label="github" href={data.github}>
+                <IconButton aria-label="github" href={data.github} target="_blank">
                     <GitHubIcon color='secondary'/>
                 </IconButton>
-                <IconButton aria-label="linkedin" href={data.linkedin}>
+                <IconButton aria-label="linkedin" href={data.linkedin} target="_blank">
                     <LinkedInIcon color='secondary' />
                 </IconButton>
             </CardActions>
