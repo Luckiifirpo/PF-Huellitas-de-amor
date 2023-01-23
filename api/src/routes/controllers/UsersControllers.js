@@ -86,7 +86,10 @@ const updateUser = async (req, res) => {
 //Usuario cambia contraseña
 const updatePasswordUser = async (req, res) => {
     const {id} = req.Usuario;
-    const {password} = req.body;
+    const {password, email} = req.body;
+
+    const user = Usuario.findOne({email});
+    if(!user) throw new Error('El Usuario no existe');
     try {
         let user = await Usuario.findByPk(id);
         const salt = await bcryptjs.genSalt(10);
