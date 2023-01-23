@@ -16,6 +16,58 @@ import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
 import {useNavigate } from "react-router-dom";
 
+import PropTypes from 'prop-types';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Fade from '@mui/material/Fade';
+import Toolbar from '@mui/material/Toolbar';
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#back-to-top-anchor',
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        block: 'center',
+      });
+    }
+  };
+
+  return (
+    <Fade in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{position: 'fixed', bottom: 16, right: 16}}
+      >
+        {children}
+      </Box>
+    </Fade>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
 const Home = () => {
   const navigate = useNavigate()
   const  handlerAdopciones = (e) =>{
@@ -35,8 +87,9 @@ const Home = () => {
 
   return (
     <>
+     <Toolbar id="back-to-top-anchor" />
       <Container >
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} alignItems="center" marginTop={'50px'}>
           <Grid item md={8}>
             <img src={perritoHome} alt='perrito home' />
           </Grid>
@@ -81,7 +134,7 @@ const Home = () => {
       </Box>
     
       <Container >
-        <Grid container spacing={2} alignItems="center" margin={'100px 0px'}>
+        <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
             <img src={banner3} alt='banner home' />
           </Grid>
@@ -131,6 +184,13 @@ const Home = () => {
           </Grid>
 
         </Container>
+
+
+        <ScrollTop>
+        <Fab size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon sx={{color:'#FF3041'}} />
+        </Fab>
+      </ScrollTop>
       </Box>
     </>
   )

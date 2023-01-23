@@ -15,6 +15,8 @@ import Logo from '../../assets/image/logo.svg'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Container from '@mui/material/Container'
 
+
+
 const drawerWidth = 240;
 const navItems = [
   {
@@ -80,8 +82,8 @@ const Navbar = (props) => {
   return (
     <Container>
       <Box sx={{ display: 'flex'}}>
-        <AppBar position="sticky" component="nav" sx={{boxShadow:'none'}}>
-          <Toolbar sx={{background:'#fff',paddingTop:'10px', paddingBottom:'10px'}}>
+        <AppBar position="fixed" component="nav" sx={{boxShadow:'none', background:'#fff'}}>
+          <Toolbar sx={{background:'#fff',paddingTop:'10px', paddingBottom:'10px', margin:'0px 70px'}}>
             <IconButton
               color="primary"
               aria-label="open drawer"

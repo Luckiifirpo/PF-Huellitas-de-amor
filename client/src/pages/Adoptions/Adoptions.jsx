@@ -136,7 +136,7 @@ const Adoptions = () => {
 
   return (
     <div>
-      <Container style={{ marginBottom: 30 }} >
+      <Container style={{ marginBottom: 30, marginTop: 130 }} >
         <Grid container spacing={5} alignItems="flex-start">
           <Grid component={Box} item lg={2} display={{ xs: "none", lg: "block" }} />
           <Grid item lg={8} xs={12}>
