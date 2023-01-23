@@ -11,7 +11,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers } from "../../redux/userReducer";
+import { postUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import style from "./SignUp.module.css";
 
