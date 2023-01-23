@@ -5,7 +5,7 @@ import login_img from "../../assets/image/login-img.png";
 import style from "./Login.module.css";
 import { MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "react-social-login-buttons";
 import { Link } from "react-router-dom";
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, OAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import FirebaseApp from "../../services/firebaseApp";
 
 const Login = (props) => {
@@ -15,7 +15,6 @@ const Login = (props) => {
 
     const googleAuthProvider = new GoogleAuthProvider();
     const githubAuthProvider = new GithubAuthProvider();
-    const microsoftAuthProvider = new OAuthProvider("microsoft.com");
 
 
     const loginWithGoogle = () => {
@@ -24,6 +23,9 @@ const Login = (props) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
+
+                console.log(token, user);
+
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -38,25 +40,15 @@ const Login = (props) => {
                 const credential = GithubAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
+
+                console.log(token, user);
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 const email = error.customData.email;
                 const credential = GithubAuthProvider.credentialFromError(error);
-            });
-    }
 
-    const loginWithMicrosoft = () => {
-        signInWithPopup(firebaseAuth, microsoftAuthProvider)
-            .then((result) => {
-                const credential = OAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.customData.email;
-                const credential = OAuthProvider.credentialFromError(error);
+                console.log(errorCode, errorMessage, email);
             });
     }
 
@@ -104,9 +96,6 @@ const Login = (props) => {
                                         <GoogleLoginButton iconSize="16px" onClick={loginWithGoogle} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
                                             <span>Continuar con Google</span>
                                         </GoogleLoginButton>
-                                        <MicrosoftLoginButton iconSize="16px" onClick={loginWithMicrosoft} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
-                                            <span>Continuar con Microsoft</span>
-                                        </MicrosoftLoginButton>
                                     </ButtonGroup>
                                 </Grid>
                                 <Grid item>
