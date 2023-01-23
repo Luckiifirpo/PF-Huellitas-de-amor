@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters } from '../../redux/slices/adoptionSlice'
 import { useEffect } from 'react'
+import _ from "lodash";
 
 const filterControlValues = {
   genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
@@ -21,9 +22,13 @@ const Adoptions = () => {
 
   const dispatch = useDispatch();
 
-  const petList = useSelector((state) => state.pets.petsList);
+  const petState = useSelector((state) => state.pets);
   const globalState = useSelector((state) => state.adoptions);
   const minDistance = 1;
+
+  var isArrayEqual = function (x, y) {
+    return _(x).differenceWith(y, _.isEqual).isEmpty();
+  }
 
   const adoptionListItemClick = (event, index) => {
     dispatch(setCurrentSortMethodIndex(index));
@@ -53,7 +58,7 @@ const Adoptions = () => {
   }
 
   const apply_filters_and_sort = (filters, sort_method_index, sort_direction) => {
-    const filtered_pets_data = Pet_Filters_Behavior.Apply(testingPetList, filters);
+    const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, filters);
     const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, sort_method_index, sort_direction);
     create_pagination(sorted_pets_data);
   }
@@ -121,12 +126,13 @@ const Adoptions = () => {
   }
 
   useEffect(() => {
-    if (!globalState.petsData) {
-      const page_chunks = Pet_Pagination_Behavior.Apply(petList, 6);
+    const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
+    
+    if (!isArrayEqual(page_chunks, globalState.pageChunks)) {
       dispatch(setPageChunks(page_chunks));
       dispatch(setPetsData(page_chunks[0]));
     }
-  }, [])
+  }, [globalState, petState, dispatch, setPageChunks, setPetsData])
 
   return (
     <div>
