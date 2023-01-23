@@ -83,6 +83,7 @@ const updateUser = async (req, res) => {
     }
 }
 
+//Usuario cambia contraseña
 const updatePasswordUser = async (req, res) => {
     const {id} = req.Usuario;
     const {password} = req.body;
