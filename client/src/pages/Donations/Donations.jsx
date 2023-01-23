@@ -28,7 +28,7 @@ const Donations = () => {
   return (
     <Box>
     <Container>
-      <Grid container marginTop={'80px'}>
+      <Grid container marginTop={'120px'}>
         <Grid item md={6} sx={{marginTop:'20px'}}>
         <Typography
               component="h4"

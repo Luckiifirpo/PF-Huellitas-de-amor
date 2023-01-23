@@ -43,7 +43,10 @@ const getDetail = async(req,res) => {
 }
 
 const postAnimal = async (req, res) => {
-    const { name, publication, species, age, weight, size, gender, race, description, image} = req.body;
+    const { name, date, species, age, weight, size, gender, race, description, image, ageTime} = req.body;
+
+    const publication = date;
+    const petAgeTime = ageTime ? ageTime : "years"
 
     const createdAnimal = await Animal.create({
        id: generateId(),
@@ -58,6 +61,7 @@ const postAnimal = async (req, res) => {
        race,
        description,
        image,
+       ageTime: petAgeTime
     });
 
     try {
