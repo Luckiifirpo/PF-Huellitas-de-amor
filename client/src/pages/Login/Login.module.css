@@ -13,8 +13,7 @@
 }
 
 .auth_button{
-    display: flex;
-    justify-content: flex-start !important;
+    height: 40px !important;
 }
 
 .link{

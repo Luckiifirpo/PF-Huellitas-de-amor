@@ -60,7 +60,7 @@ const SignUp = (props) => {
         initialValues,
         validationSchema: validationSchema,
         onSubmit: (values,{resetForm} ) => { 
-            dispatch(createUsers(values))
+            dispatch(postUser(values))
             resetForm()
             setTimeout(()=>{
                 navigate('/iniciar-sesion')

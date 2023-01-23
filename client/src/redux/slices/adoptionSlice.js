@@ -18,7 +18,8 @@ const initialState = {
         sizeFilter: filterControlValues.sizeFilter[0],
         ageFilter: [0, 30],
         weightFilter: [1, 100]
-    }
+    },
+    updatingFiltersAndSort: false
 }
 
 export const adoptionsSlice = createSlice({
@@ -36,15 +37,21 @@ export const adoptionsSlice = createSlice({
         },
         setCurrentSortMethodIndex: (state, action) => {
             state.currentSortMethodIndex = action.payload;
+            state.updatingFiltersAndSort = true;
         },
         setCurrentSortDirection: (state, action) => {
             state.currentSortDirection = action.payload;
+            state.updatingFiltersAndSort = true;
         },
         setFilters: (state, action) => {
             state.filters = action.payload;
+            state.updatingFiltersAndSort = true;
+        },
+        resetUpdatingFiltersAndSort: (state) => {
+            state.updatingFiltersAndSort = false;
         }
     }
 });
 
-export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters } = adoptionsSlice.actions
+export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } = adoptionsSlice.actions
 export default adoptionsSlice.reducer
