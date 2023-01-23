@@ -6,7 +6,7 @@ export const userReducers = createSlice({
         createUser:{}
     },
     reducers: {
-      postUser(state, action) {
+      _postUser(state, action) {
         state.createUser = action.payload
       },
     },
