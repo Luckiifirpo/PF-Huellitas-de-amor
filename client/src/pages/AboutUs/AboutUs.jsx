@@ -60,7 +60,7 @@ const testingData = [
 const AboutUs = () => {
   return (
     <div>
-      <Container style={{ marginTop: 30, marginBottom: 30 }} >
+      <Container style={{ marginTop: 150, marginBottom: 30 }} >
         <Grid
           container
           spacing={2}
