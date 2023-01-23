@@ -37,15 +37,15 @@ const validationSchema = yup.object({
 });
 const PostAdoption = (props) => {
   const initialValues = {
-    name: "aaaa",
-    date: "2023-01-01",
-    species: "dog",
-    age: 12,
-    weight: 20,
-    size: "small",
-    gender: "female",
-    breed: "creole",
-    description: "bla bla bla bla",
+    name: "",
+    date: "",
+    species: "",
+    age: 0,
+    weight: 0,
+    size: "",
+    gender: "",
+    breed: "",
+    description: "",
   };
 
   const dispatch = useDispatch();
