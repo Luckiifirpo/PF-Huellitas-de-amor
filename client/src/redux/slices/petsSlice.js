@@ -21,7 +21,7 @@ export const petsSlice = createSlice({
                 weight: obtainedPetData.weight,
                 size: obtainedPetData.size,
                 genre: obtainedPetData.gender,
-                breed: obtainedPetData.race,
+                breed: obtainedPetData.breed,
                 description: obtainedPetData.description,
                 img: obtainedPetData.image,
                 isAdopted: obtainedPetData.isAdopted,
