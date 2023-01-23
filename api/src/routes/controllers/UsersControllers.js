@@ -83,9 +83,24 @@ const updateUser = async (req, res) => {
     }
 }
 
+const updatePasswordUser = async (req, res) => {
+    const {id} = req.Usuario;
+    const {password} = req.body;
+    try {
+        let user = await Usuario.findByPk(id);
+        const salt = await bcryptjs.genSalt(10);
+        const newPassword = await bcryptjs.hash(password, salt);
+         await Usuario.update({ password: newPassword, resetPassword: false});
+         res.send(Usuario);
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
+}
+
 module.exports = {
     getAllUsers,
     postUser,
     deleteUser,
-    updateUser
+    updateUser,
+    updatePasswordUser
 }
