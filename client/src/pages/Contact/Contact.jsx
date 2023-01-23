@@ -11,7 +11,7 @@ import ImageContact from '../../assets/image/fondocontacto.png'
 const Contact = () => {
   return (
     <>
-      <Box className={style.gridContact}>
+      <Box className={style.gridContact} marginTop={'110px'}>
         <Box className={style.gridContactImage}>
           <img src={ImageContact} alt="" />
         </Box>
