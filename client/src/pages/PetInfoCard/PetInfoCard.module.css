@@ -1,0 +1,32 @@
+.pet_card_info_div{
+    min-height: 100vh !important;
+}
+
+.bg_image_1{
+    position: absolute;
+    width: 173px;
+    height: auto;
+    left: 715px;
+    top: -75px;
+}
+.bg_image_2{
+    position: absolute;
+    width: 100px;
+    height: auto;
+    left: -50px;
+    top: -30px;
+}
+.bg_image_3{
+    position: absolute;
+    width: 173px;
+    height: auto;
+    left: -100px;
+    top: 555px;
+}
+.bg_image_4{
+    position: absolute;
+    width: 68px;
+    height: auto;
+    left: 820px;
+    top: 350px;
+}

@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
-import api from "../services/api"
+import api from "../../services/api"
 export const userReducers = createSlice({
     name: 'users',
     initialState: {
         createUser:{}
     },
     reducers: {
-      postUsers(state, action) {
+      postUser(state, action) {
         state.createUser = action.payload
       },
     },
@@ -15,7 +15,7 @@ const { postUsers } = userReducers.actions
 
 export default userReducers.reducer;
   
-export const createUsers = (obj) => async (dispatch) => {
+export const createUser = (obj) => async (dispatch) => {
     try {
         const response = await api.post(`/users`,obj);
         console.log(response)

@@ -70,9 +70,9 @@ const SignUp = (props) => {
 
 
     return (
-        <div>
-            <Container style={{ marginBottom: 30, marginTop: 30 }} >
-                <form onSubmit={formik.handleSubmit}>
+        <div className={style.sign_up_div} >
+            <Container style={{minHeight:"100vh", display: "flex"}}>
+                <form onSubmit={formik.handleSubmit} style={{display: "flex"}}>
                     <Grid container spacing={4} alignItems="center">
                         <Grid item lg={7}>
                             <img src={sign_up_img} />

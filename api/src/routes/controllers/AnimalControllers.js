@@ -45,14 +45,13 @@ const getDetail = async(req,res) => {
 const postAnimal = async (req, res) => {
     const { name, date, species, age, weight, size, gender, race, description, image, ageTime} = req.body;
 
-    const publication = date;
-    const petAgeTime = ageTime ? ageTime : "years"
+    const petAgeTime = ageTime ? ageTime : "years";
 
     const createdAnimal = await Animal.create({
        id: generateId(),
        isAdopted: false,
        name,
-       publication,
+       postDate: date,
        species,
        age,
        weight,
@@ -88,11 +87,11 @@ const deleteAnimal = async (req, res) => {
 const updateAnimal = async (req, res) => {
     try{
         const { id } = req.params;
-        const { name, publication, species, age, weight, size, gender, race, description, image, isAdopted} = req.body;
+        const { name, date, species, age, weight, size, gender, race, description, image, isAdopted} = req.body;
 
         const animal = await Animal.findByPk(id)
         animal.name = name || animal.name;
-        animal.publication = publication || animal.publication;
+        animal.postDate = date || animal.date;
         animal.species = species || animal.species;
         animal.age = age || animal.age;
         animal.weight = weight || animal.weight;

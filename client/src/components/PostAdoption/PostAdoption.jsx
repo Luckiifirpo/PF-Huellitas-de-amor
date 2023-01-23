@@ -15,7 +15,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { createPet } from "../../redux/petReducer";
+import { postPet } from "../../redux/slices/petsSlice";
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
@@ -28,7 +28,7 @@ const validationSchema = yup.object({
     .required("Peso es obligatorio")
     .default(0),
   size: yup.string("Enter pet size").required("tamaño es obligatorio"),
-  gender: yup.string("Enter pet genre").required("Genero es obligatorio"),
+  gender: yup.string("Enter pet gender").required("Genero es obligatorio"),
   breed: yup.string("Enter pet breed").required("raza es obligatorio"),
   description: yup
     .string("Describe your pet")
@@ -87,7 +87,7 @@ en donde debe hacerse para enviar el post a /animals */
       if (!res.ok) return null;
 
       const data = await res.json();
-      dispatch(createPet({
+      dispatch(postPet({
         ...values,
         image: data.secure_url
       }));
@@ -179,14 +179,15 @@ en donde debe hacerse para enviar el post a /animals */
                     type="number"
                     label="Edad:"
                     variant="standard"
-                    id="edad"
-                    name="edad"
-                    value={formik.values.edad}
+                    id="age"
+                    name="age"
+                    value={formik.values.age}
                     onChange={formik.handleChange}
-                    error={formik.touched.edad && Boolean(formik.errors.edad)}
-                    helperText={formik.touched.edad && formik.errors.edad}
+                    error={formik.touched.age && Boolean(formik.errors.age)}
+                    helperText={formik.touched.age && formik.errors.age}
                   />
                   <TextField
+                    type="number"
                     label="Peso:"
                     variant="standard"
                     id="weight"
