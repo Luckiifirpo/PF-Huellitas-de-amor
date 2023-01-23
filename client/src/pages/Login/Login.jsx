@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 const Login = (props) => {
     return (
-        <div>
-            <Container style={{ marginBottom: 30, marginTop: 30 }} >
+        <div className={style.login_div}>
+            <Container style={{minHeight:"100vh", display: "flex"}}>
                 <Grid container spacing={4} alignItems="center">
                     <Grid item lg={7}>
                         <img src={login_img} />

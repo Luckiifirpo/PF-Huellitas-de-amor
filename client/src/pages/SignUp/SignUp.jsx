@@ -11,7 +11,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers } from "../../redux/userReducer";
+import { postUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import style from "./SignUp.module.css";
 
@@ -70,9 +70,9 @@ const SignUp = (props) => {
 
 
     return (
-        <div>
-            <Container style={{ marginBottom: 30, marginTop: 30 }} >
-                <form onSubmit={formik.handleSubmit}>
+        <div className={style.sign_up_div} >
+            <Container style={{minHeight:"100vh", display: "flex"}}>
+                <form onSubmit={formik.handleSubmit} style={{display: "flex"}}>
                     <Grid container spacing={4} alignItems="center">
                         <Grid item lg={7}>
                             <img src={sign_up_img} />

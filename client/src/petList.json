@@ -9,7 +9,7 @@
     "size": "Big",
     "genre": "Male",
     "breed": "Cacri",
-    "description": "Its a black lovely dog, who likes to play with kids",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZJlbDtw4byJKcug1ME7qlpG1jet3tHg1zA&usqp=CAU"
   },
   {
@@ -22,7 +22,7 @@
     "size": "medium",
     "genre": "female",
     "breed": "Spaniel",
-    "description": "Beautiful grandma dog XD, its a great company for people and loves to be pet",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiEwsd1j4JLO9RoDf1e5DJOyRzJ6MHHC-sHpoD-i0DFjiQER8KvxTD7ZAbAQiKnOEpB4c&usqp=CAU"
   },
   {
@@ -35,7 +35,7 @@
     "size": "medium",
     "genre": "male",
     "breed": "orange",
-    "description": "lovely cat, likes to spend his time on you, you cant until his willing",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://imagenes.muyinteresante.es/files/vertical_composte_image/uploads/2022/10/12/63468940d3974.jpeg"
   },
   {
@@ -48,7 +48,7 @@
     "size": "small",
     "genre": "male",
     "breed": "White",
-    "description": "lovely dog, obeys every order you give to him",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZJlbDtw4byJKcug1ME7qlpG1jet3tHg1zA&usqp=CAU"
   },
   {
@@ -61,7 +61,7 @@
     "size": "small",
     "genre": "male",
     "breed": "black",
-    "description": "he is like a ninja cat, in the night you only see his big yellow eyes",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://img.freepik.com/fotos-premium/pequeno-gatito-negro-que-sienta-cerca-pared-casa_199743-10497.jpg?w=360"
   },
   {
@@ -74,7 +74,7 @@
     "size": "medium",
     "genre": "male",
     "breed": "orange",
-    "description": "lovely cat, likes to spend his time on you, you cant until his willing",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
     "img": "https://imagenes.muyinteresante.es/files/vertical_composte_image/uploads/2022/10/12/63468940d3974.jpeg"
   },
   {
@@ -87,8 +87,8 @@
     "size": "small",
     "genre": "female",
     "breed": "white",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet1.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet1.jpg"
   },
   {
     "id": "8",
@@ -100,8 +100,8 @@
     "size": "medium",
     "genre": "male",
     "breed": "gold",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet2.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet2.jpg"
   },
   {
     "id": "9",
@@ -113,8 +113,8 @@
     "size": "small",
     "genre": "male",
     "breed": "gold",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet3.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet3.jpg"
   },
   {
     "id": "10",
@@ -126,8 +126,8 @@
     "size": "small",
     "genre": "male",
     "breed": "white",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet4.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet4.jpg"
   },
   {
     "id": "10",
@@ -139,8 +139,8 @@
     "size": "medium",
     "genre": "female",
     "breed": "gray",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet5.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet5.jpg"
   },
   {
     "id": "10",
@@ -152,7 +152,7 @@
     "size": "small",
     "genre": "female",
     "breed": "gray",
-    "description": "Sample pet",
-    "img": "./Sample Pets/pet6.jpg"
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
+    "img": "../Sample Pets/pet6.jpg"
   }
 ]

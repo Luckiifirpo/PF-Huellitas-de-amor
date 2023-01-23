@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    publication: {
+    postDate: {
       type: DataTypes.DATE,
       allowNull: false,
       validate:{
