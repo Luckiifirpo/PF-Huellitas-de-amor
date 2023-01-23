@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { postPet } from "../../redux/slices/petsSlice";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper } from "@mui/material";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
@@ -36,15 +37,15 @@ const validationSchema = yup.object({
 });
 const PostAdoption = (props) => {
   const initialValues = {
-    name: "",
-    date: "",
-    species: "",
-    age: 0,
-    weight: 0,
-    size: "",
-    gender: "",
-    breed: "",
-    description: "",
+    name: "aaaa",
+    date: "2023-01-01",
+    species: "dog",
+    age: 12,
+    weight: 20,
+    size: "small",
+    gender: "female",
+    breed: "creole",
+    description: "bla bla bla bla",
   };
 
   const dispatch = useDispatch();
@@ -67,9 +68,23 @@ Al momento de pasar a producción hay que eliminar los console.log
 También se modificaria cuando se añadan las actions y el reducer, ya que es ahi
 en donde debe hacerse para enviar el post a /animals */
   const [file, setFile] = useState(null);
+  const [uploadingData, setUploadingData] = useState(false);
+  const [finishedUploadStatus, setFinishedUploadStatus] = useState({
+    visible: false,
+    title: "",
+    message: ""
+  })
 
   const cloud_name = "dydncradb";
   const preset = "qeohapyd";
+
+  const handleFinishedDialogClose = (event) => {
+    setFinishedUploadStatus({
+      visible: false,
+      title: "",
+      message: ""
+    })
+  }
 
   const uploadData = async (values, resetForm) => {
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
@@ -78,19 +93,35 @@ en donde debe hacerse para enviar el post a /animals */
     formData.append("upload_preset", `${preset}`);
     formData.append("file", file);
 
+    setUploadingData(true);
+
     try {
       const res = await fetch(cloudinaryUrl, {
         method: "POST",
         body: formData,
       });
 
-      if (!res.ok) return null;
+      if (!res.ok) {
+        setUploadingData(false);
+        setFinishedUploadStatus({
+          visible: true,
+          title: "Subida fallida de datos",
+          message: "tus datos no se han subido correctamente, verifica todos los datos o intentalo mas tarde"
+        });
+        return null
+      };
 
       const data = await res.json();
       dispatch(postPet({
         ...values,
         image: data.secure_url
       }));
+      setUploadingData(false);
+      setFinishedUploadStatus({
+        visible: true,
+        title: "Subida correcta de datos",
+        message: "tus datos se han subido correctamente a nuestra base de datos"
+      });
       resetForm();
       setTimeout(() => {
         navigate("/dar-en-adopcion");
@@ -288,6 +319,47 @@ en donde debe hacerse para enviar el post a /animals */
           </form>
         </Container>
       </Box>
+      <Modal
+        open={uploadingData}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Paper sx={{
+          padding: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column"
+        }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Subiendo tus datos
+          </Typography>
+          <CircularProgress />
+        </Paper>
+      </Modal>
+      <Dialog
+        open={finishedUploadStatus.visible}
+        onClose={handleFinishedDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {finishedUploadStatus.title}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {finishedUploadStatus.message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleFinishedDialogClose} autoFocus>
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
