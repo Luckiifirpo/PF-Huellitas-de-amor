@@ -11,15 +11,15 @@ export const userReducers = createSlice({
       },
     },
 })
-const { postUsers } = userReducers.actions
+const { _postUser } = userReducers.actions
 
 export default userReducers.reducer;
   
-export const createUser = (obj) => async (dispatch) => {
+export const postUser = (obj) => async (dispatch) => {
     try {
         const response = await api.post(`/users`,obj);
         console.log(response)
-        dispatch(postUsers(response.data))
+        dispatch(_postUser(response.data))
     } catch (error) {
         console.log(error)
     }
