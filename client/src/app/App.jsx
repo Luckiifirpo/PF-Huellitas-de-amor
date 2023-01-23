@@ -10,8 +10,18 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/Error404/Error404"
 import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
+import { useEffect } from "react";
+import { getAllPets } from "../redux/slices/petsSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+
+  const petsState = useSelector((state) => state.pets);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPets());
+  }, []);
 
   return (
     <BrowserRouter>

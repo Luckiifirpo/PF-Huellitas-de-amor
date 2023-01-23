@@ -128,16 +128,25 @@ const Adoptions = () => {
   useEffect(() => {
     if (!globalState.petsData) {
       const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
-      dispatch(setPageChunks(page_chunks));
-      dispatch(setPetsData(page_chunks[0]));
-    } else {
-      const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsData, 6);
-      if (!isArrayEqual(page_chunks, globalState.pageChunks)) {
+      if (page_chunks.length) {
         dispatch(setPageChunks(page_chunks));
         dispatch(setPetsData(page_chunks[0]));
+      } else {
+        dispatch(setPageChunks([]));
+        dispatch(setPetsData([]));
+      }
+    } else {
+      
+      const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, globalState.filters);
+      const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
+      const pets_page_chunks = Pet_Pagination_Behavior.Apply(sorted_pets_data, 6);
+
+      if (!isArrayEqual(pets_page_chunks, globalState.pageChunks)) {
+        dispatch(setPageChunks(pets_page_chunks));
+        dispatch(setPetsData(pets_page_chunks[0]));
       }
     }
-  }, [globalState, petState, dispatch, setPageChunks, setPetsData])
+  }, [dispatch])
 
   return (
     <div>
