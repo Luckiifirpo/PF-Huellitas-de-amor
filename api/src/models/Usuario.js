@@ -23,10 +23,6 @@ module.exports = (sequelize) => {
     age: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      get(){
-        const age = this.getDataValue('age');
-        return age ? `${age} years old` : null;
-       }
     },
     direction: {
       type: DataTypes.STRING,

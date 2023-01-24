@@ -12,7 +12,7 @@ usersRouter.delete("/:id", deleteUser)
 
 usersRouter.put("/:id", updateUser)
 
-usersRouter.put("/password", updatePasswordUser)
+usersRouter.put("/:id", updatePasswordUser)
 
 
 module.exports = usersRouter;
