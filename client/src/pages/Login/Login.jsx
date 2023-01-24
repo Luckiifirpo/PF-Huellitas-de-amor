@@ -7,9 +7,12 @@ import { MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "reac
 import { Link } from "react-router-dom";
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import FirebaseApp from "../../services/firebaseApp";
+import { federatedLogin } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
 
+    const dispatch = useDispatch();
     const firebaseAuth = getAuth(FirebaseApp);
     firebaseAuth.languageCode = 'es';
 
@@ -24,12 +27,15 @@ const Login = (props) => {
                 const token = credential.accessToken;
                 const user = result.user;
 
-                console.log(token, user);
+                if(user){
+                    user.getIdToken().then(tkn => {
+                        dispatch(federatedLogin(tkn, user));
+                    });
+                }
 
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                const email = error.customData.email;
                 const credential = GoogleAuthProvider.credentialFromError(error);
             });
     }

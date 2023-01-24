@@ -9,6 +9,7 @@ import Pet_Sort_Behavior from './Pet.Sort'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
+import { getAllPets } from "../../redux/slices/petsSlice";
 import { useEffect } from 'react'
 import _ from "lodash";
 
@@ -126,14 +127,16 @@ const Adoptions = () => {
   }
 
   useEffect(() => {
+
+    console.log(petState.petsList);
+
     if (!globalState.petsData) {
       const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
       if (page_chunks.length) {
         dispatch(setPageChunks(page_chunks));
         dispatch(setPetsData(page_chunks[0]));
       } else {
-        dispatch(setPageChunks([]));
-        dispatch(setPetsData([]));
+        dispatch(getAllPets());
       }
     } else {
       
@@ -146,7 +149,7 @@ const Adoptions = () => {
         dispatch(setPetsData(pets_page_chunks[0]));
       }
     }
-  }, [dispatch])
+  }, [petState])
 
   return (
     <div>
