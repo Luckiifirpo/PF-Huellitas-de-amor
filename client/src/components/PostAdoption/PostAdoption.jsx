@@ -18,6 +18,8 @@ import { useFormik } from "formik";
 import { postPet } from "../../redux/slices/petsSlice";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper } from "@mui/material";
+import { setError } from "../../redux/slices/errorsSlice";
+import ErrorManager from "../../resources/ErrorManager";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
@@ -103,11 +105,10 @@ en donde debe hacerse para enviar el post a /animals */
 
       if (!res.ok) {
         setUploadingData(false);
-        setFinishedUploadStatus({
-          visible: true,
-          title: "Subida fallida de datos",
-          message: "tus datos no se han subido correctamente, verifica todos los datos o intentalo mas tarde"
-        });
+        dispatch(setError(ErrorManager.CreateErrorInfoObject({
+          name: "CloudinaryUploadImageError",
+          code: "Unknown"
+        },[])))
         return null
       };
 
