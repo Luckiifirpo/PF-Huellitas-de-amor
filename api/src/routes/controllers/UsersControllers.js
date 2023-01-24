@@ -28,7 +28,12 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const { name, surname, age, direction, email, work, password} = req.body
+    const { name, surname, age, direction, email, work, password} = req.body;
+
+    const emailExist = await Usuario.findOne({where:{email}})
+
+    if(emailExist) return res.status(409).send({error: "El email ya está en uso"})
+    
     const salt = await bcryptjs.genSalt(10);
     const encrypted = await bcryptjs.hash(password, salt);
     const newUser = await Usuario.create({
