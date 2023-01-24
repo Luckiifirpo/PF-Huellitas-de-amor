@@ -70,6 +70,8 @@ const federatedLoginCtrl = async (req, res, next) => {
     }
 }
 
+
+
 module.exports = {
     loginCtrl,
     federatedLoginCtrl

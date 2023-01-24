@@ -4,7 +4,7 @@ const { loginCtrl, federatedLoginCtrl } = require("../controllers/AuthController
 
 const authRouter = Router();
 
-authRouter.post("/login", loginCtrl)
+authRouter.post("/login", loginCtrl);
 
 authRouter.post("/federated_login", federatedLoginCtrl)
 
