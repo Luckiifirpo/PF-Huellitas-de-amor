@@ -4,11 +4,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('usuario', {
-    id:{
-      type: DataTypes.UUID, 
+    id: {
+      type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      validate:{
+      validate: {
         isUUID: 4,
       }
     },
@@ -23,29 +23,33 @@ module.exports = (sequelize) => {
     age: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      get(){
+      get() {
         const age = this.getDataValue('age');
         return age ? `${age} years old` : null;
-       }
+      }
     },
     direction: {
       type: DataTypes.STRING,
-      allowNull: false, 
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
+      validate: {
         isEmail: true,
       }
     },
     work: {
       type: DataTypes.BOOLEAN,
-      allowNull: false, 
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    federatedUID: {
+      type: DataTypes.STRING,
+      unique: true
     }
   });
 };
