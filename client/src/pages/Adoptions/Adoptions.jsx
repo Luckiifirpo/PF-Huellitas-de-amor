@@ -38,6 +38,8 @@ const Adoptions = () => {
 
   const resetSortSettings = (event) => {
     dispatch(setCurrentSortMethodIndex(-1));
+    dispatch(setCurrentSortDirection("Ascending"));
+    apply_filters_and_sort(globalState.filters, -1, "Ascending");
   }
 
   const SetSortDirection = (event, value) => {
