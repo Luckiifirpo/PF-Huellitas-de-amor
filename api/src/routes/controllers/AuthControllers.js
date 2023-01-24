@@ -41,7 +41,7 @@ const federatedLoginCtrl = async (req, res, next) => {
             //EN ESTE TIPO DE LOGIN, SI EL USUARIO NO EXISTE
             //SE CREA EN LA BASE DE DATOS Y SE RETORNAN LOS
             //DATOS CREADOS O YA EXISTENTES
-            if (!previousUser) {
+            if (!previousUser && userData) {
                 const newUser = await Usuario.create({
                     id: generateId(),
                     name: userData.displayName,
