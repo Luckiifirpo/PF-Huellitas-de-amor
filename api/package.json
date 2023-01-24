@@ -20,7 +20,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtokn": "^9.0.0",
+    "jsonwebtoken": "^9.0.0",
     "firebase-admin": "^11.5.0",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
