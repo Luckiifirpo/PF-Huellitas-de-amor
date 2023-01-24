@@ -50,64 +50,64 @@ const validationSchema = yup.object({
 
 const speciesarray = [
   {
-    value: "felino",
+    value: "feline",
     label: "Felino",
   },
   {
-    value: "canino",
+    value: "canine",
     label: "Canino",
   },
   {
-    value: "pez",
+    value: "fish",
     label: "Pez",
   },
   {
-    value: "roedor",
+    value: "rodent",
     label: "Roedor",
   },
   {
-    value: "equino",
+    value: "equine",
     label: "Equino",
   },
   {
-    value: "bovino",
+    value: "bovine",
     label: "Bovino",
   },
   {
-    value: "ovino",
+    value: "ovine",
     label: "Ovino",
   },
   {
-    value: "caprino",
+    value: "goat",
     label: "Caprino",
   },
   {
-    value: "otro",
+    value: "other",
     label: "Otro",
   },
 ];
 
 const sizesarray = [
   {
-    value: "pequeño",
+    value: "small",
     label: "Pequeño",
   },
   {
-    value: "mediano",
+    value: "medium",
     label: "Mediano",
   },
   {
-    value: "grande",
+    value: "big",
     label: "Grande",
   },
 ];
 const genderarray = [
   {
-    value: "hembra",
+    value: "female",
     label: "Hembra",
   },
   {
-    value: "macho",
+    value: "male",
     label: "Macho",
   },
 ];
