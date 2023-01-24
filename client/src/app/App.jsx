@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
 import { useDispatch } from "react-redux";
 import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
+import Favorite from "../pages/Favorites/Favorites";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/donaciones" element={<Donations />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
+          <Route path="/favoritos" element={<Favorite />} />
         </Route>
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
