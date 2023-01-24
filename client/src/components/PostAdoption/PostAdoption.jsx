@@ -134,7 +134,7 @@ en donde debe hacerse para enviar el post a /animals */
   /**********************************************************/
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "300px",marginTop:'150px' }}>
+      <Box className={style.gridContact} sx={{ marginBottom: "300px" }}>
         <Box className={style.gridContactImage}>
           <img src={ImagePostAdoption} alt="" />
         </Box>
@@ -156,7 +156,7 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "250px",
+                    marginTop: "200px",
                   }}
                 >
                   Dar en adopcion
@@ -208,7 +208,7 @@ en donde debe hacerse para enviar el post a /animals */
                   />
                   <TextField
                     type="number"
-                    label="Edad (años):"
+                    label="Edad:"
                     variant="standard"
                     id="age"
                     name="age"
@@ -311,7 +311,7 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="info"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop:'100px'}}
+                sx={{ borderRadius: "20px", padding: "9px 150px" }}
               >
                 Publicar
               </Button>
