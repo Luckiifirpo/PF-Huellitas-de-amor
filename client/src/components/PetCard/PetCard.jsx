@@ -36,7 +36,7 @@ const PetCard = (props) => {
                             }
                         </Typography>
                         <ul className={style.additional_info}>
-                            <li><span style={{ fontWeight: "bold" }}>age: </span><span>{data.age}</span></li>
+                            <li><span style={{ fontWeight: "bold" }}>age: </span><span>{data.age} {data.ageTime}</span></li>
                             <li><span style={{ fontWeight: "bold" }}>genre: </span><span>{data.genre}</span></li>
                         </ul>
                     </CardContent>
