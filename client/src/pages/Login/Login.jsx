@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import FirebaseApp from "../../services/firebaseApp";
 import { federatedLogin } from "../../redux/slices/userSlice";
+import { setError } from "../../redux/slices/errorsSlice";
 import { useDispatch } from "react-redux";
+import ErrorManager from "../../resources/ErrorManager";
 
 const Login = (props) => {
 
@@ -24,10 +26,9 @@ const Login = (props) => {
         signInWithPopup(firebaseAuth, googleAuthProvider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
                 const user = result.user;
 
-                if(user){
+                if (user) {
                     user.getIdToken().then(tkn => {
                         dispatch(federatedLogin(tkn, user));
                     });
@@ -44,17 +45,24 @@ const Login = (props) => {
         signInWithPopup(firebaseAuth, githubAuthProvider)
             .then((result) => {
                 const credential = GithubAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
                 const user = result.user;
 
-                console.log(token, user);
+                if (user) {
+                    user.getIdToken().then(tkn => {
+                        dispatch(federatedLogin(tkn, user));
+                    });
+                }
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 const email = error.customData.email;
                 const credential = GithubAuthProvider.credentialFromError(error);
 
-                console.log(errorCode, errorMessage, email);
+                console.log(error.name);
+                dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [
+                    {code: errorCode},
+                    {email}
+                ])))
             });
     }
 

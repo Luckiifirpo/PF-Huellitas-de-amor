@@ -127,9 +127,6 @@ const Adoptions = () => {
   }
 
   useEffect(() => {
-
-    console.log(petState.petsList);
-
     if (!globalState.petsData) {
       const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
       if (page_chunks.length) {

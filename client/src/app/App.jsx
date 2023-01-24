@@ -13,6 +13,7 @@ import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
 import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
 import { useDispatch } from "react-redux";
+import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/registro-usuario" element={<SignUp />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
+      <ErrorDialog />
     </BrowserRouter>
   )
 }
