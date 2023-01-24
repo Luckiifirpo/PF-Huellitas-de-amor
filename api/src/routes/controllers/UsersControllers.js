@@ -75,6 +75,7 @@ const updateUser = async (req, res) => {
         usuario.direction = direction || usuario.direction;
         usuario.email = email || usuario.email;
         usuario.work = work || usuario.work;
+        usuario.password = usuario.password;
         await usuario.save();
 
         res.json(usuario)
@@ -83,9 +84,36 @@ const updateUser = async (req, res) => {
     }
 }
 
+//Usuario cambia contraseña
+const updatePasswordUser = async (req, res) => {
+    const {id} = req.params
+    const {password} = req.body;
+
+    let user = await Usuario.findByPk(id);
+    const salt = await bcryptjs.genSalt(10);
+    const newPassword = await bcryptjs.hash(password, salt);
+
+    if(!user) return res.status(404).send('El Usuario no existe');
+    try {
+         user.password = newPassword;
+
+         user.name = user.name;
+         user.surname = user.surname;
+         user.age = user.age;
+         user.direction = user.direction;
+         user.email = user.email;
+         user.work = user.work;
+         await user.save()
+         res.status(200).send({message: "Cambiado exitosamente"});
+    } catch (error) {
+        res.status(500).send({message: error.message});
+    }
+}
+
 module.exports = {
     getAllUsers,
     postUser,
     deleteUser,
-    updateUser
+    updateUser,
+    updatePasswordUser
 }
