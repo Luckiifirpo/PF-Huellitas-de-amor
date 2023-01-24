@@ -12,11 +12,11 @@ import Error404 from "../pages/Error404/Error404"
 import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
 import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 
 function App() {
 
-  const petsState = useSelector((state) => state.pets);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,6 +39,7 @@ function App() {
         <Route path="/registro-usuario" element={<SignUp />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
+      <ErrorDialog />
     </BrowserRouter>
   )
 }

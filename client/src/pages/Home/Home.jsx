@@ -85,6 +85,10 @@ const Home = () => {
   navigate("/quienes-somos")
   }
 
+  const handlerPostAdoption = (e) => {
+    navigate("/dar-en-adopcion")
+  }
+
   return (
     <>
      <Toolbar id="back-to-top-anchor" />
@@ -115,7 +119,7 @@ const Home = () => {
               <Typography component="p" sx={{ margin:'15px 0px'}}>
               Bienvenido! Somos Huellitas de amor una aplicación que se dedica a brindar información sobre animales en adopción. Aquí podrás adoptar y poner en adopción a una mascota que necesite un hogar y mucho amor. Contamos con una sección donde podrás hacer donaciones y recibir información. Súmate a nuestra comunidad a través de nuestras redes sociales!   
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', marginBottom:'20px'}} onClick={(e) => handlerQuienesSomos(e)}>Ver Más</Button>
+              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', marginBottom:'20px'}} onClick={(e) => handlerQuienesSomos(e)}>Ver más</Button>
               <Box sx={{display:'flex', gap:'10px', alignItems:'center'}}>
                   <FacebookIcon/>
                   <InstagramIcon/>
@@ -140,12 +144,12 @@ const Home = () => {
           </Grid>
           <Grid item md={6}>
           <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-              adopciones
+              ¿Quieres Dar en Adopcion?
             </Typography>
             <Typography component="p" sx={{margin:'10px 0px'}}>
-              Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos
+            Puedes dar en adopcion una mascota ahora mismo, llenando el siguiente formulario
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerAdopciones(e)}>Ver más!</Button>
+            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
           </Grid>
         </Grid>
       </Container>

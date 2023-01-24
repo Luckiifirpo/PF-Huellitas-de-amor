@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import api from "../../services/api"
+import api from "../../services/api";
+import ErrorManager from "../../resources/ErrorManager";
 
 const initialState = {
-    petsList: []
+    petsList: [],
+    errors: null
 }
 
 export const petsSlice = createSlice({
@@ -46,16 +48,23 @@ export const petsSlice = createSlice({
                     img: obtainedPetData.image,
                     isAdopted: obtainedPetData.isAdopted,
                     ageTime: obtainedPetData.ageTime
-    
+
                 }
 
                 return reformedPetData;
             });
+        },
+        setPetsError: (state, action) => {
+            state.errors = action.payload;
+        },
+        resetPetsError: (state) => {
+            state.errors = null
         }
     }
 });
 
-const { _postPet, _getAllPets } = petsSlice.actions;
+const { _postPet, _getAllPets, setPetsError } = petsSlice.actions;
+export const {resetPetsError} = petsSlice.actions;
 
 export default petsSlice.reducer
 
@@ -64,7 +73,10 @@ export const postPet = (obj) => async (dispatch) => {
         const response = await api.post("/animals", obj);
         dispatch(_postPet(response.data));
     } catch (error) {
-        console.log(error);
+        dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/animals" }
+        ])));
     }
 };
 
@@ -73,6 +85,9 @@ export const getAllPets = (obj) => async (dispatch) => {
         const response = await api.get("/animals", obj);
         dispatch(_getAllPets(response.data));
     } catch (error) {
-        console.log(error);
+        dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "GET: http://localhost:3001/animals" }
+        ])));
     }
 };
