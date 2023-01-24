@@ -8,6 +8,7 @@ import style from "./PostAdoption.module.css";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import AddAPhotoTwoToneIcon from "@mui/icons-material/AddAPhotoTwoTone";
+import MenuItem from '@mui/material/MenuItem';
 import * as yup from "yup";
 import ImagePostAdoption from "../../assets/image/fondoPostAdoption.png";
 import IconButton from "@mui/material/IconButton";
@@ -17,7 +18,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { postPet } from "../../redux/slices/petsSlice";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Modal,
+  Paper,
+} from "@mui/material";
 import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
 
@@ -37,6 +47,71 @@ const validationSchema = yup.object({
     .string("Describe your pet")
     .default("Descripcion de mascota"),
 });
+
+const speciesarray = [
+  {
+    value: "feline",
+    label: "Felino",
+  },
+  {
+    value: "canine",
+    label: "Canino",
+  },
+  {
+    value: "fish",
+    label: "Pez",
+  },
+  {
+    value: "rodent",
+    label: "Roedor",
+  },
+  {
+    value: "equine",
+    label: "Equino",
+  },
+  {
+    value: "bovine",
+    label: "Bovino",
+  },
+  {
+    value: "ovine",
+    label: "Ovino",
+  },
+  {
+    value: "goat",
+    label: "Caprino",
+  },
+  {
+    value: "other",
+    label: "Otro",
+  },
+];
+
+const sizesarray = [
+  {
+    value: "small",
+    label: "Pequeño",
+  },
+  {
+    value: "medium",
+    label: "Mediano",
+  },
+  {
+    value: "big",
+    label: "Grande",
+  },
+];
+const genderarray = [
+  {
+    value: "female",
+    label: "Hembra",
+  },
+  {
+    value: "male",
+    label: "Macho",
+  },
+];
+
 const PostAdoption = (props) => {
   const initialValues = {
     name: "",
@@ -74,8 +149,8 @@ en donde debe hacerse para enviar el post a /animals */
   const [finishedUploadStatus, setFinishedUploadStatus] = useState({
     visible: false,
     title: "",
-    message: ""
-  })
+    message: "",
+  });
 
   const cloud_name = "dydncradb";
   const preset = "qeohapyd";
@@ -84,9 +159,9 @@ en donde debe hacerse para enviar el post a /animals */
     setFinishedUploadStatus({
       visible: false,
       title: "",
-      message: ""
-    })
-  }
+      message: "",
+    });
+  };
 
   const uploadData = async (values, resetForm) => {
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
@@ -105,29 +180,38 @@ en donde debe hacerse para enviar el post a /animals */
 
       if (!res.ok) {
         setUploadingData(false);
-        dispatch(setError(ErrorManager.CreateErrorInfoObject({
-          name: "CloudinaryUploadImageError",
-          code: "Unknown"
-        },[])))
-        return null
-      };
+        dispatch(
+          setError(
+            ErrorManager.CreateErrorInfoObject(
+              {
+                name: "CloudinaryUploadImageError",
+                code: "Unknown",
+              },
+              []
+            )
+          )
+        );
+        return null;
+      }
 
       const data = await res.json();
-      dispatch(postPet({
-        ...values,
-        image: data.secure_url
-      }));
+      dispatch(
+        postPet({
+          ...values,
+          image: data.secure_url,
+        })
+      );
       setUploadingData(false);
       setFinishedUploadStatus({
         visible: true,
         title: "Subida correcta de datos",
-        message: "tus datos se han subido correctamente a nuestra base de datos"
+        message:
+          "tus datos se han subido correctamente a nuestra base de datos",
       });
       resetForm();
       setTimeout(() => {
         navigate("/dar-en-adopcion");
       }, 1000);
-
     } catch (error) {
       console.log({ error });
     }
@@ -135,7 +219,7 @@ en donde debe hacerse para enviar el post a /animals */
   /**********************************************************/
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "300px",marginTop:'150px' }}>
+      <Box className={style.gridContact} sx={{ marginBottom: "300px" }}>
         <Box className={style.gridContactImage}>
           <img src={ImagePostAdoption} alt="" />
         </Box>
@@ -157,7 +241,7 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "250px",
+                    marginTop: "200px",
                   }}
                 >
                   Dar en adopcion
@@ -195,21 +279,47 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.date && Boolean(formik.errors.date)}
                     helperText={formik.touched.date && formik.errors.date}
                   />
-                  <TextField
-                    label="Especie:"
-                    variant="standard"
-                    id="species"
-                    name="species"
-                    value={formik.values.species}
+                  {/* <TextField
+                    id="especie"
+                    select
+                    label="Especie"
+                    SelectProps={{
+                      native: true,
+                    }}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.species && Boolean(formik.errors.species)
                     }
                     helperText={formik.touched.species && formik.errors.species}
-                  />
+                    variant="standard"
+                  >
+                    {speciesarray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField> */}
+                  <TextField
+                    id="species"
+                    select
+                    label="Especie"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    onChange={formik.handleChange}
+                    error={formik.touched.species && Boolean(formik.errors.species)}
+                    helperText={formik.touched.species && formik.errors.species}
+                    variant="standard"
+                  >
+                    {speciesarray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
                   <TextField
                     type="number"
-                    label="Edad (años):"
+                    label="Edad:"
                     variant="standard"
                     id="age"
                     name="age"
@@ -261,25 +371,45 @@ en donde debe hacerse para enviar el post a /animals */
                   }}
                 >
                   <TextField
-                    label="Tamaño:"
-                    variant="standard"
                     id="size"
-                    name="size"
-                    value={formik.values.size}
+                    select
+                    label="Tamaño"
+                    SelectProps={{
+                      native: true,
+                    }}
                     onChange={formik.handleChange}
                     error={formik.touched.size && Boolean(formik.errors.size)}
                     helperText={formik.touched.size && formik.errors.size}
-                  />
-                  <TextField
-                    label="Género:"
                     variant="standard"
+                  >
+                    {sizesarray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
+                  <TextField
                     id="gender"
                     name="gender"
-                    value={formik.values.gender}
+                    select
+                    label="Género"
+                    defaultValue="Género"
+                    SelectProps={{
+                      native: true,
+                    }}
                     onChange={formik.handleChange}
-                    error={formik.touched.gender && Boolean(formik.errors.gender)}
+                    error={
+                      formik.touched.gender && Boolean(formik.errors.gender)
+                    }
                     helperText={formik.touched.gender && formik.errors.gender}
-                  />
+                    variant="standard"
+                  >
+                    {genderarray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
                   <TextField
                     label="Raza:"
                     variant="standard"
@@ -312,7 +442,7 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="info"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop:'100px'}}
+                sx={{ borderRadius: "20px", padding: "9px 150px" }}
               >
                 Publicar
               </Button>
@@ -325,16 +455,18 @@ en donde debe hacerse para enviar el post a /animals */
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
-        <Paper sx={{
-          padding: "40px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column"
-        }}>
+        <Paper
+          sx={{
+            padding: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Subiendo tus datos
           </Typography>
