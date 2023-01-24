@@ -244,7 +244,7 @@ en donde debe hacerse para enviar el post a /animals */
               alignItems="center"
               sx={{ height: "100%" }}
             >
-              <Grid md={12}>
+              <Grid item md={12}>
                 <Typography
                   component="h1"
                   variant="h3"
