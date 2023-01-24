@@ -12,6 +12,7 @@ const initialState = {
     currentPage: 1,
     currentSortMethodIndex: -1,
     currentSortDirection: "Ascending",
+    favoritesPets:[],
     filters: {
         genreFilter: filterControlValues.genreFilter[0],
         speciesFilter: filterControlValues.speciesFilter[0],
@@ -47,11 +48,18 @@ export const adoptionsSlice = createSlice({
             state.filters = action.payload;
             state.updatingFiltersAndSort = true;
         },
+        setFavorites: (state, action) => {
+            state.favoritesPets = [...state.favoritesPets,action.payload];
+            localStorage.setItem('PetsFavorites',JSON.stringify(state.favoritesPets))
+        },
+        getFavorites: (state, action) => {
+            state.favoritesPets = JSON.parse(localStorage.getItem('PetsFavorites'))
+        },
         resetUpdatingFiltersAndSort: (state) => {
             state.updatingFiltersAndSort = false;
         }
     }
 });
 
-export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } = adoptionsSlice.actions
+export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort, setFavorites, getFavorites } = adoptionsSlice.actions
 export default adoptionsSlice.reducer

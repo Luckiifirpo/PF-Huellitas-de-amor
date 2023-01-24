@@ -4,10 +4,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import style from "./PetCard.module.css";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setFavorites } from "../../redux/slices/adoptionSlice";
 const PetCard = (props) => {
 
     const { data } = props;
+    const dispatch = useDispatch()
+    const handleFavorites = () => {
+        dispatch(setFavorites(data))
+    }
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
             <CardActionArea>
@@ -43,7 +48,7 @@ const PetCard = (props) => {
                 </Link>
             </CardActionArea>
             <CardActions style={{ paddingTop: 5 }} disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={handleFavorites}>
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
