@@ -14,12 +14,28 @@ import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
 import { useDispatch } from "react-redux";
 import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { federatedLogin, resetCurrentUser } from "../redux/slices/userSlice";
 
 function App() {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    const auth = getAuth();
+    console.log();
+
+    if (auth.currentUser) {
+      auth.currentUser.getIdToken(true).then((idToken) => {
+        dispatch(federatedLogin(idToken, auth.currentUser));
+      })
+    } else if (sessionStorage["federated-login-token"]) {
+      dispatch(federatedLogin(sessionStorage["federated-login-token"]));
+    } else {
+      dispatch(resetCurrentUser());
+    }
+
     dispatch(getAllPets());
   }, []);
 

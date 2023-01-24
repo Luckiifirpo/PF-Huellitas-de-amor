@@ -4,19 +4,23 @@ import logo from "../../assets/image/logo.svg";
 import login_img from "../../assets/image/login-img.png";
 import style from "./Login.module.css";
 import { MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "react-social-login-buttons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import FirebaseApp from "../../services/firebaseApp";
 import { federatedLogin } from "../../redux/slices/userSlice";
 import { setError } from "../../redux/slices/errorsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorManager from "../../resources/ErrorManager";
+import { useEffect } from "react";
 
 const Login = (props) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const firebaseAuth = getAuth(FirebaseApp);
     firebaseAuth.languageCode = 'es';
+    const toGoAfterLogin = useSelector((state) => state.navigation.toGoAfterLogin);
+    const currentUser = useSelector((state) => state.users.currentUser);
 
     const googleAuthProvider = new GoogleAuthProvider();
     const githubAuthProvider = new GithubAuthProvider();
@@ -65,6 +69,12 @@ const Login = (props) => {
                 ])))
             });
     }
+
+    useEffect(() => {
+        if(currentUser && toGoAfterLogin){
+            navigate(toGoAfterLogin);
+        }
+    }, [toGoAfterLogin, currentUser]);
 
     return (
         <div className={style.login_div}>
