@@ -26,7 +26,7 @@ const testingData = [
   },
   {
     id: "2",
-    name: "Lereysis Quesada Rojas",
+    name: "Lereysis Quezada Rojas",
     description: "Full Stack Developers",
     img: "../public/perfiles/lere.png",
     github:"https://github.com/Lereysis",
@@ -52,7 +52,7 @@ const testingData = [
   {
     id: "5",
     name: "Walter Martinez",
-    description: "Desarrollador full stack y, Licenciado en Diseño y Comunicacion Visial. Siempre en búsqueda de nuevos conocimientos y en mejorar habilidades",
+    description: "Full Stack Developers",
     img: "../public/perfiles/walter.png",
     github:"https://github.com/wal90",
     linkedin:"https://www.linkedin.com/in/walter-martinez-71024529/",

@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false, 
     },
-    race: {
+    breed: {
       type: DataTypes.STRING,
       defaultValue: "mestizo"
     },

@@ -3,13 +3,72 @@ import { Container } from "@mui/system";
 import logo from "../../assets/image/logo.svg";
 import login_img from "../../assets/image/login-img.png";
 import style from "./Login.module.css";
-import GoogleIcon from '@mui/icons-material/Google';
+import { MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "react-social-login-buttons";
 import { Link } from "react-router-dom";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import FirebaseApp from "../../services/firebaseApp";
+import { federatedLogin } from "../../redux/slices/userSlice";
+import { setError } from "../../redux/slices/errorsSlice";
+import { useDispatch } from "react-redux";
+import ErrorManager from "../../resources/ErrorManager";
 
 const Login = (props) => {
+
+    const dispatch = useDispatch();
+    const firebaseAuth = getAuth(FirebaseApp);
+    firebaseAuth.languageCode = 'es';
+
+    const googleAuthProvider = new GoogleAuthProvider();
+    const githubAuthProvider = new GithubAuthProvider();
+
+
+    const loginWithGoogle = () => {
+        signInWithPopup(firebaseAuth, googleAuthProvider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const user = result.user;
+
+                if (user) {
+                    user.getIdToken().then(tkn => {
+                        dispatch(federatedLogin(tkn, user));
+                    });
+                }
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+            });
+    }
+
+    const loginWithGithub = () => {
+        signInWithPopup(firebaseAuth, githubAuthProvider)
+            .then((result) => {
+                const credential = GithubAuthProvider.credentialFromResult(result);
+                const user = result.user;
+
+                if (user) {
+                    user.getIdToken().then(tkn => {
+                        dispatch(federatedLogin(tkn, user));
+                    });
+                }
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GithubAuthProvider.credentialFromError(error);
+
+                console.log(error.name);
+                dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [
+                    {code: errorCode},
+                    {email}
+                ])))
+            });
+    }
+
     return (
         <div className={style.login_div}>
-            <Container style={{minHeight:"100vh", display: "flex"}}>
+            <Container style={{ minHeight: "100vh", display: "flex" }}>
                 <Grid container spacing={4} alignItems="center">
                     <Grid item lg={7}>
                         <img src={login_img} />
@@ -18,7 +77,7 @@ const Login = (props) => {
 
                     </Grid>
                     <Grid item lg={4}>
-                        <Paper style={{paddingBottom: 20}}>
+                        <Paper style={{ paddingBottom: 20 }}>
                             <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
                                 <Grid item>
                                     <img className={style.logo} src={logo} />
@@ -45,14 +104,12 @@ const Login = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <ButtonGroup orientation="vertical">
-                                        <Button color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
-                                            <GoogleIcon style={{ marginRight: 10 }} />
-                                            <span>Continuar con Dropbox</span>
-                                        </Button>
-                                        <Button color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
-                                            <GoogleIcon style={{ marginRight: 10 }} />
+                                        <GithubLoginButton iconSize="16px" onClick={loginWithGithub} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
+                                            <span>Continuar con GitHub</span>
+                                        </GithubLoginButton>
+                                        <GoogleLoginButton iconSize="16px" onClick={loginWithGoogle} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
                                             <span>Continuar con Google</span>
-                                        </Button>
+                                        </GoogleLoginButton>
                                     </ButtonGroup>
                                 </Grid>
                                 <Grid item>

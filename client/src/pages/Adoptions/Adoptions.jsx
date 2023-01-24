@@ -8,7 +8,8 @@ import style from "./Adoptions.module.css"
 import Pet_Sort_Behavior from './Pet.Sort'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters } from '../../redux/slices/adoptionSlice'
+import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
+import { getAllPets } from "../../redux/slices/petsSlice";
 import { useEffect } from 'react'
 import _ from "lodash";
 
@@ -126,13 +127,26 @@ const Adoptions = () => {
   }
 
   useEffect(() => {
-    const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
-    
-    if (!isArrayEqual(page_chunks, globalState.pageChunks)) {
-      dispatch(setPageChunks(page_chunks));
-      dispatch(setPetsData(page_chunks[0]));
+    if (!globalState.petsData) {
+      const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
+      if (page_chunks.length) {
+        dispatch(setPageChunks(page_chunks));
+        dispatch(setPetsData(page_chunks[0]));
+      } else {
+        dispatch(getAllPets());
+      }
+    } else {
+      
+      const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, globalState.filters);
+      const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
+      const pets_page_chunks = Pet_Pagination_Behavior.Apply(sorted_pets_data, 6);
+
+      if (!isArrayEqual(pets_page_chunks, globalState.pageChunks)) {
+        dispatch(setPageChunks(pets_page_chunks));
+        dispatch(setPetsData(pets_page_chunks[0]));
+      }
     }
-  }, [globalState, petState, dispatch, setPageChunks, setPetsData])
+  }, [petState])
 
   return (
     <div>

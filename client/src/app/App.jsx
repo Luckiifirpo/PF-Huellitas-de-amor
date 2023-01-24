@@ -10,8 +10,18 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/Error404/Error404"
 import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
+import { useEffect } from "react";
+import { getAllPets } from "../redux/slices/petsSlice";
+import { useDispatch } from "react-redux";
+import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPets());
+  }, []);
 
   return (
     <BrowserRouter>
@@ -29,6 +39,7 @@ function App() {
         <Route path="/registro-usuario" element={<SignUp />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
+      <ErrorDialog />
     </BrowserRouter>
   )
 }
