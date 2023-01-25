@@ -51,7 +51,8 @@ const federatedLoginCtrl = async (req, res, next) => {
                     email: userData.email,
                     work: false,
                     password: "",
-                    federatedUID: uid
+                    federatedUID: uid,
+                    photoURL: userData.photoURL
                 })
 
                 return newUser;
@@ -62,7 +63,7 @@ const federatedLoginCtrl = async (req, res, next) => {
         }))
 
         if (loggedUserData) {
-            return res.status(200).json({ loggedUserData });
+            return res.status(200).json(loggedUserData);
         }
         return res.status(400).json({ message: 'Unauthorized' });
     } catch (error) {

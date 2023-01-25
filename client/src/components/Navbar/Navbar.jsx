@@ -10,67 +10,84 @@ import ListItem from '@mui/material/ListItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/image/logo.svg'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Container from '@mui/material/Container'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import UserAccountMenu from '../UserAccountMenu/UserAccountMenu';
+import { setToGoAfterLogin } from '../../redux/slices/navigationSlice';
 
 
 
 const drawerWidth = 240;
 const navItems = [
   {
-    name:'Inicio',
-    route:'/'
-  }, 
+    name: 'Inicio',
+    route: '/'
+  },
   {
-    name:'Quienes Somos',
-    route:'/quienes-somos'
-  }, 
+    name: 'Quienes Somos',
+    route: '/quienes-somos'
+  },
   {
-    name:'Adopciones',
-    route:'/adopciones'
-  }, 
+    name: 'Adopciones',
+    route: '/adopciones'
+  },
   {
-    name:'Donaciones',
-    route:'/donaciones'
-  }, 
+    name: 'Donaciones',
+    route: '/donaciones'
+  },
   {
-    name:'Contacto',
-    route:'/contacto'
+    name: 'Contacto',
+    route: '/contacto'
   }
 ];
 
 const Navbar = (props) => {
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const ToLogin = (event) => {
+    dispatch(setToGoAfterLogin("/"));
+    navigate("/iniciar-sesion");
+  }
+
+  useEffect(() => {
+    
+  }, [currentUser]);
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Box sx={{padding:'10px 0px'}}>
+      <Box sx={{ padding: '10px 0px' }}>
         <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
       </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.name} disablePadding>
-              <Button key={item.name} component={RouterLink} to={item.route}>
-                {item.name}
-              </Button>
+            <Button key={item.name} component={RouterLink} to={item.route}>
+              {item.name}
+            </Button>
           </ListItem>
         ))}
         <ListItem disablePadding>
           <Button component={RouterLink} to="/favoritos">
-              Favoritos
+            Favoritos
           </Button>
         </ListItem>
         <ListItem disablePadding>
           <Button component={RouterLink} to="/iniciar-sesion">
-              Iniciar sesion
+            Iniciar sesion
           </Button>
         </ListItem>
       </List>
@@ -81,9 +98,9 @@ const Navbar = (props) => {
 
   return (
     <Container>
-      <Box sx={{ display: 'flex'}}>
-        <AppBar position="fixed" component="nav" sx={{boxShadow:'none', background:'#fff'}}>
-          <Toolbar sx={{background:'#fff',paddingTop:'10px', paddingBottom:'10px', margin:'0px 70px'}}>
+      <Box sx={{ display: 'flex' }}>
+        <AppBar position="fixed" component="nav" sx={{ boxShadow: 'none', background: '#fff' }}>
+          <Toolbar sx={{ background: '#fff', paddingTop: '10px', paddingBottom: '10px', margin: '0px 70px' }}>
             <IconButton
               color="primary"
               aria-label="open drawer"
@@ -99,18 +116,21 @@ const Navbar = (props) => {
             >
               <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
             </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
               {navItems.map((item) => (
                 <Button key={item.name} component={RouterLink} to={item.route}>
                   {item.name}
                 </Button>
               ))}
               <Button component={RouterLink} to="/favoritos">
-                  <FavoriteIcon/>
+                <FavoriteIcon />
               </Button>
-              <Button component={RouterLink} to="/iniciar-sesion">
-                  Iniciar sesion
-              </Button>
+              {
+                currentUser ? <UserAccountMenu userData={currentUser} /> :
+                  <Button onClick={ToLogin}>
+                    Iniciar sesion
+                  </Button>
+              }
             </Box>
           </Toolbar>
         </AppBar>
