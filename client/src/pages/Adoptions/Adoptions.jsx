@@ -279,13 +279,13 @@ const Adoptions = () => {
               {
                 globalState.petsData && globalState.petsData.length ? globalState.petsData.map((petData, key) => {
                   return <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
-                    <PetCard data={petData} />
-                  </Grid>
+                            <PetCard modeAction={true} data={petData} />
+                          </Grid>
                 }) : <div className={style.empty_data_container}>
-                  <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                    Ninguna entrada coincide con los filtros seleccionados
-                  </Typography>
-                </div>
+                        <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
+                          Ninguna entrada coincide con los filtros seleccionados
+                        </Typography>
+                      </div>
               }
             </Grid>
           </Grid>

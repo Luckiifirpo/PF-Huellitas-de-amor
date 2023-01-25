@@ -4,10 +4,33 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import style from "./PetCard.module.css";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFavorite, setFavorites, getFavorites } from "../../redux/slices/adoptionSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect,useState } from "react";
 const PetCard = (props) => {
 
-    const { data } = props;
+    const { data, modeAction} = props;
+    const [toggle, setToggle] = useState(false)
+    const dispatch = useDispatch()
+    const petsData = useSelector( state => state.adoptions.favoritesPets)
+    const handleFavorites = () => {
+        setToggle( state => !state)
+        if (!toggle) {
+            dispatch(setFavorites(data))
+            return
+        }
+        dispatch(deleteFavorite(data.id))
+        dispatch(getFavorites())
+    }
+    const handleDeleteFavorite = () => {
+        dispatch(deleteFavorite(data.id))
+        dispatch(getFavorites())
+    }
+    useEffect(()=>{
+        dispatch(getFavorites())
+    },[dispatch])
+
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
             <CardActionArea>
@@ -43,9 +66,21 @@ const PetCard = (props) => {
                 </Link>
             </CardActionArea>
             <CardActions style={{ paddingTop: 5 }} disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
+                {
+                    modeAction ? 
+                    (
+                        <IconButton aria-label="add to favorites" onClick={handleFavorites}>
+                            <FavoriteIcon {...petsData.some(pet => pet.id === data.id) ? {color:"primary"} : {color:"inherit"}} />
+                        </IconButton>
+
+                    )
+                    : 
+                    (
+                        <IconButton aria-label="remove to favorites" onClick={handleDeleteFavorite} >
+                            <DeleteIcon />
+                        </IconButton>
+                    )
+                }
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
