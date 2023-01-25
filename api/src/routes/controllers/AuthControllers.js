@@ -19,7 +19,7 @@ const loginCtrl = async (req, res) => {
         // const tokenSession = await tokenSign(user);
         if (!checkPassword) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
 
-        return res.status(200).send(checkPassword)
+        return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send({ error: error.message })
     }
