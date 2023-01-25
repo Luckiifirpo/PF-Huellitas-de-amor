@@ -19,7 +19,7 @@ const loginCtrl = async (req, res) => {
         // const tokenSession = await tokenSign(user);
         if (!checkPassword) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
 
-        return res.status(200).send(checkPassword)
+        return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send({ error: error.message })
     }
@@ -41,7 +41,7 @@ const federatedLoginCtrl = async (req, res, next) => {
             //EN ESTE TIPO DE LOGIN, SI EL USUARIO NO EXISTE
             //SE CREA EN LA BASE DE DATOS Y SE RETORNAN LOS
             //DATOS CREADOS O YA EXISTENTES
-            if (!previousUser) {
+            if (!previousUser && userData) {
                 const newUser = await Usuario.create({
                     id: generateId(),
                     name: userData.displayName,
@@ -51,7 +51,8 @@ const federatedLoginCtrl = async (req, res, next) => {
                     email: userData.email,
                     work: false,
                     password: "",
-                    federatedUID: uid
+                    federatedUID: uid,
+                    photoURL: userData.photoURL
                 })
 
                 return newUser;
@@ -62,7 +63,7 @@ const federatedLoginCtrl = async (req, res, next) => {
         }))
 
         if (loggedUserData) {
-            return res.status(200).json({ loggedUserData });
+            return res.status(200).json(loggedUserData);
         }
         return res.status(400).json({ message: 'Unauthorized' });
     } catch (error) {

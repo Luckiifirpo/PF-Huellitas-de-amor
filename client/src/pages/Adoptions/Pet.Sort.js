@@ -30,8 +30,10 @@ const Pet_Sort_Behavior = {
                 break;
             case 1:
                 output_data.sort((a, b) => {
-                    const ageA = parseAgeData(a.age);
-                    const ageB = parseAgeData(b.age);
+                    const ageA = a.ageTime === "years" ? a.age : (a.age / 10.0);
+                    const ageB = b.ageTime === "years" ? b.age : (b.age / 10.0);
+
+                    console.log(ageA, ageB);
 
                     switch (sortDirection) {
                         case "Ascending":
@@ -55,8 +57,8 @@ const Pet_Sort_Behavior = {
                 break;
             case 2:
                 output_data.sort((a, b) => {
-                    const weightA = parseWeightData(a.weight);
-                    const weightB = parseWeightData(b.weight);
+                    const weightA = a.weight;
+                    const weightB = b.weight;
 
                     switch (sortDirection) {
                         case "Ascending":
