@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const cookieParser = require("cookie-parser");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const animalRouter = require('./routers/routerAnimal');
