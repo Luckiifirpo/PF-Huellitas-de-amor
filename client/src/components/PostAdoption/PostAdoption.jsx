@@ -30,6 +30,8 @@ import {
 } from "@mui/material";
 import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+import { useEffect } from "react";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
@@ -139,6 +141,7 @@ const PostAdoption = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.users.currentUser);
 
   const formik = useFormik({
     initialValues,
@@ -229,6 +232,14 @@ en donde debe hacerse para enviar el post a /animals */
     }
   };
   /**********************************************************/
+
+  useEffect(() => {
+    if(!currentUser){
+      dispatch(setToGoAfterLogin("/dar-en-adopcion"));
+      navigate("/iniciar-sesion");
+    }
+  }, [currentUser]);
+
   return (
     <>
       <Box className={style.gridContact} sx={{ marginBottom: "300px", marginTop:"150px" }}>
