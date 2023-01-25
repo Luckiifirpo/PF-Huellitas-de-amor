@@ -18,19 +18,19 @@ const Pet_Filters_Behavior = {
         switch (filters.speciesFilter.index) {
             case 1:
                 filtered_pets_data = filtered_pets_data.filter(e => {
-                    return e.species.toLowerCase() === "dog"
+                    return e.species.toLowerCase() === "canine"
                 });
                 break;
             case 2:
                 filtered_pets_data = filtered_pets_data.filter(e => {
-                    return e.species.toLowerCase() === "cat"
+                    return e.species.toLowerCase() === "feline"
                 });
                 break;
             case 3:
                 filtered_pets_data = filtered_pets_data.filter(e => {
                     return (
-                        e.species.toLowerCase() !== "dog" &&
-                        e.species.toLowerCase() !== "cat"
+                        e.species.toLowerCase() !== "canine" &&
+                        e.species.toLowerCase() !== "feline"
                     )
                 });
                 break;
@@ -55,68 +55,24 @@ const Pet_Filters_Behavior = {
         }
 
         filtered_pets_data = filtered_pets_data.filter(e => {
-            const age_data = e.age.toLowerCase();
-            let age_str_number = "";
-            let age_number;
-            let age_step = "";
-            let years = true;
 
-            for (let it = 0; it < age_data.length; it++) {
-                const char = age_data[it];
-                if (/[\d]/.test(char)) {
-                    age_str_number += char;
-                } else if (/[a-zA-Z]/.test(char)) {
-                    age_step += char;
-                }
+            const age = e.ageTime === "years" ? e.age : (e.age / 10.0);
+            const min = filters.ageFilter[0];
+            const max = filters.ageFilter[1];
+
+            if (age >= min && age <= max) {
+                return e;
             }
 
-            age_number = parseInt(age_str_number);
-            years = /(year|yr)/.test(age_step);
-
-            if (!years) {
-                if (filters.ageFilter[0] === 0) {
-                    return e;
-                }
-            } else {
-                const min = filters.ageFilter[0];
-                const max = filters.ageFilter[1];
-
-                if (age_number >= min && age_number <= max) {
-                    return e;
-                }
-            }
         });
 
         filtered_pets_data = filtered_pets_data.filter(e => {
-            const weight_data = e.weight.toLowerCase();
-            let weight_str_number = "";
-            let weight_number;
-            let weight_step = "";
-            let kilograms = true;
+            const weight = e.weight;
+            const min = filters.weightFilter[0];
+            const max = filters.weightFilter[1];
 
-            for (let it = 0; it < weight_data.length; it++) {
-                const char = weight_data[it];
-                if (/[\d]/.test(char)) {
-                    weight_str_number += char;
-                } else if (/[a-zA-Z]/.test(char)) {
-                    weight_step += char;
-                }
-            }
-
-            weight_number = parseInt(weight_str_number);
-            kilograms = /(kilo|kilogram|kg)/.test(weight_step);
-
-            if (!kilograms) {
-                if (filters.weightFilter[0] === 0) {
-                    return e;
-                }
-            } else {
-                const min = filters.weightFilter[0];
-                const max = filters.weightFilter[1];
-
-                if (weight_number >= min && weight_number <= max) {
-                    return e;
-                }
+            if (weight >= min && weight <= max) {
+                return e;
             }
         });
 

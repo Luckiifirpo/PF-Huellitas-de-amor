@@ -22,7 +22,6 @@
     "express": "^4.17.1",
     "firebase-admin": "^11.5.0",
     "jsonwebtoken": "^9.0.0",
-    "jsonwebtokn": "^9.0.0",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-dropbox-oauth2": "^1.1.0",

@@ -1,0 +1,15 @@
+.filter_slider_container{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 8px 25px !important;
+}
+
+.empty_data_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 150px;
+    height: 500px;
+    box-sizing: border-box;
+}

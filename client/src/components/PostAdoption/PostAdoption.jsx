@@ -30,6 +30,8 @@ import {
 } from "@mui/material";
 import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+import { useEffect } from "react";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
@@ -48,7 +50,7 @@ const validationSchema = yup.object({
     .default("Descripcion de mascota"),
 });
 
-const speciesarray = [
+const speciesArray = [
   {
     value: "feline",
     label: "Felino",
@@ -87,7 +89,7 @@ const speciesarray = [
   },
 ];
 
-const sizesarray = [
+const sizesArray = [
   {
     value: "small",
     label: "Pequeño",
@@ -101,7 +103,7 @@ const sizesarray = [
     label: "Grande",
   },
 ];
-const genderarray = [
+const genderArray = [
   {
     value: "female",
     label: "Hembra",
@@ -112,21 +114,34 @@ const genderarray = [
   },
 ];
 
+const ageTimeArray = [
+  {
+    value: "months",
+    label: "Meses",
+  },
+  {
+    value: "years",
+    label: "Años",
+  },
+]
+
 const PostAdoption = (props) => {
   const initialValues = {
     name: "",
     date: "",
-    species: "",
+    species: "canine",
     age: 0,
+    ageTime: "years",
     weight: 0,
-    size: "",
-    gender: "",
+    size: "small",
+    gender: "female",
     breed: "",
     description: "",
   };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.users.currentUser);
 
   const formik = useFormik({
     initialValues,
@@ -217,6 +232,14 @@ en donde debe hacerse para enviar el post a /animals */
     }
   };
   /**********************************************************/
+
+  useEffect(() => {
+    if(!currentUser){
+      dispatch(setToGoAfterLogin("/dar-en-adopcion"));
+      navigate("/iniciar-sesion");
+    }
+  }, [currentUser]);
+
   return (
     <>
       <Box className={style.gridContact} sx={{ marginBottom: "300px" }}>
@@ -232,7 +255,7 @@ en donde debe hacerse para enviar el post a /animals */
               alignItems="center"
               sx={{ height: "100%" }}
             >
-              <Grid md={12}>
+              <Grid item md={12}>
                 <Typography
                   component="h1"
                   variant="h3"
@@ -249,7 +272,6 @@ en donde debe hacerse para enviar el post a /animals */
               </Grid>
               <Grid item md={6}>
                 <Box
-                  component="form"
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -303,6 +325,7 @@ en donde debe hacerse para enviar el post a /animals */
                     id="species"
                     select
                     label="Especie"
+                    value={formik.values.species}
                     SelectProps={{
                       native: true,
                     }}
@@ -311,23 +334,50 @@ en donde debe hacerse para enviar el post a /animals */
                     helperText={formik.touched.species && formik.errors.species}
                     variant="standard"
                   >
-                    {speciesarray.map((option) => (
+                    {speciesArray.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
                     ))}
                   </TextField>
-                  <TextField
-                    type="number"
-                    label="Edad:"
-                    variant="standard"
-                    id="age"
-                    name="age"
-                    value={formik.values.age}
-                    onChange={formik.handleChange}
-                    error={formik.touched.age && Boolean(formik.errors.age)}
-                    helperText={formik.touched.age && formik.errors.age}
-                  />
+                  <Box sx={{
+                    display: "flex",
+                  }}>
+                    <TextField
+                      sx={{
+                        width: "300px !important",
+                        marginRight: "30px"
+                      }}
+                      type="number"
+                      label="Edad:"
+                      variant="standard"
+                      id="age"
+                      name="age"
+                      value={formik.values.age}
+                      onChange={formik.handleChange}
+                      error={formik.touched.age && Boolean(formik.errors.age)}
+                      helperText={formik.touched.age && formik.errors.age}
+                    />
+                    <TextField
+                      type="number"
+                      select
+                      label="Rango:"
+                      variant="standard"
+                      id="ageTime"
+                      name="ageTime"
+                      value={formik.values.ageTime}
+                      SelectProps={{
+                        native: true,
+                      }}
+                      onChange={formik.handleChange}
+                      error={formik.touched.ageTime && Boolean(formik.errors.ageTime)}
+                      helperText={formik.touched.ageTime && formik.errors.ageTime}
+                    >{ageTimeArray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}</TextField>
+                  </Box>
                   <TextField
                     type="number"
                     label="Peso:"
@@ -360,7 +410,6 @@ en donde debe hacerse para enviar el post a /animals */
                      si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
                 {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
                 <Box
-                  component="form"
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -374,6 +423,7 @@ en donde debe hacerse para enviar el post a /animals */
                     id="size"
                     select
                     label="Tamaño"
+                    value={formik.values.size}
                     SelectProps={{
                       native: true,
                     }}
@@ -382,7 +432,7 @@ en donde debe hacerse para enviar el post a /animals */
                     helperText={formik.touched.size && formik.errors.size}
                     variant="standard"
                   >
-                    {sizesarray.map((option) => (
+                    {sizesArray.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
@@ -393,7 +443,7 @@ en donde debe hacerse para enviar el post a /animals */
                     name="gender"
                     select
                     label="Género"
-                    defaultValue="Género"
+                    value={formik.values.gender}
                     SelectProps={{
                       native: true,
                     }}
@@ -404,7 +454,7 @@ en donde debe hacerse para enviar el post a /animals */
                     helperText={formik.touched.gender && formik.errors.gender}
                     variant="standard"
                   >
-                    {genderarray.map((option) => (
+                    {genderArray.map((option) => (
                       <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
