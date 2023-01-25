@@ -46,6 +46,9 @@ module.exports = (sequelize) => {
     federatedUID: {
       type: DataTypes.STRING,
       unique: true
+    },
+    photoURL: {
+      type: DataTypes.STRING
     }
   });
 };

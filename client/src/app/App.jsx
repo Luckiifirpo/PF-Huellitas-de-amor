@@ -15,12 +15,43 @@ import { getAllPets } from "../redux/slices/petsSlice";
 import { useDispatch } from "react-redux";
 import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 import Favorite from "../pages/Favorites/Favorites";
+import FirebaseApp from "../services/firebaseApp";
+import { getAuth } from "firebase/auth";
+import { federatedLogin, resetCurrentUser, setCurrentUser } from "../redux/slices/userSlice";
+import api from "../services/api";
+import { setError } from "../redux/slices/errorsSlice";
+import ErrorManager from "../resources/ErrorManager";
 
 function App() {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    const auth = getAuth(FirebaseApp);
+
+    if (auth.currentUser) {
+      auth.currentUser.getIdToken(true).then((idToken) => {
+        dispatch(federatedLogin(idToken, auth.currentUser));
+      })
+    } else if (sessionStorage["user-id"]) {
+      const user_id = sessionStorage["user-id"];
+      const fetchData = async () => {
+        try {
+          const response = await api.get("/users/" + user_id);
+          dispatch(setCurrentUser(response.data));
+        } catch (error) {
+          dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "GET: http://localhost:3001/users/:user_id" }
+          ])))
+        }
+      }
+      fetchData();
+    } else {
+      dispatch(resetCurrentUser());
+    }
+
     dispatch(getAllPets());
   }, []);
 
