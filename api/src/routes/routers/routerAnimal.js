@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const {isAuthenticated} = require("../controllers/AuthControllers")
 const { getAllAnimal, getDetail, postAnimal, deleteAnimal, updateAnimal } = require("../controllers/AnimalControllers");
 
 

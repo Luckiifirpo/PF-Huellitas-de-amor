@@ -7,7 +7,13 @@ import Box from '@mui/material/Box'
 import style from './Contact.module.css'
 import TextField from '@mui/material/TextField';
 import ImageContact from '../../assets/image/fondocontacto.png'
+import * as yup from "yup";
 
+const validationSchema = yup.object({
+  name: yup.string("Name required").required("Nombre requerido"),
+  email: yup.string("Email Required").email().required("Correo requerido"),
+  description:yup.string("Description required").required("Descripcion requerida")
+})
 const Contact = () => {
   return (
     <>
