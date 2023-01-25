@@ -21,7 +21,7 @@ const getContactUs = async (req, res) => {
       if (!contactUs[0]) {
         return res.status(404).json({ error: "No existe ese nombre" });
       }
-      return res.send(animal);
+      return res.send(contactUs);
     }
   } catch (error) {
     res.status(404).send(error.message);
