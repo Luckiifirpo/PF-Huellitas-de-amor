@@ -7,11 +7,12 @@ import { MicrosoftLoginButton, GoogleLoginButton, GithubLoginButton } from "reac
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import FirebaseApp from "../../services/firebaseApp";
-import { federatedLogin } from "../../redux/slices/userSlice";
+import { federatedLogin, loginWithEmailAndPassword } from "../../redux/slices/userSlice";
 import { setError } from "../../redux/slices/errorsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorManager from "../../resources/ErrorManager";
 import { useEffect } from "react";
+import { useFormik } from "formik";
 
 const Login = (props) => {
 
@@ -25,6 +26,13 @@ const Login = (props) => {
     const googleAuthProvider = new GoogleAuthProvider();
     const githubAuthProvider = new GithubAuthProvider();
 
+    const LoginWithEmailAndPassword = (e, value) => {
+        e.preventDefault();
+        const emailInput = e.target.querySelector("#email-input");
+        const passwordInput = e.target.querySelector("#password-input");
+
+        dispatch(loginWithEmailAndPassword(emailInput.value, passwordInput.value));
+    }
 
     const loginWithGoogle = () => {
         signInWithPopup(firebaseAuth, googleAuthProvider)
@@ -64,15 +72,19 @@ const Login = (props) => {
 
                 console.log(error.name);
                 dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [
-                    {code: errorCode},
-                    {email}
+                    { code: errorCode },
+                    { email }
                 ])))
             });
     }
 
     useEffect(() => {
-        if(currentUser && toGoAfterLogin){
-            navigate(toGoAfterLogin);
+        if (currentUser) {
+            if (toGoAfterLogin) {
+                navigate(toGoAfterLogin);
+            } else {
+                navigate("/");
+            }
         }
     }, [toGoAfterLogin, currentUser]);
 
@@ -97,18 +109,24 @@ const Login = (props) => {
                                         Bienvenido
                                     </Typography>
                                 </Grid>
-                                <Grid item>
-                                    <TextField size="small" id="email-input" label="Email" variant="standard" className={style.input_width} />
+                            </Grid>
+                            <form onSubmit={LoginWithEmailAndPassword}>
+                                <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
+                                    <Grid item>
+                                        <TextField type="email" size="small" id="email-input" label="Email" variant="standard" className={style.input_width} />
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField size="small" id="password-input" type="password" label="Password" variant="standard" className={style.input_width} />
+                                    </Grid>
+                                    <Grid item>
+                                        <Link to="/restore_password" className={style.link}>¿Olvidaste tu contraseña?</Link>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>Continuar</Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <TextField size="small" id="password-input" type="password" label="Password" variant="standard" className={style.input_width} />
-                                </Grid>
-                                <Grid item>
-                                    <Link to="/restore_password" className={style.link}>¿Olvidaste tu contraseña?</Link>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>Continuar</Button>
-                                </Grid>
+                            </form>
+                            <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
                                 <Grid item>
                                     <Divider className={style.divider} />
                                 </Grid>

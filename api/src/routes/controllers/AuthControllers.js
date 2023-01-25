@@ -40,6 +40,7 @@ const loginCtrl = async (req, res) => {
         });
 
         return res.cookie({"token": token}).status(200).send({success:true, message:"Logeado correctamente"})
+
     } catch (error) {
         return res.status(400).send({ error: error.message })
     }
