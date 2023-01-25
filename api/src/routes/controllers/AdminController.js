@@ -74,7 +74,7 @@ const updateAdmin = async (req, res) => {
         admin.name = name || admin.name;
         admin.surname = surname || admin.surname;
         admin.email = email || admin.email;
-        usuario.password = admin.password;
+        admin.password = admin.password;
         await admin.save();
 
         res.json(admin)
@@ -87,7 +87,7 @@ const getAdminById = async (req, res) => {
     const { admin_id } = req.params;
 
     try {
-        const adminData = await Admin.findByPk(user_id);
+        const adminData = await Admin.findByPk(admin_id);
         if(adminData){
             res.status(200).json(adminData);
         } else {
@@ -112,7 +112,7 @@ const updateAdminPassword = async (req, res) => {
         admin.password = newPassword;
 
         admin.name = admin.name;
-        admin.surname = user.surname;
+        admin.surname = admin.surname;
         admin.email = admin.email;
         await admin.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
