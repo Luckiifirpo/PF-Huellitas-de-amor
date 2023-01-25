@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const {isAuthenticated} = require("../controllers/AuthControllers")
 const { getAllAnimal, getDetail, postAnimal, deleteAnimal, updateAnimal } = require("../controllers/AnimalControllers");
 
 
@@ -8,7 +9,7 @@ animalRouter.get('/', getAllAnimal);
 
 animalRouter.get('/:id', getDetail);
 
-animalRouter.post("/", postAnimal);
+animalRouter.post("/",isAuthenticated, postAnimal);
 
 animalRouter.delete("/:id", deleteAnimal)
 

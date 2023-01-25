@@ -7,19 +7,39 @@ const compare = async (passwordPlain, hashPassword) => {
     return await bcrypt.compare(passwordPlain, hashPassword)
 }
 
+const isAuthenticated = async (req, res, next) => {
+    try {
+        const { token } = req.cookies;
+
+        if(!token) return next("Por favor inicie sesion antes de acceder a esta ruta");
+
+        const verify = await jwt.verify(token.process.env.SECRET_KEY);
+        req.user = await Usuario.findById(verify.id);
+        next()
+    } catch (error) {
+        return next(error);
+    }
+}
+
 const loginCtrl = async (req, res) => {
     const { email, password } = req.body;
 
+    if(!email || !password) return res.status(400).send({message: "Por favor introduce los datos necesarios"})
+    
     try {
         const user = await Usuario.findOne({ where: { email } });
 
-        if (!user) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
+        if (!user) return res.status(409).send({ error: "Ya existe usuario con ese email" })
 
         const checkPassword = await compare(password, user.password);
         // const tokenSession = await tokenSign(user);
         if (!checkPassword) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
 
-        return res.status(200).send(checkPassword)
+        const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
+            expiresIn: process.env.JWT_EXPIRE,
+        });
+
+        return res,cookie({"token": token}).status(200).send({success:true, message:"Logeado correctamente"})
     } catch (error) {
         return res.status(400).send({ error: error.message })
     }
@@ -75,5 +95,6 @@ const federatedLoginCtrl = async (req, res, next) => {
 
 module.exports = {
     loginCtrl,
-    federatedLoginCtrl
+    federatedLoginCtrl,
+    isAuthenticated
 }

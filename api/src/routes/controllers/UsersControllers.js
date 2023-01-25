@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
 const { generateId } = require("../utils/utils");
 const bcryptjs = require('bcryptjs');
+const jwt = require("jsonwebtoken")
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -47,8 +48,12 @@ const postUser = async (req, res) => {
         password: encrypted
     })
 
+    const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
+        expiresIn: process.env.JWT_EXPIRE,
+    });
+
     try {
-        res.status(200).send(newUser)
+        res.cookie({"token": token}).status(200).send({success:true, message:"Usuario creado correctamente"})
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
