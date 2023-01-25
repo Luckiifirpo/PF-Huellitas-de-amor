@@ -1,10 +1,12 @@
 const { Router } = require("express");
-const { getAllUsers, postUser, deleteUser, updateUser, updatePasswordUser } = require("../controllers/UsersControllers.js");
+const { getAllUsers, postUser, deleteUser, updateUser, updatePasswordUser, getUserById } = require("../controllers/UsersControllers.js");
 
 
 const usersRouter = Router();
 
 usersRouter.get('/', getAllUsers);
+
+usersRouter.get('/:user_id', getUserById);
 
 usersRouter.post("/", postUser)
 

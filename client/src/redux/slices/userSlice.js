@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import ErrorManager from "../../resources/ErrorManager"
+import { getAuth } from "firebase/auth";
 import api from "../../services/api"
+import FirebaseApp from "../../services/firebaseApp";
 
 export const userSlice = createSlice({
     name: 'users',
@@ -9,11 +11,21 @@ export const userSlice = createSlice({
         errors: null
     },
     reducers: {
-        _setCurrentUser(state, action) {
-            state.currentUser = action.payload
+        setCurrentUser(state, action) {
+            state.currentUser = action.payload;
+            sessionStorage.setItem("user-id", action.payload.id);
         },
         resetCurrentUser: (state) => {
             state.currentUser = null;
+        },
+        signOut: (state) => {
+            state.currentUser = null;
+            sessionStorage.removeItem("user-id");
+
+            const auth = getAuth(FirebaseApp);
+            if(auth.currentUser){
+                auth.signOut();
+            }
         },
         setUserError: (state, action) => {
             state.errors = action.payload;
@@ -23,8 +35,8 @@ export const userSlice = createSlice({
         }
     },
 })
-const { _setCurrentUser, setUserError } = userSlice.actions
-export const { resetUserError, resetCurrentUser } = userSlice.actions;
+const { setUserError } = userSlice.actions
+export const { resetUserError, resetCurrentUser, setCurrentUser, signOut } = userSlice.actions;
 
 export default userSlice.reducer;
 
@@ -32,7 +44,7 @@ export const postUser = (obj) => async (dispatch) => {
     try {
         const response = await api.post(`/users`, obj);
         console.log(response)
-        dispatch(_setCurrentUser(response.data))
+        dispatch(setCurrentUser(response.data))
     } catch (error) {
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
@@ -43,13 +55,13 @@ export const postUser = (obj) => async (dispatch) => {
 
 export const federatedLogin = (token, userData) => async (dispatch) => {
     try {
+        console.log(userData);
         const response = await api.post(`/auth/federated_login`, { userData }, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
-        dispatch(_setCurrentUser(response.data));
-        sessionStorage.setItem("federated-login-token", token);
+        dispatch(setCurrentUser(response.data));
 
     } catch (error) {
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
