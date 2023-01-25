@@ -48,12 +48,12 @@ const postUser = async (req, res) => {
         password: encrypted
     })
 
-    const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
+    const token = await jwt.sign({id: newUser._id}, process.env.SECRET_KEY, {
         expiresIn: process.env.JWT_EXPIRE,
     });
 
     try {
-        res.cookie({"token": token}).status(200).send({success:true, message:"Usuario creado correctamente"})
+        res.cookie({"token": token}).status(200).send(newUser)
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
