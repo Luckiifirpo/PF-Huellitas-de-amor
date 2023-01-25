@@ -157,9 +157,6 @@ const Home = () => {
       <Container>
         <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
-            <img src={banner4} alt='banner home' className={style.bannerContent} />
-          </Grid>
-          <Grid item md={6}>
             <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
               haz tu donación
             </Typography>
@@ -168,12 +165,19 @@ const Home = () => {
             </Typography>
             <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerDonar(e)}>DONA AHORA!</Button>
           </Grid>
+          <Grid item md={6}>
+            <img src={banner4} alt='banner home' className={style.bannerContent} />
+          </Grid>
         </Grid>
       </Container>
       <Box>
         <Container>
           <Grid container marginTop={'80px'}>
-            <Grid item md={4} sx={{marginTop:'20px'}}>
+          
+            <Grid item md={6} sx={{marginBottom:'-10px'}}>
+            </Grid>
+
+            <Grid item md={6} sx={{marginTop:'20px'}}>
               <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
               más información
               </Typography>
@@ -182,9 +186,10 @@ const Home = () => {
               </Typography>
               <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerContacto(e)}>contacto</Button>
             </Grid>
-            <Grid item md={8} sx={{marginBottom:'-10px'}}>
-              <img src={banner5} alt='fondo perro'/>
+            <Grid item md={12} sx={{marginBottom:'-10px'}}>
+              <img src={banner5} alt='fondo perro' className={style.imageInfo}/>
             </Grid>
+            
           </Grid>
 
         </Container>

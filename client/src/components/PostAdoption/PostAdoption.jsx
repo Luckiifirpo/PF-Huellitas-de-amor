@@ -242,7 +242,7 @@ en donde debe hacerse para enviar el post a /animals */
 
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "300px" }}>
+      <Box className={style.gridContact} sx={{ marginBottom: "300px", marginTop:"150px" }}>
         <Box className={style.gridContactImage}>
           <img src={ImagePostAdoption} alt="" />
         </Box>
@@ -492,7 +492,7 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="info"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px" }}
+                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop:"50px" }}
               >
                 Publicar
               </Button>
