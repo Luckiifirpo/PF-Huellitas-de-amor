@@ -3,6 +3,7 @@ import ErrorManager from "../../resources/ErrorManager"
 import { getAuth } from "firebase/auth";
 import api from "../../services/api"
 import FirebaseApp from "../../services/firebaseApp";
+import { async } from "@firebase/util";
 
 export const userSlice = createSlice({
     name: 'users',
@@ -23,7 +24,7 @@ export const userSlice = createSlice({
             sessionStorage.removeItem("user-id");
 
             const auth = getAuth(FirebaseApp);
-            if(auth.currentUser){
+            if (auth.currentUser) {
                 auth.signOut();
             }
         },
@@ -43,7 +44,6 @@ export default userSlice.reducer;
 export const postUser = (obj) => async (dispatch) => {
     try {
         const response = await api.post(`/users`, obj);
-        console.log(response)
         dispatch(setCurrentUser(response.data))
     } catch (error) {
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
@@ -53,9 +53,21 @@ export const postUser = (obj) => async (dispatch) => {
     }
 }
 
+export const loginWithEmailAndPassword = (email, password) => async (dispatch) => {
+    try {
+        const response = await api.post(`/auth/login`, { email, password });
+        console.log(response.data);
+        dispatch(setCurrentUser(response.data));
+    } catch (error) {
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/auth/login" }
+        ])));
+    }
+}
+
 export const federatedLogin = (token, userData) => async (dispatch) => {
     try {
-        console.log(userData);
         const response = await api.post(`/auth/federated_login`, { userData }, {
             headers: {
                 'Authorization': `Bearer ${token}`
