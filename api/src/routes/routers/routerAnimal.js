@@ -9,7 +9,7 @@ animalRouter.get('/', getAllAnimal);
 
 animalRouter.get('/:id', getDetail);
 
-animalRouter.post("/",isAuthenticated, postAnimal);
+animalRouter.post("/", postAnimal);
 
 animalRouter.delete("/:id", deleteAnimal)
 

@@ -29,7 +29,7 @@ const loginCtrl = async (req, res) => {
     try {
         const user = await Usuario.findOne({ where: { email } });
 
-        if (!user) return res.status(409).send({ error: "Ya existe usuario con ese email" })
+        if (user) return res.status(409).send({ error: "Ya existe usuario con ese email" })
 
         const checkPassword = await compare(password, user.password);
         // const tokenSession = await tokenSign(user);
@@ -39,7 +39,7 @@ const loginCtrl = async (req, res) => {
             expiresIn: process.env.JWT_EXPIRE,
         });
 
-        return res,cookie({"token": token}).status(200).send({success:true, message:"Logeado correctamente"})
+        return res.cookie({"token": token}).status(200).send({success:true, message:"Logeado correctamente"})
     } catch (error) {
         return res.status(400).send({ error: error.message })
     }
