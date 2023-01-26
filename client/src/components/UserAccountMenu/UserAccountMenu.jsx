@@ -1,10 +1,11 @@
 import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography, } from "@mui/material";
 import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
+import EditIcon from '@mui/icons-material/Edit';
 import Logout from '@mui/icons-material/Logout';
 import React from "react";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../redux/slices/userSlice";
+import { Link } from "react-router-dom";
 
 const UserAccountMenu = (props) => {
 
@@ -78,10 +79,12 @@ const UserAccountMenu = (props) => {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
             <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                    <Settings fontSize="small" />
-                </ListItemIcon>
-                Configuración
+                <Link to={"/user-info-editor"}>
+                    <ListItemIcon>
+                        <EditIcon fontSize="small" />
+                    </ListItemIcon>
+                    <span>Editar Datos</span>
+                </Link>
             </MenuItem>
             <MenuItem onClick={HandleSignOut}>
                 <ListItemIcon>
