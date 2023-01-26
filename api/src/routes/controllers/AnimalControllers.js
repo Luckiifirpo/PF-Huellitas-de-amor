@@ -1,5 +1,6 @@
 const {Op, Animal, Usuario} = require("../../db")
 const {generateId} = require("../utils/utils")
+const {generateDate} = require("../utils/utils") 
 
 const getAllAnimal = async (req, res) => {
     const { name } = req.query;
@@ -43,7 +44,7 @@ const getDetail = async(req,res) => {
 }
 
 const postAnimal = async (req, res) => {
-    const { name, date, species, age, weight, size, gender, breed, description, image, ageTime} = req.body;
+    const { name, species, age, weight, size, gender, breed, description, image, ageTime} = req.body;
 
     const petAgeTime = ageTime ? ageTime : "years";
 
@@ -51,7 +52,7 @@ const postAnimal = async (req, res) => {
        id: generateId(),
        isAdopted: false,
        name,
-       postDate: date,
+       postDate: generateDate(),
        species,
        age,
        weight,

@@ -35,7 +35,7 @@ import { useEffect } from "react";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
-  date: yup.string("Publication Date").required("fecha es obligatoria"),
+  // date: yup.string("Publication Date").required("fecha es obligatoria"),
   species: yup.string("pet Species").required("Especie es obligatoria"),
   age: yup.string("Enter pet age").required("edad es obligatoria").default(0),
   weight: yup
@@ -128,7 +128,7 @@ const ageTimeArray = [
 const PostAdoption = (props) => {
   const initialValues = {
     name: "",
-    date: "",
+    // date: "",
     species: "canine",
     age: 0,
     ageTime: "years",
@@ -291,7 +291,7 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                   />
-                  <TextField
+                  {/* <TextField
                     type="date"
                     variant="standard"
                     id="date"
@@ -300,7 +300,7 @@ en donde debe hacerse para enviar el post a /animals */
                     onChange={formik.handleChange}
                     error={formik.touched.date && Boolean(formik.errors.date)}
                     helperText={formik.touched.date && formik.errors.date}
-                  />
+                  /> */}
                   {/* <TextField
                     id="especie"
                     select
