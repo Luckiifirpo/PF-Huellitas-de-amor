@@ -23,7 +23,7 @@ const Adoptions = () => {
 
   const dispatch = useDispatch();
 
-  const petState = useSelector((state) => state.pets);
+  const petsList = useSelector((state) => state.pets.petsList);
   const globalState = useSelector((state) => state.adoptions);
   const minDistance = 1;
 
@@ -61,7 +61,7 @@ const Adoptions = () => {
   }
 
   const apply_filters_and_sort = (filters, sort_method_index, sort_direction) => {
-    const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, filters);
+    const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, filters);
     const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, sort_method_index, sort_direction);
     create_pagination(sorted_pets_data);
   }
@@ -130,16 +130,14 @@ const Adoptions = () => {
 
   useEffect(() => {
     if (!globalState.petsData) {
-      const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
+      const page_chunks = Pet_Pagination_Behavior.Apply(petsList, 6);
       if (page_chunks.length) {
         dispatch(setPageChunks(page_chunks));
         dispatch(setPetsData(page_chunks[0]));
-      } else {
-        dispatch(getAllPets());
       }
     } else {
-      
-      const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, globalState.filters);
+
+      const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, globalState.filters);
       const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
       const pets_page_chunks = Pet_Pagination_Behavior.Apply(sorted_pets_data, 6);
 
@@ -148,7 +146,7 @@ const Adoptions = () => {
         dispatch(setPetsData(pets_page_chunks[0]));
       }
     }
-  }, [petState])
+  }, [petsList])
 
   return (
     <div>
@@ -279,13 +277,13 @@ const Adoptions = () => {
               {
                 globalState.petsData && globalState.petsData.length ? globalState.petsData.map((petData, key) => {
                   return <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
-                            <PetCard modeAction={true} data={petData} />
-                          </Grid>
+                    <PetCard modeAction={true} data={petData} />
+                  </Grid>
                 }) : <div className={style.empty_data_container}>
-                        <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                          Ninguna entrada coincide con los filtros seleccionados
-                        </Typography>
-                      </div>
+                  <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
+                    Ninguna entrada coincide con los filtros seleccionados
+                  </Typography>
+                </div>
               }
             </Grid>
           </Grid>

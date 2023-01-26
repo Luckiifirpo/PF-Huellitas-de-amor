@@ -29,7 +29,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const { name, surname, age, direction, email, work, password } = req.body;
+    const { name, surname, age, direction, email, hasAJob, password } = req.body;
 
     const emailExist = await Usuario.findOne({ where: { email } })
 
@@ -44,7 +44,8 @@ const postUser = async (req, res) => {
         age,
         direction,
         email,
-        work,
+        hasAJob,
+        occupation: "",
         password: encrypted
     })
 
@@ -76,7 +77,9 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, surname, age, direction, email, work } = req.body;
+        const { name, surname, age, direction, email, hasAJob, occupation, photoURL } = req.body;
+
+        console.log(id, name, surname, age, direction, email, hasAJob, occupation, photoURL);
 
         const usuario = await Usuario.findByPk(id)
         usuario.name = name || usuario.name;
@@ -84,8 +87,10 @@ const updateUser = async (req, res) => {
         usuario.age = age || usuario.age;
         usuario.direction = direction || usuario.direction;
         usuario.email = email || usuario.email;
-        usuario.work = work || usuario.work;
-        usuario.password = usuario.password;
+        usuario.hasAJob = hasAJob || usuario.hasAJob;
+        usuario.occupation = occupation || usuario.occupation;
+        usuario.photoURL = photoURL || usuario.photoURL
+        /*usuario.password = usuario.password; la contraseña se actualiza en una ruta diferente (updatePasswordUser)*/
         await usuario.save();
 
         res.json(usuario)
@@ -127,7 +132,7 @@ const updatePasswordUser = async (req, res) => {
         user.age = user.age;
         user.direction = user.direction;
         user.email = user.email;
-        user.work = user.work;
+        user.jasAJob = user.jasAJob;
         await user.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
     } catch (error) {

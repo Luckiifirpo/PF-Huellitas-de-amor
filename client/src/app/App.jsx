@@ -23,6 +23,8 @@ import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
 import { tryStartingFavoritesInLocalStorage } from "../redux/slices/adoptionSlice";
 import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
+import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
+import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
 
 function App() {
 
@@ -77,6 +79,8 @@ function App() {
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <ErrorDialog />
+      <MessageInfoDialog />
+      <BusyModeCircularProgressIndicator />
     </BrowserRouter>
   )
 }

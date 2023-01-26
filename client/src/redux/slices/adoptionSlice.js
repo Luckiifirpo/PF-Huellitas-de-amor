@@ -20,7 +20,8 @@ const initialState = {
         ageFilter: [0, 30],
         weightFilter: [1, 100]
     },
-    updatingFiltersAndSort: false
+    updatingFiltersAndSort: false,
+    isBusy: false,
 }
 
 export const adoptionsSlice = createSlice({
@@ -67,9 +68,12 @@ export const adoptionsSlice = createSlice({
         },
         resetUpdatingFiltersAndSort: (state) => {
             state.updatingFiltersAndSort = false;
+        },
+        setAdoptionsBusyMode: (state, action) => {
+          state.isBusy = action.payload;
         }
     }
 });
 
-export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort, setFavorites, getFavorites, deleteFavorite, tryStartingFavoritesInLocalStorage } = adoptionsSlice.actions
+export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort, setFavorites, getFavorites, deleteFavorite, tryStartingFavoritesInLocalStorage, setAdoptionsBusyMode } = adoptionsSlice.actions
 export default adoptionsSlice.reducer
