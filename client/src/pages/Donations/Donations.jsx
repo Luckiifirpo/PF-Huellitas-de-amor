@@ -115,7 +115,7 @@ const Donations = () => {
     <Container>
     <Grid item md={12}  sx={{marginBottom:'-10px'}}>
       <img src={imgDonaciones} alt='fondo donaciones' className={style.imageD}/>
-        </Grid>
+      </Grid>
     </Container>
   </Box>
 

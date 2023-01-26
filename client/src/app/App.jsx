@@ -21,6 +21,7 @@ import { federatedLogin, resetCurrentUser, setCurrentUser } from "../redux/slice
 import api from "../services/api";
 import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
+import { tryStartingFavoritesInLocalStorage } from "../redux/slices/adoptionSlice";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
     }
 
     dispatch(getAllPets());
+    dispatch(tryStartingFavoritesInLocalStorage());
   }, []);
 
   return (
