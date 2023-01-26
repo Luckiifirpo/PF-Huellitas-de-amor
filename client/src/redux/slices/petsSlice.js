@@ -32,7 +32,7 @@ export const petsSlice = createSlice({
             state.petsList.push(reformedPetData);
         },
         _getAllPets(state, action) {
-            state.petsList = action.payload.map((petData) => {
+            const allPets = action.payload.map((petData) => {
                 const obtainedPetData = petData;
                 const reformedPetData = {
                     id: obtainedPetData.id,
@@ -53,6 +53,10 @@ export const petsSlice = createSlice({
 
                 return reformedPetData;
             });
+
+            if (allPets.length) {
+                state.petsList = allPets;
+            }
         },
         setPetsError: (state, action) => {
             state.errors = action.payload;
@@ -64,7 +68,7 @@ export const petsSlice = createSlice({
 });
 
 const { _postPet, _getAllPets, setPetsError } = petsSlice.actions;
-export const {resetPetsError} = petsSlice.actions;
+export const { resetPetsError } = petsSlice.actions;
 
 export default petsSlice.reducer
 

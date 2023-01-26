@@ -9,7 +9,7 @@ import logoBlanco from "../../assets/image/logoBlanco.svg"
 
 const Footer = () => {
   return (
-    <Box className={style['bg-footer']}>
+    <Box className={style['bg-footer']} style={{position: "relative", zIndex: 1}}>
         <Container>
             <Grid container justifyContent="space-between" className={style.footer}>
                 <Grid item md={3}>
