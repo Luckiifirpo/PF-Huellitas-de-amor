@@ -4,7 +4,9 @@ import ErrorManager from "../../resources/ErrorManager";
 
 const initialState = {
     petsList: [],
-    errors: null
+    errors: null,
+    amountDonation:0,
+    clientSecret:''
 }
 
 export const petsSlice = createSlice({
@@ -59,12 +61,18 @@ export const petsSlice = createSlice({
         },
         resetPetsError: (state) => {
             state.errors = null
-        }
+        },
+        setAmountDonation:(state,action)=>{
+            state.amountDonation = action.payload
+        },
+        setClientSecret:(state,action)=>{
+            state.clientSecret = action.payload
+        } 
     }
 });
 
 const { _postPet, _getAllPets, setPetsError } = petsSlice.actions;
-export const {resetPetsError} = petsSlice.actions;
+export const {resetPetsError,setAmountDonation, setClientSecret} = petsSlice.actions;
 
 export default petsSlice.reducer
 
