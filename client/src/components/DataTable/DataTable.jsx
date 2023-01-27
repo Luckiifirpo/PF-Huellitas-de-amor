@@ -1,9 +1,10 @@
 import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState} from 'react';
 import { getAllPets } from "../../redux/slices/petsSlice";
-import { useState } from "react";
+
+
 
 
 
@@ -23,21 +24,23 @@ const columns = [
     field: 'age',
     headerName: 'Edad',
     type: 'number',
-    width: 90,
+    width: 50,
   },
   {
-    field: 'Weight',
+    field: 'weight',
     headerName: 'Peso',
     type: 'number',
-    width: 90,
+    width: 50,
   },
   { field: 'size',
     headerName: 'Tamaño',
     width: 90 },
   { field: 'gender',
     headerName: 'Género',
+    type: 'singleSelect',
+    valueOptions: ['male', 'female'],
     width: 100 },
-    { field: 'Breed',
+    { field: 'breed',
     headerName: 'Raza',
     width:100 },
     { field: 'description',
@@ -46,8 +49,16 @@ const columns = [
     { field: 'image',
     headerName: 'Imagen',
     width: 100 },
+    {
+      field: 'createdAt',
+      headerName: 'Created At',
+      width: 200,
+
+    },
     { field: 'IsAdopted',
     headerName: 'Adoptado',
+    type: 'boolean',
+    editable: true,
     width: 90 },
    
   ];
@@ -55,7 +66,14 @@ export default function DataTable() {
 
   const dispatch = useDispatch()
   const allPets = useSelector((state)=>state.pets)
+  const [tableData, setTableData] = useState([])
 
+
+  useEffect(() => {
+    fetch("http://localhost:3001/animals")
+      .then((data) => data.json())
+      .then((data) => setTableData(data))
+  }, [])
 
   // {
   //   field: 'fullName',
@@ -120,16 +138,16 @@ export default function DataTable() {
 
   
 
-   useEffect(()=>{
-    dispatch(getAllPets());
-   },[])
+  //  useEffect(()=>{
+  //   dispatch(getAllPets());
+  //  },[])
 
 
 
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={allPets}
+        rows={tableData}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
