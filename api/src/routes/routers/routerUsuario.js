@@ -18,5 +18,7 @@ usersRouter.put("/user_password/:id", updatePasswordUser)
 
 usersRouter.post("/forgot-password", forgotPassword)
 
+// usersRouter.put("/resetpassaword/:id", resetpassword)
+
 
 module.exports = usersRouter;

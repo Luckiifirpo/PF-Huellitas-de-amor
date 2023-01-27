@@ -53,6 +53,9 @@ module.exports = (sequelize) => {
     },
     photoURL: {
       type: DataTypes.STRING
+    },
+    reset: {
+      type: DataTypes.STRING
     }
   });
 };
