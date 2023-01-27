@@ -265,7 +265,7 @@ const Adoptions = () => {
             </Paper>
           </Grid>
           <Grid item lg={9} md={8} xs={12}>
-            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} card_lg={4} card_md={6} card_xs={12}/>
+            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} emptyListLabel="Ninguna entrada coincide con los filtros seleccionados"/>
           </Grid>
         </Grid>
       </Container>

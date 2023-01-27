@@ -55,6 +55,7 @@ export const postUser = (obj) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
         const response = await api.post(`/users`, obj);
+        console.log(response);
         dispatch(setUserBusyMode(false));
         dispatch(setCurrentUser(response.data))
     } catch (error) {

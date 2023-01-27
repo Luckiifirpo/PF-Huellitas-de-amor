@@ -43,13 +43,13 @@ const ErrorDialog = (props) => {
                     detailValue = errorDetail[prop]
                 }
 
-                return <li>
+                return <li key={key}>
                     <strong>{detailName}: </strong>
                     <span>{detailValue}</span>
                 </li>
             });
 
-            return <Box  sx={{ padding: "20px" }}>
+            return <Box sx={{ padding: "20px" }}>
                 <strong>Detalles:</strong>
                 <ul>
                     {renderedDetails}
