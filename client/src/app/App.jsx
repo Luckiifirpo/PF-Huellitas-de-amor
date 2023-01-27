@@ -9,6 +9,7 @@ import LayoutMain from "../layout/LayoutMain";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/Error404/Error404"
+import Dashboard from "../pages/Dashboard/Dashboard"
 import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
 import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
@@ -69,6 +70,7 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
         </Route>
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
