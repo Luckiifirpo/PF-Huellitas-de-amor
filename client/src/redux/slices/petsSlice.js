@@ -87,7 +87,7 @@ export const petsSlice = createSlice({
 });
 
 const { _postPet, _getAllPets,  } = petsSlice.actions;
-export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode } = petsSlice.actions;
+export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode,setAmountDonation, setClientSecret } = petsSlice.actions;
 
 export default petsSlice.reducer
 
