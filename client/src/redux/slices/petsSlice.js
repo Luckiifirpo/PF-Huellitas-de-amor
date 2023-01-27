@@ -4,7 +4,9 @@ import ErrorManager from "../../resources/ErrorManager";
 
 const initialState = {
     petsList: [],
-    errors: null,
+    error: null,
+    message: null,
+    isBusy: false,
     amountDonation:0,
     clientSecret:''
 }
@@ -34,7 +36,7 @@ export const petsSlice = createSlice({
             state.petsList.push(reformedPetData);
         },
         _getAllPets(state, action) {
-            state.petsList = action.payload.map((petData) => {
+            const allPets = action.payload.map((petData) => {
                 const obtainedPetData = petData;
                 const reformedPetData = {
                     id: obtainedPetData.id,
@@ -55,11 +57,16 @@ export const petsSlice = createSlice({
 
                 return reformedPetData;
             });
+
+            if (allPets.length) {
+                state.petsList = allPets;
+            }
         },
         setPetsError: (state, action) => {
-            state.errors = action.payload;
+            state.error = action.payload;
         },
         resetPetsError: (state) => {
+<<<<<<< HEAD
             state.errors = null
         },
         setAmountDonation:(state,action)=>{
@@ -73,14 +80,35 @@ export const petsSlice = createSlice({
 
 const { _postPet, _getAllPets, setPetsError } = petsSlice.actions;
 export const {resetPetsError,setAmountDonation, setClientSecret} = petsSlice.actions;
+=======
+            state.error = null
+        },
+        setPetsMessage: (state, action) => {
+            state.message = action.payload;
+        },
+        resetPetsMessage: (state) => {
+            state.message = null
+        },
+        setPetsBusyMode: (state, action) => {
+            state.isBusy = action.payload;
+        }
+    }
+});
+
+const { _postPet, _getAllPets,  } = petsSlice.actions;
+export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode } = petsSlice.actions;
+>>>>>>> dev
 
 export default petsSlice.reducer
 
 export const postPet = (obj) => async (dispatch) => {
     try {
+        dispatch(setPetsBusyMode(true));
         const response = await api.post("/animals", obj);
+        dispatch(setPetsBusyMode(false));
         dispatch(_postPet(response.data));
     } catch (error) {
+        dispatch(setPetsBusyMode(false));
         dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
             { request: "POST: http://localhost:3001/animals" }
@@ -90,9 +118,12 @@ export const postPet = (obj) => async (dispatch) => {
 
 export const getAllPets = (obj) => async (dispatch) => {
     try {
+        dispatch(setPetsBusyMode(true));
         const response = await api.get("/animals", obj);
+        dispatch(setPetsBusyMode(false));
         dispatch(_getAllPets(response.data));
     } catch (error) {
+        dispatch(setPetsBusyMode(false));
         dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
             { request: "GET: http://localhost:3001/animals" }

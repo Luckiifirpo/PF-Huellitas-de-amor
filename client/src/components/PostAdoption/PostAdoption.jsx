@@ -32,10 +32,12 @@ import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import { useEffect } from "react";
+import { setAdoptionsBusyMode } from "../../redux/slices/adoptionSlice";
+import { setMessage } from "../../redux/slices/messageInfoSlice";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
-  date: yup.string("Publication Date").required("fecha es obligatoria"),
+  // date: yup.string("Publication Date").required("fecha es obligatoria"),
   species: yup.string("pet Species").required("Especie es obligatoria"),
   age: yup.string("Enter pet age").required("edad es obligatoria").default(0),
   weight: yup
@@ -128,7 +130,7 @@ const ageTimeArray = [
 const PostAdoption = (props) => {
   const initialValues = {
     name: "",
-    date: "",
+    // date: "",
     species: "canine",
     age: 0,
     ageTime: "years",
@@ -160,23 +162,9 @@ Al momento de pasar a producción hay que eliminar los console.log
 También se modificaria cuando se añadan las actions y el reducer, ya que es ahi
 en donde debe hacerse para enviar el post a /animals */
   const [file, setFile] = useState(null);
-  const [uploadingData, setUploadingData] = useState(false);
-  const [finishedUploadStatus, setFinishedUploadStatus] = useState({
-    visible: false,
-    title: "",
-    message: "",
-  });
 
   const cloud_name = "dydncradb";
   const preset = "qeohapyd";
-
-  const handleFinishedDialogClose = (event) => {
-    setFinishedUploadStatus({
-      visible: false,
-      title: "",
-      message: "",
-    });
-  };
 
   const uploadData = async (values, resetForm) => {
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
@@ -185,16 +173,14 @@ en donde debe hacerse para enviar el post a /animals */
     formData.append("upload_preset", `${preset}`);
     formData.append("file", file);
 
-    setUploadingData(true);
-
     try {
+      dispatch(setAdoptionsBusyMode(true));
       const res = await fetch(cloudinaryUrl, {
         method: "POST",
         body: formData,
       });
 
       if (!res.ok) {
-        setUploadingData(false);
         dispatch(
           setError(
             ErrorManager.CreateErrorInfoObject(
@@ -216,13 +202,12 @@ en donde debe hacerse para enviar el post a /animals */
           image: data.secure_url,
         })
       );
-      setUploadingData(false);
-      setFinishedUploadStatus({
-        visible: true,
-        title: "Subida correcta de datos",
-        message:
-          "tus datos se han subido correctamente a nuestra base de datos",
-      });
+      dispatch(setAdoptionsBusyMode(false));
+      dispatch(setMessage({
+        title: "Completado",
+        message: "Se han cargado tus datos correctamente",
+        details: []
+      }))
       resetForm();
       setTimeout(() => {
         navigate("/dar-en-adopcion");
@@ -234,7 +219,7 @@ en donde debe hacerse para enviar el post a /animals */
   /**********************************************************/
 
   useEffect(() => {
-    if(!currentUser){
+    if (!currentUser) {
       dispatch(setToGoAfterLogin("/dar-en-adopcion"));
       navigate("/iniciar-sesion");
     }
@@ -242,7 +227,7 @@ en donde debe hacerse para enviar el post a /animals */
 
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "300px", marginTop:"150px" }}>
+      <Box className={style.gridContact} sx={{ marginBottom: "300px", marginTop: "150px" }}>
         <Box className={style.gridContactImage}>
           <img src={ImagePostAdoption} alt="" />
         </Box>
@@ -291,7 +276,7 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                   />
-                  <TextField
+                  {/* <TextField
                     type="date"
                     variant="standard"
                     id="date"
@@ -300,7 +285,7 @@ en donde debe hacerse para enviar el post a /animals */
                     onChange={formik.handleChange}
                     error={formik.touched.date && Boolean(formik.errors.date)}
                     helperText={formik.touched.date && formik.errors.date}
-                  />
+                  /> */}
                   {/* <TextField
                     id="especie"
                     select
@@ -492,7 +477,7 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="info"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop:"50px" }}
+                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop: "50px" }}
               >
                 Publicar
               </Button>
@@ -500,49 +485,6 @@ en donde debe hacerse para enviar el post a /animals */
           </form>
         </Container>
       </Box>
-      <Modal
-        open={uploadingData}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Paper
-          sx={{
-            padding: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Subiendo tus datos
-          </Typography>
-          <CircularProgress />
-        </Paper>
-      </Modal>
-      <Dialog
-        open={finishedUploadStatus.visible}
-        onClose={handleFinishedDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {finishedUploadStatus.title}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {finishedUploadStatus.message}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleFinishedDialogClose} autoFocus>
-            Aceptar
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 };

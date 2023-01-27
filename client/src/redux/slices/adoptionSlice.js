@@ -7,8 +7,6 @@ const filterControlValues = {
 }
 
 const initialState = {
-    petsData: null,
-    pageChunks: [],
     currentPage: 1,
     currentSortMethodIndex: -1,
     currentSortDirection: "Ascending",
@@ -20,19 +18,14 @@ const initialState = {
         ageFilter: [0, 30],
         weightFilter: [1, 100]
     },
-    updatingFiltersAndSort: false
+    updatingFiltersAndSort: false,
+    isBusy: false,
 }
 
 export const adoptionsSlice = createSlice({
     name: "adoptions",
     initialState,
     reducers: {
-        setPetsData: (state, action) => {
-            state.petsData = action.payload;
-        },
-        setPageChunks: (state, action) => {
-            state.pageChunks = action.payload;
-        },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload
         },
@@ -67,9 +60,12 @@ export const adoptionsSlice = createSlice({
         },
         resetUpdatingFiltersAndSort: (state) => {
             state.updatingFiltersAndSort = false;
+        },
+        setAdoptionsBusyMode: (state, action) => {
+          state.isBusy = action.payload;
         }
     }
 });
 
-export const { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort, setFavorites, getFavorites, deleteFavorite, tryStartingFavoritesInLocalStorage } = adoptionsSlice.actions
+export const {setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort, setFavorites, getFavorites, deleteFavorite, tryStartingFavoritesInLocalStorage, setAdoptionsBusyMode } = adoptionsSlice.actions
 export default adoptionsSlice.reducer

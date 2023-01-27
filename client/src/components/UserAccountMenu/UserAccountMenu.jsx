@@ -1,10 +1,11 @@
-import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography, } from "@mui/material";
+import { Avatar, Box, Button, Divider, Grid, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography, } from "@mui/material";
 import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
+import EditIcon from '@mui/icons-material/Edit';
 import Logout from '@mui/icons-material/Logout';
 import React from "react";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../redux/slices/userSlice";
+import { Link } from "react-router-dom";
 
 const UserAccountMenu = (props) => {
 
@@ -29,17 +30,16 @@ const UserAccountMenu = (props) => {
     return <React.Fragment>
         <Box>
             <Tooltip title="Account settings">
-                <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={open ? 'account-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                >
-                    <Avatar sx={{ width: 32, height: 32 }} src={userData.photoURL ? userData.photoURL : null}>{userData.photoURL ? "" : userData.name[0]}</Avatar>
-                    <Typography sx={{ minWidth: 100 }}>{userData.name.split(" ")[0]}</Typography>
-                </IconButton>
+                <Button onClick={handleClick}>
+                    <Grid container>
+                        <Grid item>
+                            <Avatar sx={{ width: 32, height: 32 }} src={userData.photoURL ? userData.photoURL : null}>{userData.photoURL ? "" : userData.name[0].toUpperCase()}</Avatar>
+                        </Grid>
+                        <Grid item sx={{display: "flex", alignItems: "center"}}>
+                            <Typography sx={{ minWidth: 100, color: "black" }}>{userData.name.split(" ")[0]}</Typography>
+                        </Grid>
+                    </Grid>
+                </Button>
             </Tooltip>
         </Box>
         <Menu
@@ -78,10 +78,12 @@ const UserAccountMenu = (props) => {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
             <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                    <Settings fontSize="small" />
-                </ListItemIcon>
-                Configuración
+                <Link to={"/user-info-editor"}>
+                    <ListItemIcon>
+                        <EditIcon fontSize="small" />
+                    </ListItemIcon>
+                    <span>Editar Datos</span>
+                </Link>
             </MenuItem>
             <MenuItem onClick={HandleSignOut}>
                 <ListItemIcon>

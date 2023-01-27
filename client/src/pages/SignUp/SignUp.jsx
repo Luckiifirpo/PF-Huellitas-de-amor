@@ -33,7 +33,7 @@ const validationSchema = yup.object({
     direction: yup
         .string('Enter your address')
         .required('address is required'),
-    work: yup
+    hasAJob: yup
         .string('Are yoe working?')
         .required('work is required'),
     password: yup
@@ -50,7 +50,7 @@ const SignUp = (props) => {
         age: '',
         direction: '',
         email: '',
-        work:'',
+        hasAJob:'',
         password: ''
     }
 
@@ -162,16 +162,16 @@ const SignUp = (props) => {
                                          
                                     >
                                         <FormHelperText
-                                        error={formik.touched.work && Boolean(formik.errors.work)}
+                                        error={formik.touched.hasAJob && Boolean(formik.errors.hasAJob)}
                                         >
-                                        {formik.touched.work && formik.errors.work}
+                                        {formik.touched.hasAJob && formik.errors.hasAJob}
                                         </FormHelperText>
                                         <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginTop: "25px" }}>¿Tienes trabajo?</FormLabel>
                                         <RadioGroup
                                             row
                                             aria-labelledby="demo-row-radio-buttons-group-label"
-                                            name="work"
-                                            value={formik.values.work} 
+                                            name="hasAJob"
+                                            value={formik.values.hasAJob} 
                                             onChange={formik.handleChange}
                                            
                                         >

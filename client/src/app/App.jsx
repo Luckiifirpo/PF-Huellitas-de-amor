@@ -9,6 +9,7 @@ import LayoutMain from "../layout/LayoutMain";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Error404 from "../pages/Error404/Error404"
+import Dashboard from "../pages/Dashboard/Dashboard"
 import PetInfoCard from "../pages/PetInfoCard/PetInfoCard";
 import { useEffect } from "react";
 import { getAllPets } from "../redux/slices/petsSlice";
@@ -24,6 +25,9 @@ import ErrorManager from "../resources/ErrorManager";
 import { tryStartingFavoritesInLocalStorage } from "../redux/slices/adoptionSlice";
 import Stripe from "../pages/Stripe/Stripe";
 import Completion from "../pages/Stripe/Completion";
+import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
+import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
+import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
 
 function App() {
 
@@ -70,8 +74,13 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
+<<<<<<< HEAD
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
+=======
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-info-editor" element={<UserInfoEditor />} />
+>>>>>>> dev
         </Route>
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
@@ -79,6 +88,8 @@ function App() {
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <ErrorDialog />
+      <MessageInfoDialog />
+      <BusyModeCircularProgressIndicator />
     </BrowserRouter>
   )
 }
