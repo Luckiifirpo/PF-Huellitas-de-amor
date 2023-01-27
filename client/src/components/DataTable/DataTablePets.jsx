@@ -50,8 +50,8 @@ const columns = [
     headerName: 'Imagen',
     width: 100 },
     {
-      field: 'createdAt',
-      headerName: 'Created At',
+      field: 'postDate',
+      headerName: 'Publicado',
       width: 200,
 
     },
@@ -62,10 +62,10 @@ const columns = [
     width: 90 },
    
   ];
-export default function DataTable() {
+export default function DataTablePets() {
 
-  const dispatch = useDispatch()
-  const allPets = useSelector((state)=>state.pets)
+  // const dispatch = useDispatch()
+  // const allPets = useSelector((state)=>state.pets)
   const [tableData, setTableData] = useState([])
 
 
