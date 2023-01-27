@@ -41,7 +41,7 @@ const postContactUs = async (req, res) => {
 
   try {
     const info = await transporter.sendMail({
-      from: '"Huellitas de Amor" <alexpalagomez7@gmail.com>', // sender address
+      from: '"Huellitas de Amor" <hdeamor2023@gmail.com>', // sender address
       to: email, // list of receivers
       subject: `Bienvenido ${name}`, // Subject line
       html: "<b>Gracias por contactarnos en breve responderemos sus inquietudes</b>", // html body
