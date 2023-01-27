@@ -22,6 +22,8 @@ import { federatedLogin, resetCurrentUser, setCurrentUser } from "../redux/slice
 import api from "../services/api";
 import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
+import { tryStartingFavoritesInLocalStorage } from "../redux/slices/adoptionSlice";
+import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 
 function App() {
 
@@ -54,6 +56,7 @@ function App() {
     }
 
     dispatch(getAllPets());
+    dispatch(tryStartingFavoritesInLocalStorage());
   }, []);
 
   return (
@@ -68,6 +71,7 @@ function App() {
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user-info-editor" element={<UserInfoEditor />} />
         </Route>
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
