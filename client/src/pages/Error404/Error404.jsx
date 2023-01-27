@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import error404 from "../../assets/image/error404-img.png";
