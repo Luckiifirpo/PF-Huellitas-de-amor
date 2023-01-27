@@ -71,7 +71,8 @@ const federatedLoginCtrl = async (req, res, next) => {
                     age: 0,
                     direction: "",
                     email: userData.email,
-                    work: false,
+                    hasAJob: false,
+                    occupation: "",
                     password: "",
                     federatedUID: uid,
                     photoURL: userData.photoURL

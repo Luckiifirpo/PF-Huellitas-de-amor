@@ -1,7 +1,7 @@
-const Pet_Pagination_Behavior = {
+const CardViewer_Pagination_Behavior = {
 
-    Apply(petsData = [], itemsPerPage) {
-        let input_data = [...petsData];
+    Apply(cardsData = [], itemsPerPage) {
+        let input_data = [...cardsData];
         const pages = Math.round(input_data.length / itemsPerPage);
         const page_chunks = [];
 
@@ -18,4 +18,4 @@ const Pet_Pagination_Behavior = {
     }
 }
 
-export default Pet_Pagination_Behavior;
+export default CardViewer_Pagination_Behavior;
