@@ -8,8 +8,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import style from "./Stripe.module.css"
-import fondo from "../../assets/image/fondostripe.png"
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 
 function CheckoutForm() {
   const stripe = useStripe();
@@ -46,13 +46,18 @@ function CheckoutForm() {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
-      <button sx={{marginTop:'20px'}} disabled={isProcessing || !stripe || !elements} id="submit">
+    <form id="payment-form" onSubmit={handleSubmit} c>
+      <PaymentElement id="payment-element"  />
+      <Button 
+        variant="contained"
+        sx={{marginTop:'20px'}}
+        type="submit"
+        disabled={isProcessing || !stripe || !elements} 
+        id="submit">
         <span id="button-text">
-          {isProcessing ? "Processing ... " : "Pay now"}
+          {isProcessing ? "Procesando ... " : "Pagar Ahora"}
         </span>
-      </button>
+      </Button>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
@@ -67,7 +72,7 @@ export default function Stripe() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(amount)
+
     if (amount === 0 || amount === 1) {
       alert("Debe ingresar el monto primero en la pagina de donaciones")
       navigate("/donaciones")
@@ -86,22 +91,25 @@ export default function Stripe() {
 
   return (
     <>
-      <Container sx={{
-        background:'blue',
-        height:'400px',
+      <Container className={style.stripeContenedor} sx={{
+        
+         height:'400px',
          marginBottom:'100px',
          marginTop:'250px',
          display:'flex',
          placeContent:'center'
          }}>
-        <div className={style.stripeContenedor}
+        <div 
           style={{
             margin:'auto',
             minHeight:'35.7vh',
-            backgroundImage: { fondo },
-            background:'red',
+            background:'#fff',
             width:'70%',
-            padding:'20px'
+            padding:'25px',
+            borderRadius: '.45rem',
+            webkitBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
+            mozBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
+            boxShadow:' 5px 5px 29px -12px rgba(0,0,0,0.52)'
           }}>
           {
             clientSecret && (

@@ -1,0 +1,11 @@
+.stripeContenedor{
+    background-image: url('../../assets/image/fondostripe.png');
+    background-repeat: no-repeat;
+    background-size : contain;
+    background-position: center center;
+
+}
+
+.page_gracias_div{
+    min-height: 100vh !important;
+}

@@ -7,8 +7,7 @@ const initialState = {
     error: null,
     message: null,
     isBusy: false,
-        amountDonation:0,
-    clientSecret:''
+    amountDonation:0,
 }
 
 export const petsSlice = createSlice({
@@ -79,15 +78,12 @@ export const petsSlice = createSlice({
         },
         setAmountDonation:(state,action)=>{
             state.amountDonation = action.payload
-        },
-        setClientSecret:(state,action)=>{
-            state.clientSecret = action.payload
-        } 
+        }, 
     }
 });
 
 const { _postPet, _getAllPets,  } = petsSlice.actions;
-export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode,setAmountDonation, setClientSecret } = petsSlice.actions;
+export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode,setAmountDonation } = petsSlice.actions;
 
 export default petsSlice.reducer
 

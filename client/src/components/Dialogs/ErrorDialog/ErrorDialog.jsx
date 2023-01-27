@@ -49,7 +49,7 @@ const ErrorDialog = (props) => {
                 </li>
             });
 
-            return <Box key={key} sx={{ padding: "20px" }}>
+            return <Box  sx={{ padding: "20px" }}>
                 <strong>Detalles:</strong>
                 <ul>
                     {renderedDetails}

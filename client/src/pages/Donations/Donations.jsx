@@ -16,11 +16,13 @@ import comida from '../../assets/image/comida.svg'
 import higiene from '../../assets/image/higiene.svg'
 import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
-import TextField from '@mui/material/TextField';
 import style from './Donations.module.css'
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { setAmountDonation } from '../../redux/slices/petsSlice';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 const Donations = () => {
   const navigate = useNavigate()
@@ -28,7 +30,9 @@ const Donations = () => {
     navigate("/contacto")
   }
   const dispatch = useDispatch()
+
   const handleChange = (event) => {
+    console.log(event)
     dispatch(setAmountDonation(event.target.value))
   }
 
@@ -137,7 +141,19 @@ const Donations = () => {
             <Box
               sx={{display:'flex', flexDirection:'column', gap:'10px', marginTop:'10px'}}
             >
-              <TextField id="outlined-basic" label="Ingresa una cantidad" variant="outlined" type="number" onChange={handleChange}/>
+              <InputLabel id="demo-simple-select-label">Selecciona un Monto</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Selecciona"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1000}>10$</MenuItem>
+                    <MenuItem value={2000}>20$</MenuItem>
+                    <MenuItem value={3000}>30$</MenuItem>
+                    <MenuItem value={5000}>50$</MenuItem>
+                    <MenuItem value={10000}>100$</MenuItem>
+                  </Select>
               <Button component={Link} to="/stripe" variant="contained" sx={{textDecoration:'none'}}>Ir a Pagar</Button>
             </Box>
           </Grid>

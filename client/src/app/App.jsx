@@ -75,10 +75,10 @@ function App() {
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
           <Route path="/stripe" element={<Stripe />} />
-          <Route path="/gracias-por-tu-donacion" element={<Completion />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
         </Route>
+          <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="/registro-usuario" element={<SignUp />} />
