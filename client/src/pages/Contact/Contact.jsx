@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import {useDispatch } from "react-redux";
-import { postContactus } from "../../redux/slices/contactUsSlice";
+import { postContactUs } from "../../redux/slices/contactUsSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -51,46 +51,15 @@ const Contact = () => {
       uploadData(values, resetForm);
     },
   });
-  // const [file, setFile] = useState(null);
-  const [uploadingData, setUploadingData] = useState(false);
-  const [finishedUploadStatus, setFinishedUploadStatus] = useState({
-    visible: false,
-    title: "",
-    message: "",
-  });
-
-  // const cloud_name = "dydncradb";
-  // const preset = "qeohapyd";
-
-  const handleFinishedDialogClose = (event) => {
-    setFinishedUploadStatus({
-      visible: false,
-      title: "",
-      message: "",
-    });
-  };
 
   const uploadData = async (values, resetForm) => {
-    
-
-    // const formData = new FormData();
-    // formData.append("upload_preset", `${preset}`);
-    // formData.append("file", file);
-
-    setUploadingData(true);
 
     try {
       dispatch(
-        postContactus({
+        postContactUs({
           ...values,
         })
       );
-      setUploadingData(false);
-      setFinishedUploadStatus({
-        visible: true,
-        title: "Datos enviados correctamente",
-        message: "Hemos Recibido tu mensaje",
-      });
       resetForm();
       setTimeout(() => {
         navigate("/contacto");
@@ -200,49 +169,6 @@ const Contact = () => {
           </form>
         </Container>
       </Box>
-      <Modal
-        open={uploadingData}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Paper
-          sx={{
-            padding: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Subiendo tus datos
-          </Typography>
-          <CircularProgress />
-        </Paper>
-      </Modal>
-      <Dialog
-        open={finishedUploadStatus.visible}
-        onClose={handleFinishedDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {finishedUploadStatus.title}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {finishedUploadStatus.message}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleFinishedDialogClose} autoFocus>
-            Aceptar
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
 };

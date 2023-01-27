@@ -35,9 +35,13 @@ module.exports = (sequelize) => {
         isEmail: true,
       }
     },
-    work: {
+    hasAJob: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+    },
+    occupation: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,

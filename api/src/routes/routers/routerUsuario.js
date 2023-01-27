@@ -12,9 +12,9 @@ usersRouter.post("/", postUser)
 
 usersRouter.delete("/:id", deleteUser)
 
-usersRouter.put("/:id", updateUser)
+usersRouter.put("/user_info/:id", updateUser)
 
-usersRouter.put("/:id", updatePasswordUser)
+usersRouter.put("/user_password/:id", updatePasswordUser)
 
 usersRouter.post("/forgot-password", forgotPassword)
 
