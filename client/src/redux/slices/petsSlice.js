@@ -7,7 +7,7 @@ const initialState = {
     error: null,
     message: null,
     isBusy: false,
-    amountDonation:0,
+        amountDonation:0,
     clientSecret:''
 }
 
@@ -66,21 +66,6 @@ export const petsSlice = createSlice({
             state.error = action.payload;
         },
         resetPetsError: (state) => {
-<<<<<<< HEAD
-            state.errors = null
-        },
-        setAmountDonation:(state,action)=>{
-            state.amountDonation = action.payload
-        },
-        setClientSecret:(state,action)=>{
-            state.clientSecret = action.payload
-        } 
-    }
-});
-
-const { _postPet, _getAllPets, setPetsError } = petsSlice.actions;
-export const {resetPetsError,setAmountDonation, setClientSecret} = petsSlice.actions;
-=======
             state.error = null
         },
         setPetsMessage: (state, action) => {
@@ -91,13 +76,18 @@ export const {resetPetsError,setAmountDonation, setClientSecret} = petsSlice.act
         },
         setPetsBusyMode: (state, action) => {
             state.isBusy = action.payload;
-        }
+        },
+        setAmountDonation:(state,action)=>{
+            state.amountDonation = action.payload
+        },
+        setClientSecret:(state,action)=>{
+            state.clientSecret = action.payload
+        } 
     }
 });
 
 const { _postPet, _getAllPets,  } = petsSlice.actions;
 export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode } = petsSlice.actions;
->>>>>>> dev
 
 export default petsSlice.reducer
 

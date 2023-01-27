@@ -74,13 +74,10 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
-<<<<<<< HEAD
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
-=======
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
->>>>>>> dev
         </Route>
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
