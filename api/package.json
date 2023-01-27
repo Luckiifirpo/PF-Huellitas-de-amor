@@ -29,6 +29,7 @@
     "passport-jwt": "^4.0.1",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
+    "stripe": "^11.7.0",
     "uuid-js": "^0.7.5"
   },
   "devDependencies": {
