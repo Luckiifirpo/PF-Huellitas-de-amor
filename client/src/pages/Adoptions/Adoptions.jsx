@@ -2,16 +2,16 @@ import { Autocomplete, Box, Button, Card, CardContent, Divider, Grid, List, List
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import PetCard from '../../components/PetCard/PetCard'
-import Pet_Pagination_Behavior from "./Pet.Pagination"
 import Pet_Filters_Behavior from './Pet.Filters';
 import style from "./Adoptions.module.css"
 import Pet_Sort_Behavior from './Pet.Sort'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
+import { setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
 import { getAllPets } from "../../redux/slices/petsSlice";
 import { useEffect } from 'react'
 import _ from "lodash";
+import CardViewer from '../../components/CardViewer/CardViewer'
 
 const filterControlValues = {
   genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
@@ -22,7 +22,7 @@ const filterControlValues = {
 const Adoptions = () => {
 
   const dispatch = useDispatch();
-
+  const [pets_data, set_pets_data] = useState([]);
   const petsList = useSelector((state) => state.pets.petsList);
   const globalState = useSelector((state) => state.adoptions);
   const minDistance = 1;
@@ -63,14 +63,18 @@ const Adoptions = () => {
   const apply_filters_and_sort = (filters, sort_method_index, sort_direction) => {
     const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, filters);
     const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, sort_method_index, sort_direction);
-    create_pagination(sorted_pets_data);
+
+    if (sorted_pets_data.length !== pets_data.length || !isArrayEqual(sorted_pets_data, pets_data)) {
+      set_pets_data(sorted_pets_data);
+    }
+    //create_pagination(sorted_pets_data);
   }
 
-  const create_pagination = (filtered_pets_data) => {
+  /*const create_pagination = (filtered_pets_data) => {
     const pets_page_chunks = Pet_Pagination_Behavior.Apply(filtered_pets_data, 6);
     dispatch(setPageChunks(pets_page_chunks));
     updatePetsData(pets_page_chunks);
-  }
+  }*/
 
   const updatePetsData = (pets_page_chunks) => {
     if (pets_page_chunks.length) {
@@ -118,9 +122,8 @@ const Adoptions = () => {
     apply_filters_and_sort(new_filter_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
   }
 
-  const ChangePage = (event, page) => {
+  const ChangePage = (page) => {
     dispatch(setCurrentPage(page));
-    dispatch(setPetsData(globalState.pageChunks[page - 1]));
   }
 
   const navigate = useNavigate()
@@ -129,24 +132,17 @@ const Adoptions = () => {
   }
 
   useEffect(() => {
-    if (!globalState.petsData) {
-      const page_chunks = Pet_Pagination_Behavior.Apply(petsList, 6);
-      if (page_chunks.length) {
-        dispatch(setPageChunks(page_chunks));
-        dispatch(setPetsData(page_chunks[0]));
-      }
-    } else {
-
+    if (petsList) {
       const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, globalState.filters);
       const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
-      const pets_page_chunks = Pet_Pagination_Behavior.Apply(sorted_pets_data, 6);
 
-      if (!isArrayEqual(pets_page_chunks, globalState.pageChunks)) {
-        dispatch(setPageChunks(pets_page_chunks));
-        dispatch(setPetsData(pets_page_chunks[0]));
+      if (pets_data.length !== sorted_pets_data.length || !isArrayEqual(pets_data, sorted_pets_data)) {
+        set_pets_data(sorted_pets_data);
       }
     }
-  }, [petsList])
+
+  }, [petsList, pets_data, globalState]);
+
 
   return (
     <div>
@@ -154,11 +150,7 @@ const Adoptions = () => {
         <Grid container spacing={5} alignItems="flex-start">
           <Grid component={Box} item lg={2} display={{ xs: "none", lg: "block" }} />
           <Grid item lg={8} xs={12}>
-            <Grid container alignItems="center" justifyContent="center">
-              {
-                globalState.petsData && globalState.petsData.length ? <Pagination count={globalState.pageChunks.length} page={globalState.currentPage} onChange={ChangePage} /> : null
-              }
-            </Grid>
+
           </Grid>
           <Grid item lg={2} xs={12} display="flex" justifyContent="center">
             <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
@@ -273,19 +265,7 @@ const Adoptions = () => {
             </Paper>
           </Grid>
           <Grid item lg={9} md={8} xs={12}>
-            <Grid container spacing={2} alignItems="flex-start" style={{ minHeight: "500px" }}>
-              {
-                globalState.petsData && globalState.petsData.length ? globalState.petsData.map((petData, key) => {
-                  return <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
-                    <PetCard modeAction={true} data={petData} />
-                  </Grid>
-                }) : <div className={style.empty_data_container}>
-                  <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                    Ninguna entrada coincide con los filtros seleccionados
-                  </Typography>
-                </div>
-              }
-            </Grid>
+            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} card_lg={4} card_md={6} card_xs={12}/>
           </Grid>
         </Grid>
       </Container>
