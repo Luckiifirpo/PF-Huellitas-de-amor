@@ -90,7 +90,7 @@ const updateUser = async (req, res) => {
         usuario.hasAJob = hasAJob || usuario.hasAJob;
         usuario.occupation = occupation || usuario.occupation;
         usuario.photoURL = photoURL || usuario.photoURL
-        /*usuario.password = usuario.password; la contraseña se actualiza en una ruta diferente (updatePasswordUser)*/
+        usuario.password = usuario.password;
         await usuario.save();
 
         res.json(usuario)
@@ -132,7 +132,7 @@ const updatePasswordUser = async (req, res) => {
         user.age = user.age;
         user.direction = user.direction;
         user.email = user.email;
-        user.jasAJob = user.jasAJob;
+        user.hasAJob = user.hasAJob;
         await user.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
     } catch (error) {
