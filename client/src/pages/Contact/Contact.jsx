@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {useDispatch, useSelector } from "react-redux";
 import { postContactUs } from "../../redux/slices/contactUsSlice";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +35,12 @@ import { useEffect } from "react";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 >>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
 
+=======
+import { useDispatch, useSelector } from "react-redux";
+import { postContactUs } from "../../redux/slices/contactUsSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
 
 const validationSchema = yup.object({
   name: yup.string("Name required").required("Nombre requerido"),
@@ -52,6 +59,7 @@ const Contact = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 <<<<<<< HEAD
+<<<<<<< HEAD
   const lang = useSelector((state) => state.lang.currentLangData);
   // const currentUser = useSelector((state) => state.users.currentUser);
 =======
@@ -65,6 +73,9 @@ const Contact = () => {
      }
    }, [currentUser]);
 >>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
+=======
+  // const currentUser = useSelector((state) => state.users.currentUser);
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
 
   const formik = useFormik({
     initialValues,

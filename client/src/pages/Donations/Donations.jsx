@@ -18,9 +18,14 @@ import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
 import style from './Donations.module.css'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 =======
+=======
+import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +34,10 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+<<<<<<< HEAD
 >>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
+=======
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
 
 const Donations = () => {
   const navigate = useNavigate()
@@ -40,15 +48,19 @@ const Donations = () => {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   useEffect(() => {
 
   }, [lang]);
 
 =======
+=======
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
   const handleChange = (event) => {
     console.log(event)
     dispatch(setAmountDonation(event.target.value))
   }
+<<<<<<< HEAD
   /********************** */
   const currentUser = useSelector((state) => state.users.currentUser);
     
@@ -60,6 +72,12 @@ const Donations = () => {
    }, [currentUser]);
   /********************** */
 >>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
+=======
+  useEffect(() => {
+
+  }, [lang]);
+
+>>>>>>> 1067a23 (cambios necesarios en mi rama local)
   return (
     <Box>
       <Container>
