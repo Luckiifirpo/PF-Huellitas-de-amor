@@ -144,6 +144,7 @@ const PostAdoption = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.users.currentUser);
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const formik = useFormik({
     initialValues,
@@ -252,7 +253,7 @@ en donde debe hacerse para enviar el post a /animals */
                     marginTop: "200px",
                   }}
                 >
-                  Dar en adopcion
+                  {lang.darEnAdopcion.titles.darEnAdopcion}
                 </Typography>
               </Grid>
               <Grid item md={6}>
@@ -268,7 +269,7 @@ en donde debe hacerse para enviar el post a /animals */
                 >
                   <TextField
                     id="name"
-                    label="Nombre:"
+                    label={lang.darEnAdopcion.inputs.nombre + ":"}
                     variant="standard"
                     name="name"
                     value={formik.values.name}
@@ -309,7 +310,7 @@ en donde debe hacerse para enviar el post a /animals */
                   <TextField
                     id="species"
                     select
-                    label="Especie"
+                    label={lang.darEnAdopcion.inputs.especie + ":"}
                     value={formik.values.species}
                     SelectProps={{
                       native: true,
@@ -321,7 +322,7 @@ en donde debe hacerse para enviar el post a /animals */
                   >
                     {speciesArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {lang.darEnAdopcion.values.especies[option.label.toLowerCase()]}
                       </option>
                     ))}
                   </TextField>
@@ -334,7 +335,7 @@ en donde debe hacerse para enviar el post a /animals */
                         marginRight: "30px"
                       }}
                       type="number"
-                      label="Edad:"
+                      label={lang.darEnAdopcion.inputs.edad + ":"}
                       variant="standard"
                       id="age"
                       name="age"
@@ -346,7 +347,7 @@ en donde debe hacerse para enviar el post a /animals */
                     <TextField
                       type="number"
                       select
-                      label="Rango:"
+                      label={lang.darEnAdopcion.inputs.rango + ":"}
                       variant="standard"
                       id="ageTime"
                       name="ageTime"
@@ -359,13 +360,13 @@ en donde debe hacerse para enviar el post a /animals */
                       helperText={formik.touched.ageTime && formik.errors.ageTime}
                     >{ageTimeArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {lang.darEnAdopcion.values.rangoTiempo[option.label.toLowerCase()]}
                       </option>
                     ))}</TextField>
                   </Box>
                   <TextField
                     type="number"
-                    label="Peso:"
+                    label={lang.darEnAdopcion.inputs.peso + ":"}
                     variant="standard"
                     id="weight"
                     name="weight"
@@ -407,7 +408,7 @@ en donde debe hacerse para enviar el post a /animals */
                   <TextField
                     id="size"
                     select
-                    label="Tamaño"
+                    label={lang.darEnAdopcion.inputs.tamaño + ":"}
                     value={formik.values.size}
                     SelectProps={{
                       native: true,
@@ -419,7 +420,7 @@ en donde debe hacerse para enviar el post a /animals */
                   >
                     {sizesArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {lang.darEnAdopcion.values.tamaños[option.label.toLowerCase()]}
                       </option>
                     ))}
                   </TextField>
@@ -427,7 +428,7 @@ en donde debe hacerse para enviar el post a /animals */
                     id="gender"
                     name="gender"
                     select
-                    label="Género"
+                    label={lang.darEnAdopcion.inputs.genero + ":"}
                     value={formik.values.gender}
                     SelectProps={{
                       native: true,
@@ -441,12 +442,12 @@ en donde debe hacerse para enviar el post a /animals */
                   >
                     {genderArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {lang.darEnAdopcion.values.generos[option.label.toLowerCase()]}
                       </option>
                     ))}
                   </TextField>
                   <TextField
-                    label="Raza:"
+                    label={lang.darEnAdopcion.inputs.raza + ":"}
                     variant="standard"
                     id="breed"
                     name="breed"
@@ -456,7 +457,7 @@ en donde debe hacerse para enviar el post a /animals */
                     helperText={formik.touched.breed && formik.errors.breed}
                   />
                   <TextField
-                    label="Descripción:"
+                    label={lang.darEnAdopcion.inputs.descripcion + ":"}
                     variant="standard"
                     id="description"
                     name="description"
@@ -479,7 +480,7 @@ en donde debe hacerse para enviar el post a /animals */
                 size="large"
                 sx={{ borderRadius: "20px", padding: "9px 150px", marginTop: "50px" }}
               >
-                Publicar
+                {lang.darEnAdopcion.buttons.publicar}
               </Button>
             </Grid>
           </form>

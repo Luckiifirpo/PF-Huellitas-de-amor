@@ -15,6 +15,7 @@ const UserInfoEditor = (props) => {
     const cloudinary_cloud_name = "dydncradb";
     const cloudinary_preset = "qeohapyd";
     const currentUser = useSelector((state) => state.users.currentUser);
+    const lang = useSelector((state) => state.lang.currentLangData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -120,7 +121,7 @@ const UserInfoEditor = (props) => {
             navigate("/iniciar-sesion");
         }
 
-    }, [currentUser, localUserInfoData, lastUpdatedCurrentUser]);
+    }, [currentUser, localUserInfoData, lastUpdatedCurrentUser, lang]);
 
     return <div style={{ minHeight: "calc(100vh - 267px)" }}>
         <Container style={{ marginBottom: 30, marginTop: 130 }}>
@@ -135,13 +136,13 @@ const UserInfoEditor = (props) => {
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="name" value={localUserInfoData ? localUserInfoData.name : ""} onChange={handle_change_input} label="Nombre" sx={{ width: "100%" }} />
+                                            <TextField name="name" value={localUserInfoData ? localUserInfoData.name : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.nombre} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="age" value={localUserInfoData ? localUserInfoData.age : 0} type={"number"} onChange={handle_change_input} label="Edad" sx={{ width: "100%" }} />
+                                            <TextField name="age" value={localUserInfoData ? localUserInfoData.age : 0} type={"number"} onChange={handle_change_input} label={lang.userInfoEditor.inputs.edad} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="email" value={localUserInfoData ? localUserInfoData.email : ""} type={"email"} onChange={handle_change_input} label="Email" sx={{ width: "100%" }} />
+                                            <TextField name="email" value={localUserInfoData ? localUserInfoData.email : ""} type={"email"} onChange={handle_change_input} label={lang.userInfoEditor.inputs.correo} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
                                             <Paper sx={{ padding: "5px", width: "100%" }}>
@@ -169,7 +170,7 @@ const UserInfoEditor = (props) => {
                                                                         <CameraAltOutlinedIcon />
                                                                     </Avatar>
                                                                 </ListItemAvatar>
-                                                                <ListItemText primary="Foto de perfil" secondary={localUserInfoData ? (localUserInfoData.localPhoto.file ? localUserInfoData.localPhoto.file.name : "Ninguna Foto Seleccionada") : "Ninguna Foto Seleccionada"} />
+                                                                <ListItemText primary={lang.userInfoEditor.fotoPerfil.fotoPerfil} secondary={localUserInfoData ? (localUserInfoData.localPhoto.file ? localUserInfoData.localPhoto.file.name : lang.userInfoEditor.fotoPerfil.sinFoto) : lang.userInfoEditor.fotoPerfil.sinFoto} />
                                                             </ListItem>
                                                         </List>
                                                     </CardContent>
@@ -177,7 +178,7 @@ const UserInfoEditor = (props) => {
                                             </Card>
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <Button onClick={update_user_info} variant="contained" color='info' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>Actualizar Datos</Button>
+                                            <Button onClick={update_user_info} variant="contained" color='info' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -186,16 +187,16 @@ const UserInfoEditor = (props) => {
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="surname" value={localUserInfoData ? localUserInfoData.surname : ""} onChange={handle_change_input} label="Apellido" sx={{ width: "100%" }} />
+                                            <TextField name="surname" value={localUserInfoData ? localUserInfoData.surname : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.apellido} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="direction" value={localUserInfoData ? localUserInfoData.direction : ""} onChange={handle_change_input} label="Direccion" sx={{ width: "100%" }} />
+                                            <TextField name="direction" value={localUserInfoData ? localUserInfoData.direction : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.direccion} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <FormControlLabel control={<Checkbox name="hasAJob" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAJob) : false} />} label="Empleado" />
+                                            <FormControlLabel control={<Checkbox name="hasAJob" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAJob) : false} />} label={lang.userInfoEditor.inputs.empleado} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label="Ocupacion" sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
+                                            <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
                                         </Grid>
                                     </Grid>
                                 </Box>

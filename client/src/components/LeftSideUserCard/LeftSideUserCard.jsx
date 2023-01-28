@@ -8,10 +8,11 @@ import { useEffect } from "react";
 const LeftSideUserCard = (props) => {
 
     const currentUser = useSelector((state) => state.users.currentUser);
+    const lang = useSelector((state) => state.lang.currentLangData);
 
     useEffect(() => {
 
-    }, [currentUser]);
+    }, [currentUser, lang]);
 
     return <Box sx={{ width: "min-content" }}>
         <Grid container spacing={2}>
@@ -41,13 +42,13 @@ const LeftSideUserCard = (props) => {
                                 <ListItemIcon>
                                     <SettingsIcon />
                                 </ListItemIcon>
-                                Configuracion
+                                {lang.leftSideUserBar.labels.configuracion}
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <FavoriteIcon />
                                 </ListItemIcon>
-                                Favoritos
+                                {lang.leftSideUserBar.labels.favoritos}
                             </ListItemButton>
                         </List>
                     </Paper>

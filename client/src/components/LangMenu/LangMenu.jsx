@@ -1,53 +1,45 @@
-import { Avatar, Box, Button, Divider, Grid, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, Typography, } from "@mui/material";
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import EditIcon from '@mui/icons-material/Edit';
-import Logout from '@mui/icons-material/Logout';
+import { Button, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "../../redux/slices/userSlice";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { setLanguage } from "../../redux/slices/languageSlice";
 
-const UserAccountMenu = (props) => {
-
+const LangMenu = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const lang = useSelector((state) => state.lang.currentLangData);
+    const langName = useSelector((state) => state.lang.currentLang);
     const dispatch = useDispatch();
+
+    const langNames = {
+        "es" : "Español",
+        "en" : "English",
+        "pt" : "Português"
+    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const HandleSignOut = () => {
-        dispatch(signOut())
+    const changeLanguage = (value) => {
+        dispatch(setLanguage(value));
     }
 
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    const { userData } = props;
-
     useEffect(() => {
 
     }, [lang]);
 
     return <React.Fragment>
-        <Box>
-            <Tooltip title="Account settings">
-                <Button onClick={handleClick}>
-                    <Grid container>
-                        <Grid item>
-                            <Avatar sx={{ width: 32, height: 32 }} src={userData.photoURL ? userData.photoURL : null}>{userData.photoURL ? "" : userData.name[0].toUpperCase()}</Avatar>
-                        </Grid>
-                        <Grid item sx={{display: "flex", alignItems: "center"}}>
-                            <Typography sx={{ minWidth: 100, color: "black" }}>{userData.name.split(" ")[0]}</Typography>
-                        </Grid>
-                    </Grid>
-                </Button>
-            </Tooltip>
-        </Box>
+        <Tooltip title="Language">
+            <Button onClick={handleClick}>
+                <Typography sx={{ minWidth: 100, color: "black" }}>{langNames[langName]}</Typography>
+            </Button>
+        </Tooltip>
         <Menu
             anchorEl={anchorEl}
             id="account-menu"
@@ -83,22 +75,17 @@ const UserAccountMenu = (props) => {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem onClick={handleClose}>
-                <Link to={"/user-info-editor"}>
-                    <ListItemIcon>
-                        <EditIcon fontSize="small" />
-                    </ListItemIcon>
-                    <span>{lang.userMenu.labels.editarDatos}</span>
-                </Link>
+            <MenuItem onClick={(e) => { changeLanguage("es") }}>
+                Español
             </MenuItem>
-            <MenuItem onClick={HandleSignOut}>
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                {lang.userMenu.labels.cerrarSesion}
+            <MenuItem onClick={(e) => { changeLanguage("en") }}>
+                English
+            </MenuItem>
+            <MenuItem onClick={(e) => { changeLanguage("pt") }}>
+                Português
             </MenuItem>
         </Menu>
     </React.Fragment>
-};
+}
 
-export default UserAccountMenu;
+export default LangMenu;
