@@ -7,7 +7,7 @@ const mailer = async (req, res) => {
   console.log(description);
   try {
     await transporter.sendMail({
-      from: '"NewsLetter" <alexpalagomez7@gmail.com>', // sender address
+      from: process.env.MAILER_EMAIL, // sender address
       to: email, // list of receivers
       subject: `Bienvenido ${name}`, // Subject line
       html: "<b>Esta es la seccion de noticias de Huellitas</b>", // html body

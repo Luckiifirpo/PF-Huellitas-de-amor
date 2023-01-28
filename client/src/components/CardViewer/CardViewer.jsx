@@ -36,7 +36,6 @@ const CardViewer = (props) => {
                 return null;
         }
     }
-
     useEffect(() => {
         create_pagination();
     }, [cardsDataList]);

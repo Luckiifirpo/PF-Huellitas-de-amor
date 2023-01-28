@@ -6,14 +6,27 @@ import { getFavorites } from '../../redux/slices/adoptionSlice'
 import style from "./Favorites.module.css"
 import CardViewer from '../../components/CardViewer/CardViewer'
 import LeftSideUserCard from '../../components/LeftSideUserCard/LeftSideUserCard'
+import { useNavigate } from "react-router-dom";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+
 
 const Favorites = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const petsData = useSelector(state => state.adoptions.favoritesPets)
     useEffect(() => {
         dispatch(getFavorites())
     }, [])
 
+    const currentUser = useSelector((state) => state.users.currentUser);
+    
+    useEffect(() => {
+       if (!currentUser) {
+         dispatch(setToGoAfterLogin("/favoritos"));
+         navigate("/iniciar-sesion");
+       }
+     }, [currentUser]);
+    
     return (
         <>
             <Container >

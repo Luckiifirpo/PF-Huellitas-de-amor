@@ -21,9 +21,11 @@ import {
   Paper,
 } from "@mui/material";
 import { useState } from "react";
-import {useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postContactUs } from "../../redux/slices/contactUsSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 
 
 const validationSchema = yup.object({
@@ -42,7 +44,15 @@ const Contact = () => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const currentUser = useSelector((state) => state.users.currentUser);
+
+  const currentUser = useSelector((state) => state.users.currentUser);
+    
+  useEffect(() => {
+     if (!currentUser) {
+       dispatch(setToGoAfterLogin("/contacto"));
+       navigate("/iniciar-sesion");
+     }
+   }, [currentUser]);
 
   const formik = useFormik({
     initialValues,

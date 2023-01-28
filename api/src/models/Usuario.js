@@ -40,8 +40,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     occupation: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
     password: {
       type: DataTypes.STRING,

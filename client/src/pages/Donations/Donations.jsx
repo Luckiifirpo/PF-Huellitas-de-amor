@@ -18,11 +18,13 @@ import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
 import style from './Donations.module.css'
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAmountDonation } from '../../redux/slices/petsSlice';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 
 const Donations = () => {
   const navigate = useNavigate()
@@ -35,7 +37,16 @@ const Donations = () => {
     console.log(event)
     dispatch(setAmountDonation(event.target.value))
   }
-
+  /********************** */
+  const currentUser = useSelector((state) => state.users.currentUser);
+    
+  useEffect(() => {
+     if (!currentUser) {
+       dispatch(setToGoAfterLogin("/donaciones"));
+       navigate("/iniciar-sesion");
+     }
+   }, [currentUser]);
+  /********************** */
   return (
     <Box>
       <Container>
