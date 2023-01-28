@@ -32,6 +32,7 @@ const ErrorManager = {
                     }
                 }
                 default:
+                    console.log(error);
                     return {
                         title: "UnknownError",
                         message: errorMessageList["UnknownError"],

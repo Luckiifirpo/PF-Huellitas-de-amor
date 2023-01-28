@@ -4,7 +4,6 @@ const {
 } = process.env
 
 
-
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
