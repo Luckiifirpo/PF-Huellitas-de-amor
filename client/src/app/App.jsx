@@ -23,6 +23,8 @@ import api from "../services/api";
 import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
 import { tryStartingFavoritesInLocalStorage } from "../redux/slices/adoptionSlice";
+import Stripe from "../pages/Stripe/Stripe";
+import Completion from "../pages/Stripe/Completion";
 import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
 import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
@@ -90,9 +92,11 @@ function App() {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/dar-en-adopcion" element={<PostAdoption />} />
           <Route path="/favoritos" element={<Favorite />} />
+          <Route path="/stripe" element={<Stripe />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
         </Route>
+          <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
         <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="/registro-usuario" element={<SignUp />} />
