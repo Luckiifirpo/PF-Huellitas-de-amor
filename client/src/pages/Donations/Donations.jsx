@@ -35,7 +35,8 @@ const Donations = () => {
   return (
     <Box>
       <Container>
-        <Grid container marginTop={'120px'}>
+        <Grid container marginTop={'120px'} spacing={4}     justifyContent="space-between"
+  alignItems="flex-start">
           <Grid item md={6} sx={{ marginTop: '20px' }}>
             <Typography
               component="h4"
@@ -122,6 +123,8 @@ const Donations = () => {
       <Container>
         <Grid item md={12} sx={{ marginBottom: '-10px' }}>
           <img src={imgDonaciones} alt='fondo donaciones' className={style.imageD} />
+        </Grid>
+        <Grid item md={12} sx={{ marginBottom: '-10px' }}>
         </Grid>
       </Container>
     </Box>

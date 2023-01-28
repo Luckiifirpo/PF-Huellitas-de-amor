@@ -173,10 +173,10 @@ const forgotPassword = async (req,res) => {
             text: "Parece que has olvidado tu contraseña!", // plain text body
             html: `
             <h2>Por favor has click en el siguiente enlace para restablecer la contraseña</h2>
-            <p>${process.env.CLIENT_URL}/users/resetpassword/${user.id}</p>
+            <p>${process.env.CLIENT_URL}/users/resetpassword/${token}</p>
             `, // html body
           });
-          user.setDataValue({reset: user.id});
+          user.setDataValue({reset: token});
           user.save();
           res.status(200).send("email enviado")
     } catch (error) {
@@ -184,31 +184,46 @@ const forgotPassword = async (req,res) => {
     }
 }
 
-// const resetpassword = async(req, res) => {
-//     const {id} = req.params;
-//     const {newPassword} = req.body;
+const resetpassword = async(req, res) => {
+    const {reset} = req.params;
+    const {newPassword} = req.body;
+    console.log(reset);
+    console.log(newPassword);
+    if(!newPassword){
+        return res.status(400).json("debe ingresar una nueva contraseña");
+    }
+    if(reset){
+       await jwt.verify(reset, process.env.RESET_PASSWORD_KEY, function(err, decodedData){
+            if(err){
+                return res.json({
+                    error: "Incorrect token or it is expired."
+                })
+            }
+        });    
+    }else{
+        return res.status(401).json({error: "Error al autenticar"});
+    }
+    const user = await Usuario.findOne({reset}, function(err, user){
+            
+    });
+    console.log(user)
+    if(!user){
+        return res.status(400).json({error: "User with this token does not existe"});
+    }
+   
+    try {
+        const salt = await bcryptjs.genSalt(10);
+        const password = await bcryptjs.hash(newPassword, salt);
+        user.update({
+            password: password
+        }
+        );
+        res.status(200).send("contraseña cambiada");
 
-//     if(!newPassword){
-//         return res.status(400).json("debe ingresar una nueva contraseña");
-//     }
-
-//     const user = await Usuario.findOne({
-//         where: {
-//             id: id
-//         }
-//     }
-//     );
-//     try {
-//         user.update({
-//             password: newPassword
-//         }
-//         );
-//         res.status(200).send("contraseña cambiada");
-
-//     } catch (error) {
-//         res.status(400).send({error:error.message});
-//     }
-// }
+    } catch (error) {
+        res.status(400).send({error:error.message});
+    }
+}
 
 module.exports = {
     getAllUsers,
@@ -218,5 +233,5 @@ module.exports = {
     getUserById,
     updatePasswordUser,
     forgotPassword, 
-    
+    resetpassword
 }
