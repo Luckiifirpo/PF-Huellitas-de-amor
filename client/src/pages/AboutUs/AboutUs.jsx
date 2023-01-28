@@ -84,6 +84,7 @@ const AboutUs = () => {
 
   const dispatch = useDispatch();
   const globalState = useSelector((state) => state.aboutUs);
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const OnChangePage = (page) => {
     dispatch(setCurrentPage(page));
@@ -91,7 +92,7 @@ const AboutUs = () => {
 
   useEffect(() => {
 
-  }, [globalState]);
+  }, [globalState, lang]);
 
   return (
     <div>
@@ -111,15 +112,16 @@ const AboutUs = () => {
                 fontWeight: "700",
               }}
             >
-              Quienes Somos?
+              {lang.quienesSomos.titles.quienesSomos}
             </Typography>
             <Typography component="p" sx={{ margin: "10px 0px" }}>
-              Somos estudiantes de Henry cursando la etapa final del bootcamp
+              {/* Somos estudiantes de Henry cursando la etapa final del bootcamp
               donde tenemos que desarrollar una aplicación en grupo cumpliendo
               diferentes objetivos propuestos por el bootcamp. Esta aplicación
               web tiene como objetivo conectar personas con posibles mascotas en
               adopción, además de brindar la posibilidad de hacer donaciones
-              para mejorar la calidad de vida de las mascotas.
+            para mejorar la calidad de vida de las mascotas.*/}
+            {lang.quienesSomos.paragraphs.quienesSomos}
             </Typography>
           </Grid>
           <Grid Grid item md={9}>

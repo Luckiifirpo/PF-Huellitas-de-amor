@@ -18,29 +18,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import UserAccountMenu from '../UserAccountMenu/UserAccountMenu';
 import { setToGoAfterLogin } from '../../redux/slices/navigationSlice';
+import LangMenu from '../LangMenu/LangMenu';
 
 
 
 const drawerWidth = 240;
 const navItems = [
   {
-    name: 'Inicio',
+    name: 'inicio',
     route: '/'
   },
   {
-    name: 'Quienes Somos',
+    name: 'quienesSomos',
     route: '/quienes-somos'
   },
   {
-    name: 'Adopciones',
+    name: 'adopciones',
     route: '/adopciones'
   },
   {
-    name: 'Donaciones',
+    name: 'donaciones',
     route: '/donaciones'
   },
   {
-    name: 'Contacto',
+    name: 'contacto',
     route: '/contacto'
   }
 ];
@@ -50,6 +51,7 @@ const Navbar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const currentUser = useSelector((state) => state.users.currentUser);
+  const lang = useSelector((state) => state.lang.currentLangData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -62,9 +64,13 @@ const Navbar = (props) => {
     navigate("/iniciar-sesion");
   }
 
+  const langButtonClick = (event) => {
+
+  }
+
   useEffect(() => {
-    
-  }, [currentUser]);
+
+  }, [currentUser, lang]);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -82,7 +88,7 @@ const Navbar = (props) => {
         ))}
         <ListItem disablePadding>
           <Button component={RouterLink} to="/favoritos">
-            Favoritos
+            {lang.navbar.links.inicio}
           </Button>
         </ListItem>
         <ListItem disablePadding>
@@ -119,12 +125,13 @@ const Navbar = (props) => {
             <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
               {navItems.map((item) => (
                 <Button key={item.name} component={RouterLink} to={item.route}>
-                  {item.name}
+                  {lang.navbar.links[item.name]}
                 </Button>
               ))}
               <Button component={RouterLink} to="/favoritos">
                 <FavoriteIcon />
               </Button>
+              <LangMenu />
               {
                 currentUser ? <UserAccountMenu userData={currentUser} /> :
                   <Button onClick={ToLogin}>

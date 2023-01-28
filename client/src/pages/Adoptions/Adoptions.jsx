@@ -14,9 +14,9 @@ import _ from "lodash";
 import CardViewer from '../../components/CardViewer/CardViewer'
 
 const filterControlValues = {
-  genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
-  speciesFilter: [{ label: 'Todas las especies', filter: "speciesFilter", index: 0 }, { label: 'Perros', filter: "speciesFilter", index: 1 }, { label: 'Gatos', filter: "speciesFilter", index: 2 }, { label: 'Otros', filter: "speciesFilter", index: 3 }],
-  sizeFilter: [{ label: 'Todos los tamaños', filter: "sizeFilter", index: 0 }, { label: 'Pequeños', filter: "sizeFilter", index: 1 }, { label: 'Medianos', filter: "sizeFilter", index: 2 }, { label: 'Grandes', filter: "sizeFilter", index: 3 }]
+  genreFilter: [{ label: '', langKey: 'ambosGeneros', filter: "genreFilter", index: 0 }, { label: '', langKey: 'machos', filter: "genreFilter", index: 1 }, { label: '', langKey: 'hembras', filter: "genreFilter", index: 2 }],
+  speciesFilter: [{ label: '', langKey: 'todasLasEspecies', filter: "speciesFilter", index: 0 }, { label: '', langKey: 'perros', filter: "speciesFilter", index: 1 }, { label: '', langKey: 'gatos', filter: "speciesFilter", index: 2 }, { label: '', langKey: 'otros', filter: "speciesFilter", index: 3 }],
+  sizeFilter: [{ label: '', langKey: 'todosLosTamaños', filter: "sizeFilter", index: 0 }, { label: '', langKey: 'pequeños', filter: "sizeFilter", index: 1 }, { label: '', langKey: 'medianos', filter: "sizeFilter", index: 2 }, { label: '', langKey: 'grandes', filter: "sizeFilter", index: 3 }]
 }
 
 const Adoptions = () => {
@@ -25,6 +25,7 @@ const Adoptions = () => {
   const [pets_data, set_pets_data] = useState([]);
   const petsList = useSelector((state) => state.pets.petsList);
   const globalState = useSelector((state) => state.adoptions);
+  const lang = useSelector((state) => state.lang.currentLangData);
   const minDistance = 1;
 
   var isArrayEqual = function (x, y) {
@@ -131,6 +132,39 @@ const Adoptions = () => {
     navigate("/dar-en-adopcion")
   }
 
+  const getFiltersInCurrentLang = () => {
+    const filtersInCurrentLang = {
+      genreFilter: filterControlValues.genreFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.genero[e.langKey]
+        }
+      }),
+      speciesFilter: filterControlValues.speciesFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.especies[e.langKey]
+        }
+      }),
+      sizeFilter: filterControlValues.sizeFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.tamaños[e.langKey]
+        }
+      })
+    }
+
+    return filtersInCurrentLang;
+  }
+
+  const getAppliedFiltersInCurrentLang = () => {
+    const filtersInCurrentLang = {
+      genreFilter: globalState.filters,
+      speciesFilter,
+      sizeFilter
+    }
+  }
+
   useEffect(() => {
     if (petsList) {
       const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, globalState.filters);
@@ -141,7 +175,7 @@ const Adoptions = () => {
       }
     }
 
-  }, [petsList, pets_data, globalState]);
+  }, [petsList, pets_data, globalState, lang]);
 
 
   return (
@@ -153,7 +187,7 @@ const Adoptions = () => {
 
           </Grid>
           <Grid item lg={2} xs={12} display="flex" justifyContent="center">
-            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
+            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>{lang.adoptions.buttons.publicar}</Button>
           </Grid>
           <Grid item lg={3} md={4} xs={12}>
             <Typography
@@ -165,54 +199,54 @@ const Adoptions = () => {
                 fontWeight: "700",
               }}
             >
-              Adopciones
+              {lang.adoptions.titles.adopciones}
             </Typography>
             <Typography component="h1" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-              ORDENAR POR:
+              {lang.adoptions.titles.ordenarPor + ":"}
             </Typography>
             <Paper>
               <List>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 0}
                   onClick={(event) => adoptionListItemClick(event, 0)}>
-                  <ListItemText primary="TAMAÑO" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.tamaño.toUpperCase()} />
                 </ListItemButton>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 1}
                   onClick={(event) => adoptionListItemClick(event, 1)}>
-                  <ListItemText primary="EDAD" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.edad.toUpperCase()} />
                 </ListItemButton>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 2}
                   onClick={(event) => adoptionListItemClick(event, 2)}>
-                  <ListItemText primary="PESO" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.peso.toUpperCase()} />
                 </ListItemButton>
                 <Divider />
                 <ListItem style={{ display: "flex", justifyContent: "center" }}>
                   <ToggleButtonGroup exclusive value={globalState.currentSortDirection} onChange={SetSortDirection} size='small'>
                     <ToggleButton style={{ padding: "7px 15px" }} value="Ascending">
-                      Ascendente
+                      {lang.adoptions.ordenamientos.ascendente}
                     </ToggleButton>
                     <ToggleButton style={{ padding: "7px 15px" }} value="Descending">
-                      Descendente
+                      {lang.adoptions.ordenamientos.descendente.toUpperCase()}
                     </ToggleButton>
                   </ToggleButtonGroup>
                 </ListItem>
                 <Divider />
                 <ListItemButton onClick={resetSortSettings}>
-                  <ListItemText primary="Reiniciar" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.reiniciar} />
                 </ListItemButton>
               </List>
             </Paper>
             <Typography component="h1" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-              FILTRAR POR:
+              {lang.adoptions.titles.filtrarPor + ":"}
             </Typography>
             <Paper>
               <List>
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="genre-filter"
-                    value={globalState.filters.genreFilter.label}
+                    value={lang.adoptions.filtros.genero[globalState.filters.genreFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.genreFilter}
-                    renderInput={(params) => <TextField disabled={true} {...params} label="Genero" />}
+                    options={getFiltersInCurrentLang().genreFilter}
+                    renderInput={(params) => <TextField disabled={true} {...params} label={lang.adoptions.filtros.inputs.genero} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -222,10 +256,10 @@ const Adoptions = () => {
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="species-filter"
-                    value={globalState.filters.speciesFilter.label}
+                    value={lang.adoptions.filtros.especies[globalState.filters.speciesFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.speciesFilter}
-                    renderInput={(params) => <TextField {...params} label="Especie" />}
+                    options={getFiltersInCurrentLang().speciesFilter}
+                    renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.especie} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -235,10 +269,10 @@ const Adoptions = () => {
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="size-filter"
-                    value={globalState.filters.sizeFilter.label}
+                    value={lang.adoptions.filtros.tamaños[globalState.filters.sizeFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.sizeFilter}
-                    renderInput={(params) => <TextField {...params} label="Tamaños" />}
+                    options={getFiltersInCurrentLang().sizeFilter}
+                    renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.tamaño} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -247,25 +281,25 @@ const Adoptions = () => {
                 </ListItem>
                 <ListItem className={style.filter_slider_container} >
                   <Typography variant="body2" color="text.secondary">
-                    Edad:
+                    {lang.adoptions.filtros.edad}:
                   </Typography>
                   <Slider name="ageFilter" min={0} max={30} value={globalState.filters.ageFilter} disableSwap onChange={SliderFilterOnChange} valueLabelDisplay="auto" />
                 </ListItem>
                 <ListItem className={style.filter_slider_container} >
                   <Typography variant="body2" color="text.secondary">
-                    Peso:
+                  {lang.adoptions.filtros.peso}:
                   </Typography>
                   <Slider name="weightFilter" min={0} max={100} value={globalState.filters.weightFilter} disableSwap onChange={SliderFilterOnChange} valueLabelDisplay="auto" />
                 </ListItem>
                 <Divider />
                 <ListItemButton onClick={resetAdoptionFilters}>
-                  <ListItemText primary="Reiniciar" />
+                  <ListItemText primary={lang.adoptions.filtros.reiniciar} />
                 </ListItemButton>
               </List>
             </Paper>
           </Grid>
           <Grid item lg={9} md={8} xs={12}>
-            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} emptyListLabel="Ninguna entrada coincide con los filtros seleccionados"/>
+            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} emptyListLabel={lang.adoptions.listaVacia} />
           </Grid>
         </Grid>
       </Container>
