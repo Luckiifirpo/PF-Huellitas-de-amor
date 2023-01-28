@@ -28,6 +28,7 @@ const PetCard = (props) => {
         dispatch(deleteFavorite(data.id))
         dispatch(getFavorites())
     }
+
     useEffect(()=>{
         dispatch(getFavorites())
     },[dispatch, lang])

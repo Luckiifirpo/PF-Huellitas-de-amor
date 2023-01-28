@@ -21,10 +21,18 @@ import {
   Paper,
 } from "@mui/material";
 import { useState } from "react";
+<<<<<<< HEAD
 import {useDispatch, useSelector } from "react-redux";
 import { postContactUs } from "../../redux/slices/contactUsSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+=======
+import { useDispatch, useSelector } from "react-redux";
+import { postContactUs } from "../../redux/slices/contactUsSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
 
 
 const validationSchema = yup.object({
@@ -43,8 +51,20 @@ const Contact = () => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const lang = useSelector((state) => state.lang.currentLangData);
   // const currentUser = useSelector((state) => state.users.currentUser);
+=======
+
+  const currentUser = useSelector((state) => state.users.currentUser);
+    
+  useEffect(() => {
+     if (!currentUser) {
+       dispatch(setToGoAfterLogin("/contacto"));
+       navigate("/iniciar-sesion");
+     }
+   }, [currentUser]);
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
 
   const formik = useFormik({
     initialValues,

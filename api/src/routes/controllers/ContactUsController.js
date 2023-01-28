@@ -41,6 +41,7 @@ const postContactUs = async (req, res) => {
   });
 
   try {
+<<<<<<< HEAD
     if (name === "NewsLetter") {
       await transporter.sendMail({
         from: '"NewsLetter" <hdeamor2023@gmail.com>', // sender address
@@ -73,6 +74,14 @@ const postContactUs = async (req, res) => {
         </html>`, // html body
       });
     }
+=======
+    const info = await transporter.sendMail({
+      from: process.env.MAILER_EMAIL, // sender address
+      to: email, // list of receivers
+      subject: `Bienvenido ${name}`, // Subject line
+      html: "<b>Gracias por contactarnos en breve responderemos sus inquietudes</b>", // html body
+    });
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
     res.status(201).send(createdContactUs);
   } catch (error) {
     res.status(400).send({ error: error.message });

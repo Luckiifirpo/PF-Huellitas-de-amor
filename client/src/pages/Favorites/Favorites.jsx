@@ -6,16 +6,34 @@ import { getFavorites } from '../../redux/slices/adoptionSlice'
 import style from "./Favorites.module.css"
 import CardViewer from '../../components/CardViewer/CardViewer'
 import LeftSideUserCard from '../../components/LeftSideUserCard/LeftSideUserCard'
+import { useNavigate } from "react-router-dom";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+
 
 const Favorites = () => {
+<<<<<<< HEAD
     const dispatch = useDispatch()
     const petsData = useSelector(state => state.adoptions.favoritesPets);
     const lang = useSelector(state => state.lang.currentLangData);
 
+=======
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const petsData = useSelector(state => state.adoptions.favoritesPets)
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
     useEffect(() => {
         dispatch(getFavorites())
     }, [lang])
 
+    const currentUser = useSelector((state) => state.users.currentUser);
+    
+    useEffect(() => {
+       if (!currentUser) {
+         dispatch(setToGoAfterLogin("/favoritos"));
+         navigate("/iniciar-sesion");
+       }
+     }, [currentUser]);
+    
     return (
         <>
             <Container >

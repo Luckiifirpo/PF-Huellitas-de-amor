@@ -8,6 +8,7 @@ const mailer = async (req, res) => {
   console.log(description);
 
   try {
+<<<<<<< HEAD
     if (name === "NewsLetter") {
       await transporter.sendMail({
         from: '"NewsLetter" <hdeamor2023@gmail.com>', // sender address
@@ -40,6 +41,14 @@ const mailer = async (req, res) => {
         </html>`, // html body
       });
     }
+=======
+    await transporter.sendMail({
+      from: process.env.MAILER_EMAIL, // sender address
+      to: email, // list of receivers
+      subject: `Bienvenido ${name}`, // Subject line
+      html: "<b>Esta es la seccion de noticias de Huellitas</b>", // html body
+    });
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
   } catch (error) {}
 };
 

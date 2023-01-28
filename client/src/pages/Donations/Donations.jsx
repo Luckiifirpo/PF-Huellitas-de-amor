@@ -17,8 +17,19 @@ import higiene from '../../assets/image/higiene.svg'
 import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
 import style from './Donations.module.css'
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+=======
+import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAmountDonation } from '../../redux/slices/petsSlice';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
 
 const Donations = () => {
   const navigate = useNavigate()
@@ -28,10 +39,27 @@ const Donations = () => {
     navigate("/contacto")
   }
 
+<<<<<<< HEAD
   useEffect(() => {
 
   }, [lang]);
 
+=======
+  const handleChange = (event) => {
+    console.log(event)
+    dispatch(setAmountDonation(event.target.value))
+  }
+  /********************** */
+  const currentUser = useSelector((state) => state.users.currentUser);
+    
+  useEffect(() => {
+     if (!currentUser) {
+       dispatch(setToGoAfterLogin("/donaciones"));
+       navigate("/iniciar-sesion");
+     }
+   }, [currentUser]);
+  /********************** */
+>>>>>>> 8da1656 (fix/client requerido inicio de sesion para ciertas acciones)
   return (
     <Box>
       <Container>

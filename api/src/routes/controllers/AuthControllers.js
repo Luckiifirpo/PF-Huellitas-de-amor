@@ -33,7 +33,7 @@ const loginCtrl = async (req, res) => {
         if (!user) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
 
         const checkPassword = await compare(password, user.password);
-        // const tokenSession = await tokenSign(user);
+
         if (!checkPassword) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
 
         const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
@@ -50,7 +50,7 @@ const loginCtrl = async (req, res) => {
 const federatedLoginCtrl = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const { userData } = req.body;
-
+    console.log(userData)
     try {
         const loggedUserData = await firebaseAdmin.auth().verifyIdToken(token).then((async (decodedToken) => {
             const uid = decodedToken.uid;
