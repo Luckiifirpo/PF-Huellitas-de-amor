@@ -1,5 +1,6 @@
 import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
+import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState} from 'react';
 import { getAllPets } from "../../redux/slices/petsSlice";
@@ -9,9 +10,18 @@ import { getAllPets } from "../../redux/slices/petsSlice";
 
 
 const columns = [
+  { field: 'image',
+  headerName: 'Imagen',
+  width: 70,
+  renderCell: (params) => (
+    <Avatar src={params.row.image} variant="rounded" />
+  ),
+  sortable: false,
+  filterable: false,
+},
   { field: 'id',
     headerName: 'ID', 
-    width: 70 },
+    width: 300 },
 
   { field: 'name',
     headerName: 'Nombre',
@@ -19,6 +29,8 @@ const columns = [
 
   { field: 'species',
     headerName: 'Especie',
+    type: 'singleSelect',
+    valueOptions: ['feline', 'female', 'fish',  'rodent','equine', 'bovine', 'ovine', 'goat','other'],
      width: 100 },
   {
     field: 'age',
@@ -27,6 +39,14 @@ const columns = [
     width: 50,
   },
   {
+    field: 'ageTime',
+    headerName: 'meses / años',
+    type: 'singleSelect',
+    valueOptions: ['months', 'years'],
+    width: 100,
+  },
+
+  {
     field: 'weight',
     headerName: 'Peso',
     type: 'number',
@@ -34,31 +54,33 @@ const columns = [
   },
   { field: 'size',
     headerName: 'Tamaño',
-    width: 90 },
+    type: 'singleSelect',
+    valueOptions: ['small', 'medium', 'big'],
+    width: 90 
+  },
   { field: 'gender',
     headerName: 'Género',
     type: 'singleSelect',
     valueOptions: ['male', 'female'],
-    width: 100 },
+    width: 100 
+  },
     { field: 'breed',
     headerName: 'Raza',
-    width:100 },
+    width:100 
+  },
     { field: 'description',
     headerName: 'Descripción',
-    width: 100 },
-    { field: 'image',
-    headerName: 'Imagen',
-    width: 100 },
-    {
-      field: 'postDate',
-      headerName: 'Publicado',
-      width: 200,
+    width: 100 
+  },
+  {
+    field: 'postDate',
+    headerName: 'Publicado',
+    width: 200,
 
     },
     { field: 'IsAdopted',
     headerName: 'Adoptado',
     type: 'boolean',
-    editable: true,
     width: 90 },
    
   ];

@@ -10,23 +10,22 @@ import { getAllPets } from "../../redux/slices/petsSlice";
 
 
 const columns = [
-  { field: 'id',
-    headerName: 'ID', 
-    width: 70 },
-    { field: 'photoURL',
+  { field: 'photoURL',
     headerName: 'Avatar',
     renderCell: (params) => <Avatar src={params.row.photoURL} />,
     sortable: false,
     filterable: false,
     width: 60 },
-
+  { field: 'id',
+    headerName: 'ID', 
+    width: 300 },
   { field: 'name',
     headerName: 'Nombre',
-    width: 100 },
+    width: 150 },
 
   { field: 'surname',
     headerName: 'Apellido',
-     width: 100 },
+     width: 150 },
   {
     field: 'age',
     headerName: 'Edad',
@@ -37,11 +36,11 @@ const columns = [
     field: 'direction',
     headerName: 'Dirección',
     type: 'number',
-    width: 90,
+    width: 120,
   },
   { field: 'email',
     headerName: 'Email',
-    width: 180 },
+    width: 220 },
   { field: 'work',
     headerName: 'Trabajo',
     type: 'boolean',
@@ -49,12 +48,11 @@ const columns = [
     width: 100 },
     { field: 'password',
     headerName: 'Contraseña',
-    width: 100 },
-   
+    width: 500 },  
     {
-      field: 'createdAt',
-      headerName: 'Fecha de inicio',
-      width: 200,
+    field: 'createdAt',
+    headerName: 'Fecha de inicio',
+    width: 200,
 
     },
    
