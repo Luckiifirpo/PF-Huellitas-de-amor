@@ -6,8 +6,9 @@ const animalRouter = require('./routers/routerAnimal');
 const usersRouter = require('./routers/routerUsuario');
 const authRouter = require("./routers/routerAuth");
 const contactUsRouter = require("./routers/contactUsRouter")
-const adminRouter = require ("./routers/adminRouter")
-const configPaymentRouter = require ("./routers/configPaymentRouter")
+const adminRouter = require("./routers/adminRouter")
+const configPaymentRouter = require("./routers/configPaymentRouter");
+const adoptionRequestRouter = require('./routers/adoptionRequestRouter');
 
 
 const router = Router();
@@ -17,8 +18,9 @@ const router = Router();
 router.use('/animals', animalRouter);
 router.use('/users', usersRouter);
 router.use("/auth", authRouter);
-router.use("/contactus",contactUsRouter)
-router.use("/admin",adminRouter)
-router.use("/payment",configPaymentRouter)
+router.use("/contactus", contactUsRouter);
+router.use("/admin", adminRouter);
+router.use("/payment", configPaymentRouter);
+router.use("/adoption_request", adoptionRequestRouter);
 
 module.exports = router;

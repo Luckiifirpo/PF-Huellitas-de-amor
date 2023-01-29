@@ -18,8 +18,8 @@ const Favorites = () => {
 
     return (
         <>
-            <Container >
-                <Typography component="h1" variant="h3" style={{ marginTop: '150px', marginBottom: '10px', color: '#FF3041' }}>
+            <Container style={{ marginTop: '150px', marginBottom: '10px', color: '#FF3041' }}>
+                <Typography component="h1" variant="h3" >
                     {lang.favoritos.titles.mascotasFavoritas}
                 </Typography>
                 <Grid container style={{ minHeight: "500px", marginTop:'30px',marginBottom:'100px', padding:'50px', }}>
