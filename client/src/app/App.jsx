@@ -96,7 +96,7 @@ function App() {
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
-          <Route path="/adoption-request" element={<AdoptionRequestForm />} />
+          <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
         </Route>
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
