@@ -187,8 +187,8 @@ const forgotPassword = async (req,res) => {
 const resetpassword = async(req, res) => {
     const {reset} = req.params;
     const {newPassword} = req.body;
-    console.log(reset);
-    console.log(newPassword);
+    // console.log(reset);
+    // console.log(newPassword);
     if(!newPassword){
         return res.status(400).json("debe ingresar una nueva contraseña");
     }
@@ -206,7 +206,7 @@ const resetpassword = async(req, res) => {
     const user = await Usuario.findOne({reset}, function(err, user){
             
     });
-    console.log(user)
+    // console.log(user)
     if(!user){
         return res.status(400).json({error: "User with this token does not existe"});
     }
