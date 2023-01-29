@@ -9,7 +9,21 @@ const theme = createTheme({
         secondary: {
           main: '#3B57A9',
         },
+        info: {
+          main: '#FFAB13',
+          contrastText: '#fff',
+        },
+        warning:{
+          main: '#FFFFFF'
+        }
       },
+      
+      typography: {
+        fontFamily: [
+          'Manjari'
+        ].join(','),
+      },
+
 })
 
 export default theme;

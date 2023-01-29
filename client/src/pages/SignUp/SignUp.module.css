@@ -1,0 +1,12 @@
+.logo{
+    width: 115px;
+    height: auto;
+}
+
+.input_width{
+    width: 300px;
+}
+
+.sign_up_div{
+    min-height: 100vh !important;
+}

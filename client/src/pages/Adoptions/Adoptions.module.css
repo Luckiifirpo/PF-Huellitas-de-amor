@@ -1,0 +1,6 @@
+.filter_slider_container{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 8px 25px !important;
+}

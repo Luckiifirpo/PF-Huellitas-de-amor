@@ -4,9 +4,13 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('adopcion', {
-    name: {
-      type: DataTypes.STRING,
+    date: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
+    condition: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   });
 };

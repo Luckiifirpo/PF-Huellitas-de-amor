@@ -13,12 +13,21 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
+    "@mui/x-data-grid": "^5.17.20",
     "@reduxjs/toolkit": "^1.9.1",
+    "@stripe/react-stripe-js": "^1.16.4",
+    "@stripe/stripe-js": "^1.46.0",
     "axios": "^1.2.2",
+    "firebase": "^9.16.0",
+    "firebase-tools": "^11.21.0",
+    "formik": "^2.2.9",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.6.2"
+    "react-router-dom": "^6.6.2",
+    "react-social-login-buttons": "^3.6.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
