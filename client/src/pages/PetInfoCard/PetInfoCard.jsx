@@ -7,28 +7,20 @@ import bg_2 from "../../assets/image/pet-info-background-2.png"
 import bg_3 from "../../assets/image/pet-info-background-3.png"
 import bg_4 from "../../assets/image/pet-info-background-4.png"
 import { useNavigate, useParams } from "react-router-dom";
-
-const testingData = {
-    id: "10",
-    date: "20-jan-2023",
-    species: "Dog",
-    name: "Mally",
-    age: "2 years",
-    weight: "12kg",
-    size: "medium",
-    genre: "female",
-    breed: "gray",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit porro nostrum voluptatem exercitationem dolorem, hic et maxime eveniet.",
-    img: "../Sample Pets/pet5.jpg"
-}
+import { useEffect } from "react";
 
 const PetInfoCard = (props) => {
 
     const navigate = useNavigate();
     const { pet_id } = useParams();
+    const lang = useSelector((state) => state.lang.currentLangData);
     const petData = useSelector((state) => state.pets.petsList.filter(petData => {
         return petData.id === pet_id
     })[0]);
+
+    useEffect(() => {
+
+    }, [lang]);
 
     return (
         <div className={style.pet_card_info_div}>
@@ -156,7 +148,7 @@ const PetInfoCard = (props) => {
                                     }
                                 }}>
                                     <Typography component="p">
-                                        <strong>Publicado: </strong>
+                                        <strong>{lang.petInfoCard.labels.publicado}: </strong>
                                         <span>{petData.date.replaceAll("-", "/")}</span>
                                     </Typography>
                                     <Typography component="h1" variant="h3" color="primary">
@@ -188,27 +180,27 @@ const PetInfoCard = (props) => {
                                             }
                                         }}>
                                             <Typography component="p">
-                                                <strong>Especie: </strong>
+                                                <strong>{lang.petInfoCard.labels.especie}: </strong>
                                                 <span>{petData.species}</span>
                                             </Typography>
                                             <Typography component="p">
-                                                <strong>Genero: </strong>
+                                                <strong>{lang.petInfoCard.labels.genero}: </strong>
                                                 <span>{petData.genre}</span>
                                             </Typography>
                                             <Typography component="p">
-                                                <strong>Edad: </strong>
+                                                <strong>{lang.petInfoCard.labels.edad}: </strong>
                                                 <span>{petData.age}</span>
                                             </Typography>
                                             <Typography component="p">
-                                                <strong>Tamaño: </strong>
+                                                <strong>{lang.petInfoCard.labels.tamaño}: </strong>
                                                 <span>{petData.size}</span>
                                             </Typography>
                                             <Typography component="p">
-                                                <strong>Peso: </strong>
+                                                <strong>{lang.petInfoCard.labels.peso}: </strong>
                                                 <span>{petData.weight}</span>
                                             </Typography>
                                             <Typography component="p">
-                                                <strong>Raza: </strong>
+                                                <strong>{lang.petInfoCard.labels.raza}: </strong>
                                                 <span>{petData.breed}</span>
                                             </Typography>
                                         </Box>
@@ -274,8 +266,8 @@ const PetInfoCard = (props) => {
                                         },
                                         justifyContent: "center"
                                     }}>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }}>Adopcion</Button>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginLeft: "5px" }} onClick={(event) => { navigate("/adopciones") }}>Volver</Button>
+                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }}>{lang.petInfoCard.buttons.adopcion}</Button>
+                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginLeft: "5px" }} onClick={(event) => { navigate("/adopciones") }}>{lang.petInfoCard.buttons.volver}</Button>
                                     </Box>
                                 </Grid>
                             </Grid>

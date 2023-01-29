@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const filterControlValues = {
-    genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
-    speciesFilter: [{ label: 'Todas las especies', filter: "speciesFilter", index: 0 }, { label: 'Perros', filter: "speciesFilter", index: 1 }, { label: 'Gatos', filter: "speciesFilter", index: 2 }, { label: 'Otros', filter: "speciesFilter", index: 3 }],
-    sizeFilter: [{ label: 'Todos los tamaños', filter: "sizeFilter", index: 0 }, { label: 'Pequeños', filter: "sizeFilter", index: 1 }, { label: 'Medianos', filter: "sizeFilter", index: 2 }, { label: 'Grandes', filter: "sizeFilter", index: 3 }]
-}
+    genreFilter: [{ label:'', langKey: 'ambosGeneros', filter: "genreFilter", index: 0 }, { label:'', langKey: 'machos', filter: "genreFilter", index: 1 }, { label:'', langKey: 'hembras', filter: "genreFilter", index: 2 }],
+    speciesFilter: [{ label:'', langKey: 'todasLasEspecies', filter: "speciesFilter", index: 0 }, { label:'', langKey: 'perros', filter: "speciesFilter", index: 1 }, { label:'', langKey: 'gatos', filter: "speciesFilter", index: 2 }, { label:'', langKey: 'otros', filter: "speciesFilter", index: 3 }],
+    sizeFilter: [{ label:'', langKey: 'todosLosTamaños', filter: "sizeFilter", index: 0 }, { label:'', langKey: 'pequeños', filter: "sizeFilter", index: 1 }, { label:'', langKey: 'medianos', filter: "sizeFilter", index: 2 }, { label:'', langKey: 'grandes', filter: "sizeFilter", index: 3 }]
+  }
 
 const initialState = {
     currentPage: 1,

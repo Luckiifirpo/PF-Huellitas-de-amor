@@ -1,0 +1,809 @@
+{
+    "es": {
+        "home": {
+            "titles": {
+                "meQuieresAdoptar": "Me quieres adoptar?",
+                "quienesSomos": "Quienes somos",
+                "darEnAdopcion": "¿Quieres Dar en Adopcion?",
+                "hazTuDonacion": "haz tu donación",
+                "masInformacion": "más información"
+            },
+            "buttons": {
+                "adoptame": "¡Adoptame!",
+                "verMas": "Ver más",
+                "publicar": "Publicar",
+                "donaAhora": "Dona Ahora!",
+                "contacto": "Contacto"
+            },
+            "paragraphs": {
+                "meQuieresAdoptar": "Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos",
+                "quienesSomos": "Bienvenido! Somos Huellitas De Amor, una aplicación que se dedica a brindar información sobre animales en adopción. Aquí podrás adoptar y poner en adopción a una mascota que necesite un hogar y mucho amor. Contamos con una sección donde podrás hacer donaciones y recibir información. Súmate a nuestra comunidad a través de nuestras redes sociales!",
+                "darEnAdopcion": "Puedes dar en adopcion una mascota ahora mismo, llenando el siguiente formulario",
+                "hazTuDonacion": "Su generosa contribución puede hacer una diferencia en la vida de los animales que están en necesidad y ayudarlos a encontrar sus hogares para siempre. Al donar, te unirás a otros amantes de los animales que comparten la misma misión de proporcionar un refugio seguro para todas las mascotas.",
+                "masInformacion": "Envíanos un mensaje con todas tus dudas e inquietudes, estamos para ayudarte."
+            }
+        },
+        "quienesSomos": {
+            "titles": {
+                "quienesSomos": "Quienes Somos"
+            },
+            "paragraphs": {
+                "quienesSomos": "Somos estudiantes de Henry cursando la etapa final del bootcamp donde tenemos que desarrollar una aplicación en grupo cumpliendo diferentes objetivos propuestos por el bootcamp. Esta aplicación web tiene como objetivo conectar personas con posibles mascotas en adopción, además de brindar la posibilidad de hacer donaciones para mejorar la calidad de vida de las mascotas."
+            }
+        },
+        "adoptions": {
+            "titles": {
+                "adopciones": "Adopciones",
+                "ordenarPor": "Ordenar Por",
+                "filtrarPor": "Filtrar Por"
+            },
+            "filtros": {
+                "inputs": {
+                    "genero": "Genero",
+                    "especie": "Especie",
+                    "tamaño": "Tamaño"
+                },
+                "genero": {
+                    "ambosGeneros": "Ambos Generos",
+                    "machos": "Machos",
+                    "hembras": "Hembras"
+                },
+                "especies": {
+                    "todasLasEspecies": "Todas Las Especies",
+                    "perros": "Perros",
+                    "gatos": "Gatos",
+                    "otros": "Otros"
+                },
+                "tamaños": {
+                    "todosLosTamaños": "Todos Los Tamaños",
+                    "pequeños": "Pequeños",
+                    "medianos": "Medianos",
+                    "grandes": "Grandes"
+                },
+                "edad": "Edad",
+                "peso": "Peso",
+                "reiniciar": "Reiniciar"
+            },
+            "ordenamientos": {
+                "tamaño": "Tamaño",
+                "edad": "Edad",
+                "peso": "Peso",
+                "ascendente": "Ascendente",
+                "descendente": "Descendente",
+                "reiniciar": "Reiniciar"
+            },
+            "listaVacia": "Ninguna entrada coincide con los filtros seleccionados",
+            "buttons": {
+                "publicar": "Publicar"
+            }
+        },
+        "donaciones": {
+            "titles": {
+                "apoyaNuestraCausa": "si deseas apoyar nuestra causa",
+                "donacionesEInsumos": "donaciones de insumos"
+            },
+            "buttons": {
+                "contacto": "contacto"
+            },
+            "paragraphs": {
+                "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros."
+            },
+            "lists": {
+                "medicamentos": "medicamentos",
+                "alimentos": "alimentos",
+                "higiene": "higiene",
+                "otros": "otros"
+            }
+        },
+        "contacto": {
+            "titles": {
+                "contactanos": "Contáctanos"
+            },
+            "inputs": {
+                "nombre": "Nombre",
+                "correo": "Correo",
+                "descripcion": "Descripción"
+            },
+            "buttons": {
+                "enviar": "Enviar"
+            }
+        },
+        "favoritos": {
+            "titles": {
+                "mascotasFavoritas": "Tus Mascotas Favoritas"
+            },
+            "listaVacia": "No Hay Favoritos"
+        },
+        "userInfoEditor": {
+            "inputs": {
+                "nombre": "Nombre",
+                "apellido": "Apellido",
+                "edad": "Edad",
+                "direccion": "Direccion",
+                "correo": "Correo",
+                "empleado": "Empleado",
+                "ocupacion": "Ocupacion"
+            },
+            "fotoPerfil": {
+                "fotoPerfil": "Foto de perfil",
+                "sinFoto": "Ninguna foto seleccionada"
+            },
+            "buttons": {
+                "actualizarDatos": "Actualizar Datos"
+            }
+        },
+        "darEnAdopcion": {
+            "titles": {
+                "darEnAdopcion": "Dar en adopcion"
+            },
+            "inputs": {
+                "nombre": "Nombre",
+                "tamaño": "Tamaño",
+                "especie": "Especie",
+                "genero": "Genero",
+                "edad": "Edad",
+                "raza": "Raza",
+                "peso": "Peso",
+                "descripcion": "Descripcion",
+                "rango": "Rango",
+                "rangoTiempo": {
+                    "años": "Años",
+                    "meses": "Meses"
+                }
+            },
+            "values": {
+                "especies": {
+                    "felino": "Felino",
+                    "canino": "Canino",
+                    "pez": "Pez",
+                    "roedor": "Roedor",
+                    "equino": "Equino",
+                    "bovino": "Bovino",
+                    "ovino": "Ovino",
+                    "caprino": "Caprino",
+                    "otro": "Otro"
+                },
+                "tamaños": {
+                    "pequeño": "Pequeño",
+                    "mediano": "Mediano",
+                    "grande": "Grande"
+                },
+                "generos": {
+                    "macho": "Macho",
+                    "hembra": "Hembra"
+                },
+                "rangoTiempo": {
+                    "meses": "Meses",
+                    "años": "Años"
+                }
+            },
+            "buttons": {
+                "publicar": "Publicar"
+            }
+        },
+        "iniciarSesion": {
+            "titles": {
+                "bienvenido": "Bienvenido"
+            },
+            "inputs": {
+                "correo": "Correo",
+                "contraseña": "Contraseña"
+            },
+            "labels": {
+                "olvidoContraseña": "¿Olvidaste tu contraseña?",
+                "noRegistrado": "¿No estas registrado?",
+                "registrate": "Registrate"
+            },
+            "buttons": {
+                "continuar": "Continuar",
+                "continuarConGitHub": "Continuar con GitHub",
+                "continuarConGoogle": "Continuar con Google"
+            }
+        },
+        "registrarse": {
+            "titles": {
+                "registrate": "Registrate"
+            },
+            "inputs": {
+                "nombre": "Nombre",
+                "apellido": "Apellido",
+                "edad": "Edad",
+                "direccion": "Direccion",
+                "correo": "Correo",
+                "tienesTrabajo": "¿Tienes un trabajo?",
+                "contraseña": "Contraseña",
+                "si": "Si",
+                "no": "No"
+            },
+            "buttons": {
+                "crearCuenta": "Crear cuenta"
+            }
+        },
+        "navbar": {
+            "links": {
+                "inicio": "Inicio",
+                "quienesSomos": "Quienes Somos",
+                "adopciones": "Adopciones",
+                "donaciones": "Donaciones",
+                "contacto": "Contacto",
+                "idioma": "Idioma",
+                "iniciarSesion": "Iniciar Sesion"
+            }
+        },
+        "userMenu": {
+            "labels": {
+                "editarDatos": "Editar Datos",
+                "cerrarSesion": "Cerrar Sesion"
+            }
+        },
+        "leftSideUserBar": {
+            "labels": {
+                "configuracion": "Configuracion",
+                "favoritos": "Favoritos"
+            }
+        },
+        "petCard": {
+            "labels": {
+                "edad": "Edad",
+                "genero": "Genero",
+                "months": "meses",
+                "years": "años",
+                "male": "Macho",
+                "female": "Hembra"
+            }
+        },
+        "petInfoCard": {
+            "labels": {
+                "especie": "Especie",
+                "genero": "Genero",
+                "edad": "Edad",
+                "tamaño": "Tamaño",
+                "peso": "Peso",
+                "raza": "Raza",
+                "publicado": "Publicado"
+            },
+            "buttons": {
+                "adopcion": "Adoptar",
+                "volver": "Volver"
+            }
+        }
+    },
+    "en": {
+        "home": {
+            "titles": {
+                "meQuieresAdoptar": "Do you want to adopt me?",
+                "quienesSomos": "About us",
+                "darEnAdopcion": "Do you want to give in adoption?",
+                "hazTuDonacion": "make your donation",
+                "masInformacion": "more information"
+            },
+            "buttons": {
+                "adoptame": "Adopt me!",
+                "verMas": "see more",
+                "publicar": "Post",
+                "donaAhora": "Donate Now!",
+                "contacto": "Contact"
+            },
+            "paragraphs": {
+                "meQuieresAdoptar": "Discover our rescued pets and adopt or donate. ",
+                "quienesSomos": "Welcome! We are Huellitas De Amor, an application that is dedicated to providing information about animals for adoption. Here you can adopt and put up for adoption a pet that needs a home and a lot of love. We have a section where you can make donations and receive information. Join our community through our social networks!",
+                "darEnAdopcion": "You can give up a pet for adoption right now, by filling out the following form",
+                "hazTuDonacion": "Your generous contribution can make a difference in the lives of animals in need and help them find their forever homes. ",
+                "masInformacion": "Send us a message with all your doubts and concerns, we are here to help you."
+            }
+        },
+        "quienesSomos": {
+            "titles": {
+                "quienesSomos": "About us"
+            },
+            "paragraphs": {
+                "quienesSomos": "We are students of Henry studying the final stage of the bootcamp where we have to develop a group application fulfilling different objectives proposed by the bootcamp. This web application aims to connect people with possible pets for adoption, in addition to providing the possibility of making donations to improve the quality of life of pets."
+            }
+        },
+        "adoptions": {
+            "titles": {
+                "adopciones": "Adoptions",
+                "ordenarPor": "Sort by",
+                "filtrarPor": "Filter by"
+            },
+            "filtros": {
+                "inputs": {
+                    "genero": "Gender",
+                    "especie": "Species",
+                    "tamaño": "Size"
+                },
+                "genero": {
+                    "ambosGeneros": "Both Genres",
+                    "machos": "Males",
+                    "hembras": "Females"
+                },
+                "especies": {
+                    "todasLasEspecies": "All Species",
+                    "perros": "Dogs",
+                    "gatos": "Cats",
+                    "otros": "Others"
+                },
+                "tamaños": {
+                    "todosLosTamaños": "All Sizes",
+                    "pequeños": "Small",
+                    "medianos": "Medium",
+                    "grandes": "Big"
+                },
+                "edad": "Age",
+                "peso": "Weight",
+                "reiniciar": "Restart"
+            },
+            "ordenamientos": {
+                "tamaño": "Size",
+                "edad": "Age",
+                "peso": "Weight",
+                "ascendente": "Ascending",
+                "descendente": "Descending",
+                "reiniciar": "Restart"
+            },
+            "listaVacia": "No entries match the selected filters",
+            "buttons": {
+                "publicar": "Post"
+            }
+        },
+        "donaciones": {
+            "titles": {
+                "apoyaNuestraCausa": "if you want to support our cause",
+                "donacionesEInsumos": "donation of supplies"
+            },
+            "buttons": {
+                "contacto": "Contact Us"
+            },
+            "paragraphs": {
+                "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us."
+            },
+            "lists": {
+                "medicamentos": "medicines",
+                "alimentos": "foods",
+                "higiene": "hygiene",
+                "otros": "others"
+            }
+        },
+        "contacto": {
+            "titles": {
+                "contactanos": "contact us"
+            },
+            "inputs": {
+                "nombre": "Name",
+                "correo": "Email",
+                "descripcion": "Description"
+            },
+            "buttons": {
+                "enviar": "Send"
+            }
+        },
+        "favoritos": {
+            "titles": {
+                "mascotasFavoritas": "Your Favorite Pets"
+            },
+            "listaVacia": "No Favorites"
+        },
+        "userInfoEditor": {
+            "inputs": {
+                "nombre": "Name",
+                "apellido": "Surname",
+                "edad": "Age",
+                "direccion": "Direction",
+                "correo": "Email",
+                "empleado": "Employee",
+                "ocupacion": "Occupation"
+            },
+            "fotoPerfil": {
+                "fotoPerfil": "Profile picture",
+                "sinFoto": "no photo selected"
+            },
+            "buttons": {
+                "actualizarDatos": "Update data"
+            }
+        },
+        "darEnAdopcion": {
+            "titles": {
+                "darEnAdopcion": "Give up for adoption"
+            },
+            "inputs": {
+                "nombre": "Name",
+                "tamaño": "Size",
+                "especie": "Species",
+                "genero": "Gender",
+                "edad": "Age",
+                "raza": "Race",
+                "peso": "Weight",
+                "descripcion": "Description",
+                "rango": "Range",
+                "rangoTiempo": {
+                    "años": "Years",
+                    "meses": "Months"
+                }
+            },
+            "values": {
+                "especies": {
+                    "felino": "Feline",
+                    "canino": "Canine",
+                    "pez": "Fish",
+                    "roedor": "Rodent",
+                    "equino": "Equine",
+                    "bovino": "Bovine",
+                    "ovino": "Sheep",
+                    "caprino": "Goat",
+                    "otro": "Other"
+                },
+                "tamaños": {
+                    "prqueño": "Small",
+                    "mediano": "Medium",
+                    "big": "Big"
+                },
+                "generos": {
+                    "macho": "Male",
+                    "hembra": "Female"
+                },
+                "rangoTiempo": {
+                    "meses": "Months",
+                    "años": "Years"
+                }
+            },
+            "buttons": {
+                "publicar": "Post"
+            }
+        },
+        "iniciarSesion": {
+            "titles": {
+                "bienvenido": "Welcome"
+            },
+            "inputs": {
+                "correo": "Email",
+                "contraseña": "Password"
+            },
+            "labels": {
+                "olvidoContraseña": "Did you forget your password?",
+                "noRegistrado": "Are you not registered?",
+                "registrate": "Sign up"
+            },
+            "buttons": {
+                "continuar": "Continue",
+                "continuarConGitHub": "Continue with GitHub",
+                "continuarConGoogle": "Continue with Google"
+            }
+        },
+        "registrarse": {
+            "titles": {
+                "registrate": "Sign up"
+            },
+            "inputs": {
+                "nombre": "Name",
+                "apellido": "Surname",
+                "edad": "Age",
+                "direccion": "Direction",
+                "correo": "Email",
+                "tienesTrabajo": "You have a job?",
+                "contraseña": "Password",
+                "si": "Yes",
+                "no": "Not"
+            },
+            "buttons": {
+                "crearCuenta": "Create Account"
+            }
+        },
+        "navbar": {
+            "links": {
+                "inicio": "Home",
+                "quienesSomos": "About us",
+                "adopciones": "adoptions",
+                "donaciones": "donations",
+                "contacto": "Contact",
+                "idioma": "Idiom",
+                "iniciarSesion": "Log in"
+            }
+        },
+        "userMenu": {
+            "labels": {
+                "editarDatos": "Edit Data",
+                "cerrarSesion": "Sign Off"
+            }
+        },
+        "leftSideUserBar": {
+            "labels": {
+                "configuracion": "Setting",
+                "favoritos": "Favorites"
+            }
+        },
+        "petCard": {
+            "labels": {
+                "edad": "Age",
+                "gender": "Gender",
+                "months": "months",
+                "years": "years",
+                "male": "Male",
+                "female": "Female"
+            }
+        },
+        "petInfoCard": {
+            "labels": {
+                "especie": "species",
+                "genero": "Genre",
+                "edad": "Age",
+                "tamaño": "Size",
+                "peso": "Weight",
+                "raza": "Race",
+                "publicado": "Posted"
+            },
+            "buttons": {
+                "adopcion": "Adopt",
+                "volver": "Return"
+            }
+        }
+    },
+    "pt": {
+        "home": {
+            "titles": {
+                "meQuieresAdoptar": "Você quer me adotar?",
+                "quienesSomos": "Quem somos",
+                "darEnAdopcion": "Quer dar em adoção?",
+                "hazTuDonacion": "faça sua doação",
+                "masInformacion": "mais informação"
+            },
+            "buttons": {
+                "adoptame": "Adote-me!",
+                "verMas": "Ver mais",
+                "publicar": "Postar",
+                "donaAhora": "DOE agora!",
+                "contacto": "Contato"
+            },
+            "paragraphs": {
+                "meQuieresAdoptar": "Descubra nossos animais de estimação resgatados e adote ou doe. ",
+                "quienesSomos": "Bem-vindo! Somos o Huellitas De Amor, um aplicativo que se dedica a fornecer informações sobre animais para adoção. Aqui você pode adotar e colocar para adoção um bichinho que precisa de um lar e muito amor. Temos uma seção onde você pode fazer doações e receber informações. Junte-se à nossa comunidade através das nossas redes sociais!",
+                "darEnAdopcion": "Pode entregar um animal de estimação para adoção agora mesmo, preenchendo o seguinte formulário",
+                "hazTuDonacion": "Sua generosa contribuição pode fazer a diferença na vida de animais necessitados e ajudá-los a encontrar seus lares para sempre. ",
+                "masInformacion": "Envie-nos uma mensagem com todas as suas dúvidas e preocupações, estamos aqui para ajudá-lo."
+            }
+        },
+        "quienesSomos": {
+            "titles": {
+                "quienesSomos": "Quem somos"
+            },
+            "paragraphs": {
+                "quienesSomos": "Somos alunos do Henry a estudar a fase final do bootcamp onde temos de desenvolver uma aplicação em grupo cumprindo diferentes objetivos propostos pelo bootcamp. Esta aplicação web visa conectar pessoas com possíveis animais de estimação para adoção, além de proporcionar a possibilidade de fazer doações para melhorar a qualidade de vida dos animais de estimação."
+            }
+        },
+        "adoptions": {
+            "titles": {
+                "adopciones": "Adoções",
+                "ordenarPor": "Organizar Por",
+                "filtrarPor": "Filtrar Por"
+            },
+            "filtros": {
+                "inputs": {
+                    "genero": "Gênero",
+                    "especie": "Espécie",
+                    "tamaño": "Tamanho"
+                },
+                "genero": {
+                    "ambosGeneros": "Ambos Os Gêneros",
+                    "machos": "Machos",
+                    "hembras": "Fêmeas"
+                },
+                "especies": {
+                    "todasLasEspecies": "todas As Espécies",
+                    "perros": "Cães",
+                    "gatos": "Gatos",
+                    "otros": "Outras"
+                },
+                "tamaños": {
+                    "todosLosTamaños": "Todos Os Tamanhos",
+                    "pequeños": "Pequeno",
+                    "medianos": "Médio",
+                    "grandes": "Grande"
+                },
+                "edad": "Idade",
+                "peso": "Peso",
+                "reiniciar": "Reiniciar"
+            },
+            "ordenamientos": {
+                "tamaño": "Tamanho",
+                "edad": "Idade",
+                "peso": "Peso",
+                "ascendente": "Ascendente",
+                "descendente": "Descendente",
+                "reiniciar": "Reiniciar"
+            },
+            "listaVacia": "Nenhuma entrada corresponde aos filtros selecionados",
+            "buttons": {
+                "publicar": "Postar"
+            }
+        },
+        "donaciones": {
+            "titles": {
+                "apoyaNuestraCausa": "se você quer apoiar nossa causa",
+                "donacionesEInsumos": "Doação de insumos"
+            },
+            "buttons": {
+                "contacto": "Contate-Nos"
+            },
+            "paragraphs": {
+                "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco."
+            },
+            "lists": {
+                "medicamentos": "medicação",
+                "alimentos": "alimentos",
+                "higiene": "higiene",
+                "otros": "outras"
+            }
+        },
+        "contacto": {
+            "titles": {
+                "contactanos": "Contate-Nos"
+            },
+            "inputs": {
+                "nombre": "Nome",
+                "correo": "Correio Eletrônico",
+                "descripcion": "Descrição"
+            },
+            "buttons": {
+                "enviar": "Mandar"
+            }
+        },
+        "favoritos": {
+            "titles": {
+                "mascotasFavoritas": "Seus animais de estimação favoritos"
+            },
+            "listaVacia": "Sem Favoritos"
+        },
+        "userInfoEditor": {
+            "inputs": {
+                "nombre": "Nome",
+                "apellido": "Sobrenome",
+                "edad": "Idade",
+                "direccion": "Direção",
+                "correo": "Correio Eletrônico",
+                "empleado": "Empregado",
+                "ocupacion": "Ocupação"
+            },
+            "fotoPerfil": {
+                "fotoPerfil": "Imagem de perfil",
+                "sinFoto": "nenhuma foto selecionada"
+            },
+            "buttons": {
+                "actualizarDatos": "Atualizar dados"
+            }
+        },
+        "darEnAdopcion": {
+            "titles": {
+                "darEnAdopcion": "entregar para adoção"
+            },
+            "inputs": {
+                "nombre": "Nome",
+                "tamaño": "Tamanho",
+                "especie": "Espécies",
+                "genero": "Gênero",
+                "edad": "Idade",
+                "raza": "Raça",
+                "peso": "Peso",
+                "descripcion": "Descrição",
+                "rango": "Alcance",
+                "rangoTiempo": {
+                    "años": "Anos",
+                    "meses": "Meses"
+                }
+            },
+            "values": {
+                "especies": {
+                    "felino": "Felino",
+                    "canino": "Canino",
+                    "pez": "Peixe",
+                    "roedor": "Roedor",
+                    "equino": "Equino",
+                    "bovino": "Bovino",
+                    "ovino": "Ovelha",
+                    "caprino": "Cabra",
+                    "otro": "Outro"
+                },
+                "tamaños": {
+                    "pequeño": "Pequeno",
+                    "mediano": "Médio",
+                    "grande": "Grande"
+                },
+                "generos": {
+                    "macho": "Macho",
+                    "hembra": "Fêmea"
+                },
+                "rangoTiempo": {
+                    "meses": "Meses",
+                    "años": "Anos"
+                }
+            },
+            "buttons": {
+                "publicar": "Postar"
+            }
+        },
+        "iniciarSesion": {
+            "titles": {
+                "bienvenido": "Bem-vindo"
+            },
+            "inputs": {
+                "correo": "Correspondência",
+                "contraseña": "Senha"
+            },
+            "labels": {
+                "olvidoContraseña": "Você esqueceu sua senha?",
+                "noRegistrado": "Você não é cadastrado?",
+                "registrate": "Cadastre-se"
+            },
+            "buttons": {
+                "continuar": "Prosseguir",
+                "continuarConGitHub": "Continuar com o GitHub",
+                "continuarConGoogle": "Continuar com o Google"
+            }
+        },
+        "registrarse": {
+            "titles": {
+                "registrate": "Cadastre-se"
+            },
+            "inputs": {
+                "nombre": "Nome",
+                "apellido": "Sobrenome",
+                "edad": "Idade",
+                "direccion": "Direção",
+                "correo": "Correio Eletrônico",
+                "tienesTrabajo": "Você tem um emprego?",
+                "contraseña": "Senha",
+                "si": "Sim",
+                "no": "Não"
+            },
+            "buttons": {
+                "crearCuenta": "Criar uma conta"
+            }
+        },
+        "navbar": {
+            "links": {
+                "inicio": "Casa",
+                "quienesSomos": "Quem somos",
+                "adopciones": "adoções",
+                "donaciones": "doações",
+                "contacto": "Contato",
+                "idioma": "Idioma",
+                "iniciarSesion": "Iniciar sessão"
+            }
+        },
+        "userMenu": {
+            "labels": {
+                "editarDatos": "Editar dados",
+                "cerrarSesion": "Fechar Sessão"
+            }
+        },
+        "leftSideUserBar": {
+            "labels": {
+                "configuracion": "Configuração",
+                "favoritos": "Favoritos"
+            }
+        },
+        "petCard": {
+            "labels": {
+                "edad": "Idade",
+                "genero": "gênero",
+                "months": "meses",
+                "years": "anos",
+                "male": "Macho",
+                "female": "Fêmea"
+            }
+        },
+        "petInfoCard": {
+            "labels": {
+                "especie": "espécie",
+                "genero": "Gênero",
+                "edad": "Idade",
+                "tamaño": "Tamanho",
+                "peso": "Peso",
+                "raza": "Raça",
+                "publicado": "Publicado"
+            },
+            "buttons": {
+                "adopcion": "Adotar",
+                "volver": "voltar"
+            }
+        }
+    }
+}

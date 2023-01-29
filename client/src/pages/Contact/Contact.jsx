@@ -21,9 +21,10 @@ import {
   Paper,
 } from "@mui/material";
 import { useState } from "react";
-import {useDispatch } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import { postContactUs } from "../../redux/slices/contactUsSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const validationSchema = yup.object({
@@ -42,6 +43,7 @@ const Contact = () => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const lang = useSelector((state) => state.lang.currentLangData);
   // const currentUser = useSelector((state) => state.users.currentUser);
 
   const formik = useFormik({
@@ -70,6 +72,9 @@ const Contact = () => {
   };
   /**********************************************************/
 
+  useEffect(() => {
+
+  }, [lang]);
  
   return (
     <>
@@ -101,7 +106,7 @@ const Contact = () => {
                     marginTop: "200px",
                   }}
                 >
-                  Contáctanos
+                  {lang.contacto.titles.contactanos}
                 </Typography>
               </Grid>
 
@@ -117,7 +122,7 @@ const Contact = () => {
               >
                 <TextField
                   id="name"
-                  label="Nombre:"
+                  label={lang.contacto.inputs.nombre + ":"}
                   variant="standard"
                   name="name"
                   value={formik.values.name}
@@ -126,7 +131,7 @@ const Contact = () => {
                   helperText={formik.touched.name && formik.errors.name}
                 />
                 <TextField
-                  label="Correo:"
+                  label={lang.contacto.inputs.correo + ":"}
                   variant="standard"
                   id="email"
                   name="email"
@@ -136,7 +141,7 @@ const Contact = () => {
                   helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
-                  label="Descripción:"
+                  label={lang.contacto.inputs.descripcion + ":"}
                   variant="standard"
                   id="description"
                   name="description"
@@ -161,7 +166,7 @@ const Contact = () => {
                     marginTop: "50px",
                   }}
                 >
-                  Enviar
+                  {lang.contacto.buttons.enviar}
                 </Button>
               </Box>
               {/* </Grid> */}

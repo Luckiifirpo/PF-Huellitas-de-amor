@@ -7,6 +7,8 @@ const usersRouter = require('./routers/routerUsuario');
 const authRouter = require("./routers/routerAuth");
 const contactUsRouter = require("./routers/contactUsRouter")
 const adminRouter = require ("./routers/adminRouter")
+const configPaymentRouter = require ("./routers/configPaymentRouter")
+
 
 const router = Router();
 
@@ -17,5 +19,6 @@ router.use('/users', usersRouter);
 router.use("/auth", authRouter);
 router.use("/contactus",contactUsRouter)
 router.use("/admin",adminRouter)
+router.use("/payment",configPaymentRouter)
 
 module.exports = router;

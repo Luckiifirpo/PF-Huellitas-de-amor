@@ -43,7 +43,7 @@ const ErrorDialog = (props) => {
                     detailValue = errorDetail[prop]
                 }
 
-                return <li>
+                return <li key={key}>
                     <strong>{detailName}: </strong>
                     <span>{detailValue}</span>
                 </li>
