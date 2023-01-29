@@ -22,6 +22,7 @@ const Login = (props) => {
     firebaseAuth.languageCode = 'es';
     const toGoAfterLogin = useSelector((state) => state.navigation.toGoAfterLogin);
     const currentUser = useSelector((state) => state.users.currentUser);
+    const lang = useSelector((state) => state.lang.currentLangData);
 
     const googleAuthProvider = new GoogleAuthProvider();
     const githubAuthProvider = new GithubAuthProvider();
@@ -86,7 +87,7 @@ const Login = (props) => {
                 navigate("/");
             }
         }
-    }, [toGoAfterLogin, currentUser]);
+    }, [toGoAfterLogin, currentUser, lang]);
 
     return (
         <div className={style.login_div}>
@@ -106,23 +107,23 @@ const Login = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Typography component="h1" sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                                        Bienvenido
+                                        {lang.iniciarSesion.titles.bienvenido}
                                     </Typography>
                                 </Grid>
                             </Grid>
                             <form onSubmit={LoginWithEmailAndPassword}>
                                 <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
                                     <Grid item>
-                                        <TextField type="email" size="small" id="email-input" label="Email" variant="standard" className={style.input_width} />
+                                        <TextField type="email" size="small" id="email-input" label={lang.iniciarSesion.inputs.correo} variant="standard" className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <TextField size="small" id="password-input" type="password" label="Password" variant="standard" className={style.input_width} />
+                                        <TextField size="small" id="password-input" type="password" label={lang.iniciarSesion.inputs.contraseña} variant="standard" className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <Link to="/restore_password" className={style.link}>¿Olvidaste tu contraseña?</Link>
+                                        <Link to="/restore_password" className={style.link}>{lang.iniciarSesion.labels.olvidoContraseña}</Link>
                                     </Grid>
                                     <Grid item>
-                                        <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>Continuar</Button>
+                                        <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
                                     </Grid>
                                 </Grid>
                             </form>
@@ -133,10 +134,10 @@ const Login = (props) => {
                                 <Grid item>
                                     <ButtonGroup orientation="vertical">
                                         <GithubLoginButton iconSize="16px" onClick={loginWithGithub} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
-                                            <span>Continuar con GitHub</span>
+                                            <span>{lang.iniciarSesion.buttons.continuarConGitHub}</span>
                                         </GithubLoginButton>
                                         <GoogleLoginButton iconSize="16px" onClick={loginWithGoogle} color="secondary" variant="outlined" className={style.input_width + " " + style.auth_button}>
-                                            <span>Continuar con Google</span>
+                                            <span>{lang.iniciarSesion.buttons.continuarConGoogle}</span>
                                         </GoogleLoginButton>
                                     </ButtonGroup>
                                 </Grid>
@@ -144,8 +145,8 @@ const Login = (props) => {
                                     <Divider className={style.divider} />
                                 </Grid>
                                 <Grid item display={"flex"} justifyContent={"space-around"} alignItems={"center"} className={style.input_width}>
-                                    <Typography component="p" sx={{ margin: '10px 0px' }}>¿No estas registrado?</Typography>
-                                    <Link to={"/registro-usuario"} className={style.link}>Registrate</Link>
+                                    <Typography component="p" sx={{ margin: '10px 0px' }}>{lang.iniciarSesion.labels.noRegistrado}</Typography>
+                                    <Link to={"/registro-usuario"} className={style.link}>{lang.iniciarSesion.labels.registrate}</Link>
                                 </Grid>
                             </Grid>
                         </Paper>

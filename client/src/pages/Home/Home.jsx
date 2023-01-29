@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -14,7 +14,7 @@ import banner3 from '../../assets/image/banner3.png'
 import banner4 from '../../assets/image/banner4.png'
 import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
@@ -22,6 +22,7 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
 import Toolbar from '@mui/material/Toolbar';
+import { useSelector } from 'react-redux'
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -51,7 +52,7 @@ function ScrollTop(props) {
       <Box
         onClick={handleClick}
         role="presentation"
-        sx={{position: 'fixed', bottom: 16, right: 16}}
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
       >
         {children}
       </Box>
@@ -70,41 +71,48 @@ ScrollTop.propTypes = {
 
 const Home = () => {
   const navigate = useNavigate()
-  const  handlerAdopciones = (e) =>{
-  navigate("/adopciones")
+  const lang = useSelector((state) => state.lang.currentLangData);
+
+
+  const handlerAdopciones = (e) => {
+    navigate("/adopciones")
   }
 
-  const  handlerDonar = (e) =>{
-  navigate("/donaciones")
+  const handlerDonar = (e) => {
+    navigate("/donaciones")
   }
 
-  const  handlerContacto = (e) =>{
-  navigate("/contacto")
+  const handlerContacto = (e) => {
+    navigate("/contacto")
   }
-  const  handlerQuienesSomos = (e) =>{
-  navigate("/quienes-somos")
+  const handlerQuienesSomos = (e) => {
+    navigate("/quienes-somos")
   }
 
   const handlerPostAdoption = (e) => {
     navigate("/dar-en-adopcion")
   }
 
+  useEffect(() => {
+
+  }, [lang]);
+
   return (
     <>
-     <Toolbar id="back-to-top-anchor" />
+      <Toolbar id="back-to-top-anchor" />
       <Container >
         <Grid container spacing={2} alignItems="center" marginTop={'50px'}>
           <Grid item md={8}>
             <img src={perritoHome} alt='perrito home' />
           </Grid>
           <Grid item md={4}>
-            <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-              Me quieres adoptar?
+            <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
+              {lang.home.titles.meQuieresAdoptar}
             </Typography>
-            <Typography component="p" sx={{margin:'10px 0px'}}>
-              Descubre nuestras mascotas rescatadas y adopta o dona. Ayuda a expandirnos
+            <Typography component="p" sx={{ margin: '10px 0px' }}>
+              {lang.home.paragraphs.meQuieresAdoptar}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerAdopciones(e)}>¡Adoptame!</Button>
+            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerAdopciones(e)}>{lang.home.buttons.adoptame}</Button>
           </Grid>
         </Grid>
       </Container>
@@ -112,22 +120,22 @@ const Home = () => {
       <Box className={style['background-fancy']}>
         <Container >
           <Grid container spacing={2} alignItems="center">
-            <Grid item md={6} sx={{color:'#fff'}}>
-              <Typography component="h1" variant="h2" sx={{color:'#fff', textTransform:'uppercase', fontWeight:'700'}}>
-                Quienes somos
+            <Grid item md={6} sx={{ color: '#fff' }}>
+              <Typography component="h1" variant="h2" sx={{ color: '#fff', textTransform: 'uppercase', fontWeight: '700' }}>
+                {lang.home.titles.quienesSomos}
               </Typography>
-              <Typography component="p" sx={{ margin:'15px 0px'}}>
-              Bienvenido! Somos Huellitas de amor una aplicación que se dedica a brindar información sobre animales en adopción. Aquí podrás adoptar y poner en adopción a una mascota que necesite un hogar y mucho amor. Contamos con una sección donde podrás hacer donaciones y recibir información. Súmate a nuestra comunidad a través de nuestras redes sociales!   
+              <Typography component="p" sx={{ margin: '15px 0px' }}>
+                {lang.home.paragraphs.quienesSomos}
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px', marginBottom:'20px'}} onClick={(e) => handlerQuienesSomos(e)}>Ver más</Button>
-              <Box sx={{display:'flex', gap:'10px', alignItems:'center'}}>
-                  <FacebookIcon/>
-                  <InstagramIcon/>
-                  <TwitterIcon/>
-                  <WhatsAppIcon/>
-                  <Typography component='span'>
-                    @huellitasdeamor
-                  </Typography>
+              <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginBottom: '20px' }} onClick={(e) => handlerQuienesSomos(e)}>{lang.home.buttons.verMas}</Button>
+              <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <FacebookIcon />
+                <InstagramIcon />
+                <TwitterIcon />
+                <WhatsAppIcon />
+                <Typography component='span'>
+                  @huellitasdeamor
+                </Typography>
               </Box>
             </Grid>
             <Grid item md={6}>
@@ -136,20 +144,20 @@ const Home = () => {
           </Grid>
         </Container>
       </Box>
-    
+
       <Container >
         <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
             <img src={banner3} alt='banner home' />
           </Grid>
           <Grid item md={6}>
-          <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-              ¿Quieres Dar en Adopcion?
+            <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
+              {lang.home.titles.darEnAdopcion}
             </Typography>
-            <Typography component="p" sx={{margin:'10px 0px'}}>
-            Puedes dar en adopcion una mascota ahora mismo, llenando el siguiente formulario
+            <Typography component="p" sx={{ margin: '10px 0px' }}>
+              {lang.home.paragraphs.darEnAdopcion}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
+            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerPostAdoption(e)}>{lang.home.buttons.publicar}</Button>
           </Grid>
         </Grid>
       </Container>
@@ -157,13 +165,13 @@ const Home = () => {
       <Container>
         <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
-            <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-              haz tu donación
+            <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
+              {lang.home.titles.hazTuDonacion}
             </Typography>
-            <Typography component="p" sx={{margin:'10px 0px'}}>
-            Su generosa contribución puede hacer una diferencia en la vida de los animales que están en necesidad y ayudarlos a encontrar sus hogares para siempre. Al donar, te unirás a otros amantes de los animales que comparten la misma misión de proporcionar un refugio seguro para todas las mascotas.
+            <Typography component="p" sx={{ margin: '10px 0px' }}>
+              {lang.home.paragraphs.hazTuDonacion}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerDonar(e)}>DONA AHORA!</Button>
+            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerDonar(e)}>{lang.home.buttons.donaAhora}</Button>
           </Grid>
           <Grid item md={6}>
             <img src={banner4} alt='banner home' className={style.bannerContent} />
@@ -173,33 +181,33 @@ const Home = () => {
       <Box>
         <Container>
           <Grid container marginTop={'80px'}>
-          
-            <Grid item md={6} sx={{marginBottom:'-10px'}}>
+
+            <Grid item md={6} sx={{ marginBottom: '-10px' }}>
             </Grid>
 
-            <Grid item md={6} sx={{marginTop:'20px'}}>
-              <Typography component="h1" variant="h2" sx={{color:'#FF3041', textTransform:'uppercase', fontWeight:'700'}}>
-              más información
+            <Grid item md={6} sx={{ marginTop: '20px' }}>
+              <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
+                {lang.home.titles.masInformacion}
               </Typography>
-              <Typography component="p" sx={{margin:'10px 0px'}}>
-              Envíanos un mensaje con todas tus dudas e inquietudes, estamos para ayudarte.
+              <Typography component="p" sx={{ margin: '10px 0px' }}>
+                {lang.home.paragraphs.masInformacion}
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{borderRadius:'20px'}} onClick={(e) => handlerContacto(e)}>contacto</Button>
+              <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerContacto(e)}>{lang.home.buttons.contacto}</Button>
             </Grid>
-            <Grid item md={12} sx={{marginBottom:'-10px'}}>
-              <img src={banner5} alt='fondo perro' className={style.imageInfo}/>
+            <Grid item md={12} sx={{ marginBottom: '-10px' }}>
+              <img src={banner5} alt='fondo perro' className={style.imageInfo} />
             </Grid>
-            
+
           </Grid>
 
         </Container>
 
 
         <ScrollTop>
-        <Fab size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon sx={{color:'#FF3041'}} />
-        </Fab>
-      </ScrollTop>
+          <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon sx={{ color: '#FF3041' }} />
+          </Fab>
+        </ScrollTop>
       </Box>
     </>
   )

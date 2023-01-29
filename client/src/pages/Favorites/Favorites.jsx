@@ -9,23 +9,25 @@ import LeftSideUserCard from '../../components/LeftSideUserCard/LeftSideUserCard
 
 const Favorites = () => {
     const dispatch = useDispatch()
-    const petsData = useSelector(state => state.adoptions.favoritesPets)
+    const petsData = useSelector(state => state.adoptions.favoritesPets);
+    const lang = useSelector(state => state.lang.currentLangData);
+
     useEffect(() => {
         dispatch(getFavorites())
-    }, [])
+    }, [lang])
 
     return (
         <>
             <Container >
                 <Typography component="h1" variant="h3" style={{ marginTop: '150px', marginBottom: '10px', color: '#FF3041' }}>
-                    Tus Mascotas Favoritas
+                    {lang.favoritos.titles.mascotasFavoritas}
                 </Typography>
                 <Grid container style={{ minHeight: "500px", marginTop:'30px',marginBottom:'100px', padding:'50px', }}>
                     <Grid item md={4}>
                         <LeftSideUserCard />
                     </Grid>
                     <Grid item md={8}>
-                        <CardViewer modeAction={false} cardType="pet_card" cardsDataList={petsData} currentPage={1} emptyListLabel={"No Hay Favoritos"} />
+                        <CardViewer modeAction={false} cardType="pet_card" cardsDataList={petsData} currentPage={1} emptyListLabel={lang.favoritos.listaVacia} />
                     </Grid>
                 </Grid>
             </Container>

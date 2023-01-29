@@ -55,7 +55,9 @@ const SignUp = (props) => {
     }
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const lang = useSelector((state) => state.lang.currentLangData);
+
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
@@ -88,13 +90,13 @@ const SignUp = (props) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography component="h1" sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                                            Registrate
+                                            {lang.registrarse.titles.registrate}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
                                         <TextField 
                                             size="small" 
-                                            label="Nombre" 
+                                            label={lang.registrarse.inputs.nombre + ":"} 
                                             id="name"
                                             name="name" 
                                             variant="standard"          
@@ -108,7 +110,7 @@ const SignUp = (props) => {
                                         <TextField 
                                         size="small" 
                                         id="last-name-input" 
-                                        label="Apellido" 
+                                        label={lang.registrarse.inputs.apellido + ":"}  
                                         variant="standard" 
                                         name="surname"
                                         value={formik.values.surname}
@@ -122,7 +124,7 @@ const SignUp = (props) => {
                                         type="number" 
                                         size="small" 
                                         id="last-name-input" 
-                                        label="Edad" 
+                                        label={lang.registrarse.inputs.edad + ":"} 
                                         variant="standard" 
                                         name="age"      
                                         value={formik.values.age}
@@ -135,7 +137,7 @@ const SignUp = (props) => {
                                         <TextField 
                                         size="small" 
                                         id="address-input" 
-                                        label="Direccion" 
+                                        label={lang.registrarse.inputs.direccion + ":"} 
                                         variant="standard" 
                                         name="direction"      
                                         value={formik.values.direction}
@@ -149,7 +151,7 @@ const SignUp = (props) => {
                                         type="email" 
                                         size="small" 
                                         id="email-input" 
-                                        label="Correo" 
+                                        label={lang.registrarse.inputs.correo + ":"}  
                                         variant="standard" 
                                         name="email"      
                                         value={formik.values.email}
@@ -166,7 +168,7 @@ const SignUp = (props) => {
                                         >
                                         {formik.touched.hasAJob && formik.errors.hasAJob}
                                         </FormHelperText>
-                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginTop: "25px" }}>¿Tienes trabajo?</FormLabel>
+                                        <FormLabel id="demo-row-radio-buttons-group-label" sx={{ marginTop: "25px" }}>{lang.registrarse.inputs.tienesTrabajo}</FormLabel>
                                         <RadioGroup
                                             row
                                             aria-labelledby="demo-row-radio-buttons-group-label"
@@ -175,8 +177,8 @@ const SignUp = (props) => {
                                             onChange={formik.handleChange}
                                            
                                         >
-                                            <FormControlLabel value={true} control={<Radio />} label="Si" />
-                                            <FormControlLabel value={false} control={<Radio />} label="No" />
+                                            <FormControlLabel value={true} control={<Radio />} label={lang.registrarse.inputs.si} />
+                                            <FormControlLabel value={false} control={<Radio />} label={lang.registrarse.inputs.no} />
                                         </RadioGroup>
                                     </FormControl>
 
@@ -185,7 +187,7 @@ const SignUp = (props) => {
                                         <TextField 
                                         size="small" 
                                         id="contraseña-input" 
-                                        label="Contraseña" 
+                                        label={lang.registrarse.inputs.contraseña} 
                                         type="password" 
                                         variant="standard" 
                                         name="password"      
@@ -196,7 +198,7 @@ const SignUp = (props) => {
                                         className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', marginTop: 8 }} className={style.input_width}>Crear Cuenta</Button>
+                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', marginTop: 8 }} className={style.input_width}>{lang.registrarse.buttons.crearCuenta}</Button>
                                     </Grid>
                                 </Grid>
                             </Paper>
