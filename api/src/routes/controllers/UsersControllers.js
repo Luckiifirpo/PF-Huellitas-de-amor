@@ -47,7 +47,7 @@ const postUser = async (req, res) => {
         direction,
         email,
         hasAJob,
-        occupation,
+        occupation:"",
         password: encrypted
     })
 
@@ -58,6 +58,7 @@ const postUser = async (req, res) => {
     try {
         res.cookie({"token": token}).status(200).send(newUser)
     } catch (error) {
+        console.log(error.message)
         res.status(400).send({ error: error.message })
     }
 }
@@ -116,15 +117,15 @@ const getUserById = async (req, res) => {
 //Usuario cambia contraseña
 const updatePasswordUser = async (req, res) => {
     const { id } = req.params
-    const { password } = req.body;
-
+    const { oldPassword,newPassword,repeatedNewPassword } = req.body;
+console.log(oldPassword,newPassword,repeatedNewPassword )
     let user = await Usuario.findByPk(id);
     const salt = await bcryptjs.genSalt(10);
-    const newPassword = await bcryptjs.hash(password, salt);
+    const newEncryptedPassword = await bcryptjs.hash(newPassword, salt);
 
     if (!user) return res.status(404).send('El Usuario no existe');
     try {
-        user.password = newPassword;
+        user.password = newEncryptedPassword;
 
         user.name = user.name;
         user.surname = user.surname;
@@ -135,9 +136,11 @@ const updatePasswordUser = async (req, res) => {
         user.occupation = user.occupation
         await user.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
-    } catch (error) {
+    } catch (error) { console.log(error)
         res.status(500).send({ message: error.message });
+        
     }
+    
 }
 
 const forgotPassword = async (req,res) => {
