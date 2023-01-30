@@ -117,3 +117,23 @@ export const getAllPets = (obj) => async (dispatch) => {
     }
 };
 
+export const updatePetInfo = (newData) => async (dispatch) => {
+    try {
+        dispatch(setPetsBusyMode(true));
+        const response = await api.put(`/animals/${newData.id}`, newData);
+        dispatch(setPetsBusyMode(false));
+        dispatch(_getAllPets(response.data));
+        dispatch(setPetsMessage({
+            title: "Actualizacion completada",
+            message: "Se han actualizado tus datos de la mascota correctamente",
+            details: []
+        }))
+
+    } catch (error) {
+        dispatch(setPetsBusyMode(false));
+        dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/animals" }
+        ])));
+    }
+}
