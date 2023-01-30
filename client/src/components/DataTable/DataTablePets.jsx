@@ -1,13 +1,34 @@
 import React from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem  } from '@mui/x-data-grid';
 import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState} from 'react';
 import { getAllPets } from "../../redux/slices/petsSlice";
 
+import EditIcon from '@mui/icons-material/Edit';
+
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import PutPetsAdoption from "./PutPetsAdoption";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 900,
+  height: 550,
+  bgcolor: 'background.paper',
+  // border: '2px solid #000',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  p: 4,
+};
 
 
 
+export default function DataTablePets() {
 
 const columns = [
   { field: 'image',
@@ -70,25 +91,54 @@ const columns = [
   },
     { field: 'description',
     headerName: 'Descripción',
-    width: 100 
+    width: 300 
   },
   {
     field: 'postDate',
     headerName: 'Publicado',
-    width: 200,
+    width: 110, 
+    type: 'dateTime',
 
     },
     { field: 'IsAdopted',
     headerName: 'Adoptado',
     type: 'boolean',
     width: 90 },
+    {
+      field: 'actions',
+      headerName: 'Editar',
+      type: 'actions',
+      width: 80,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={< EditIcon />}
+          label="Editar"
+          onClick={(e) => {handleOpen( <PutPetsAdoption src={params.row}/>)}}
+          // onClick={deleteUser(params.id)}
+        />,
+        
+      ],
+    },
    
   ];
-export default function DataTablePets() {
+
+
 
   // const dispatch = useDispatch()
   // const allPets = useSelector((state)=>state.pets)
   const [tableData, setTableData] = useState([])
+
+  const [modalEditar, setModalEditar]= useState(false);
+
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (id) =>{
+    setOpen(true)
+    console.log(id)
+  } 
+  const handleClose = () => setOpen(false);
+
+
 
 
   useEffect(() => {
@@ -97,73 +147,12 @@ export default function DataTablePets() {
       .then((data) => setTableData(data))
   }, [])
 
-  // {
-  //   field: 'fullName',
-  //   headerName: 'Full name',
-  //   description: 'This column has a value getter and is not sortable.',
-  //   sortable: false,
-  //   width: 160,
-  //   valueGetter: (params) =>
-  //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  // },
-
-  
-
-
-
-
-// const rows = [
-// {
-//   id: "1",
-//     date: "1-Jan-2023",
-//     species: "Dog",
-//     name: "Rex",
-//     age: 2,
-//     weight: 25,
-//     size: "Big",
-//     genre: "Male",
-//     breed: "Cacri",
-//     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
-//     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZJlbDtw4byJKcug1ME7qlpG1jet3tHg1zA&usqp=CAU"},
-//     {
-//       id: "2",
-//       date: "6-Jan-2023",
-//       species: "Dog",
-//       name: "princess",
-//       age: 8,
-//       weight: 10,
-//       size: "medium",
-//       genre: "female",
-//       breed: "Spaniel",
-//       description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
-//       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiEwsd1j4JLO9RoDf1e5DJOyRzJ6MHHC-sHpoD-i0DFjiQER8KvxTD7ZAbAQiKnOEpB4c&usqp=CAU"
-//     },
-
-
-
-  // { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  // { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  // { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  // { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  // { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  // { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  // { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-
-
-//];
-
-
-
-
-
-  
 
   //  useEffect(()=>{
   //   dispatch(getAllPets());
   //  },[])
 
+ 
 
 
   return (
@@ -175,6 +164,18 @@ export default function DataTablePets() {
         rowsPerPageOptions={[5]}
         checkboxSelection
       />
+
+      <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+           <PutPetsAdoption/> 
+        </Box>
+      </Modal>
     </div>
   );
 }
