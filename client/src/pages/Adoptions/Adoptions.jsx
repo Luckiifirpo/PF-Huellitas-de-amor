@@ -2,29 +2,30 @@ import { Autocomplete, Box, Button, Card, CardContent, Divider, Grid, List, List
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import PetCard from '../../components/PetCard/PetCard'
-import Pet_Pagination_Behavior from "./Pet.Pagination"
 import Pet_Filters_Behavior from './Pet.Filters';
 import style from "./Adoptions.module.css"
 import Pet_Sort_Behavior from './Pet.Sort'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { setPetsData, setPageChunks, setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
+import { setCurrentPage, setCurrentSortMethodIndex, setCurrentSortDirection, setFilters, resetUpdatingFiltersAndSort } from '../../redux/slices/adoptionSlice'
 import { getAllPets } from "../../redux/slices/petsSlice";
 import { useEffect } from 'react'
 import _ from "lodash";
+import CardViewer from '../../components/CardViewer/CardViewer'
 
 const filterControlValues = {
-  genreFilter: [{ label: 'Ambos generos', filter: "genreFilter", index: 0 }, { label: 'Machos', filter: "genreFilter", index: 1 }, { label: 'Hembras', filter: "genreFilter", index: 2 }],
-  speciesFilter: [{ label: 'Todas las especies', filter: "speciesFilter", index: 0 }, { label: 'Perros', filter: "speciesFilter", index: 1 }, { label: 'Gatos', filter: "speciesFilter", index: 2 }, { label: 'Otros', filter: "speciesFilter", index: 3 }],
-  sizeFilter: [{ label: 'Todos los tamaños', filter: "sizeFilter", index: 0 }, { label: 'Pequeños', filter: "sizeFilter", index: 1 }, { label: 'Medianos', filter: "sizeFilter", index: 2 }, { label: 'Grandes', filter: "sizeFilter", index: 3 }]
+  genreFilter: [{ label: '', langKey: 'ambosGeneros', filter: "genreFilter", index: 0 }, { label: '', langKey: 'machos', filter: "genreFilter", index: 1 }, { label: '', langKey: 'hembras', filter: "genreFilter", index: 2 }],
+  speciesFilter: [{ label: '', langKey: 'todasLasEspecies', filter: "speciesFilter", index: 0 }, { label: '', langKey: 'perros', filter: "speciesFilter", index: 1 }, { label: '', langKey: 'gatos', filter: "speciesFilter", index: 2 }, { label: '', langKey: 'otros', filter: "speciesFilter", index: 3 }],
+  sizeFilter: [{ label: '', langKey: 'todosLosTamaños', filter: "sizeFilter", index: 0 }, { label: '', langKey: 'pequeños', filter: "sizeFilter", index: 1 }, { label: '', langKey: 'medianos', filter: "sizeFilter", index: 2 }, { label: '', langKey: 'grandes', filter: "sizeFilter", index: 3 }]
 }
 
 const Adoptions = () => {
 
   const dispatch = useDispatch();
-
-  const petState = useSelector((state) => state.pets);
+  const [pets_data, set_pets_data] = useState([]);
+  const petsList = useSelector((state) => state.pets.petsList);
   const globalState = useSelector((state) => state.adoptions);
+  const lang = useSelector((state) => state.lang.currentLangData);
   const minDistance = 1;
 
   var isArrayEqual = function (x, y) {
@@ -61,16 +62,20 @@ const Adoptions = () => {
   }
 
   const apply_filters_and_sort = (filters, sort_method_index, sort_direction) => {
-    const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, filters);
+    const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, filters);
     const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, sort_method_index, sort_direction);
-    create_pagination(sorted_pets_data);
+
+    if (sorted_pets_data.length !== pets_data.length || !isArrayEqual(sorted_pets_data, pets_data)) {
+      set_pets_data(sorted_pets_data);
+    }
+    //create_pagination(sorted_pets_data);
   }
 
-  const create_pagination = (filtered_pets_data) => {
+  /*const create_pagination = (filtered_pets_data) => {
     const pets_page_chunks = Pet_Pagination_Behavior.Apply(filtered_pets_data, 6);
     dispatch(setPageChunks(pets_page_chunks));
     updatePetsData(pets_page_chunks);
-  }
+  }*/
 
   const updatePetsData = (pets_page_chunks) => {
     if (pets_page_chunks.length) {
@@ -118,9 +123,8 @@ const Adoptions = () => {
     apply_filters_and_sort(new_filter_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
   }
 
-  const ChangePage = (event, page) => {
+  const ChangePage = (page) => {
     dispatch(setCurrentPage(page));
-    dispatch(setPetsData(globalState.pageChunks[page - 1]));
   }
 
   const navigate = useNavigate()
@@ -128,27 +132,51 @@ const Adoptions = () => {
     navigate("/dar-en-adopcion")
   }
 
-  useEffect(() => {
-    if (!globalState.petsData) {
-      const page_chunks = Pet_Pagination_Behavior.Apply(petState.petsList, 6);
-      if (page_chunks.length) {
-        dispatch(setPageChunks(page_chunks));
-        dispatch(setPetsData(page_chunks[0]));
-      } else {
-        dispatch(getAllPets());
-      }
-    } else {
-      
-      const filtered_pets_data = Pet_Filters_Behavior.Apply(petState.petsList, globalState.filters);
-      const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
-      const pets_page_chunks = Pet_Pagination_Behavior.Apply(sorted_pets_data, 6);
+  const getFiltersInCurrentLang = () => {
+    const filtersInCurrentLang = {
+      genreFilter: filterControlValues.genreFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.genero[e.langKey]
+        }
+      }),
+      speciesFilter: filterControlValues.speciesFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.especies[e.langKey]
+        }
+      }),
+      sizeFilter: filterControlValues.sizeFilter.map(e => {
+        return {
+          ...e,
+          label: lang.adoptions.filtros.tamaños[e.langKey]
+        }
+      })
+    }
 
-      if (!isArrayEqual(pets_page_chunks, globalState.pageChunks)) {
-        dispatch(setPageChunks(pets_page_chunks));
-        dispatch(setPetsData(pets_page_chunks[0]));
+    return filtersInCurrentLang;
+  }
+
+  const getAppliedFiltersInCurrentLang = () => {
+    const filtersInCurrentLang = {
+      genreFilter: globalState.filters,
+      speciesFilter,
+      sizeFilter
+    }
+  }
+
+  useEffect(() => {
+    if (petsList) {
+      const filtered_pets_data = Pet_Filters_Behavior.Apply(petsList, globalState.filters);
+      const sorted_pets_data = Pet_Sort_Behavior.Apply(filtered_pets_data, globalState.currentSortMethodIndex, globalState.currentSortDirection);
+
+      if (pets_data.length !== sorted_pets_data.length || !isArrayEqual(pets_data, sorted_pets_data)) {
+        set_pets_data(sorted_pets_data);
       }
     }
-  }, [petState])
+
+  }, [petsList, pets_data, globalState, lang]);
+
 
   return (
     <div>
@@ -156,14 +184,10 @@ const Adoptions = () => {
         <Grid container spacing={5} alignItems="flex-start">
           <Grid component={Box} item lg={2} display={{ xs: "none", lg: "block" }} />
           <Grid item lg={8} xs={12}>
-            <Grid container alignItems="center" justifyContent="center">
-              {
-                globalState.petsData && globalState.petsData.length ? <Pagination count={globalState.pageChunks.length} page={globalState.currentPage} onChange={ChangePage} /> : null
-              }
-            </Grid>
+
           </Grid>
           <Grid item lg={2} xs={12} display="flex" justifyContent="center">
-            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>Publicar</Button>
+            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>{lang.adoptions.buttons.publicar}</Button>
           </Grid>
           <Grid item lg={3} md={4} xs={12}>
             <Typography
@@ -175,54 +199,54 @@ const Adoptions = () => {
                 fontWeight: "700",
               }}
             >
-              Adopciones
+              {lang.adoptions.titles.adopciones}
             </Typography>
             <Typography component="h1" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-              ORDENAR POR:
+              {lang.adoptions.titles.ordenarPor + ":"}
             </Typography>
             <Paper>
               <List>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 0}
                   onClick={(event) => adoptionListItemClick(event, 0)}>
-                  <ListItemText primary="TAMAÑO" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.tamaño.toUpperCase()} />
                 </ListItemButton>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 1}
                   onClick={(event) => adoptionListItemClick(event, 1)}>
-                  <ListItemText primary="EDAD" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.edad.toUpperCase()} />
                 </ListItemButton>
                 <ListItemButton selected={globalState.currentSortMethodIndex === 2}
                   onClick={(event) => adoptionListItemClick(event, 2)}>
-                  <ListItemText primary="PESO" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.peso.toUpperCase()} />
                 </ListItemButton>
                 <Divider />
                 <ListItem style={{ display: "flex", justifyContent: "center" }}>
                   <ToggleButtonGroup exclusive value={globalState.currentSortDirection} onChange={SetSortDirection} size='small'>
                     <ToggleButton style={{ padding: "7px 15px" }} value="Ascending">
-                      Ascendente
+                      {lang.adoptions.ordenamientos.ascendente}
                     </ToggleButton>
                     <ToggleButton style={{ padding: "7px 15px" }} value="Descending">
-                      Descendente
+                      {lang.adoptions.ordenamientos.descendente.toUpperCase()}
                     </ToggleButton>
                   </ToggleButtonGroup>
                 </ListItem>
                 <Divider />
                 <ListItemButton onClick={resetSortSettings}>
-                  <ListItemText primary="Reiniciar" />
+                  <ListItemText primary={lang.adoptions.ordenamientos.reiniciar} />
                 </ListItemButton>
               </List>
             </Paper>
             <Typography component="h1" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-              FILTRAR POR:
+              {lang.adoptions.titles.filtrarPor + ":"}
             </Typography>
             <Paper>
               <List>
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="genre-filter"
-                    value={globalState.filters.genreFilter.label}
+                    value={lang.adoptions.filtros.genero[globalState.filters.genreFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.genreFilter}
-                    renderInput={(params) => <TextField disabled={true} {...params} label="Genero" />}
+                    options={getFiltersInCurrentLang().genreFilter}
+                    renderInput={(params) => <TextField disabled={true} {...params} label={lang.adoptions.filtros.inputs.genero} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -232,10 +256,10 @@ const Adoptions = () => {
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="species-filter"
-                    value={globalState.filters.speciesFilter.label}
+                    value={lang.adoptions.filtros.especies[globalState.filters.speciesFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.speciesFilter}
-                    renderInput={(params) => <TextField {...params} label="Especie" />}
+                    options={getFiltersInCurrentLang().speciesFilter}
+                    renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.especie} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -245,10 +269,10 @@ const Adoptions = () => {
                 <ListItem>
                   <Autocomplete size="small" disablePortal
                     id="size-filter"
-                    value={globalState.filters.sizeFilter.label}
+                    value={lang.adoptions.filtros.tamaños[globalState.filters.sizeFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={filterControlValues.sizeFilter}
-                    renderInput={(params) => <TextField {...params} label="Tamaños" />}
+                    options={getFiltersInCurrentLang().sizeFilter}
+                    renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.tamaño} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;
@@ -257,37 +281,25 @@ const Adoptions = () => {
                 </ListItem>
                 <ListItem className={style.filter_slider_container} >
                   <Typography variant="body2" color="text.secondary">
-                    Edad:
+                    {lang.adoptions.filtros.edad}:
                   </Typography>
                   <Slider name="ageFilter" min={0} max={30} value={globalState.filters.ageFilter} disableSwap onChange={SliderFilterOnChange} valueLabelDisplay="auto" />
                 </ListItem>
                 <ListItem className={style.filter_slider_container} >
                   <Typography variant="body2" color="text.secondary">
-                    Peso:
+                  {lang.adoptions.filtros.peso}:
                   </Typography>
                   <Slider name="weightFilter" min={0} max={100} value={globalState.filters.weightFilter} disableSwap onChange={SliderFilterOnChange} valueLabelDisplay="auto" />
                 </ListItem>
                 <Divider />
                 <ListItemButton onClick={resetAdoptionFilters}>
-                  <ListItemText primary="Reiniciar" />
+                  <ListItemText primary={lang.adoptions.filtros.reiniciar} />
                 </ListItemButton>
               </List>
             </Paper>
           </Grid>
           <Grid item lg={9} md={8} xs={12}>
-            <Grid container spacing={2} alignItems="flex-start" style={{ minHeight: "500px" }}>
-              {
-                globalState.petsData && globalState.petsData.length ? globalState.petsData.map((petData, key) => {
-                  return <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
-                            <PetCard modeAction={true} data={petData} />
-                          </Grid>
-                }) : <div className={style.empty_data_container}>
-                        <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
-                          Ninguna entrada coincide con los filtros seleccionados
-                        </Typography>
-                      </div>
-              }
-            </Grid>
+            <CardViewer modeAction={true} cardType="pet_card" cardsDataList={pets_data} currentPage={globalState.currentPage} onChangePage={ChangePage} emptyListLabel={lang.adoptions.listaVacia} />
           </Grid>
         </Grid>
       </Container>

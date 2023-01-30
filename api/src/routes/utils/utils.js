@@ -5,7 +5,16 @@ const generateId = () => {
     const stringId = id.toString();
 
     return stringId
+} 
+const generateDate = () =>{
+    let fechaActual = new Date()
+      
+    return fechaActual.toDateString();
+        
+    
 }
+
 module.exports = {
     generateId,
+    generateDate,
 }

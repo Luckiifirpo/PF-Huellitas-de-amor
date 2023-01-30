@@ -71,7 +71,8 @@ const federatedLoginCtrl = async (req, res, next) => {
                     age: 0,
                     direction: "",
                     email: userData.email,
-                    work: false,
+                    hasAJob: false,
+                    occupation: "",
                     password: "",
                     federatedUID: uid,
                     photoURL: userData.photoURL
@@ -93,10 +94,17 @@ const federatedLoginCtrl = async (req, res, next) => {
     }
 }
 
+// la hacer get en esta ruta se desloguea al usuario
+const getLogout = (req, res)=>{
+    req.logout();
+    res.send('logout exitoso');
+}
+
 
 
 module.exports = {
     loginCtrl,
     federatedLoginCtrl,
-    isAuthenticated
+    isAuthenticated,
+    getLogout
 }

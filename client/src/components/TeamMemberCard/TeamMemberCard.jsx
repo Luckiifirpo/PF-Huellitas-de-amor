@@ -7,7 +7,7 @@ import style from "./TeamMemberCard.module.css";
 const TeamMemberCard = (props) => {
 
     const { data } = props;
-   console.log(data.img)
+    
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
             <CardActionArea>

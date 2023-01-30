@@ -8,30 +8,19 @@ import { resetUserError } from "../../../redux/slices/userSlice";
 
 const ErrorDialog = (props) => {
     const dispatch = useDispatch();
-    const errorState = useSelector((state) => state.errors);
-    const petErrorState = useSelector((state) => state.pets.errors);
-    const userErrorState = useSelector((state) => state.users.errors);
+    const errorState = useSelector((state) => state.errors.error);
+    const petErrorState = useSelector((state) => state.pets.error);
+    const userErrorState = useSelector((state) => state.users.error);
 
-    const CloseDialog = () => {
-        if (errorState.error) {
-            dispatch(resetError());
-            return
-        }
-
-        if (petErrorState) {
-            dispatch(resetPetsError());
-            return
-        }
-
-        if (userErrorState) {
-            dispatch(resetUserError());
-            return
-        }
+    const CloseDialog = () => {  
+        dispatch(resetError());
+        dispatch(resetPetsError());
+        dispatch(resetUserError());
     }
 
     const getErrorData = () => {
-        if (errorState.error)
-            return errorState.error;
+        if (errorState)
+            return errorState;
 
         if (petErrorState)
             return petErrorState;
@@ -54,7 +43,7 @@ const ErrorDialog = (props) => {
                     detailValue = errorDetail[prop]
                 }
 
-                return <li>
+                return <li key={key}>
                     <strong>{detailName}: </strong>
                     <span>{detailValue}</span>
                 </li>
@@ -73,7 +62,7 @@ const ErrorDialog = (props) => {
 
     useEffect(() => {
 
-    }, [petErrorState, userErrorState]);
+    }, [errorState, petErrorState, userErrorState]);
 
     return (<Dialog
         open={getErrorData() != null}

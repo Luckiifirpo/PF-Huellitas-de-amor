@@ -2,7 +2,9 @@ const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
 const { generateId } = require("../utils/utils");
 const bcryptjs = require('bcryptjs');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const nodemailer = require('nodemailer');
+//const { transporter } = require('../utils/mailer');
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -29,7 +31,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const { name, surname, age, direction, email, work, password } = req.body;
+    const { name, surname, age, direction, email, hasAJob, occupation, password } = req.body;
 
     const emailExist = await Usuario.findOne({ where: { email } })
 
@@ -44,7 +46,8 @@ const postUser = async (req, res) => {
         age,
         direction,
         email,
-        work,
+        hasAJob,
+        occupation:"",
         password: encrypted
     })
 
@@ -55,6 +58,7 @@ const postUser = async (req, res) => {
     try {
         res.cookie({"token": token}).status(200).send(newUser)
     } catch (error) {
+        console.log(error.message)
         res.status(400).send({ error: error.message })
     }
 }
@@ -76,7 +80,7 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, surname, age, direction, email, work } = req.body;
+        const { name, surname, age, direction, email, hasAJob, occupation} = req.body;
 
         const usuario = await Usuario.findByPk(id)
         usuario.name = name || usuario.name;
@@ -84,7 +88,8 @@ const updateUser = async (req, res) => {
         usuario.age = age || usuario.age;
         usuario.direction = direction || usuario.direction;
         usuario.email = email || usuario.email;
-        usuario.work = work || usuario.work;
+        usuario.hasAJob = hasAJob || usuario.hasAJob;
+        usuario.occupation = occupation || usuario.occupation;
         usuario.password = usuario.password;
         await usuario.save();
 
@@ -112,26 +117,114 @@ const getUserById = async (req, res) => {
 //Usuario cambia contraseña
 const updatePasswordUser = async (req, res) => {
     const { id } = req.params
-    const { password } = req.body;
-
+    const { oldPassword,newPassword,repeatedNewPassword } = req.body;
+console.log(oldPassword,newPassword,repeatedNewPassword )
     let user = await Usuario.findByPk(id);
     const salt = await bcryptjs.genSalt(10);
-    const newPassword = await bcryptjs.hash(password, salt);
+    const newEncryptedPassword = await bcryptjs.hash(newPassword, salt);
 
     if (!user) return res.status(404).send('El Usuario no existe');
     try {
-        user.password = newPassword;
+        user.password = newEncryptedPassword;
 
         user.name = user.name;
         user.surname = user.surname;
         user.age = user.age;
         user.direction = user.direction;
         user.email = user.email;
-        user.work = user.work;
+        user.hasAJob = user.hasAJob;
+        user.occupation = user.occupation
         await user.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
-    } catch (error) {
+    } catch (error) { console.log(error)
         res.status(500).send({ message: error.message });
+        
+    }
+    
+}
+
+const forgotPassword = async (req,res) => {
+    const {email} = req.body;
+    console.log(email);
+    if(!email) return res.send("email es requerido");
+
+    const user = await Usuario.findOne({
+        where: {
+            email: email
+        }
+    });
+    console.log(user);
+
+    if(!user) return res.send('Usuario no esta registardo');
+
+    try {
+        const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
+            expiresIn: '30m',
+        });
+
+        let transporter = await nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.MAILER_EMAIL,
+                pass: process.env.MAILER_PASS,
+            }
+        })
+        await transporter.sendMail({
+            from: process.env.MAILER_EMAIL, // sender address
+            to: user.email,
+            subject: "Cambiar tu contraseña", // Subject line
+            text: "Parece que has olvidado tu contraseña!", // plain text body
+            html: `
+            <h2>Por favor has click en el siguiente enlace para restablecer la contraseña</h2>
+            <p>${process.env.CLIENT_URL}/users/resetpassword/${token}</p>
+            `, // html body
+          });
+          user.setDataValue({reset: token});
+          user.save();
+          res.status(200).send("email enviado")
+    } catch (error) {
+          res.status(500).send({error: error.message});
+    }
+}
+
+const resetpassword = async(req, res) => {
+    const {reset} = req.params;
+    const {newPassword} = req.body;
+    console.log(reset);
+    console.log(newPassword);
+    if(!newPassword){
+        return res.status(400).json("debe ingresar una nueva contraseña");
+    }
+    if(reset){
+       await jwt.verify(reset, process.env.RESET_PASSWORD_KEY, function(err, decodedData){
+            if(err){
+                return res.json({
+                    error: "Incorrect token or it is expired."
+                })
+            }
+        });    
+    }else{
+        return res.status(401).json({error: "Error al autenticar"});
+    }
+    const user = await Usuario.findOne({reset}, function(err, user){
+            
+    });
+    console.log(user)
+    if(!user){
+        return res.status(400).json({error: "User with this token does not existe"});
+    }
+   
+    try {
+        const salt = await bcryptjs.genSalt(10);
+        const password = await bcryptjs.hash(newPassword, salt);
+        user.update({
+            password: password
+        }
+        );
+        res.status(200).send("contraseña cambiada");
+
+    } catch (error) {
+        res.status(400).send({error:error.message});
     }
 }
 
@@ -141,5 +234,7 @@ module.exports = {
     deleteUser,
     updateUser,
     getUserById,
-    updatePasswordUser
+    updatePasswordUser,
+    forgotPassword, 
+    resetpassword
 }

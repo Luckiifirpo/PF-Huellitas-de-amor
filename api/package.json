@@ -23,12 +23,14 @@
     "firebase-admin": "^11.5.0",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.0",
     "passport": "^0.6.0",
     "passport-dropbox-oauth2": "^1.1.0",
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.1",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
+    "stripe": "^11.7.0",
     "uuid-js": "^0.7.5"
   },
   "devDependencies": {

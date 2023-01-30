@@ -13,7 +13,8 @@ const PetCard = (props) => {
     const { data, modeAction} = props;
     const [toggle, setToggle] = useState(false)
     const dispatch = useDispatch()
-    const petsData = useSelector( state => state.adoptions.favoritesPets)
+    const petsData = useSelector( state => state.adoptions.favoritesPets);
+    const lang = useSelector((state) => state.lang.currentLangData);
     const handleFavorites = () => {
         setToggle( state => !state)
         if (!toggle) {
@@ -29,7 +30,7 @@ const PetCard = (props) => {
     }
     useEffect(()=>{
         dispatch(getFavorites())
-    },[dispatch])
+    },[dispatch, lang])
 
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
@@ -59,8 +60,8 @@ const PetCard = (props) => {
                             }
                         </Typography>
                         <ul className={style.additional_info}>
-                            <li><span style={{ fontWeight: "bold" }}>age: </span><span>{data.age} {data.ageTime}</span></li>
-                            <li><span style={{ fontWeight: "bold" }}>genre: </span><span>{data.genre}</span></li>
+                            <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.edad}: </span><span>{data.age} {lang.petCard.labels[data.ageTime]}</span></li>
+                            <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.genero}: </span><span>{lang.petCard.labels[data.genre]}</span></li>
                         </ul>
                     </CardContent>
                 </Link>
