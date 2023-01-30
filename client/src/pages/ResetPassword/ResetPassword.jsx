@@ -17,14 +17,14 @@ const ResetPassword = () => {
     
     const userResetPassword =  (e, value) => {
        e.preventDefault();
-       const PasswordInput = e.target.querySelector("#password-input");
-       const RePasswordInput = e.target.querySelector("#repassword-input");
-       console.log(PasswordInput.value + " contraseña 2 " + RePasswordInput.value);
-       if(PasswordInput !== RePasswordInput){
-        return alert("contraseña mal escrita");
+       let passwordInput = e.target.querySelector("#password-input");
+       let rePasswordInput = e.target.querySelector("#repassword-input");
+      
+       if(passwordInput.value !== rePasswordInput.value){
+        return alert("Las contraseñas deben coincidir");
        }
 
-       dispatch(PutresetPassword(id, PasswordInput.value));
+       dispatch(PutresetPassword(id, passwordInput.value));
     }
 
      return(
