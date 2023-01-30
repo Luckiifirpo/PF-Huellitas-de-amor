@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import {useDispatch, useSelector } from "react-redux";
-import { postContactUs } from "../../redux/slices/contactUsSlice";
+import { postContactUs } from "../../redux/slices/contactusSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
