@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import style from "./PutPetsAdoption.module.css";
 import TextField from "@mui/material/TextField";
 import * as yup from "yup";
-import ImagePostAdoption from "../../assets/image/fondoPostAdoption.png";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useState } from "react";
