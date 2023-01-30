@@ -62,7 +62,7 @@ export const postUser = (obj) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/users" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com//users" }
         ])));
     }
 }
@@ -77,7 +77,7 @@ export const loginWithEmailAndPassword = (email, password) => async (dispatch) =
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/auth/login" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com//auth/login" }
         ])));
     }
 }
@@ -97,7 +97,7 @@ export const federatedLogin = (token, userData) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/auth/federated_login" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com//auth/federated_login" }
         ])));
     }
 }
@@ -118,7 +118,7 @@ export const updateUserInfo = (newData) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/users//user_info/:user_id" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com//users//user_info/:user_id" }
         ])));
     }
 }
