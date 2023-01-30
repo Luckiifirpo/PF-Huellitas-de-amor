@@ -155,9 +155,9 @@ const forgotPassword = async (req,res) => {
     if(!user) return res.send('Usuario no esta registardo');
 
     try {
-        const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
-            expiresIn: '30m',
-        });
+        if(!user.reset){
+            var reset1 = generateId();
+        }
 
         let transporter = await nodemailer.createTransport({
             service: 'gmail',
@@ -173,10 +173,10 @@ const forgotPassword = async (req,res) => {
             text: "Parece que has olvidado tu contraseña!", // plain text body
             html: `
             <h2>Por favor has click en el siguiente enlace para restablecer la contraseña</h2>
-            <p>${process.env.CLIENT_URL}/users/resetpassword/${token}</p>
+            <p>${process.env.CLIENT_URL}/reset-password/${reset1}</p>
             `, // html body
           });
-          user.setDataValue({reset: token});
+          user.setDataValue({reset: reset1});
           user.save();
           res.status(200).send("email enviado")
     } catch (error) {
@@ -185,32 +185,24 @@ const forgotPassword = async (req,res) => {
 }
 
 const resetpassword = async(req, res) => {
-    const {reset} = req.params;
+    const {id} = req.params;
     const {newPassword} = req.body;
     // console.log(reset);
     // console.log(newPassword);
     if(!newPassword){
         return res.status(400).json("debe ingresar una nueva contraseña");
     }
-    if(reset){
-       await jwt.verify(reset, process.env.RESET_PASSWORD_KEY, function(err, decodedData){
-            if(err){
-                return res.json({
-                    error: "Incorrect token or it is expired."
-                })
-            }
-        });    
-    }else{
-        return res.status(401).json({error: "Error al autenticar"});
-    }
-    const user = await Usuario.findOne({reset}, function(err, user){
-            
+
+    
+    
+    const user = await Usuario.findOne({reset: id});
+    const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
+        expiresIn: '30m',
     });
     // console.log(user)
     if(!user){
         return res.status(400).json({error: "User with this token does not existe"});
-    }
-   
+    }  
     try {
         const salt = await bcryptjs.genSalt(10);
         const password = await bcryptjs.hash(newPassword, salt);
@@ -218,7 +210,7 @@ const resetpassword = async(req, res) => {
             password: password
         }
         );
-        res.status(200).send("contraseña cambiada");
+        res.cookie({"token":token}).status(200).send("contraseña cambiada");
 
     } catch (error) {
         res.status(400).send({error:error.message});

@@ -120,7 +120,7 @@ const Login = (props) => {
                                         <TextField size="small" id="password-input" type="password" label={lang.iniciarSesion.inputs.contraseña} variant="standard" className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <Link to="/restore_password" className={style.link}>{lang.iniciarSesion.labels.olvidoContraseña}</Link>
+                                        <Link to="/restore-password" className={style.link}>{lang.iniciarSesion.labels.olvidoContraseña}</Link>
                                     </Grid>
                                     <Grid item>
                                         <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
