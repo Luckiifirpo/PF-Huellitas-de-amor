@@ -5,7 +5,7 @@ import errorsReducer from '../slices/errorsSlice';
 import userReducer from '../slices/userSlice';
 import navigationReducer from '../slices/navigationSlice';
 import messagesReducer from "../slices/messageInfoSlice";
-import contactUsReducer from '../slices/contactusSlice';
+import contactUsReducer from '../slices/contactUsSlice';
 import aboutUsReducer from '../slices/aboutUsSlice';
 import languageReducer from '../slices/languageSlice';
 
