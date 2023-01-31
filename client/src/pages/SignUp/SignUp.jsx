@@ -198,7 +198,7 @@ const SignUp = (props) => {
                                         className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', marginTop: 8 }} className={style.input_width}>{lang.registrarse.buttons.crearCuenta}</Button>
+                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: 8 }} className={style.input_width}>{lang.registrarse.buttons.crearCuenta}</Button>
                                     </Grid>
                                 </Grid>
                             </Paper>

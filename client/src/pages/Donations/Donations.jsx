@@ -112,7 +112,7 @@ const Donations = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               {lang.donaciones.paragraphs.donacionesEInsumos}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
 
           </Grid>
           <Grid item md={6} sx={{ marginBottom: '-10px' }}>

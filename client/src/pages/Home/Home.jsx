@@ -112,7 +112,7 @@ const Home = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               {lang.home.paragraphs.meQuieresAdoptar}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerAdopciones(e)}>{lang.home.buttons.adoptame}</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerAdopciones(e)}>{lang.home.buttons.adoptame}</Button>
           </Grid>
         </Grid>
       </Container>
@@ -127,7 +127,7 @@ const Home = () => {
               <Typography component="p" sx={{ margin: '15px 0px' }}>
                 {lang.home.paragraphs.quienesSomos}
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginBottom: '20px' }} onClick={(e) => handlerQuienesSomos(e)}>{lang.home.buttons.verMas}</Button>
+              <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginBottom: '20px' }} onClick={(e) => handlerQuienesSomos(e)}>{lang.home.buttons.verMas}</Button>
               <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <FacebookIcon />
                 <InstagramIcon />
@@ -157,7 +157,7 @@ const Home = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               {lang.home.paragraphs.darEnAdopcion}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerPostAdoption(e)}>{lang.home.buttons.publicar}</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerPostAdoption(e)}>{lang.home.buttons.publicar}</Button>
           </Grid>
         </Grid>
       </Container>
@@ -171,7 +171,7 @@ const Home = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               {lang.home.paragraphs.hazTuDonacion}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerDonar(e)}>{lang.home.buttons.donaAhora}</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerDonar(e)}>{lang.home.buttons.donaAhora}</Button>
           </Grid>
           <Grid item md={6}>
             <img src={banner4} alt='banner home' className={style.bannerContent} />
@@ -192,7 +192,7 @@ const Home = () => {
               <Typography component="p" sx={{ margin: '10px 0px' }}>
                 {lang.home.paragraphs.masInformacion}
               </Typography>
-              <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerContacto(e)}>{lang.home.buttons.contacto}</Button>
+              <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerContacto(e)}>{lang.home.buttons.contacto}</Button>
             </Grid>
             <Grid item md={12} sx={{ marginBottom: '-10px' }}>
               <img src={banner5} alt='fondo perro' className={style.imageInfo} />

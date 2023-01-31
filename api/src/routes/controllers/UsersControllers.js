@@ -47,7 +47,7 @@ const postUser = async (req, res) => {
         direction,
         email,
         hasAJob,
-        occupation,
+        occupation: "",
         password: encrypted
     })
 
@@ -79,7 +79,7 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, surname, age, direction, email, hasAJob, occupation} = req.body;
+        const { name, surname, age, direction, email, hasAJob, occupation, photoURL} = req.body;
 
         const usuario = await Usuario.findByPk(id)
         usuario.name = name || usuario.name;
@@ -90,10 +90,12 @@ const updateUser = async (req, res) => {
         usuario.hasAJob = hasAJob || usuario.hasAJob;
         usuario.occupation = occupation || usuario.occupation;
         usuario.password = usuario.password;
+        usuario.photoURL = photoURL || usuario.photoURL
         await usuario.save();
 
         res.json(usuario)
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: error.message })
     }
 }
