@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import style from "./SignUp.module.css";
+import { useEffect } from "react";
 
 
 const validationSchema = yup.object({
@@ -57,19 +58,22 @@ const SignUp = (props) => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const lang = useSelector((state) => state.lang.currentLangData);
+    const currentUser = useSelector((state) => state.users.currentUser);
 
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
         onSubmit: (values,{resetForm} ) => { 
             dispatch(postUser(values))
-            resetForm()
-            setTimeout(()=>{
-                navigate('/iniciar-sesion')
-            },500)
+            resetForm();
         },
     });
 
+    useEffect(() => {
+        if(currentUser){
+            navigate('/')
+        }
+    }, [currentUser]);
 
     return (
         <div className={style.sign_up_div} >

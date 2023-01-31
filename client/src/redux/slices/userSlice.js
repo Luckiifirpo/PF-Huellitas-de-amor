@@ -9,6 +9,7 @@ export const userSlice = createSlice({
     name: 'users',
     initialState: {
         currentUser: null,
+        loginType: null,
         error: null,
         message: null,
         isBusy: false,
@@ -33,8 +34,8 @@ export const userSlice = createSlice({
             }
         },
         setForgotPassword: (state, action) => {
-           state.forgot = action.payload;
-           sessionStorage.setItem("forgot-password", action.payload.email);
+            state.forgot = action.payload;
+            sessionStorage.setItem("forgot-password", action.payload.email);
         },
         setResetPassword: (state, action) => {
             state.resetLink = action.payload;
@@ -55,10 +56,13 @@ export const userSlice = createSlice({
         setUserBusyMode: (state, action) => {
             state.isBusy = action.payload;
         },
-        
+        setLoginType: (state, action) => {
+            state.loginType = action.payload;
+        }
+
     },
 })
-export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode, setForgotPassword, setResetPassword } = userSlice.actions;
+export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode, setForgotPassword, setResetPassword, setLoginType } = userSlice.actions;
 
 export default userSlice.reducer;
 
@@ -66,15 +70,33 @@ export const postUser = (obj) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
         const response = await api.post(`/users`, obj);
-        console.log(response);
         dispatch(setUserBusyMode(false));
-        dispatch(setCurrentUser(response.data))
+        dispatch(setCurrentUser(response.data));
+        dispatch(setLoginType("withEmailAndPassword"));
     } catch (error) {
         dispatch(setUserBusyMode(false));
-        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-            { code: error.code },
-            { request: "POST: http://localhost:3001/users" }
-        ])));
+        if (error.response.data.code) {
+            const signup_error_code = error.response.data.code;
+            switch (signup_error_code) {
+                case "EmailAlreadyExist":
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject({
+                        name: "SignUpError",
+                        code: signup_error_code
+                    }, [])));
+                    break;
+                default:
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                        { code: error.code },
+                        { request: "POST: http://localhost:3001/auth/login" }
+                    ])));
+                    break;
+            }
+        } else {
+            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                { code: error.code },
+                { request: "POST: http://localhost:3001/users" }
+            ])));
+        }
     }
 }
 
@@ -84,12 +106,32 @@ export const loginWithEmailAndPassword = (email, password) => async (dispatch) =
         const response = await api.post(`/auth/login`, { email, password });
         dispatch(setUserBusyMode(false));
         dispatch(setCurrentUser(response.data));
+        dispatch(setLoginType("withEmailAndPassword"));
     } catch (error) {
         dispatch(setUserBusyMode(false));
-        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-            { code: error.code },
-            { request: "POST: http://localhost:3001/auth/login" }
-        ])));
+        if (error.response.data.code) {
+            const login_error_code = error.response.data.code;
+            switch (login_error_code) {
+                case "UserNotFound":
+                case "InvalidPassword":
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject({
+                        name: "LoginError",
+                        code: login_error_code
+                    }, [])));
+                    break;
+                default:
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                        { code: error.code },
+                        { request: "POST: http://localhost:3001/auth/login" }
+                    ])));
+                    break;
+            }
+        } else {
+            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                { code: error.code },
+                { request: "POST: http://localhost:3001/auth/login" }
+            ])));
+        }
     }
 }
 
@@ -103,7 +145,7 @@ export const federatedLogin = (token, userData) => async (dispatch) => {
         });
         dispatch(setUserBusyMode(false));
         dispatch(setCurrentUser(response.data));
-
+        dispatch(setLoginType("withFederatedProvider"));
     } catch (error) {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
@@ -138,7 +180,7 @@ export const postForgotPassword = (obj) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
 
-        const response = await api.post(`/users/forgot-password`,{email: obj});
+        const response = await api.post(`/users/forgot-password`, { email: obj });
         console.log(response.data + " respuesta servidor");
         dispatch(setUserBusyMode(false));
         dispatch(setForgotPassword(response.data));
@@ -155,7 +197,7 @@ export const PutresetPassword = (newData, password) => async (dispatch) => {
     console.log(newData, password + " slice")
     try {
         dispatch(setUserBusyMode(true));
-        const response = await api.put(`/users/resetpassword/${newData}`, {newPassword: password});
+        const response = await api.put(`/users/resetpassword/${newData}`, { newPassword: password });
         dispatch(setUserBusyMode(false));
         dispatch(setResetPassword(response.data));
         console.log(response.data)
@@ -177,7 +219,7 @@ export const PutresetPassword = (newData, password) => async (dispatch) => {
 export const createAdoptionRequest = (newData) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
-        const response = await api.post(`/adoption_request/`, {adoption_request_data: newData});
+        const response = await api.post(`/adoption_request/`, { adoption_request_data: newData });
         dispatch(setUserBusyMode(false));
         dispatch(setUserMessage({
             title: "Solicitud de adopcion completada",

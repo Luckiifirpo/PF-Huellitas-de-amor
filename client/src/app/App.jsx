@@ -18,7 +18,7 @@ import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 import Favorite from "../pages/Favorites/Favorites";
 import FirebaseApp from "../services/firebaseApp";
 import { getAuth } from "firebase/auth";
-import { federatedLogin, resetCurrentUser, setCurrentUser, signOut } from "../redux/slices/userSlice";
+import { federatedLogin, resetCurrentUser, setCurrentUser, setLoginType, signOut } from "../redux/slices/userSlice";
 import api from "../services/api";
 import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
@@ -52,6 +52,7 @@ function App() {
           try {
             const response = await api.get("/users/" + user_id);
             dispatch(setCurrentUser(response.data));
+            dispatch(setLoginType("withEmailAndPassword"));
           } catch (error) {
             dispatch(signOut());
             dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [

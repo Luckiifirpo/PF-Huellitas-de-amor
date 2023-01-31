@@ -25,16 +25,16 @@ const isAuthenticated = async (req, res, next) => {
 const loginCtrl = async (req, res) => {
     const { email, password } = req.body;
 
-    if(!email || !password) return res.status(400).send({message: "Por favor introduce los datos necesarios"})
+    if(!email || !password) return res.status(400).send({code: "EmptyLoginData", message: "Por favor introduce los datos necesarios"})
     
     try {
         const user = await Usuario.findOne({ where: { email } });
 
-        if (!user) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
+        if (!user) return res.status(409).send({code: "UserNotFound", error: "Usuario o contraseña incorrectos" })
 
         const checkPassword = await compare(password, user.password);
         // const tokenSession = await tokenSign(user);
-        if (!checkPassword) return res.status(409).send({ error: "Usuario o contraseña incorrectos" })
+        if (!checkPassword) return res.status(409).send({code: "InvalidPassword", error: "Usuario o contraseña incorrectos" })
 
         const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
             expiresIn: process.env.JWT_EXPIRE,
