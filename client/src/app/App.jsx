@@ -99,7 +99,6 @@ function App() {
           <Route path="/favoritos" element={<Favorite />} />
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/pet_update/:id" element={<PutAdoption />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
           <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
           <Route path="/cambio-contraseña" element={<CambioContraseña />} />

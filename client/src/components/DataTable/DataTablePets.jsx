@@ -13,6 +13,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PutPetsAdoption from "./PutPetsAdoption";
+import { useParams } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -30,7 +31,7 @@ const style = {
 
 
 export default function DataTablePets() {
-
+  const params=useParams()
 const columns = [
   { field: 'image',
   headerName: 'Imagen',
@@ -114,8 +115,7 @@ const columns = [
         <GridActionsCellItem
           icon={< EditIcon />}
           label="Editar"
-          // onClick={(e) => {handleOpen( <PutPetsAdoption src={params.row}/>)}}
-          onClick={handleOpen}
+          onClick={(e) => {handleOpen( <PutPetsAdoption src={currentPets.id}/>)}}
           // onClick={deleteUser(params.id)}
         />,
         
@@ -128,29 +128,19 @@ const columns = [
 
   // const dispatch = useDispatch()
   // const allPets = useSelector((state)=>state.pets)
+
+  
   const [tableData, setTableData] = useState([])
 
-  const currentPets = useSelector((state) => state.petsList);
+  const currentPets = useSelector((state) => state.pets);
   const [modalEditar, setModalEditar]= useState(false);
 
-  const [PetSeleccionado, setPetSeleccionado]=useState({
-    id:"",
-    name: "",
-    date: "",
-    species: "",
-    age: 0,
-    ageTime: "",
-    weight: 0,
-    size: "",
-    gender: "",
-    breed: "",
-    description: "",
-  })
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = (id) =>{
    setOpen(true)
-    console.log(id)
+    console.log(currentPets)
+ 
   } 
   const handleClose = () => setOpen(false);
 
