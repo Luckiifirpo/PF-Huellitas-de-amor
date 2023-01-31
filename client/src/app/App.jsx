@@ -32,6 +32,7 @@ import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import AdoptionRequestForm from "../pages/AdoptionRequestForm/AdoptionRequestForm";
 import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
+import PutAdoption from "../components/DataTable/PutPetsAdoption";
 
 function App() {
 
