@@ -158,7 +158,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   variant="contained"
-                  color="info"
+                  color="yellowButton"
                   size="large"
                   sx={{
                     borderRadius: "20px",

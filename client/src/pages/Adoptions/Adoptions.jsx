@@ -187,7 +187,7 @@ const Adoptions = () => {
 
           </Grid>
           <Grid item lg={2} xs={12} display="flex" justifyContent="center">
-            <Button variant="contained" color='info' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>{lang.adoptions.buttons.publicar}</Button>
+            <Button variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }} onClick={(e) => handlerPostAdoption(e)}>{lang.adoptions.buttons.publicar}</Button>
           </Grid>
           <Grid item lg={3} md={4} xs={12}>
             <Typography
@@ -246,7 +246,7 @@ const Adoptions = () => {
                     value={lang.adoptions.filtros.genero[globalState.filters.genreFilter.langKey]}
                     sx={{ width: 300 }}
                     options={getFiltersInCurrentLang().genreFilter}
-                    renderInput={(params) => <TextField disabled={true} {...params} label={lang.adoptions.filtros.inputs.genero} />}
+                    renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.genero} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
                       return option.label === value;

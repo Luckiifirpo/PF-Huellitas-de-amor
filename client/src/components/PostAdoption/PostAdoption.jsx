@@ -476,7 +476,7 @@ en donde debe hacerse para enviar el post a /animals */
               <Button
                 type="submit"
                 variant="contained"
-                color="info"
+                color="yellowButton"
                 size="large"
                 sx={{ borderRadius: "20px", padding: "9px 150px", marginTop: "50px" }}
               >
