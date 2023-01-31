@@ -29,6 +29,7 @@ import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
 import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
 import AdoptionRequestForm from "../pages/AdoptionRequestForm/AdoptionRequestForm";
+import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
 
 function App() {
 
@@ -97,6 +98,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
           <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
+          <Route path="/cambio-contraseña" element={<CambioContraseña />} />
         </Route>
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />

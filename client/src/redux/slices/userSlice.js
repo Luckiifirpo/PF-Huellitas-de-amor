@@ -44,7 +44,8 @@ export const userSlice = createSlice({
         },
         setUserBusyMode: (state, action) => {
             state.isBusy = action.payload;
-        }
+        },
+        
     },
 })
 export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode } = userSlice.actions;
