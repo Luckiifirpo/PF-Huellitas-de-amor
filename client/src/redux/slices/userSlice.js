@@ -54,7 +54,8 @@ export const userSlice = createSlice({
         },
         setUserBusyMode: (state, action) => {
             state.isBusy = action.payload;
-        }
+        },
+        
     },
 })
 export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode, setForgotPassword, setResetPassword } = userSlice.actions;
@@ -169,6 +170,26 @@ export const PutresetPassword = (newData, password) => async (dispatch) => {
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
             { request: "PUT: http://localhost:3001/users/resetpassword/:id" }
+        ])));
+    }
+}
+
+export const createAdoptionRequest = (newData) => async (dispatch) => {
+    try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.post(`/adoption_request/`, {adoption_request_data: newData});
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserMessage({
+            title: "Solicitud de adopcion completada",
+            message: "Se han enviado tu solicitud de adopcion, en poco tiempo estaremos respondiendote",
+            details: []
+        }))
+
+    } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/adoption_request/" }
         ])));
     }
 }
