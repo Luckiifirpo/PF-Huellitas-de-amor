@@ -18,7 +18,7 @@ import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
 import style from './Donations.module.css'
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAmountDonation } from '../../redux/slices/petsSlice';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
@@ -30,6 +30,7 @@ const Donations = () => {
     navigate("/contacto")
   }
   const dispatch = useDispatch()
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const handleChange = (event) => {
     console.log(event)
@@ -52,7 +53,7 @@ const Donations = () => {
                 fontSize: '30px'
               }}
             >
-              si deseas apoyar nuestra causa
+              {lang.donaciones.titles.apoyaNuestraCausa}
             </Typography>
 
             <Paper>
@@ -63,7 +64,7 @@ const Donations = () => {
                       <ListItemIcon>
                         <img src={vacuna} alt="medicamentos" className={style.image} />
                       </ListItemIcon>
-                      <ListItemText primary="MEDICAMENTOS" />
+                      <ListItemText primary={lang.donaciones.lists.medicamentos.toUpperCase()} />
                     </ListItemButton>
                   </ListItem>
                   <ListItem disablePadding>
@@ -71,7 +72,7 @@ const Donations = () => {
                       <ListItemIcon>
                         <img src={comida} alt="alimentos" className={style.image} />
                       </ListItemIcon>
-                      <ListItemText primary="ALIMENTOS" />
+                      <ListItemText primary={lang.donaciones.lists.alimentos.toUpperCase()} />
                     </ListItemButton>
                   </ListItem>
 
@@ -80,7 +81,7 @@ const Donations = () => {
                       <ListItemIcon>
                         <img src={higiene} alt="higiene" className={style.image} />
                       </ListItemIcon>
-                      <ListItemText primary="HIGIENE" />
+                      <ListItemText primary={lang.donaciones.lists.higiene.toUpperCase()} />
                     </ListItemButton>
                   </ListItem>
 
@@ -89,7 +90,7 @@ const Donations = () => {
                       <ListItemIcon>
                         <img src={otros} alt="otros" className={style.image} />
                       </ListItemIcon>
-                      <ListItemText primary="OTROS" />
+                      <ListItemText primary={lang.donaciones.lists.otros.toUpperCase()} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -109,11 +110,11 @@ const Donations = () => {
                 marginTop: '40px'
               }}
             >
-              donaciones de insumos
+              {lang.donaciones.titles.donacionesEInsumos}
             </Typography>
 
             <Typography component="p" sx={{ margin: '10px 0px' }}>
-              Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros.
+              {lang.donaciones.paragraphs.donacionesEInsumos}
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
           </Grid>
