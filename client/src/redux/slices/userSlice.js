@@ -134,7 +134,6 @@ export const updateUserInfo = (newData) => async (dispatch) => {
     }
 }
 
-
 export const postForgotPassword = (obj) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
@@ -174,6 +173,7 @@ export const PutresetPassword = (newData, password) => async (dispatch) => {
         ])));
     }
 }
+
 export const createAdoptionRequest = (newData) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
@@ -182,7 +182,6 @@ export const createAdoptionRequest = (newData) => async (dispatch) => {
         dispatch(setUserMessage({
             title: "Solicitud de adopcion completada",
             message: "Se han enviado tu solicitud de adopcion, en poco tiempo estaremos respondiendote",
-
             details: []
         }))
 
