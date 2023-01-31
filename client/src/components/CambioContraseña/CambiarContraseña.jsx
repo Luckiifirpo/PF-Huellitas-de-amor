@@ -9,18 +9,24 @@ import style from './CambiarContraseña.module.css'
 import TextField from '@mui/material/TextField';
 import ImageContact from '../../assets/image/fondocontacto.png'
 import api from '../../services/api'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
 import { useState } from 'react'
 import { async } from '@firebase/util'
-import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material'
+import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { setUserBusyMode, setUserError, setUserMessage } from '../../redux/slices/userSlice'
+import ErrorManager from '../../resources/ErrorManager'
 
 const CambioContraseña = () => {
 
   const [passowrdConfig, setPassWordConfig] = useState({ oldPassword: null, newPassword: null, repeatedNewPassword: null })
   const currentUser = useSelector((state) => state.users.currentUser);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPreviousPassword, setShowPreviousPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showRepeatedNewPassword, setShowRepeatedNewPassword] = useState(false)
+
+  const dispatch = useDispatch()
 
   const handlerContraseñaAnterior = (e) => {
     const value = e.target.value
@@ -46,11 +52,30 @@ const CambioContraseña = () => {
   }
   const handlerEnviarContraseña = async (e) => {
     if (currentUser) {
-      const response = await api.put("/users/user_password/" + currentUser.id, passowrdConfig);
+      
+      try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.put("/users/user_password/" + currentUser.id, passowrdConfig);
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserMessage({
+            title: "Actualizacion completada",
+            message: "Se han actualizado tus datos de usuario correctamente",
+            details: []
+        }))
+
+    } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/users//user_info/:user_id" }
+        ])));
+    }
     }
   }
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPreviousPassword = () => setShowPreviousPassword((show) => !show);
+  const handleClickShowNewPassword = () => setShowNewPassword((show) => !show);
+  const handleClickshowRepeatedNewPassword = () => setShowRepeatedNewPassword((show) => !show); 
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -80,16 +105,16 @@ const CambioContraseña = () => {
                   <FilledInput
                    onChange={handlerContraseñaAnterior}
                     id="contraseña-anterior"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPreviousPassword ? 'text' : 'password'}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={handleClickShowPreviousPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                          {showPreviousPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -101,16 +126,16 @@ const CambioContraseña = () => {
                   <FilledInput
                   onChange={handlerNuevaContraseña}
                     id="nueva-contraseña"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showNewPassword ? 'text' : 'password'}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={handleClickShowNewPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                          {showNewPassword? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -122,16 +147,16 @@ const CambioContraseña = () => {
                   <FilledInput
                    onChange={handlerRepetirContraseña}
                     id="confirmar-nueva-contraseña"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showRepeatedNewPassword ? 'text' : 'password'}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
+                          onClick={handleClickshowRepeatedNewPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                          {showRepeatedNewPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
                     }
