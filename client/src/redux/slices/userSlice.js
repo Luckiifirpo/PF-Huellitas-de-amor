@@ -73,7 +73,7 @@ export const postUser = (obj) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/users" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com//users" }
         ])));
     }
 }
@@ -88,7 +88,7 @@ export const loginWithEmailAndPassword = (email, password) => async (dispatch) =
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/auth/login" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com/auth/login" }
         ])));
     }
 }
@@ -108,7 +108,7 @@ export const federatedLogin = (token, userData) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/auth/federated_login" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com/auth/federated_login" }
         ])));
     }
 }
@@ -129,47 +129,7 @@ export const updateUserInfo = (newData) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/users//user_info/:user_id" }
-        ])));
-    }
-}
-
-export const postForgotPassword = (obj) => async (dispatch) => {
-    try {
-        dispatch(setUserBusyMode(true));
-
-        const response = await api.post(`/users/forgot-password`,{email: obj});
-        console.log(response.data + " respuesta servidor");
-        dispatch(setUserBusyMode(false));
-        dispatch(setForgotPassword(response.data));
-    } catch (error) {
-        dispatch(setUserBusyMode(false));
-        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-            { code: error.code },
-            { request: "POST: http://localhost:3001/users/forgot-password" }
-        ])));
-    }
-}
-
-export const PutresetPassword = (newData, password) => async (dispatch) => {
-    console.log(newData, password + " slice")
-    try {
-        dispatch(setUserBusyMode(true));
-        const response = await api.put(`/users/resetpassword/${newData}`, {newPassword: password});
-        dispatch(setUserBusyMode(false));
-        dispatch(setResetPassword(response.data));
-        console.log(response.data)
-        dispatch(setUserMessage({
-            title: "Contraseña Cambiada",
-            message: "Se ha cambiado tu contraseña de usuario correctamente",
-            details: []
-        }))
-
-    } catch (error) {
-        dispatch(setUserBusyMode(false));
-        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-            { code: error.code },
-            { request: "PUT: http://localhost:3001/users/resetpassword/:id" }
+            { request: "POST: http://localhost:3001/users/user_info/:user_id" }
         ])));
     }
 }
