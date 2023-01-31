@@ -28,6 +28,9 @@ import Completion from "../pages/Stripe/Completion";
 import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
 import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import AdoptionRequestForm from "../pages/AdoptionRequestForm/AdoptionRequestForm";
 import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
 import PutAdoption from "../components/DataTable/PutPetsAdoption";
 
@@ -98,12 +101,15 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/pet_update/:id" element={<PutAdoption />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
+          <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
           <Route path="/cambio-contraseña" element={<CambioContraseña />} />
         </Route>
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
-        <Route path="/iniciar-sesion" element={<Login />} />
+        <Route path="/iniciar-sesion" element={<Login />} />      
         <Route path="/registro-usuario" element={<SignUp />} />
+        <Route path="/restore-password" element={<ForgotPassword/>}/>
+        <Route path="/reset-password/:id" element={<ResetPassword/>}  />
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <ErrorDialog />
