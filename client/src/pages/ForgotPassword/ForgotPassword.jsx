@@ -1,9 +1,9 @@
-import { Button, ButtonGroup, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Button, ButtonGroup, Divider, Grid, Paper, TextField, Typography, Box } from "@mui/material";
 import { Container } from "@mui/system";
 import logo from "../../assets/image/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import ImageContact from "../../assets/image/fondocontacto.png";
 import { postForgotPassword } from "../../redux/slices/userSlice";
 import style from './ForgotPassword.module.css';
 
@@ -31,8 +31,66 @@ import style from './ForgotPassword.module.css';
         }
 
         return(
-         <div className={style.login_div}>
-            <Container style={{ minHeight: "100vh", display: "flex" }}>
+         <>
+            <Box
+                className={style.gridContact}
+                sx={{ marginBottom: "300px", marginTop: "150px" }}
+            >
+            <Box className={style.gridContactImage}>
+            <img src={ImageContact} alt="" />
+            </Box>
+
+            <Container sx={{ height: "100%" }}>
+                <form onSubmit={userForgotPassword}>
+                    <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{ height: "100%" }}
+                    >
+                    <Grid item md={12}>
+                        <Typography
+                        component="h1"
+                        variant="h3"
+                        align="center"
+                        sx={{
+                            color: "#FF3041",
+                            textTransform: "uppercase",
+                            fontWeight: "700",
+                            marginTop: "300px",
+                            marginBottom: "50px"
+                        }}
+                        >
+                        {"Recupera tu cuenta"}
+                        </Typography>
+                    </Grid>
+
+                    <Box
+                        sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "15px",
+                        justifyContent: "center",
+                        height: "100%",
+                        margin: " 0 20px 0 35px",
+                        }}
+                    >
+                        <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
+                            <Grid item>
+                            <TextField type="email" size="small" id="email-input" label={"ingresa tu email"} variant="standard" className={style.input_width} />
+                            </Grid>
+                                
+                            <Grid item>
+                            <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{"Enviar"}</Button>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                    {/* </Grid> */}
+                    </Grid>
+                </form>
+            </Container>
+      </Box>
+            {/* <Container style={{ minHeight: "100vh", display: "flex" }}>
                <Grid container spacing={4} alignItems="center">
                  <Grid item lg={4}>
                     <Paper style={{ paddingBottom: 20 }}>
@@ -60,9 +118,10 @@ import style from './ForgotPassword.module.css';
                     </Paper> 
                   </Grid>   
                 </Grid> 
-            </Container>
-        </div>
+            </Container> */}
+        </>
     );
+
     }
      
     export default ForgotPassword;

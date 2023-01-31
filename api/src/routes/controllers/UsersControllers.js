@@ -142,7 +142,7 @@ const updatePasswordUser = async (req, res) => {
 
 const forgotPassword = async (req,res) => {
     const {email} = req.body;
-    console.log(email);
+    
     if(!email) return res.send("email es requerido");
 
     const user = await Usuario.findOne({
@@ -150,14 +150,14 @@ const forgotPassword = async (req,res) => {
             email: email
         }
     });
-    console.log(user);
 
     if(!user) return res.send('Usuario no esta registardo');
 
     try {
-        if(!user.reset){
-            var reset1 = generateId();
-        }
+        
+        const reset1 = generateId();
+        user.setDataValue("reset", reset1);
+        user.save();
 
         let transporter = await nodemailer.createTransport({
             service: 'gmail',
@@ -173,11 +173,10 @@ const forgotPassword = async (req,res) => {
             text: "Parece que has olvidado tu contraseña!", // plain text body
             html: `
             <h2>Por favor has click en el siguiente enlace para restablecer la contraseña</h2>
-            <p>${process.env.CLIENT_URL}/reset-password/${reset1}</p>
+            <p>${process.env.CLIENT_URL}/reset-password/${user.dataValues.reset}</p>
             `, // html body
           });
-          user.setDataValue({reset: reset1});
-          user.save();
+          
           res.status(200).send("email enviado")
     } catch (error) {
           res.status(500).send({error: error.message});
@@ -192,17 +191,16 @@ const resetpassword = async(req, res) => {
     if(!newPassword){
         return res.status(400).json("debe ingresar una nueva contraseña");
     }
-
     
+    const user = await Usuario.findOne({where:{reset: id}});
     
-    const user = await Usuario.findOne({reset: id});
-    const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
-        expiresIn: '30m',
-    });
     // console.log(user)
     if(!user){
         return res.status(400).json({error: "User with this token does not existe"});
     }  
+    const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
+        expiresIn: '20m',
+    });
     try {
         const salt = await bcryptjs.genSalt(10);
         const password = await bcryptjs.hash(newPassword, salt);
