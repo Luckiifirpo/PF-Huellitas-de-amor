@@ -24,7 +24,7 @@ const Error404 = () => {
             <Typography component="p" sx={{ fontFamily: 'Outfit', fontSize: '30px', lineHeight: '36px', fontWeight: '400', color: '#3B57A9', textAlign: 'center' }}>
               Ups... La página no ha sido encontrada (Error 404)
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>volver al inicio</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>volver al inicio</Button>
           </Grid>
           <Grid item md={6} style={{ padding: 40 }}>
             <img src={error404} alt='perrito sad' />

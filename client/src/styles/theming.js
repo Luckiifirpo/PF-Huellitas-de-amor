@@ -9,12 +9,9 @@ const theme = createTheme({
         secondary: {
           main: '#3B57A9',
         },
-        info: {
+        yellowButton: {
           main: '#FFAB13',
           contrastText: '#fff',
-        },
-        warning:{
-          main: '#FFFFFF'
         }
       },
       
