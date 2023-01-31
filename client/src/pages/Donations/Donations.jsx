@@ -115,8 +115,7 @@ const Donations = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros.
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>contacto</Button>
-
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
           </Grid>
           <Grid item md={5} 
             sx={{

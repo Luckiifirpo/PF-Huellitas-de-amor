@@ -21,6 +21,12 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
+fs.readdirSync(path.join(__dirname, '/models/AdoptionRequest'))
+  .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+  .forEach((file) => {
+    modelDefiners.push(require(path.join(__dirname, '/models/AdoptionRequest', file)));
+  });
+
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
@@ -30,18 +36,54 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Adopcion, Animal, Usuario, Contactus, Admin } = sequelize.models;
+const { Animal, Usuario, Contactus, Admin, AdoptionRequest, ApplicantsResidence, PersonalReference, PreviousPet, PreviousPetsVaccine, ResidencesTenant, TenantsPsychologicalData } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Usuario.hasMany(Animal, {foreignKey: 'idUsuario'});
-Animal.belongsTo(Usuario, {foreignKey: 'idUsuario'});
-Usuario.hasMany(Adopcion, {foreignKey: 'idUsuario'});
-Adopcion.belongsTo(Usuario, {foreignKey: 'idUsuario'});
-Animal.hasOne(Adopcion, {foreignKey: 'idAnimal'});
-Adopcion.belongsTo(Animal, {foreignKey: 'idAnimal'});
-Contactus.belongsToMany(Admin, {through: 'idAdminContactus'})
+Usuario.hasMany(Animal, { foreignKey: 'idUsuario' });
+Animal.belongsTo(Usuario, { foreignKey: 'idUsuario' });
+
+Contactus.belongsToMany(Admin, { through: 'idAdminContactus' })
 // Admin.belongsToMany(Contactus,{through: 'idAdminContactus'})
+
+//ADOPTION REQUEST RELATIONS
+
+//Usuario -> AdoptionRequest
+Usuario.hasOne(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "applicantId" });
+AdoptionRequest.belongsTo(Usuario, { as: 'applicant', foreignKey: "applicantId" });
+
+//Animal -> AdoptionRequest
+Animal.hasOne(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "toBeAdoptedId" });
+AdoptionRequest.belongsTo(Animal, { as: 'toBeAdopted', foreignKey: "toBeAdoptedId" });
+
+//AdoptionRequest -> ApplicantsResidence
+AdoptionRequest.hasMany(ApplicantsResidence, { as: 'applicantsResidence', foreignKey: "adoptionRequestId" });
+ApplicantsResidence.belongsTo(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "adoptionRequestId" });
+
+//AdoptionRequest -> PersonalReference
+AdoptionRequest.hasMany(PersonalReference, { as: 'personalReference', foreignKey: "adoptionRequestId" });
+PersonalReference.belongsTo(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "adoptionRequestId" });
+
+//AdoptionRequest -> PreviousPet
+AdoptionRequest.hasMany(PreviousPet, { as: 'previousPet', foreignKey: "adoptionRequestId" });
+PreviousPet.belongsTo(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "adoptionRequestId" });
+
+//AdoptionRequest -> ResidencesTenant
+AdoptionRequest.hasMany(ResidencesTenant, { as: 'residencesTenant', foreignKey: "adoptionRequestId" });
+ResidencesTenant.belongsTo(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "adoptionRequestId" });
+
+//AdoptionRequest -> TenantsPsychologicalData
+AdoptionRequest.hasOne(TenantsPsychologicalData, { as: 'applicantsPsychologicalData', foreignKey: "adoptionRequestId" });
+TenantsPsychologicalData.belongsTo(AdoptionRequest, { as: 'adoptionRequest', foreignKey: "adoptionRequestId" });
+
+//ResidencesTenant -> TenantsPsychologicalData
+ResidencesTenant.hasOne(TenantsPsychologicalData, { as: 'tenantPsychologicalData', foreignKey: "residencesTenantId" });
+TenantsPsychologicalData.belongsTo(ResidencesTenant, { as: 'residencesTenant', foreignKey: "residencesTenantId" });
+
+//PreviousPet -> PreviousPetsVaccine
+PreviousPet.hasMany(PreviousPetsVaccine, { as: 'previousPetVaccine', foreignKey: "previousPetId" });
+PreviousPetsVaccine.belongsTo(PreviousPet, { as: 'previousPet', foreignKey: "previousPetId" });
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

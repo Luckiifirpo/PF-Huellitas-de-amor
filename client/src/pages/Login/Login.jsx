@@ -32,6 +32,7 @@ const Login = (props) => {
         const emailInput = e.target.querySelector("#email-input");
         const passwordInput = e.target.querySelector("#password-input");
 
+        console.log(emailInput.value, value);
         dispatch(loginWithEmailAndPassword(emailInput.value, passwordInput.value));
     }
 
@@ -123,7 +124,7 @@ const Login = (props) => {
                                         <Link to="/restore_password" className={style.link}>{lang.iniciarSesion.labels.olvidoContraseña}</Link>
                                     </Grid>
                                     <Grid item>
-                                        <Button type="submit" variant="contained" color='info' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
+                                        <Button type="submit" variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
                                     </Grid>
                                 </Grid>
                             </form>
