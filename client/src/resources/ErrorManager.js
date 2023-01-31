@@ -2,6 +2,17 @@ const errorMessageList = {
     AxiosError: {
         ERR_NETWORK: "Ocurrio un error al intentar establecer la conexion con el servidor"
     },
+    LoginError : {
+        UserNotFound : "No se ha encontrado usuario registrado con este correo",
+        InvalidPassword: "Contraseña incorrecta"
+    },
+    SignUpError: {
+        EmailAlreadyExist: "Este email ya esta registrado"
+    },
+    ChangingPasswordError: {
+        OldPasswordNotMatch: "Contraseña anterior incorrecta",
+        RepeatedPasswordNotMatch: "Debe repetir la contraseña"
+    },
     FirebaseError: {
         "account_exists_with_different_credential": "Ya usaste un metodo de autenticacion distinto anteriormente"
     },
@@ -10,6 +21,7 @@ const errorMessageList = {
 
 const ErrorManager = {
     CreateErrorInfoObject(error, detailsData) {
+        console.log(error);
         if (error.name) {
             switch (error.name) {
                 case "AxiosError":
@@ -18,6 +30,27 @@ const ErrorManager = {
                         message: errorMessageList["AxiosError"][error.code],
                         detailsData
                     }
+                case "LoginError" : {
+                    return {
+                        title: "Error de autenticacion",
+                        message: errorMessageList["LoginError"][error.code],
+                        detailsData
+                    }
+                }
+                case "SignUpError" : {
+                    return {
+                        title: "Error de registro",
+                        message: errorMessageList["SignUpError"][error.code],
+                        detailsData
+                    }
+                }
+                case "ChangingPasswordError" : {
+                    return {
+                        title: "Error al actualizar contraseña",
+                        message: errorMessageList["ChangingPasswordError"][error.code],
+                        detailsData
+                    }
+                }
                 case "FirebaseError":
                     return {
                         title: "Error de autenticacion",
