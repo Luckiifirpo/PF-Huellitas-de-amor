@@ -1,10 +1,14 @@
 const { Op } = require('sequelize');
 const { Usuario, Animal } = require('../../db');
 const { generateId } = require("../utils/utils");
-const bcryptjs = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
 //const { transporter } = require('../utils/mailer');
+
+const compare = async (passwordPlain, hashPassword) => {
+    return await bcrypt.compare(passwordPlain, hashPassword)
+}
 
 const getAllUsers = async (req, res) => {
     const { name } = req.query;
@@ -35,10 +39,10 @@ const postUser = async (req, res) => {
 
     const emailExist = await Usuario.findOne({ where: { email } })
 
-    if (emailExist) return res.status(409).send({ error: "El email ya está en uso" })
+    if (emailExist) return res.status(409).send({ code: "EmailAlreadyExist", error: "El email ya está en uso" });
 
-    const salt = await bcryptjs.genSalt(10);
-    const encrypted = await bcryptjs.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const encrypted = await bcrypt.hash(password, salt);
     const newUser = await Usuario.create({
         id: generateId(),
         name,
@@ -47,16 +51,16 @@ const postUser = async (req, res) => {
         direction,
         email,
         hasAJob,
-        occupation:"",
+        occupation: "",
         password: encrypted
     })
 
-    const token = await jwt.sign({id: newUser._id}, process.env.SECRET_KEY, {
+    const token = await jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
         expiresIn: process.env.JWT_EXPIRE,
     });
 
     try {
-        res.cookie({"token": token}).status(200).send(newUser)
+        res.cookie({ "token": token }).status(200).send(newUser)
     } catch (error) {
         console.log(error.message)
         res.status(400).send({ error: error.message })
@@ -80,7 +84,7 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, surname, age, direction, email, hasAJob, occupation, photoURL} = req.body;
+        const { name, surname, age, direction, email, hasAJob, occupation, photoURL } = req.body;
 
         const usuario = await Usuario.findByPk(id)
         usuario.name = name || usuario.name;
@@ -106,7 +110,7 @@ const getUserById = async (req, res) => {
 
     try {
         const userData = await Usuario.findByPk(user_id);
-        if(userData){
+        if (userData) {
             res.status(200).json(userData);
         } else {
             return res.status(404).json({ message: error.message });
@@ -119,13 +123,22 @@ const getUserById = async (req, res) => {
 //Usuario cambia contraseña
 const updatePasswordUser = async (req, res) => {
     const { id } = req.params
-    const { oldPassword,newPassword,repeatedNewPassword } = req.body;
-console.log(oldPassword,newPassword,repeatedNewPassword )
+    const { oldPassword, newPassword, repeatedNewPassword } = req.body;
+
     let user = await Usuario.findByPk(id);
-    const salt = await bcryptjs.genSalt(10);
-    const newEncryptedPassword = await bcryptjs.hash(newPassword, salt);
+    const salt = await bcrypt.genSalt(10);
+    const newEncryptedPassword = await bcrypt.hash(newPassword, salt);
 
     if (!user) return res.status(404).send('El Usuario no existe');
+
+    const matchOldPassword = await compare(oldPassword, user.password);
+
+    if (!matchOldPassword) return res.status(403).send({ code: "OldPasswordNotMatch", message: 'La contraseña anterior no coincide con la que tienes registrada' });
+
+    if (newPassword !== repeatedNewPassword) {
+        return res.status(403).send({ code: "RepeatedPasswordNotMatch", message: 'La contraseñas no coinciden' });
+    }
+
     try {
         user.password = newEncryptedPassword;
 
@@ -138,17 +151,18 @@ console.log(oldPassword,newPassword,repeatedNewPassword )
         user.occupation = user.occupation
         await user.save()
         res.status(200).send({ message: "Cambiado exitosamente" });
-    } catch (error) { console.log(error)
+    } catch (error) {
+        console.log(error)
         res.status(500).send({ message: error.message });
-        
+
     }
-    
+
 }
 
-const forgotPassword = async (req,res) => {
-    const {email} = req.body;
-    
-    if(!email) return res.send("email es requerido");
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) return res.send("email es requerido");
 
     const user = await Usuario.findOne({
         where: {
@@ -156,10 +170,10 @@ const forgotPassword = async (req,res) => {
         }
     });
 
-    if(!user) return res.send('Usuario no esta registardo');
+    if (!user) return res.send('Usuario no esta registardo');
 
     try {
-        
+
         const reset1 = generateId();
         user.setDataValue("reset", reset1);
         user.save();
@@ -180,43 +194,43 @@ const forgotPassword = async (req,res) => {
             <h2>Por favor has click en el siguiente enlace para restablecer la contraseña</h2>
             <p>${process.env.CLIENT_URL}/reset-password/${user.dataValues.reset}</p>
             `, // html body
-          });
-          
-          res.status(200).send("email enviado")
+        });
+
+        res.status(200).send("email enviado")
     } catch (error) {
-          res.status(500).send({error: error.message});
+        res.status(500).send({ error: error.message });
     }
 }
 
-const resetpassword = async(req, res) => {
-    const {id} = req.params;
-    const {newPassword} = req.body;
+const resetpassword = async (req, res) => {
+    const { id } = req.params;
+    const { newPassword } = req.body;
     // console.log(reset);
     // console.log(newPassword);
-    if(!newPassword){
+    if (!newPassword) {
         return res.status(400).json("debe ingresar una nueva contraseña");
     }
-    
-    const user = await Usuario.findOne({where:{reset: id}});
-    
+
+    const user = await Usuario.findOne({ where: { reset: id } });
+
     // console.log(user)
-    if(!user){
-        return res.status(400).json({error: "User with this token does not existe"});
-    }  
-    const token =  await jwt.sign({id: user._id}, process.env.RESET_PASSWORD_KEY, {
+    if (!user) {
+        return res.status(400).json({ error: "User with this token does not existe" });
+    }
+    const token = await jwt.sign({ id: user._id }, process.env.RESET_PASSWORD_KEY, {
         expiresIn: '20m',
     });
     try {
-        const salt = await bcryptjs.genSalt(10);
-        const password = await bcryptjs.hash(newPassword, salt);
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(newPassword, salt);
         user.update({
             password: password
         }
         );
-        res.cookie({"token":token}).status(200).send("contraseña cambiada");
+        res.cookie({ "token": token }).status(200).send("contraseña cambiada");
 
     } catch (error) {
-        res.status(400).send({error:error.message});
+        res.status(400).send({ error: error.message });
     }
 }
 
@@ -227,6 +241,6 @@ module.exports = {
     updateUser,
     getUserById,
     updatePasswordUser,
-    forgotPassword, 
+    forgotPassword,
     resetpassword
 }
