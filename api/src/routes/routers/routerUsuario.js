@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getAllUsers, postUser, deleteUser, updateUser, updatePasswordUser, getUserById, forgotPassword, resetpassword } = require("../controllers/UsersControllers.js");
+const { getAllUsers, postUser, deleteUser, updateUser, updatePasswordUser, getUserById, forgotPassword, resetpassword, getReview } = require("../controllers/UsersControllers.js");
 
 
 const usersRouter = Router();
@@ -19,6 +19,8 @@ usersRouter.put("/user_password/:id", updatePasswordUser)
 usersRouter.post("/forgot-password", forgotPassword)
 
 usersRouter.put("/resetpassword/:id", resetpassword)
+
+usersRouter.get("/:id/review", getReview)
 
 
 module.exports = usersRouter;

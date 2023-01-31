@@ -139,9 +139,14 @@ export const postForgotPassword = (obj) => async (dispatch) => {
         dispatch(setUserBusyMode(true));
 
         const response = await api.post(`/users/forgot-password`,{email: obj});
-        console.log(response.data + " respuesta servidor");
+        //console.log(response.data + " respuesta servidor");
         dispatch(setUserBusyMode(false));
         dispatch(setForgotPassword(response.data));
+        dispatch(setUserMessage({
+            title: "Email ha sido enviado a tu correo",
+            message: "Se ha enviado a tu correo un link para restablecer tu contraseña",
+            details: []
+        }))
     } catch (error) {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
