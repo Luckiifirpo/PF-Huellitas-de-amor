@@ -29,6 +29,7 @@ import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
 import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
 import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
+import PutAdoption from "../components/DataTable/PutPetsAdoption";
 
 function App() {
 
@@ -95,6 +96,7 @@ function App() {
           <Route path="/favoritos" element={<Favorite />} />
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/pet_update/:id" element={<PutAdoption />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
           <Route path="/cambio-contraseña" element={<CambioContraseña />} />
         </Route>

@@ -53,7 +53,7 @@ const PetCard = (props) => {
                         image={data ? data.img : ""}
                         alt={(data ? data.name : "") + " image"}>
                     </CardMedia>
-                    <CardContent style={{ paddingBottom: 5 }}>
+                    <CardContent style={{ paddingBottom: 1 }}>
                         <Typography variant="body2" color="text.secondary">
                             {
                                 data ? data.description : null
@@ -66,7 +66,7 @@ const PetCard = (props) => {
                     </CardContent>
                 </Link>
             </CardActionArea>
-            <CardActions style={{ paddingTop: 5 }} disableSpacing>
+            <CardActions style={{ paddingTop: 5  }} disableSpacing>
                 {
                     modeAction ? 
                     (

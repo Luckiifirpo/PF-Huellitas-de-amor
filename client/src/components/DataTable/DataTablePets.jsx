@@ -4,6 +4,7 @@ import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState} from 'react';
 import { getAllPets } from "../../redux/slices/petsSlice";
+import { Link } from "react-router-dom";
 
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -113,7 +114,8 @@ const columns = [
         <GridActionsCellItem
           icon={< EditIcon />}
           label="Editar"
-          onClick={(e) => {handleOpen( <PutPetsAdoption src={params.row}/>)}}
+          // onClick={(e) => {handleOpen( <PutPetsAdoption src={params.row}/>)}}
+          onClick={handleOpen}
           // onClick={deleteUser(params.id)}
         />,
         
@@ -128,15 +130,30 @@ const columns = [
   // const allPets = useSelector((state)=>state.pets)
   const [tableData, setTableData] = useState([])
 
+  const currentPets = useSelector((state) => state.petsList);
   const [modalEditar, setModalEditar]= useState(false);
 
+  const [PetSeleccionado, setPetSeleccionado]=useState({
+    id:"",
+    name: "",
+    date: "",
+    species: "",
+    age: 0,
+    ageTime: "",
+    weight: 0,
+    size: "",
+    gender: "",
+    breed: "",
+    description: "",
+  })
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = (id) =>{
-    setOpen(true)
+   setOpen(true)
     console.log(id)
   } 
   const handleClose = () => setOpen(false);
+
 
 
 
@@ -174,6 +191,7 @@ const columns = [
       >
         <Box sx={style}>
            <PutPetsAdoption/> 
+
         </Box>
       </Modal>
     </div>
