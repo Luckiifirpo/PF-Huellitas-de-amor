@@ -1,7 +1,7 @@
 .bg-footer {
-    padding: 20px 0;
+    padding: 10px 0;
     background-color: #FF3041;
-    border-radius: 200px 0px 0px 0px;
+    border-radius: 0px 200px 0px 0px;
     
 }
 
@@ -9,23 +9,27 @@
     color:#fff;
 }
 .footer a {
-    color:#FFAB13;
+    color:#fff;
     text-decoration: none;
     display: flex;
-    flex-direction: column;
-    gap: 51px;
-    font-size: 1.2rem;
-    margin-top: 30px;
+    /* flex-direction: column; */
+    gap: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+    margin-top: 20px;
+    line-height: 0;
+    
 }
+
 
 .newsletter{
     border:none;
     color:#fff;
-    margin-left: 150px;
+
 }
 
 .logo{
-    width: 100px;
-    margin-left: 200px;
-    margin-top: 30px;
+width: 100px;
+  margin-top: 10px;
 }
