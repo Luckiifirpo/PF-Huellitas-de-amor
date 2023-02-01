@@ -205,7 +205,7 @@ const Home = () => {
 
         <ScrollTop>
           <Fab size="small" aria-label="scroll back to top">
-            <KeyboardArrowUpIcon sx={{ color: '#FF3041' }} />
+            <KeyboardArrowUpIcon sx={{ color: '#FF3041'}} />
           </Fab>
         </ScrollTop>
       </Box>
