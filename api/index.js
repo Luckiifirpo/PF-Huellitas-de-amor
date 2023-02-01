@@ -7,7 +7,7 @@ const { conn } = require('./src/db.js');
 
 conn.sync({ force: false }).then(() => {
 
-  server.listen(3001, () => {
+  server.listen(6432, () => {
     console.log('server listening at 3001'); // eslint-disable-line no-console
   });
 });
