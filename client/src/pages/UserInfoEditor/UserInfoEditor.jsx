@@ -8,13 +8,14 @@ import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
 import _ from "lodash";
 import { setUserBusyMode, updateUserInfo } from "../../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 
 const UserInfoEditor = (props) => {
     const cloudinary_cloud_name = "dydncradb";
     const cloudinary_preset = "qeohapyd";
     const currentUser = useSelector((state) => state.users.currentUser);
+    const loginType = useSelector((state) => state.users.loginType);
     const lang = useSelector((state) => state.lang.currentLangData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -65,6 +66,8 @@ const UserInfoEditor = (props) => {
             photoURL: newPhotoURL ? newPhotoURL : localUserInfoData.photoURL
         }
 
+        console.log(newUserInfoData);
+
         dispatch(updateUserInfo(newUserInfoData));
     }
 
@@ -104,7 +107,6 @@ const UserInfoEditor = (props) => {
     }
 
     useEffect(() => {
-
         if (currentUser) {
             if (!_.isEqual(lastUpdatedCurrentUser, currentUser)) {
                 setLastUpdatedCurrentUserData(currentUser);
@@ -121,7 +123,7 @@ const UserInfoEditor = (props) => {
             navigate("/iniciar-sesion");
         }
 
-    }, [currentUser, localUserInfoData, lastUpdatedCurrentUser, lang]);
+    }, [currentUser, localUserInfoData, lastUpdatedCurrentUser, lang, loginType]);
 
     return <div style={{ minHeight: "calc(100vh - 267px)" }}>
         <Container style={{ marginBottom: 30, marginTop: 130 }}>
@@ -178,7 +180,7 @@ const UserInfoEditor = (props) => {
                                             </Card>
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <Button onClick={update_user_info} variant="contained" color='info' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
+                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -198,6 +200,10 @@ const UserInfoEditor = (props) => {
                                         <Grid item sx={{ width: "100%" }}>
                                             <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
                                         </Grid>
+
+                                        {loginType === "withEmailAndPassword" ? <Grid item sx={{ width: "100%" }}>
+                                            <Link to="/cambio-contraseña">Actualizar Contraseña</Link>
+                                        </Grid> : null}
                                     </Grid>
                                 </Box>
                             </Grid>

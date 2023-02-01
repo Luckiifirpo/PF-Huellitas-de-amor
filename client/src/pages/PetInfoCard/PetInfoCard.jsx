@@ -266,8 +266,8 @@ const PetInfoCard = (props) => {
                                         },
                                         justifyContent: "center"
                                     }}>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }}>{lang.petInfoCard.buttons.adopcion}</Button>
-                                        <Button variant="contained" type="submit" color='info' size="large" sx={{ borderRadius: '20px', my: "20px", marginLeft: "5px" }} onClick={(event) => { navigate("/adopciones") }}>{lang.petInfoCard.buttons.volver}</Button>
+                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }} onClick={(event) => { navigate("/adoption-request/" + pet_id) }}>{lang.petInfoCard.buttons.adopcion}</Button>
+                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginLeft: "5px" }} onClick={(event) => { navigate("/adopciones") }}>{lang.petInfoCard.buttons.volver}</Button>
                                     </Box>
                                 </Grid>
                             </Grid>

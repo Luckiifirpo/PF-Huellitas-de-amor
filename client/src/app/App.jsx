@@ -18,7 +18,7 @@ import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 import Favorite from "../pages/Favorites/Favorites";
 import FirebaseApp from "../services/firebaseApp";
 import { getAuth } from "firebase/auth";
-import { federatedLogin, resetCurrentUser, setCurrentUser, signOut } from "../redux/slices/userSlice";
+import { federatedLogin, resetCurrentUser, setCurrentUser, setLoginType, signOut } from "../redux/slices/userSlice";
 import api from "../services/api";
 import { setError } from "../redux/slices/errorsSlice";
 import ErrorManager from "../resources/ErrorManager";
@@ -28,6 +28,11 @@ import Completion from "../pages/Stripe/Completion";
 import UserInfoEditor from "../pages/UserInfoEditor/UserInfoEditor";
 import MessageInfoDialog from "../components/Dialogs/InfoDialog/MessageInfoDialog";
 import BusyModeCircularProgressIndicator from "../components/Dialogs/BusyModeCircularProgressIndicator/BusyModeCircularProgressIndicator";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import AdoptionRequestForm from "../pages/AdoptionRequestForm/AdoptionRequestForm";
+import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
+import PutAdoption from "../components/DataTable/PutPetsAdoption";
 
 function App() {
 
@@ -47,6 +52,7 @@ function App() {
           try {
             const response = await api.get("/users/" + user_id);
             dispatch(setCurrentUser(response.data));
+            dispatch(setLoginType("withEmailAndPassword"));
           } catch (error) {
             dispatch(signOut());
             dispatch(setError(ErrorManager.CreateErrorInfoObject(error, [
@@ -95,11 +101,15 @@ function App() {
           <Route path="/stripe" element={<Stripe />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-info-editor" element={<UserInfoEditor />} />
+          <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
+          <Route path="/cambio-contraseña" element={<CambioContraseña />} />
         </Route>
           <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
-        <Route path="/iniciar-sesion" element={<Login />} />
+        <Route path="/iniciar-sesion" element={<Login />} />      
         <Route path="/registro-usuario" element={<SignUp />} />
+        <Route path="/restore-password" element={<ForgotPassword/>}/>
+        <Route path="/reset-password/:id" element={<ResetPassword/>}  />
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <ErrorDialog />

@@ -31,7 +31,7 @@ function Completion(props) {
                   <Typography component="p" sx={{ fontFamily: 'Outfit', fontSize: '30px', lineHeight: '36px', fontWeight: '400', color: '#3B57A9', textAlign: 'center' }}>
                      Cada granito de arena cuenta
                   </Typography>
-                  <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>volver al inicio</Button>
+                  <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>volver al inicio</Button>
                </Grid>
             </Grid>
          </Container>

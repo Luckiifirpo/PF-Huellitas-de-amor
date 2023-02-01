@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -17,20 +17,25 @@ import higiene from '../../assets/image/higiene.svg'
 import otros from '../../assets/image/bolso.svg'
 import imgDonaciones from '../../assets/image/image_donaciones.png'
 import style from './Donations.module.css'
-import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setAmountDonation } from '../../redux/slices/petsSlice';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 const Donations = () => {
   const navigate = useNavigate()
-  const lang = useSelector((state) => state.lang.currentLangData);
-
   const handlerContacto = (e) => {
     navigate("/contacto")
   }
+  const dispatch = useDispatch()
+  const lang = useSelector((state) => state.lang.currentLangData);
 
-  useEffect(() => {
-
-  }, [lang]);
+  const handleChange = (event) => {
+    console.log(event)
+    dispatch(setAmountDonation(event.target.value))
+  }
 
   return (
     <Box>
@@ -61,7 +66,6 @@ const Donations = () => {
                       </ListItemIcon>
                       <ListItemText primary={lang.donaciones.lists.medicamentos.toUpperCase()} />
                     </ListItemButton>
-
                   </ListItem>
                   <ListItem disablePadding>
                     <ListItemButton>
@@ -112,10 +116,46 @@ const Donations = () => {
             <Typography component="p" sx={{ margin: '10px 0px' }}>
               {lang.donaciones.paragraphs.donacionesEInsumos}
             </Typography>
-            <Button variant="contained" color='info' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
-
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
           </Grid>
-          <Grid item md={6} sx={{ marginBottom: '-10px' }}>
+          <Grid item md={5} 
+            sx={{
+              backgroundColor:'#fff',
+              borderRadius: '.45rem',
+              padding:'32px',
+              webkitBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
+              mozBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
+              boxShadow:' 5px 5px 29px -12px rgba(0,0,0,0.52)'}}>
+          <Typography
+              component="h5"
+              variant="h2"
+              sx={{
+                color:'#252525',
+                textTransform: "uppercase",
+                fontWeight: "700",
+                fontSize: '20px',
+              }}
+            >
+              Ingresa el Monto de Tu Donación
+          </Typography>
+            <Box
+              sx={{display:'flex', flexDirection:'column', gap:'10px', marginTop:'10px'}}
+            >
+              <InputLabel id="demo-simple-select-label">Selecciona un Monto</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Selecciona"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1000}>10$</MenuItem>
+                    <MenuItem value={2000}>20$</MenuItem>
+                    <MenuItem value={3000}>30$</MenuItem>
+                    <MenuItem value={5000}>50$</MenuItem>
+                    <MenuItem value={10000}>100$</MenuItem>
+                  </Select>
+              <Button component={Link} to="/stripe" variant="contained" sx={{textDecoration:'none'}}>Ir a Pagar</Button>
+            </Box>
           </Grid>
         </Grid>
 

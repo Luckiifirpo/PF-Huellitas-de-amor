@@ -54,7 +54,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     reset: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      default: ''
     }
   });
 };
