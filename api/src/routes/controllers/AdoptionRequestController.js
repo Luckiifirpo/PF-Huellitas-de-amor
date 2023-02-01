@@ -8,6 +8,9 @@ const postAdoptionRequest = async (req, res) => {
         const { adoption_request_data } = req.body;
         const adoptionRequestId = generateId();
 
+        const user_id = adoption_request_data.user_id;
+        const pet_id = adoption_request_data.pet_id;
+
         //LA NUEVA SOLICITUD DE ADOPCION
         const newAdoptionRequest = await AdoptionRequest.create({
             id: adoptionRequestId,
@@ -127,6 +130,15 @@ const postAdoptionRequest = async (req, res) => {
             await newResidencesTenant.setTenantPsychologicalData(newTenantPsychologicalData);
             await newAdoptionRequest.addResidencesTenant(newResidencesTenant);
         }
+
+        const user = await Usuario.findByPk(user_id);
+        const pet = await Animal.findByPk(pet_id);
+
+        user.setAdoptionRequest(newAdoptionRequest);
+        pet.setAdoptionRequest(newAdoptionRequest);
+
+        user.hasAdoptionRequest = true;
+        user.save();
 
         res.status(200).json(await AdoptionRequest.findByPk(adoptionRequestId, {
             include: [{

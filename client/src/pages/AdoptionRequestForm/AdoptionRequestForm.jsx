@@ -116,6 +116,7 @@ const adoption_request_template = {
 const AdoptionRequestForm = (props) => {
 
     const petsList = useSelector((state) => state.pets.petsList);
+    const currentUser = useSelector((state) => state.users.currentUser);
     const dispatch = useDispatch();
     const { pet_id } = useParams();
 
@@ -457,13 +458,18 @@ const AdoptionRequestForm = (props) => {
     }
 
     const CreateAdoptionRequest = () => {
-        dispatch(createAdoptionRequest(localState));
+        const adoptionRequestData = {
+            ...localState,
+            user_id: currentUser.id,
+            pet_id:  pet_id
+        }
+
+        dispatch(createAdoptionRequest(adoptionRequestData));
     }
 
     useEffect(() => {
 
     }, [localState]);
-    console.log(pet_data);
 
     return <Container style={{ marginTop: '150px', marginBottom: '10px', color: '#FF3041' }}>
         <Grid container spacing={4}>
