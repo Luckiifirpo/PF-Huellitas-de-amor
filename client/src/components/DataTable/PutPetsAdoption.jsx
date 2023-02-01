@@ -135,7 +135,18 @@ const PutAdoption = (props) => {
     description: "",
   };
  
- 
+//  const [petDescription, setPetDescription] = useState({
+//   name: "",
+//   date: "",
+//   species: "",
+//   age: 0,
+//   ageTime: "",
+//   weight: 0,
+//   size: "",
+//   gender: "",
+//   breed: "",
+//   description: "",
+//  })
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();

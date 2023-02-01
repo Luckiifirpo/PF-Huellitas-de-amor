@@ -138,9 +138,10 @@ const columns = [
 
 
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = (id) =>{
-   setOpen(true)
-    console.log(currentPets)
+   setOpen(true, currentPets.id)
+    console.log(id)
  
   } 
   const handleClose = () => setOpen(false);
