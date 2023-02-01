@@ -57,6 +57,9 @@ module.exports = (sequelize) => {
     reset: {
       type: DataTypes.STRING,
       default: ''
+    },
+    hasAdoptionRequest: {
+      type: DataTypes.BOOLEAN
     }
   });
 };
