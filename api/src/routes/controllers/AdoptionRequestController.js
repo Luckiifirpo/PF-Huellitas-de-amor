@@ -139,7 +139,10 @@ const postAdoptionRequest = async (req, res) => {
 
         user.hasAdoptionRequest = true;
         user.save();
-        console.log(user)
+        console.log(user.datavalues)
+        // console.log(user.datavalues.name)
+        // console.log(user.datavalues.surname)
+        console.log(pet)
         res.status(200).json(await AdoptionRequest.findByPk(adoptionRequestId, {
             include: [{
                 model: TenantsPsychologicalData,
