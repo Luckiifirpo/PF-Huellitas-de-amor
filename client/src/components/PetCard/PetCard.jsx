@@ -8,19 +8,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFavorite, setFavorites, getFavorites } from "../../redux/slices/adoptionSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect,useState } from "react";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
+
+
 const PetCard = (props) => {
 
     const { data, modeAction} = props;
     const [toggle, setToggle] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [openRemove, setOpenRemove] = useState(false);
     const dispatch = useDispatch()
     const petsData = useSelector( state => state.adoptions.favoritesPets);
     const lang = useSelector((state) => state.lang.currentLangData);
     const handleFavorites = () => {
         setToggle( state => !state)
         if (!toggle) {
+            setOpen(true)
             dispatch(setFavorites(data))
             return
         }
+        setOpen(false)
+        setOpenRemove(true)
         dispatch(deleteFavorite(data.id))
         dispatch(getFavorites())
     }
@@ -31,6 +42,17 @@ const PetCard = (props) => {
     useEffect(()=>{
         dispatch(getFavorites())
     },[dispatch, lang])
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setOpen(false);
+        setOpenRemove(false)
+    };
+      
+
 
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
@@ -70,9 +92,12 @@ const PetCard = (props) => {
                 {
                     modeAction ? 
                     (
-                        <IconButton aria-label="add to favorites" onClick={handleFavorites}>
-                            <FavoriteIcon {...petsData.some(pet => pet.id === data.id) ? {color:"primary"} : {color:"inherit"}} />
-                        </IconButton>
+                        <>
+                            <IconButton aria-label="add to favorites" onClick={handleFavorites}>
+                                <FavoriteIcon {...petsData?.some(pet => pet.id === data.id) ? {color:"primary"} : {color:"inherit"}} />
+                            </IconButton>
+
+                      </>
 
                     )
                     : 
@@ -86,6 +111,16 @@ const PetCard = (props) => {
                     <ShareIcon />
                 </IconButton>
             </CardActions>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    ¡Se ha agregado a Favoritos!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openRemove} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    ¡Ha sido removido de Favoritos!
+                </Alert>
+            </Snackbar>
         </Card>
     )
 }

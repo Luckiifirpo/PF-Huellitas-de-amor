@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import UserAccountMenu from '../UserAccountMenu/UserAccountMenu';
 import { setToGoAfterLogin } from '../../redux/slices/navigationSlice';
 import LangMenu from '../LangMenu/LangMenu';
-
+import Badge from '@mui/material/Badge';
 
 
 const drawerWidth = 240;
@@ -55,6 +55,9 @@ const Navbar = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const numberFavorites = useSelector(state => state.adoptions.favoritesPets)
+ 
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -88,7 +91,8 @@ const Navbar = (props) => {
         ))}
         <ListItem disablePadding>
           <Button component={RouterLink} to="/favoritos">
-            {lang.navbar.links.inicio}
+            {/* {lang.navbar.links.inicio} */}
+            Favoritos
           </Button>
         </ListItem>
         <ListItem disablePadding>
@@ -129,7 +133,9 @@ const Navbar = (props) => {
                 </Button>
               ))}
               <Button component={RouterLink} to="/favoritos">
-                <FavoriteIcon />
+                <Badge badgeContent={numberFavorites?.length} color="primary">
+                  <FavoriteIcon />
+                </Badge>
               </Button>
               <LangMenu />
               {
