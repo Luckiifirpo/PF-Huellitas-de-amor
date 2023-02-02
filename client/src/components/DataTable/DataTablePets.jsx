@@ -147,7 +147,7 @@ const columns = [
    setData(currentPets.filter((e)=> e.id === id)[0])
    
  
-   console.log(id)
+   console.log(data.description)
  
   } 
   const handleClose = () => setOpen(false);

@@ -413,15 +413,16 @@ en donde debe hacerse para enviar el post a /animals */
                       </option>
                     ))}
                   </TextField>
+
                   <TextField
                     id="gender"
-                    name="gender"
                     select
                     label="Género"
                     value={formik.values.gender}
                     SelectProps={{
                       native: true,
                     }}
+                   
                     onChange={formik.handleChange}
                     error={
                       formik.touched.gender && Boolean(formik.errors.gender)
@@ -435,6 +436,7 @@ en donde debe hacerse para enviar el post a /animals */
                       </option>
                     ))}
                   </TextField>
+
                   <TextField
                     label="Raza:"
                     variant="standard"
@@ -445,6 +447,11 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.breed && Boolean(formik.errors.breed)}
                     helperText={formik.touched.breed && formik.errors.breed}
                   />
+            
+
+
+
+
                   <TextField
                     label="Descripción:"
                     variant="standard"
