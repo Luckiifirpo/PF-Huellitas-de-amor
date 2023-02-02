@@ -1,9 +1,10 @@
 const { Op } = require('sequelize');
-const { Usuario, Animal } = require('../../db');
+const { Usuario, Animal, Review } = require('../../db');
 const { generateId } = require("../utils/utils");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
+
 //const { transporter } = require('../utils/mailer');
 
 const compare = async (passwordPlain, hashPassword) => {
@@ -234,6 +235,24 @@ const resetpassword = async (req, res) => {
     }
 }
 
+//ruta que muestra todas las review de un user
+const getReview = async(req, res) => {
+    const { id } = req.params;
+
+   try {
+        const review = await Review.findAll({
+            where: {
+                userId: id
+            },
+            include: [{model: Animal}]
+        });
+
+        res.status(200).json(review);
+   } catch (error) {
+        res.status(400).json({error: error.message});
+   }
+}
+
 module.exports = {
     getAllUsers,
     postUser,
@@ -241,6 +260,8 @@ module.exports = {
     updateUser,
     getUserById,
     updatePasswordUser,
-    forgotPassword,
-    resetpassword
+    forgotPassword, 
+    resetpassword,
+    getReview
+
 }

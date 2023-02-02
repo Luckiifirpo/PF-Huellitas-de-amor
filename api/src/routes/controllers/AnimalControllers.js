@@ -1,4 +1,4 @@
-const {Op, Animal, Usuario} = require("../../db")
+const {Op, Animal, Usuario, Review} = require("../../db");
 const {generateId} = require("../utils/utils")
 const {generateDate} = require("../utils/utils") 
 
@@ -111,10 +111,58 @@ const updateAnimal = async (req, res) => {
     }
 }
 
+const postReview = async(req, res) => {
+    const animalId = req.params.id;
+    const { userId, rate, description} = req.body;
+
+    try {
+        if(!userId || rate || description || animalId){
+           res.status(400).send('Debes de completar todos los campos');
+        }
+
+       const review = await Review.create({
+            rate: rate,
+            description: description,
+            animalId: animalId,
+            userId: userId
+        });
+
+        res.status(200).json(review);
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const putReview = async(req, res) => {
+    const animalId = req.params.id;
+    const reviewId = req.params.idreview;
+    const { rate, description } = req.body;
+
+    try {
+        const review = await Review.update({
+            rate: rate,
+            description: description,           
+        },{
+            where : {
+                id : reviewId,
+                animalId: animalId
+            }
+        });
+
+        res.status(200).json(review);
+    } catch (error) {
+       res.status(400).json({error: error.message});
+    }
+
+
+}
+
 module.exports = {
     getAllAnimal,
     getDetail,
     postAnimal,
     deleteAnimal,
-    updateAnimal
+    updateAnimal,
+    postReview,
+    putReview
 }
