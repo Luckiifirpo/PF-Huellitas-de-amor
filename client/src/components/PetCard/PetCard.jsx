@@ -10,7 +10,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect,useState } from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    LinkedinShareButton,
+    TelegramShareButton,
+    TwitterShareButton,
+    WhatsappShareButton,
+  } from "react-share";
+  import {
+    EmailIcon,
+    FacebookIcon,
+    LinkedinIcon,
+    TelegramIcon,
+    TwitterIcon,
+    WhatsappIcon,
+  } from "react-share";
 
 
 
@@ -51,8 +66,6 @@ const PetCard = (props) => {
         setOpen(false);
         setOpenRemove(false)
     };
-      
-
 
     return (
         <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
@@ -110,6 +123,30 @@ const PetCard = (props) => {
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
+                
+            </CardActions>
+            <CardActions>
+            <FacebookShareButton url={"/pet_info/" + data.id} quote={'adopta esta hermosa mascota'} hashtag={'#huellitasDeAmor'}>
+                    <FacebookIcon size={40} round/>
+                </FacebookShareButton>
+                <WhatsappShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'} separator={'  '}>
+                    <WhatsappIcon size={40} round/>
+                </WhatsappShareButton>
+                <LinkedinShareButton url={"/pet_info/" + data.id}  
+                   title={'adopta esta hermosa mascota'} 
+                   summary={'Esta aplicación web tiene como objetivo conectar personas con posibles mascotas en adopción'} 
+                   source={'huellitasDeAmor'}>
+                <LinkedinIcon size={40} round/>
+                </LinkedinShareButton>
+                <TelegramShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'}>
+                    <TelegramIcon size={40} round/>
+                </TelegramShareButton>
+                <TwitterShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'} hashtag={['#huellitasDeAmor']} related={[]}>
+                    <TwitterIcon size={40} round/>
+                </TwitterShareButton>
+                <EmailShareButton url={"/pet_info/" + data.id}  subject={'Adopcion de Mascota'} body={'Adopta a esta hermosa mascota'} separator={' '}>
+                    <EmailIcon size={40} round/>
+                </EmailShareButton>
             </CardActions>
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -121,6 +158,7 @@ const PetCard = (props) => {
                     ¡Ha sido removido de Favoritos!
                 </Alert>
             </Snackbar>
+
         </Card>
     )
 }
