@@ -139,7 +139,7 @@ const postAdoptionRequest = async (req, res) => {
 
         user.hasAdoptionRequest = true;
         user.save();
-
+        console.log(user)
         res.status(200).json(await AdoptionRequest.findByPk(adoptionRequestId, {
             include: [{
                 model: TenantsPsychologicalData,

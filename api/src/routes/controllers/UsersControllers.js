@@ -4,6 +4,7 @@ const { generateId } = require("../utils/utils");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
+const { transporter } = require("../utils/mailer");
 
 //const { transporter } = require('../utils/mailer');
 
@@ -37,7 +38,8 @@ const getAllUsers = async (req, res) => {
 
 const postUser = async (req, res) => {
     const { name, surname, age, direction, email, hasAJob, occupation, password } = req.body;
-
+    const fecha = new Date()
+    const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
     const emailExist = await Usuario.findOne({ where: { email } })
 
     if (emailExist) return res.status(409).send({ code: "EmailAlreadyExist", error: "El email ya está en uso" });
@@ -59,7 +61,23 @@ const postUser = async (req, res) => {
     const token = await jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
         expiresIn: process.env.JWT_EXPIRE,
     });
-
+    await transporter.sendMail({
+        from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: `Nueva cuenta en Huellitas`, // Subject line
+        html: `<!DOCTYPE html>
+        <html>
+        <body>
+        <h1>Gracias ${name} ${surname} por unirte a Huellitas de amor</h1>
+        <h1>Nos emociona tenerte con nosotros!</h1>
+        <h1>Seguro te va a encantar!!!</h1>
+        <h3>Fecha y hora del registro: ${fecha}</h3>
+        <h6>No responder a este mensaje</h6>
+        <img src=${imageHuellitas} alt="Huellitas de amor">
+        </body>
+        </html>`, // html body
+      });
+      console.log(email)
     try {
         res.cookie({ "token": token }).status(200).send(newUser)
     } catch (error) {
