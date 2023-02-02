@@ -59,7 +59,7 @@ const loginCtrl = async (req, res) => {
                 </body>
                 </html>`, // html body
               });
-        console.log(email)
+        // console.log(email)
         return res.cookie({"token": token}).status(200).send(user)
     } catch (error) {
         console.log({error})
