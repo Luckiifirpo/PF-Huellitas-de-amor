@@ -121,19 +121,22 @@ const ageTimeArray = [
   },
 ]
 
-const PutAdoption = (props) => {
+const PutAdoption = ({id,name, date, species, age, ageTime, weight, size, gender, breed, description}) => {
   const initialValues = {
-    name: "",
-    date: "",
-    species: "canine",
-    age: 0,
-    ageTime: "years",
-    weight: 0,
-    size: "small",
-    gender: "female",
-    breed: "",
-    description: "",
+    id: id ? id : "",
+    name: name ? name : "",
+    date: date ? date : "",
+    species: species ? species : "",
+    age: age ? age : 0,
+    ageTime: ageTime ? ageTime : "",
+    weight: weight ? weight : 0,
+    size: size ? size : "",
+    gender: gender ? gender : "",
+    breed: breed ? breed : "",
+    description: description ? description : "",
   };
+
+  console.log(age)
  
 //  const [petDescription, setPetDescription] = useState({
 //   name: "",
@@ -220,7 +223,7 @@ en donde debe hacerse para enviar el post a /animals */
 
       const data = await res.json();
       dispatch(
-        postPet({
+        updatePetInfo({
           ...values,
           image: data.secure_url,
         })
