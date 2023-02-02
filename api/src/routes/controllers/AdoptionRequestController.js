@@ -150,6 +150,8 @@ const postAdoptionRequest = async (req, res) => {
         // console.log(petName)
         // console.log(fecha)
         // console.log(petImage)
+        //console.log(user)
+        // console.log(pet)
         await transporter.sendMail({
             from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
             to: email, // list of receivers
