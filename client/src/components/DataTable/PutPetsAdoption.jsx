@@ -29,22 +29,22 @@ import ErrorManager from "../../resources/ErrorManager";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import { useEffect } from "react";
 
-// const validationSchema = yup.object({
-//   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
-//   date: yup.string("Publication Date").required("fecha es obligatoria"),
-//   species: yup.string("pet Species").required("Especie es obligatoria"),
-//   age: yup.string("Enter pet age").required("edad es obligatoria").default(0),
-//   weight: yup
-//     .string("Enter pet weight")
-//     .required("Peso es obligatorio")
-//     .default(0),
-//   size: yup.string("Enter pet size").required("tamaño es obligatorio"),
-//   gender: yup.string("Enter pet gender").required("Genero es obligatorio"),
-//   breed: yup.string("Enter pet breed").required("raza es obligatorio"),
-//   description: yup
-//     .string("Describe your pet")
-//     .default("Descripcion de mascota"),
-// });
+const validationSchema = yup.object({
+  name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
+  date: yup.string("Publication Date").required("fecha es obligatoria"),
+  species: yup.string("pet Species").required("Especie es obligatoria"),
+  age: yup.string("Enter pet age").required("edad es obligatoria").default(0),
+  weight: yup
+    .string("Enter pet weight")
+    .required("Peso es obligatorio")
+    .default(0),
+  size: yup.string("Enter pet size").required("tamaño es obligatorio"),
+  gender: yup.string("Enter pet gender").required("Genero es obligatorio"),
+  breed: yup.string("Enter pet breed").required("raza es obligatorio"),
+  description: yup
+    .string("Describe your pet")
+    .default("Descripcion de mascota"),
+});
 
 const speciesArray = [
   {
