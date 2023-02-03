@@ -2,7 +2,9 @@ const { Usuario } = require('../../db');
 const bcrypt = require('bcryptjs');
 const firebaseAdmin = require('../../config/firebase-config');
 const { generateId } = require('../utils/utils');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const mailer = require('./MailerController');
+const { transporter } = require("../utils/mailer");
 
 const compare = async (passwordPlain, hashPassword) => {
     return await bcrypt.compare(passwordPlain, hashPassword)
@@ -24,11 +26,14 @@ const isAuthenticated = async (req, res, next) => {
 
 const loginCtrl = async (req, res) => {
     const { email, password } = req.body;
-
+    const fecha = new Date()
+    const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
     if(!email || !password) return res.status(400).send({code: "EmptyLoginData", message: "Por favor introduce los datos necesarios"})
     
     try {
         const user = await Usuario.findOne({ where: { email } });
+        const mail = mailer(email)
+        const concaten = user + mail
 
         if (!user) return res.status(409).send({code: "UserNotFound", error: "Usuario o contraseña incorrectos" })
 
@@ -39,7 +44,22 @@ const loginCtrl = async (req, res) => {
         const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
             expiresIn: process.env.JWT_EXPIRE,
         });
-
+        
+            await transporter.sendMail({
+                from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+                to: email, // list of receivers
+                subject: `Inicio de Sesión`, // Subject line
+                html: `<!DOCTYPE html>
+                <html>
+                <body>
+                <h1>Se acaba de registrar un inicio de sesion con su cuenta</h1>
+                <h3>Fecha y hora: ${fecha}</h3>
+                <h6>No responder a este mensaje</h6>
+                <img src=${imageHuellitas} alt="Huellitas de amor">
+                </body>
+                </html>`, // html body
+              });
+        // console.log(email)
         return res.cookie({"token": token}).status(200).send(user)
     } catch (error) {
         console.log({error})
@@ -50,6 +70,8 @@ const loginCtrl = async (req, res) => {
 const federatedLoginCtrl = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const { userData } = req.body;
+    const fecha = new Date()
+    const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
 
     try {
         const loggedUserData = await firebaseAdmin.auth().verifyIdToken(token).then((async (decodedToken) => {
@@ -86,8 +108,25 @@ const federatedLoginCtrl = async (req, res, next) => {
         }))
 
         if (loggedUserData) {
+            await transporter.sendMail({
+                from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+                to: userData.email, // list of receivers
+                subject: `Inicio de Sesión`, // Subject line
+                html: `<!DOCTYPE html>
+                <html>
+                <body>
+                <h1>Se acaba de registrar un inicio de sesion con su cuenta</h1>
+                <h3>Fecha y hora: ${fecha}</h3>
+                <h6>No responder a este mensaje</h6>
+                <img src=${imageHuellitas} alt="Huellitas de amor">
+                </body>
+                </html>`, // html body
+              });
+              console.log(userData.email)
             return res.status(200).json(loggedUserData);
+            
         }
+        
         return res.status(400).json({ message: 'Unauthorized' });
     } catch (error) {
         return res.status(400).json({ error: error.message });
