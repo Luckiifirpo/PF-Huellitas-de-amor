@@ -122,7 +122,9 @@
                 "direccion": "Direccion",
                 "correo": "Correo",
                 "empleado": "Empleado",
-                "ocupacion": "Ocupacion"
+                "ocupacion": "Ocupacion",
+                "adopto": "Adoptó",
+                "contraseña": "Contraseña"
             },
             "fotoPerfil": {
                 "fotoPerfil": "Foto de perfil",

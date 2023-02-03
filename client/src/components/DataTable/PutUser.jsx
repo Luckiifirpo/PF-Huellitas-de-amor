@@ -192,13 +192,20 @@ const PutUser = (props) => {
                                         <Grid item sx={{ width: "100%" }}>
                                             <FormControlLabel control={<Checkbox name="hasAJob" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAJob) : false} />} label={lang.userInfoEditor.inputs.empleado} />
                                         </Grid>
+                                       
                                         <Grid item sx={{ width: "100%" }}>
                                             <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
                                         </Grid>
+                                        <Grid item sx={{ width: "100%" }}>
+                                            <FormControlLabel control={<Checkbox name="hasAdoptionRequest" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAdoptionRequest) : false} />} label={lang.userInfoEditor.inputs.adopto} />
+                                        </Grid>
 
-                                        {loginType === "withEmailAndPassword" ? <Grid item sx={{ width: "100%" }}>
+                                        <Grid item sx={{ width: "100%", textDecoration:"none" }}>
+                                            <TextField name="password" value={localUserInfoData ? localUserInfoData.password : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.contraseña} sx={{ width: "100%" }} />
                                             <Link to="/cambio-contraseña">Actualizar Contraseña</Link>
-                                        </Grid> : null}
+                                        </Grid>
+
+                                       
 
                                         <Grid item sx={{ width: "100%" }}>
                                             <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
