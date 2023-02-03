@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const { Usuario, Animal, AdoptionRequest, ApplicantsResidence, PersonalReference, PreviousPet, PreviousPetsVaccine, ResidencesTenant, TenantsPsychologicalData } = require('../../db');
 const { generateId } = require("../utils/utils");
+const { transporter } = require("../utils/mailer");
 
 const postAdoptionRequest = async (req, res) => {
 
@@ -133,12 +134,42 @@ const postAdoptionRequest = async (req, res) => {
 
         const user = await Usuario.findByPk(user_id);
         const pet = await Animal.findByPk(pet_id);
-
+        const name = user.dataValues.name
+        const email = user.dataValues.email
+        const petName = pet.dataValues.name
+        const petImage = pet.dataValues.image
+        const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
+        const fecha = new Date()
         user.setAdoptionRequest(newAdoptionRequest);
         pet.setAdoptionRequest(newAdoptionRequest);
 
         user.hasAdoptionRequest = true;
         user.save();
+        // console.log(email)
+        // console.log(name)
+        // console.log(petName)
+        // console.log(fecha)
+        // console.log(petImage)
+        //console.log(user)
+        // console.log(pet)
+        await transporter.sendMail({
+            from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: `Solicitud de adopción`, // Subject line
+            html: `<!DOCTYPE html>
+            <html>
+            <body>
+            <h1>Gracias por mostrar interes en ${petName} seguro se pondrá feliz</h1>
+            <img src = ${petImage} alt ="Mascota">
+            <h4>Estaremos en contacto para agendar una cita según tu calendario</h4>
+            <h3>Fecha y hora de radicación del formulario: ${fecha}</h3>
+            <h6>No responder a este mensaje</h6>
+            <img src=${imageHuellitas} alt="Huellitas de amor">
+            </body>
+            </html>`, // html body
+          });
+        
+        
 
         res.status(200).json(await AdoptionRequest.findByPk(adoptionRequestId, {
             include: [{
