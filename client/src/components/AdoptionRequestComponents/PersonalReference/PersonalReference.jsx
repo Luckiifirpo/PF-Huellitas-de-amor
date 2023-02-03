@@ -1,6 +1,7 @@
 import { Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react";
 
 
 /*
@@ -19,6 +20,12 @@ const personal_reference_template = {
 const PersonalReference = (props) => {
 
     const { item, data } = props;
+    const [formErrors, setFormErrors] = useState({
+        name: true,
+        surname: true,
+        age: true,
+        relationship: true
+    });
 
     const RemoveIt = () => {
         if (props.onRemove) {
@@ -30,8 +37,16 @@ const PersonalReference = (props) => {
         const propertyName = event.target.name;
         let propertyValue = value != undefined ? value : event.target.value;
 
-        if(!isNaN(parseFloat(propertyValue))){
+        if (!isNaN(parseFloat(propertyValue))) {
             propertyValue = parseFloat(propertyValue);
+        }
+
+        if (formErrors.hasOwnProperty(propertyName)) {
+            const newFormErrors = {
+                ...formErrors,
+                [propertyName]: propertyName !== "age" ? (propertyValue ? false : true) : (propertyValue && propertyValue > 0 ? false : true)
+            }
+            setFormErrors(newFormErrors);
         }
 
         if (props.onChange) {
@@ -54,13 +69,13 @@ const PersonalReference = (props) => {
                     </IconButton>
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" onChange={OnChange} value={data.name} type={"text"} name="name" label={"Nombre:"} sx={{ width: "100%" }} />
+                    <TextField size="small" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} onChange={OnChange} value={data.name} type={"text"} name="name" label={"Nombre:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" onChange={OnChange} value={data.surname} type={"text"} name="surname" label={"Apellido:"} sx={{ width: "100%" }} />
+                    <TextField size="small" error={formErrors.surname} helperText={formErrors.surname ? "Valor Invalido" : null} onChange={OnChange} value={data.surname} type={"text"} name="surname" label={"Apellido:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" onChange={OnChange} value={data.age} type={"number"} name="age" label={"Edad:"} sx={{ width: "100%" }} />
+                    <TextField size="small" error={formErrors.age} helperText={formErrors.age ? "Valor Invalido" : null} onChange={OnChange} value={data.age} type={"number"} name="age" label={"Edad:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
                     <TextField size="small" onChange={OnChange} value={data.email} type={"email"} name="email" label={"Correo:"} sx={{ width: "100%" }} />
@@ -74,7 +89,7 @@ const PersonalReference = (props) => {
                     <TextField size="small" onChange={OnChange} value={data.occupation} type={"text"} name="occupation" label={"Ocupacion:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" onChange={OnChange} value={data.relationship} type={"text"} name="relationship" label={"Parentesco:"} sx={{ width: "100%" }} />
+                    <TextField size="small" error={formErrors.relationship} helperText={formErrors.relationship ? "Valor Invalido" : null} onChange={OnChange} value={data.relationship} type={"text"} name="relationship" label={"Parentesco:"} sx={{ width: "100%" }} />
                 </Grid>
             </Grid>
         </Paper>

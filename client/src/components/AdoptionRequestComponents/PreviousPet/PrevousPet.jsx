@@ -2,9 +2,16 @@ import { Button, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Paper,
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviousPetVaccine from "../PreviousPetVaccine/PreviousPetVaccine";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PreviousPet = (props) => {
     const { item, data } = props;
+    const [formErrors, setFormErrors] = useState({
+        name: true,
+        species: true
+    });
+    const [haveErrors, setHaveErrors] = useState(false);
 
     const isAliveOptions = [
         { label: "yes", value: "yes", langKey: 'si', index: 0 },
@@ -25,6 +32,16 @@ const PreviousPet = (props) => {
         if (!isNaN(parseFloat(propertyValue))) {
             propertyValue = parseFloat(propertyValue);
         }
+
+        if (formErrors.hasOwnProperty(propertyName)) {
+            const newFormErrors = {
+                ...formErrors,
+                [propertyName]: propertyValue ? false : true
+            }
+
+            setFormErrors(newFormErrors);
+        }
+
 
         if (props.onChange) {
             props.onChange(data.id, propertyName, propertyValue);
@@ -52,13 +69,13 @@ const PreviousPet = (props) => {
                     </IconButton>
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="name" onChange={OnChange} value={data.name} label={"Nombre:"} sx={{ width: "100%" }} />
+                    <TextField type={"text"} size="small" name="name" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} onChange={OnChange} value={data.name} label={"Nombre:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
                     <TextField type={"number"} size="small" name="age" onChange={OnChange} value={data.age} label={"Edad:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="species" onChange={OnChange} value={data.species} label={"Especie:"} sx={{ width: "100%" }} />
+                    <TextField type={"text"} size="small" name="species" error={formErrors.species} helperText={formErrors.species ? "Valor Invalido" : null} onChange={OnChange} value={data.species} label={"Especie:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
                     <TextField type={"text"} size="small" name="details" onChange={OnChange} value={data.details} label={"Detalles:"} sx={{ width: "100%" }} />
