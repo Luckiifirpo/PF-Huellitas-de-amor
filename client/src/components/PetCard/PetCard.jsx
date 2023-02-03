@@ -55,7 +55,7 @@ const PetCard = (props) => {
 
 
     return (
-        <Card className={style.card} sx={{ maxWidth: props.maxWidth ? props.maxWidth : 345, height: "100%" }}>
+        <Card className={style.card} sx={{ width: "100%", height: "100%" }}>
             <CardActionArea>
                 <Link to={"/pet_info/" + data.id}>
                     <CardHeader avatar={
