@@ -128,9 +128,11 @@ const ageTimeArray = [
 ]
 
 const PostAdoption = (props) => {
+  const currentUser = useSelector((state) => state.users.currentUser);
   const initialValues = {
     name: "",
     // date: "",
+    email: currentUser["email"],
     species: "canine",
     age: 0,
     ageTime: "years",
@@ -143,7 +145,6 @@ const PostAdoption = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.users.currentUser);
   const lang = useSelector((state) => state.lang.currentLangData);
 
   const formik = useFormik({
