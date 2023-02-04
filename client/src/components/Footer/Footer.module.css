@@ -33,3 +33,12 @@
 width: 100px;
   margin-top: 10px;
 }
+
+
+
+@media(max-width:560px){
+    .footer{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+} 

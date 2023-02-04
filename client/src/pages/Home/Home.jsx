@@ -100,12 +100,13 @@ const Home = () => {
   return (
     <>
       <Toolbar id="back-to-top-anchor" />
-      <Container >
+      <Box className={style.contenedorpadre} >
+      <Container className={style.adoptar} >
         <Grid container spacing={2} alignItems="center" marginTop={'50px'}>
           <Grid item md={8}>
             <img src={perritoHome} alt='perrito home' />
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={4}className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.meQuieresAdoptar}
             </Typography>
@@ -120,7 +121,7 @@ const Home = () => {
       <Box className={style['background-fancy']}>
         <Container >
           <Grid container spacing={2} alignItems="center">
-            <Grid item md={6} sx={{ color: '#fff' }}>
+            <Grid item md={6} sx={{ color: '#fff' }}className={style.centradosgrid}>
               <Typography component="h1" variant="h2" sx={{ color: '#fff', textTransform: 'uppercase', fontWeight: '700' }}>
                 {lang.home.titles.quienesSomos}
               </Typography>
@@ -145,12 +146,12 @@ const Home = () => {
         </Container>
       </Box>
 
-      <Container >
+      <Container className={style.darEnAdopcion}>
         <Grid container spacing={2} alignItems="center">
           <Grid item md={6}>
             <img src={banner3} alt='banner home' />
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6}className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.darEnAdopcion}
             </Typography>
@@ -162,9 +163,9 @@ const Home = () => {
         </Grid>
       </Container>
 
-      <Container>
+      <Container className={style.hazTuDonacion} >
         <Grid container spacing={2} alignItems="center">
-          <Grid item md={6}>
+          <Grid item md={6} className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.hazTuDonacion}
             </Typography>
@@ -179,13 +180,13 @@ const Home = () => {
         </Grid>
       </Container>
       <Box>
-        <Container>
-          <Grid container marginTop={'80px'}>
+        <Container className={style.masInformacion}>
+          <Grid spacing={{ xs: 5, md: 0 }} container marginTop={'40px'}>
 
-            <Grid item md={6} sx={{ marginBottom: '-10px' }}>
+            <Grid item md={6} sx={{  }}>
+              <img src={banner5} alt='fondo perro' className={style.imageInfo} />
             </Grid>
-
-            <Grid item md={6} sx={{ marginTop: '20px' }}>
+            <Grid item md={6} sx={{ marginTop: '20px' }} className={style.centradosgrid}>
               <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
                 {lang.home.titles.masInformacion}
               </Typography>
@@ -193,9 +194,6 @@ const Home = () => {
                 {lang.home.paragraphs.masInformacion}
               </Typography>
               <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerContacto(e)}>{lang.home.buttons.contacto}</Button>
-            </Grid>
-            <Grid item md={12} sx={{ marginBottom: '-10px' }}>
-              <img src={banner5} alt='fondo perro' className={style.imageInfo} />
             </Grid>
 
           </Grid>
@@ -208,6 +206,7 @@ const Home = () => {
             <KeyboardArrowUpIcon sx={{ color: '#FF3041'}} />
           </Fab>
         </ScrollTop>
+      </Box>
       </Box>
     </>
   )
