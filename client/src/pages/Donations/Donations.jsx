@@ -136,12 +136,12 @@ const Donations = () => {
                 fontSize: '20px',
               }}
             >
-              Ingresa el Monto de Tu Donación
+              {lang.donaciones.titles.ingresaElMonto}
           </Typography>
             <Box
               sx={{display:'flex', flexDirection:'column', gap:'10px', marginTop:'10px'}}
             >
-              <InputLabel id="demo-simple-select-label">Selecciona un Monto</InputLabel>
+              <InputLabel id="demo-simple-select-label">{lang.donaciones.subtitles.seleccionaMonto}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -154,7 +154,7 @@ const Donations = () => {
                     <MenuItem value={5000}>50$</MenuItem>
                     <MenuItem value={10000}>100$</MenuItem>
                   </Select>
-              <Button component={Link} to="/stripe" variant="contained" sx={{textDecoration:'none'}}>Ir a Pagar</Button>
+              <Button component={Link} to="/stripe" variant="contained" sx={{textDecoration:'none'}}>{lang.donaciones.buttons.irAPagar}</Button>
             </Box>
           </Grid>
         </Grid>

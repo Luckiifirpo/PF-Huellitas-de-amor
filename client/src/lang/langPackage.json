@@ -80,10 +80,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "si deseas apoyar nuestra causa",
-                "donacionesEInsumos": "donaciones de insumos"
+                "donacionesEInsumos": "donaciones de insumos",
+                "ingresaElMonto": "ingresa el monto de tu donación"
             },
             "buttons": {
-                "contacto": "contacto"
+                "contacto": "contacto",
+                "irAPagar": "ir a pagar"
             },
             "paragraphs": {
                 "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros."
@@ -93,6 +95,9 @@
                 "alimentos": "alimentos",
                 "higiene": "higiene",
                 "otros": "otros"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Selecciona un monto"
             }
         },
         "contacto": {
@@ -273,6 +278,17 @@
             "inputs": {
                 "newsletter": "Email para Huellitas Newsletter"
             }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Número de Tarjeta",
+                "caducidad": "Caducidad",
+                "pais": "País"
+            },
+            "buttons": {
+                "pagarAhora": "pagar ahora",
+                "procesando": "procesando ..."
+            }
         }
     },
     "en": {
@@ -356,10 +372,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "if you want to support our cause",
-                "donacionesEInsumos": "donation of supplies"
+                "donacionesEInsumos": "donation of supplies",
+                "ingresaElMonto": "enter the amount of your donation"
             },
             "buttons": {
-                "contacto": "Contact Us"
+                "contacto": "Contact Us",
+                "irAPagar": "go pay"
             },
             "paragraphs": {
                 "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us."
@@ -369,6 +387,9 @@
                 "alimentos": "foods",
                 "higiene": "hygiene",
                 "otros": "others"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Select an Amount"
             }
         },
         "contacto": {
@@ -548,6 +569,17 @@
             "inputs": {
                 "newsletter": "Email for Huellitas Newsletter"
             }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Card Number",
+                "caducidad": "Expiration",
+                "pais": "Country"
+            },
+            "buttons": {
+                "pagarAhora": "pay now",
+                "procesando": "processing ..."
+            }
         }
     },
     "pt": {
@@ -631,10 +663,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "se você quer apoiar nossa causa",
-                "donacionesEInsumos": "Doação de insumos"
+                "donacionesEInsumos": "Doação de insumos",
+                "ingresaElMonto": "insira o valor da sua doação"
             },
             "buttons": {
-                "contacto": "Contate-Nos"
+                "contacto": "Contate-Nos",
+                "irAPagar": "vá pagar"
             },
             "paragraphs": {
                 "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco."
@@ -644,6 +678,9 @@
                 "alimentos": "alimentos",
                 "higiene": "higiene",
                 "otros": "outras"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Selecione uma Quantia"
             }
         },
         "contacto": {
@@ -822,6 +859,17 @@
         "footer": {
             "inputs": {
                 "newsletter": "E-mail para Boletim Huellitas"
+            }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Número de cartão",
+                "caducidad": "Caducity",
+                "pais": "País"
+            },
+            "buttons": {
+                "pagarAhora": "pague agora",
+                "procesando": "em processamento ..."
             }
         }
     }
