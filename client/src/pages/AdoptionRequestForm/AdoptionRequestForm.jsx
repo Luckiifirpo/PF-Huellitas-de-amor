@@ -8,7 +8,9 @@ import { useParams } from "react-router-dom";
 import PersonalReference from "../../components/AdoptionRequestComponents/PersonalReference/PersonalReference";
 import PreviousPet from "../../components/AdoptionRequestComponents/PreviousPet/PrevousPet";
 import ResidencesTenant from "../../components/AdoptionRequestComponents/ResidencesTenant/ResidencesTenant";
-import { createAdoptionRequest } from "../../redux/slices/userSlice";
+import { createAdoptionRequest, setUserBusyMode, setUserError, setUserMessage } from "../../redux/slices/userSlice";
+import ErrorManager from "../../resources/ErrorManager";
+import api from "../../services/api";
 
 const applicants_residence_template = {
     actualResidence: false,
@@ -114,11 +116,21 @@ const adoption_request_template = {
 
 const AdoptionRequestForm = (props) => {
 
+    const { adminMode, data } = props;
     const petsList = useSelector((state) => state.pets.petsList);
     const currentUser = useSelector((state) => state.users.currentUser);
     const dispatch = useDispatch();
     const { pet_id } = useParams();
-    const [formErrors, setFormErrors] = useState({
+    const [formErrors, setFormErrors] = useState(adminMode ? {
+        phoneNumber: false,
+        workplacePhoneNumber: false,
+        reasonForRequest: false,
+        minPersonalReferences: false,
+        currentResidenceOwner: null,
+        nextResidenceOwner: null,
+        currentResidencePetArea: false,
+        nextResidencePetArea: false
+    } : {
         phoneNumber: true,
         workplacePhoneNumber: true,
         reasonForRequest: true,
@@ -129,7 +141,7 @@ const AdoptionRequestForm = (props) => {
         nextResidencePetArea: false
     })
 
-    const pet_data = petsList.filter((e) => {
+    const pet_data = data ? data.petData : petsList.filter((e) => {
         return e.id === pet_id;
     })[0];
 
@@ -148,7 +160,7 @@ const AdoptionRequestForm = (props) => {
         { label: "movable dwelling", value: "movable dwelling", langKey: "movableDwelling", index: 4 }
     ]
 
-    const [localState, setLocalState] = useState(adoption_request_template);
+    const [localState, setLocalState] = useState(data ? data.adoptionRequest : adoption_request_template);
     const [localNextResidence, setLocalNextResidence] = useState(applicants_residence_template);
 
     const GenerateID = () => {
@@ -524,6 +536,38 @@ const AdoptionRequestForm = (props) => {
         dispatch(createAdoptionRequest(adoptionRequestData));
     }
 
+    const AuthorizeRequest = async () => {
+        try {
+            dispatch(setUserBusyMode(true));
+            const response = await api.post("/adoption_request/authorize_adoption_request/" + localState.id)
+            dispatch(setUserBusyMode(false));
+            dispatch(setUserMessage({
+                title: "Autorizacion Completada",
+                message: "Se ha autorizado la adopcion",
+                details: []
+            }));
+
+            if (props.UpdatedUserInfo) {
+                props.UpdatedUserInfo();
+            }
+
+        } catch (error) {
+            dispatch(setUserBusyMode(false));
+            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                { code: error.code },
+                { request: "POST: http://localhost:3001/adoption_request/authorize_adoption_request/:user_id" }
+            ])));
+        }
+    }
+
+    const RejectRequest = () => {
+
+    }
+
+    const RequestDataReview = () => {
+
+    }
+
     const HaveErrors = () => {
         const personalReferencesWithErrors = localState.personalReferences.filter(e => {
             return !(e.name && e.surname && e.relationship && e.age > 0);
@@ -614,7 +658,7 @@ const AdoptionRequestForm = (props) => {
                     </Paper>
                 </Box>
             </Grid>
-            <Grid item xs={12}>
+            {adminMode ? null : <Grid item xs={12}>
                 <Box>
                     <Paper sx={{ padding: "20px" }}>
                         <Stack spacing={2}>
@@ -630,7 +674,7 @@ const AdoptionRequestForm = (props) => {
                         </Stack>
                     </Paper>
                 </Box>
-            </Grid>
+            </Grid>}
             <Grid item xs={12}>
                 <Box>
                     <Paper sx={{ padding: "30px" }}>
@@ -643,13 +687,13 @@ const AdoptionRequestForm = (props) => {
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item md={12}>
-                                            <TextField type={"tel"} name="phoneNumber" error={formErrors.phoneNumber} helperText={formErrors.phoneNumber ? "Valor Invalido" : null} onChange={ChangeBaseProperty} label={"Telefono celular"} sx={{ width: "100%" }} />
+                                            <TextField type={"tel"} name="phoneNumber" error={formErrors.phoneNumber} helperText={formErrors.phoneNumber ? "Valor Invalido" : null} value={localState.phoneNumber} disabled={adminMode} onChange={ChangeBaseProperty} label={"Telefono celular"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"tel"} name="workplacePhoneNumber" error={formErrors.workplacePhoneNumber} helperText={formErrors.workplacePhoneNumber ? "Valor Invalido" : null} onChange={ChangeBaseProperty} label={"Tel. Trabajo u Oficina"} sx={{ width: "100%" }} />
+                                            <TextField type={"tel"} name="workplacePhoneNumber" error={formErrors.workplacePhoneNumber} helperText={formErrors.workplacePhoneNumber ? "Valor Invalido" : null} value={localState.workplacePhoneNumber} disabled={adminMode} onChange={ChangeBaseProperty} label={"Tel. Trabajo u Oficina"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="allergies" onChange={ChangeBaseProperty} label={"Alergias:"} placeholder={"Ninguna"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="allergies" value={localState.allergies} disabled={adminMode} onChange={ChangeBaseProperty} label={"Alergias:"} placeholder={"Ninguna"} sx={{ width: "100%" }} />
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -672,6 +716,7 @@ const AdoptionRequestForm = (props) => {
                                                     native: true,
                                                 }}
                                                 sx={{ width: "100%" }}
+                                                disabled={adminMode}
                                             >
                                                 {educationalLevelsOptions.map((option, key) => (
                                                     <option key={key} value={option.value}>
@@ -681,11 +726,11 @@ const AdoptionRequestForm = (props) => {
                                             </TextField>
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="reasonForRequest" error={formErrors.reasonForRequest} helperText={formErrors.reasonForRequest ? "Valor Invalido" : null} onChange={ChangeBaseProperty} label={"Por que quieres adoptar esta mascota?"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="reasonForRequest" error={formErrors.reasonForRequest} helperText={formErrors.reasonForRequest ? "Valor Invalido" : null} value={localState.reasonForRequest} disabled={adminMode} onChange={ChangeBaseProperty} label={"Por que quieres adoptar esta mascota?"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="acceptsPeriodicVisits" onChange={ChangeBaseProperty} defaultChecked />} label="Estoy de acuerdo con que hagan visitas periodicas a mi residencia" />
+                                                <FormControlLabel control={<Checkbox name="acceptsPeriodicVisits" onChange={ChangeBaseProperty} checked={localState.acceptsPeriodicVisits} disabled={adminMode} />} label="Estoy de acuerdo con que hagan visitas periodicas a mi residencia" />
                                             </FormGroup>
                                         </Grid>
                                     </Grid>
@@ -703,7 +748,7 @@ const AdoptionRequestForm = (props) => {
                             {/*lang.adoptionRequest.titles.datosPersonales*/}
                         </Typography>
                         <Grid container spacing={3}>
-                            <Grid item md={12}>
+                            {adminMode ? null : <Grid item md={12}>
                                 <Stack sx={{ width: '100%' }} spacing={2}>
                                     <Alert severity="info">
                                         Con la siguiente informacion, podremos saber si esta mascota es la que estas buscando, o si
@@ -715,7 +760,7 @@ const AdoptionRequestForm = (props) => {
                                         podrias toparte con situaciones inesperadas e indeseadas a la hora de interactuar con tu mascota.
                                     </Alert>
                                 </Stack>
-                            </Grid>
+                            </Grid>}
                             <Grid item md={12}>
                                 <Typography sx={{ fontWeight: 'Bold' }}>
                                     Imagina que ya tienes tu mascota. Cual seria tu reaccion frente a los siguientes comportamientos de tu mascota, o como reaccionas generalmente frente a este tipo de situaciones:
@@ -726,16 +771,16 @@ const AdoptionRequestForm = (props) => {
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withNoisyPet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota ruidosa:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withNoisyPet" value={localState.psychologicalData.withNoisyPet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota ruidosa:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withHyperactivePet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota hiperactiva:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withHyperactivePet" value={localState.psychologicalData.withHyperactivePet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota hiperactiva:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withCalmPet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota muy calmada:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withCalmPet" value={localState.psychologicalData.withCalmPet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota muy calmada:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withNonObedientPet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota desobediente:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withNonObedientPet" value={localState.psychologicalData.withNonObedientPet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota desobediente:"} sx={{ width: "100%" }} />
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -744,16 +789,16 @@ const AdoptionRequestForm = (props) => {
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withUnwantedPetWaste" onChange={ChangeApplicantsPsychologicalData} label={"Frente a los desechos indeseados de una mascota:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withUnwantedPetWaste" value={localState.psychologicalData.withUnwantedPetWaste} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a los desechos indeseados de una mascota:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withAggressivePet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota agresiva:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withAggressivePet" value={localState.psychologicalData.withAggressivePet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota agresiva:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withSmallPet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota pequeña:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withSmallPet" value={localState.psychologicalData.withSmallPet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota pequeña:"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"text"} name="withBigPet" onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota grande:"} sx={{ width: "100%" }} />
+                                            <TextField type={"text"} name="withBigPet" value={localState.psychologicalData.withBigPet} disabled={adminMode} onChange={ChangeApplicantsPsychologicalData} label={"Frente a una mascota grande:"} sx={{ width: "100%" }} />
                                         </Grid>
                                     </Grid>
                                 </Box>
@@ -781,9 +826,9 @@ const AdoptionRequestForm = (props) => {
                                     </Grid>
                                     : null
                             }
-                            <Grid item md={12}>
+                            {adminMode ? null : <Grid item md={12}>
                                 <Button onClick={AddPersonalReference} variant="outlined" size="small">Agregar</Button>
-                            </Grid>
+                            </Grid>}
                             <Grid item md={12}>
                                 <Box>
                                     <Paper sx={{ boxShadow: "inset 0px 0px 3px 1px rgba(0,0,0,0.35);", padding: "10px", marginTop: "10px" }}>
@@ -791,7 +836,7 @@ const AdoptionRequestForm = (props) => {
                                             {
                                                 localState.personalReferences.map((data, key) => {
                                                     return <Grid key={key} item md={12}>
-                                                        <PersonalReference data={data} item={key} onRemove={RemovePersonalReference} onChange={UpdatePersonalReferenceData} />
+                                                        <PersonalReference data={data} item={key} onRemove={RemovePersonalReference} onChange={UpdatePersonalReferenceData} adminMode={adminMode} />
                                                     </Grid>
                                                 })
                                             }
@@ -811,9 +856,9 @@ const AdoptionRequestForm = (props) => {
                             {/*lang.adoptionRequest.titles.datosPersonales*/}
                         </Typography>
                         <Grid container space={4}>
-                            <Grid item md={12}>
+                            {adminMode ? null : <Grid item md={12}>
                                 <Button onClick={AddPreviousPet} variant="outlined" size="small">Agregar</Button>
-                            </Grid>
+                            </Grid>}
                             <Grid item md={12}>
                                 <Box>
                                     <Paper sx={{ boxShadow: "inset 0px 0px 3px 1px rgba(0,0,0,0.35);", padding: "10px", marginTop: "10px" }}>
@@ -821,7 +866,7 @@ const AdoptionRequestForm = (props) => {
                                             {
                                                 localState.previousPets.map((data, key) => {
                                                     return <Grid key={key} item md={12}>
-                                                        <PreviousPet data={data} item={key} onRemove={RemovePreviousPet} onChange={UpdatePreviousPet} onAddVaccine={AddPreviousPetVaccine} onRemoveVaccine={RemovePreviousPetVaccine} onChangeVaccine={UpdatePreviousPetVaccine} />
+                                                        <PreviousPet data={data} item={key} onRemove={RemovePreviousPet} onChange={UpdatePreviousPet} onAddVaccine={AddPreviousPetVaccine} onRemoveVaccine={RemovePreviousPetVaccine} onChangeVaccine={UpdatePreviousPetVaccine} adminMode={adminMode} />
                                                     </Grid>
                                                 })
                                             }
@@ -842,19 +887,19 @@ const AdoptionRequestForm = (props) => {
                         </Typography>
                         <Grid container space={4}>
                             <Grid item md={12}>
-                                <TextField type={"number"} name="numberOfTenants" value={localState.numberOfTenants} onChange={ChangeBaseProperty} label={"Numero de inquilinos:"} sx={{ width: "100%" }} />
+                                <TextField type={"number"} name="numberOfTenants" value={localState.numberOfTenants} disabled={adminMode} onChange={ChangeBaseProperty} label={"Numero de inquilinos:"} sx={{ width: "100%" }} />
                             </Grid>
                             <Grid item md={12}>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox name="allTenantsAgreeToAdoption" onChange={ChangeBaseProperty} defaultChecked />} label="Todos estan de acuerdo con la adopcion" />
+                                    <FormControlLabel control={<Checkbox name="allTenantsAgreeToAdoption" onChange={ChangeBaseProperty} checked={localState.allTenantsAgreeToAdoption} disabled={adminMode} />} label="Todos estan de acuerdo con la adopcion" />
                                 </FormGroup>
                             </Grid>
                             <Grid item md={12}>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox name="childrenUnder10Years" onChange={ChangeBaseProperty} />} label="Niños menores de 10 años" />
+                                    <FormControlLabel control={<Checkbox name="childrenUnder10Years" onChange={ChangeBaseProperty} checked={localState.childrenUnder10Years} disabled={adminMode} />} label="Niños menores de 10 años" />
                                 </FormGroup>
                             </Grid>
-                            <Grid item md={12}>
+                            {adminMode ? null : <Grid item md={12}>
                                 <Stack sx={{ width: '100%' }} spacing={2}>
                                     <Alert severity="info">
                                         Con la siguiente informacion, podremos saber si esta mascota es la que estas buscando, o si
@@ -866,7 +911,7 @@ const AdoptionRequestForm = (props) => {
                                         podrias toparte con situaciones inesperadas e indeseadas a la hora de interactuar con tu mascota.
                                     </Alert>
                                 </Stack>
-                            </Grid>
+                            </Grid>}
                             <Grid item md={12}>
                                 <Box>
                                     <Paper sx={{ boxShadow: "inset 0px 0px 3px 1px rgba(0,0,0,0.35);", padding: "10px", marginTop: "10px" }}>
@@ -874,7 +919,7 @@ const AdoptionRequestForm = (props) => {
                                             {
                                                 localState.residencesTenants.map((data, key) => {
                                                     return <Grid key={key} item md={12}>
-                                                        <ResidencesTenant data={data} item={key} onRemove={RemoveResidencesTenant} onChange={UpdateResidencesTenant} />
+                                                        <ResidencesTenant data={data} item={key} onRemove={RemoveResidencesTenant} onChange={UpdateResidencesTenant} adminMode={adminMode} />
                                                     </Grid>
                                                 })
                                             }
@@ -903,32 +948,32 @@ const AdoptionRequestForm = (props) => {
                                     <Grid container spacing={1}>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="ownHouse" defaultChecked onChange={ChangeCurrentResidenceProperty} />} label="Soy el propietario de esta vivienda" />
+                                                <FormControlLabel control={<Checkbox name="ownHouse" checked={localState.applicantsResidences[0].ownHouse} disabled={adminMode} onChange={ChangeCurrentResidenceProperty} />} label="Soy el propietario de esta vivienda" />
                                             </FormGroup>
                                         </Grid>
                                         <Grid item md={12} style={{ display: localState.applicantsResidences[0].ownHouse ? "none" : "block" }}>
                                             <Box>
                                                 <Grid container spacing={2}>
                                                     <Grid item md={12}>
-                                                        <TextField type={"text"} name="homeownerName" error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerName : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerName ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Nombre del propietario:"} sx={{ width: "100%" }} />
+                                                        <TextField type={"text"} name="homeownerName" value={localState.applicantsResidences[0].homeownerName} disabled={adminMode} error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerName : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerName ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Nombre del propietario:"} sx={{ width: "100%" }} />
                                                     </Grid>
                                                     <Grid item md={12}>
-                                                        <TextField type={"text"} name="homeownerSurname" error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerSurname : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerSurname ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Apellido del propietario:"} sx={{ width: "100%" }} />
+                                                        <TextField type={"text"} name="homeownerSurname" value={localState.applicantsResidences[0].homeownerSurname} disabled={adminMode} error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerSurname : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerSurname ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Apellido del propietario:"} sx={{ width: "100%" }} />
                                                     </Grid>
                                                     <Grid item md={12}>
-                                                        <TextField type={"text"} name="homeownerPhoneNumber" error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerPhoneNumber : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerPhoneNumber ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Numero telefonico del propietario:"} sx={{ width: "100%" }} />
+                                                        <TextField type={"text"} name="homeownerPhoneNumber" value={localState.applicantsResidences[0].homeownerPhoneNumber} disabled={adminMode} error={formErrors.currentResidenceOwner ? formErrors.currentResidenceOwner.homeownerPhoneNumber : false} helperText={formErrors.currentResidenceOwner && formErrors.currentResidenceOwner.homeownerPhoneNumber ? "Valor Invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Numero telefonico del propietario:"} sx={{ width: "100%" }} />
                                                     </Grid>
                                                 </Grid>
                                             </Box>
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="plansToChangeResidence" onChange={ChangeBaseProperty} />} label="Pienso mudarme en los proximos meses" />
+                                                <FormControlLabel control={<Checkbox name="plansToChangeResidence" checked={localState.plansToChangeResidence} disabled={adminMode} onChange={ChangeBaseProperty} />} label="Pienso mudarme en los proximos meses" />
                                             </FormGroup>
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="knowYourNextResidence" onChange={ChangeBaseProperty} disabled={!localState.plansToChangeResidence} />} label="Ya conozco la vivienda donde me voy a mudar" />
+                                                <FormControlLabel control={<Checkbox name="knowYourNextResidence" onChange={ChangeBaseProperty} checked={localState.knowYourNextResidence} disabled={!localState.plansToChangeResidence} />} label="Ya conozco la vivienda donde me voy a mudar" />
                                             </FormGroup>
                                         </Grid>
                                     </Grid>
@@ -955,6 +1000,7 @@ const AdoptionRequestForm = (props) => {
                                                     native: true,
                                                 }}
                                                 sx={{ width: "100%" }}
+                                                disabled={adminMode}
                                             >
                                                 {residenceTypesOptions.map((option, key) => (
                                                     <option key={key} value={option.value}>
@@ -964,26 +1010,26 @@ const AdoptionRequestForm = (props) => {
                                             </TextField>
                                         </Grid>
                                         <Grid item md={12}>
-                                            <TextField type={"number"} name="petAreaDimension" min={0} error={formErrors.currentResidencePetArea} helperText={formErrors.currentResidencePetArea ? "Valor invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Area donde estara frecuentemente tu mascota (en metros cuadrados):"} sx={{ width: "100%" }} />
+                                            <TextField type={"number"} name="petAreaDimension" min={0} value={localState.applicantsResidences[0].petAreaDimension} disabled={adminMode} error={formErrors.currentResidencePetArea} helperText={formErrors.currentResidencePetArea ? "Valor invalido" : null} onChange={ChangeCurrentResidenceProperty} label={"Area donde estara frecuentemente tu mascota (en metros cuadrados):"} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="withPatio" onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con un patio" />
+                                                <FormControlLabel control={<Checkbox name="withPatio" checked={localState.applicantsResidences[0].withPatio} disabled={adminMode} onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con un patio" />
                                             </FormGroup>
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="withGarden" onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con un jardin" />
+                                                <FormControlLabel control={<Checkbox name="withGarden" checked={localState.applicantsResidences[0].withGarden} disabled={adminMode} onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con un jardin" />
                                             </FormGroup>
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="withTerrace" onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con una terraza" />
+                                                <FormControlLabel control={<Checkbox name="withTerrace" checked={localState.applicantsResidences[0].withTerrace} disabled={adminMode} onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con una terraza" />
                                             </FormGroup>
                                         </Grid>
                                         <Grid item md={12}>
                                             <FormGroup>
-                                                <FormControlLabel control={<Checkbox name="coveredPetArea" onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con una zona descubierta" />
+                                                <FormControlLabel control={<Checkbox name="coveredPetArea" checked={localState.applicantsResidences[0].coveredPetArea} disabled={adminMode} onChange={ChangeCurrentResidenceProperty} />} label="La vivienda cuenta con una zona descubierta" />
                                             </FormGroup>
                                         </Grid>
                                     </Grid>
@@ -1007,20 +1053,20 @@ const AdoptionRequestForm = (props) => {
                                                         <Grid container spacing={1}>
                                                             <Grid item md={12}>
                                                                 <FormGroup>
-                                                                    <FormControlLabel control={<Checkbox name="ownHouse" defaultChecked onChange={ChangeNextResidenceProperty} />} label="Soy el propietario de esta vivienda" />
+                                                                    <FormControlLabel control={<Checkbox name="ownHouse" checked={localState.applicantsResidences[1].ownHouse} disabled={adminMode} onChange={ChangeNextResidenceProperty} />} label="Soy el propietario de esta vivienda" />
                                                                 </FormGroup>
                                                             </Grid>
                                                             <Grid item md={12} style={{ display: localState.applicantsResidences[1].ownHouse ? "none" : "block" }}>
                                                                 <Box>
                                                                     <Grid container spacing={2}>
                                                                         <Grid item md={12}>
-                                                                            <TextField type={"text"} name="homeownerName" error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerName : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerName ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Nombre del propietario:"} sx={{ width: "100%" }} />
+                                                                            <TextField type={"text"} name="homeownerName" value={localState.applicantsResidences[1].homeownerName} disabled={adminMode} error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerName : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerName ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Nombre del propietario:"} sx={{ width: "100%" }} />
                                                                         </Grid>
                                                                         <Grid item md={12}>
-                                                                            <TextField type={"text"} name="homeownerSurname" error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerSurname : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerSurname ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Apellido del propietario:"} sx={{ width: "100%" }} />
+                                                                            <TextField type={"text"} name="homeownerSurname" value={localState.applicantsResidences[1].homeownerSurname} disabled={adminMode} error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerSurname : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerSurname ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Apellido del propietario:"} sx={{ width: "100%" }} />
                                                                         </Grid>
                                                                         <Grid item md={12}>
-                                                                            <TextField type={"text"} name="homeownerPhoneNumber" error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerPhoneNumber : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerPhoneNumber ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Numero telefonico del propietario:"} sx={{ width: "100%" }} />
+                                                                            <TextField type={"text"} name="homeownerPhoneNumber" value={localState.applicantsResidences[1].homeownerPhoneNumber} disabled={adminMode} error={formErrors.nextResidenceOwner ? formErrors.nextResidenceOwner.homeownerPhoneNumber : false} helperText={formErrors.nextResidenceOwner && formErrors.nextResidenceOwner.homeownerPhoneNumber ? "Valor Invalido" : null} onChange={ChangeNextResidenceProperty} label={"Numero telefonico del propietario:"} sx={{ width: "100%" }} />
                                                                         </Grid>
                                                                     </Grid>
                                                                 </Box>
@@ -1058,26 +1104,26 @@ const AdoptionRequestForm = (props) => {
                                                                 </TextField>
                                                             </Grid>
                                                             <Grid item md={12}>
-                                                                <TextField type={"number"} name="petAreaDimension" min={0} error={formErrors.nextResidencePetArea} helperText={formErrors.nextResidencePetArea ? "Valor invalido" : null} onChange={ChangeNextResidenceProperty} label={"Area donde estara frecuentemente tu mascota (en metros cuadrados):"} sx={{ width: "100%" }} />
+                                                                <TextField type={"number"} name="petAreaDimension" min={0} value={localState.applicantsResidences[1].petAreaDimension} disabled={adminMode} error={formErrors.nextResidencePetArea} helperText={formErrors.nextResidencePetArea ? "Valor invalido" : null} onChange={ChangeNextResidenceProperty} label={"Area donde estara frecuentemente tu mascota (en metros cuadrados):"} sx={{ width: "100%" }} />
                                                             </Grid>
                                                             <Grid item md={12}>
                                                                 <FormGroup>
-                                                                    <FormControlLabel control={<Checkbox name="withPatio" onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con un patio" />
+                                                                    <FormControlLabel control={<Checkbox name="withPatio" checked={localState.applicantsResidences[1].withPatio} disabled={adminMode} onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con un patio" />
                                                                 </FormGroup>
                                                             </Grid>
                                                             <Grid item md={12}>
                                                                 <FormGroup>
-                                                                    <FormControlLabel control={<Checkbox name="withGarden" onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con un jardin" />
+                                                                    <FormControlLabel control={<Checkbox name="withGarden" checked={localState.applicantsResidences[1].withGarden} disabled={adminMode} onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con un jardin" />
                                                                 </FormGroup>
                                                             </Grid>
                                                             <Grid item md={12}>
                                                                 <FormGroup>
-                                                                    <FormControlLabel control={<Checkbox name="withTerrace" onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con una terraza" />
+                                                                    <FormControlLabel control={<Checkbox name="withTerrace" checked={localState.applicantsResidences[1].withTerrace} disabled={adminMode} onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con una terraza" />
                                                                 </FormGroup>
                                                             </Grid>
                                                             <Grid item md={12}>
                                                                 <FormGroup>
-                                                                    <FormControlLabel control={<Checkbox name="coveredPetArea" onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con una zona descubierta" />
+                                                                    <FormControlLabel control={<Checkbox name="coveredPetArea" checked={localState.applicantsResidences[1].coveredPetArea} disabled={adminMode} onChange={ChangeNextResidenceProperty} />} label="La vivienda cuenta con una zona descubierta" />
                                                                 </FormGroup>
                                                             </Grid>
                                                         </Grid>
@@ -1095,7 +1141,7 @@ const AdoptionRequestForm = (props) => {
                     </Paper>
                 </Box>
             </Grid>
-            <Grid item xs={12}>
+            {adminMode ? null : <Grid item xs={12}>
                 <Box>
                     <Paper sx={{ padding: "20px" }}>
                         <Stack spacing={2}>
@@ -1111,10 +1157,19 @@ const AdoptionRequestForm = (props) => {
                         </Stack>
                     </Paper>
                 </Box>
-            </Grid>
+            </Grid>}
             <Grid item xs={12}>
                 <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "100px" }}>
-                    <Button onClick={CreateAdoptionRequest} variant="contained" color='yellowButton' size="big" sx={{ borderRadius: '20px', paddingLeft: 10, paddingRight: 10, fontSize: "20px", width: "300px" }} disabled={HaveErrors()}>{"Enviar"}</Button>
+                    {adminMode ? null : <Button onClick={CreateAdoptionRequest} variant="contained" color='yellowButton' size="big" sx={{ borderRadius: '20px', paddingLeft: 10, paddingRight: 10, fontSize: "20px", width: "300px" }} disabled={HaveErrors()}>{"Enviar"}</Button>}
+                    {adminMode ?
+                        <Button onClick={AuthorizeRequest} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px" }}>{"Autorizar"}</Button>
+                        : null}
+                    {adminMode ?
+                        <Button onClick={RejectRequest} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Rechazar"}</Button>
+                        : null}
+                    {adminMode ?
+                        <Button onClick={RequestDataReview} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Solicitar revision de datos"}</Button>
+                        : null}
                 </Box>
             </Grid>
         </Grid>

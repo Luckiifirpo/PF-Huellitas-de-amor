@@ -179,6 +179,29 @@ export const updateUserInfo = (newData) => async (dispatch) => {
     }
 }
 
+export const updateUserInfoForAdminDashboard = (newData, callback) => async (dispatch) => {
+    try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.put(`/users/user_info/${newData.id}`, newData);
+        dispatch(setUserMessage({
+            title: "Actualizacion completada",
+            message: "Se han actualizado tus datos de usuario correctamente",
+            details: []
+        }));
+        
+        if(callback){
+            callback();
+        }
+
+    } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/users//user_info/:user_id" }
+        ])));
+    }
+}
+
 export const postForgotPassword = (obj) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));

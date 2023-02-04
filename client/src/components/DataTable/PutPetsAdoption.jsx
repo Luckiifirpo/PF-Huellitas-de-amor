@@ -122,6 +122,9 @@ const ageTimeArray = [
 ]
 
 const PutAdoption = ({id,name, date, species, age, ageTime, weight, size, gender, breed, description}) => {
+
+  console.log(gender);
+
   const initialValues = {
     id: id ? id : "",
     name: name ? name : "",

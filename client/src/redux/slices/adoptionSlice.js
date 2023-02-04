@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const filterControlValues = {
-    genreFilter: [{ label:'', langKey: 'ambosGeneros', filter: "genreFilter", index: 0 }, { label:'', langKey: 'machos', filter: "genreFilter", index: 1 }, { label:'', langKey: 'hembras', filter: "genreFilter", index: 2 }],
+    genderFilter: [{ label:'', langKey: 'ambosGeneros', filter: "genderFilter", index: 0 }, { label:'', langKey: 'machos', filter: "genderFilter", index: 1 }, { label:'', langKey: 'hembras', filter: "genderFilter", index: 2 }],
     speciesFilter: [{ label:'', langKey: 'todasLasEspecies', filter: "speciesFilter", index: 0 }, { label:'', langKey: 'perros', filter: "speciesFilter", index: 1 }, { label:'', langKey: 'gatos', filter: "speciesFilter", index: 2 }, { label:'', langKey: 'otros', filter: "speciesFilter", index: 3 }],
     sizeFilter: [{ label:'', langKey: 'todosLosTamaños', filter: "sizeFilter", index: 0 }, { label:'', langKey: 'pequeños', filter: "sizeFilter", index: 1 }, { label:'', langKey: 'medianos', filter: "sizeFilter", index: 2 }, { label:'', langKey: 'grandes', filter: "sizeFilter", index: 3 }]
   }
@@ -12,7 +12,7 @@ const initialState = {
     currentSortDirection: "Ascending",
     favoritesPets: [],
     filters: {
-        genreFilter: filterControlValues.genreFilter[0],
+        genderFilter: filterControlValues.genderFilter[0],
         speciesFilter: filterControlValues.speciesFilter[0],
         sizeFilter: filterControlValues.sizeFilter[0],
         ageFilter: [0, 30],
