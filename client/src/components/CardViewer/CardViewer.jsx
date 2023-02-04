@@ -53,7 +53,7 @@ const CardViewer = (props) => {
                     {
 
                         page_chunks && page_chunks.length ? page_chunks[(currentPage - 1)].map((card_data, key) => {
-                            return <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
+                            return <Grid key={key} item lg={4} sm={6} xs={12} alignSelf="stretch" sx={{display: "flex", justifyContent: "center"}}>
                                 {
                                     render_card(card_data)
                                 }

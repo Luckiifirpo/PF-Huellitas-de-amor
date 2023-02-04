@@ -116,17 +116,17 @@ const Navbar = (props) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { lg: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
             <Box
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},justifyContent:"center",marginTop:{xs:"0px",md:"25px"}}}
             >
               <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
             </Box>
-            <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+            <Box sx={{ display: { xs: 'none', lg: 'flex' } }}>
               {navItems.map((item) => (
                 <Button key={item.name} component={RouterLink} to={item.route}>
                   {lang.navbar.links[item.name]}
@@ -157,7 +157,7 @@ const Navbar = (props) => {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: 'block', sm: 'none' },
+              display: { xs: 'block', lg: 'none' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}
           >
