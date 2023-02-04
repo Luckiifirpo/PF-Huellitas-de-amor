@@ -298,6 +298,9 @@
                     "volverAlInicio": "volver al inicio"
                 }
             }
+        },
+        "404": {
+            "mensaje": "Ups... La página no ha sido encontrada"
         }
     },
     "en": {
@@ -598,6 +601,9 @@
                     "volverAlInicio": "back to home"
                 }
             }
+        },
+        "404": {
+            "mensaje": "Oops... The page was not found"
         }
     },
     "pt": {
@@ -898,6 +904,9 @@
                     "volverAlInicio": "voltar ao inicio"
                 }
             }
+        },
+        "404": {
+            "mensaje": "Opa... a página não foi encontrada"
         }
     }
 }
