@@ -68,7 +68,6 @@ const columns = [
     valueOptions: ['months', 'years'],
     width: 100,
   },
-
   {
     field: 'weight',
     headerName: 'Peso',
@@ -147,7 +146,7 @@ const columns = [
    setData(currentPets.filter((e)=> e.id === id)[0])
    
  
-   console.log(data.description)
+   console.log(currentPets)
  
   } 
   const handleClose = () => setOpen(false);
@@ -159,16 +158,15 @@ const columns = [
   useEffect(() => {
     fetch("http://localhost:3001/animals")
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => {
+        setTableData(data)
+      })
   }, [])
 
 
   //  useEffect(()=>{
   //   dispatch(getAllPets());
   //  },[])
-
- 
-
 
   return (
     <div style={{ height: 400, width: '100%' }}>

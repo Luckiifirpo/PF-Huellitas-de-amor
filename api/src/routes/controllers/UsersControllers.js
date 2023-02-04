@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Usuario, Animal, Review } = require('../../db');
+const { Usuario, Animal, Review, AdoptionRequest } = require('../../db');
 const { generateId } = require("../utils/utils");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
@@ -16,7 +16,14 @@ const getAllUsers = async (req, res) => {
     const { name } = req.query;
     try {
         if (!name) {
-            const allUsers = await Usuario.findAll();
+            const allUsers = await Usuario.findAll({
+                include: [
+                    {
+                        model: AdoptionRequest,
+                        as: "adoptionRequest"
+                    }
+                ]
+            });
             return res.send(allUsers);
         } else {
             let users = await Usuario.findAll({

@@ -1,8 +1,14 @@
 const CardViewer_Pagination_Behavior = {
 
-    Apply(cardsData = [], itemsPerPage) {
+    Apply(cardType, cardsData = [], itemsPerPage) {
         let input_data = [...cardsData];
-        const pages = Math.round(input_data.length / itemsPerPage);
+
+        if(cardType === "pet_card"){
+            input_data = input_data.filter(card_data => {
+                return !card_data.isAdopted;
+            });
+        }
+        
         const page_chunks = [];
 
         while(input_data.length){

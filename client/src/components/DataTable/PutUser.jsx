@@ -6,21 +6,31 @@ import { useState, useEffect } from "react";
 import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
 import _ from "lodash";
-import { setUserBusyMode, updateUserInfo } from "../../redux/slices/userSlice";
+import { setUserBusyMode, updateUserInfoForAdminDashboard } from "../../redux/slices/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 
 const PutUser = (props) => {
+    const {data} = props;
     const cloudinary_cloud_name = "dydncradb";
     const cloudinary_preset = "qeohapyd";
-    const currentUser = useSelector((state) => state.users.currentUser);
-    const loginType = useSelector((state) => state.users.loginType);
     const lang = useSelector((state) => state.lang.currentLangData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [localUserInfoData, setLocalUserInfoData] = useState(null);
-    const [lastUpdatedCurrentUser, setLastUpdatedCurrentUserData] = useState(null);
+    const [localUserInfoData, setLocalUserInfoData] = useState({
+        ...data,
+        localPhoto: {
+            file: null,
+            data: null
+        }
+    });
+
+    const UpdatedUserInfo = () => {
+        if(props.UpdatedUserInfo){
+            props.UpdatedUserInfo();
+        }
+    }
 
     const handle_change_input = (event) => {
         const input_name = event.target.name;
@@ -67,7 +77,7 @@ const PutUser = (props) => {
 
         console.log(newUserInfoData);
 
-        dispatch(updateUserInfo(newUserInfoData));
+        dispatch(updateUserInfoForAdminDashboard(newUserInfoData, UpdatedUserInfo));
     }
 
     const upload_user_photo_to_cloudinary = async () => {
@@ -104,25 +114,6 @@ const PutUser = (props) => {
 
         return null;
     }
-
-    useEffect(() => {
-        // if (currentUser) {
-            if (!_.isEqual(lastUpdatedCurrentUser, currentUser)) {
-                setLastUpdatedCurrentUserData(currentUser);
-                setLocalUserInfoData({
-                    ...currentUser,
-                    localPhoto: {
-                        file: null,
-                        data: null
-                    }
-                })
-            }
-        // } else {
-        //     dispatch(setToGoAfterLogin("/user-info-editor"));
-        //     navigate("/iniciar-sesion");
-        // }
-
-    }, [currentUser, localUserInfoData, lastUpdatedCurrentUser, lang, loginType]);
 
     return <div style={{ minHeight: "calc(100vh - 267px)" }}>
         <Container style={{ marginBottom: 0, marginTop: 0}}>
@@ -197,21 +188,8 @@ const PutUser = (props) => {
                                             <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <FormControlLabel control={<Checkbox name="hasAdoptionRequest" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAdoptionRequest) : false} />} label={lang.userInfoEditor.inputs.adopto} />
-                                        </Grid>
-
-                                        <Grid item sx={{ width: "100%", textDecoration:"none" }}>
-                                            <TextField name="password" value={localUserInfoData ? localUserInfoData.password : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.contraseña} sx={{ width: "100%" }} />
-                                            <Link to="/cambio-contraseña">Actualizar Contraseña</Link>
-                                        </Grid>
-
-                                       
-
-                                        <Grid item sx={{ width: "100%" }}>
                                             <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
                                         </Grid>
-
-
                                     </Grid>
                                 </Box>
                             </Grid>
