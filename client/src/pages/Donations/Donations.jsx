@@ -40,8 +40,8 @@ const Donations = () => {
   return (
     <Box>
       <Container>
-        <Grid container marginTop={'120px'} spacing={4}     justifyContent="space-between"
-  alignItems="flex-start">
+        <Grid container marginTop={'120px'} spacing={4} justifyContent="space-between"
+          alignItems="flex-start">
           <Grid item md={6} sx={{ marginTop: '20px' }}>
             <Typography
               component="h4"
@@ -118,50 +118,53 @@ const Donations = () => {
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
           </Grid>
-          <Grid item md={5} 
+          <Grid item md={5}
             sx={{
-              backgroundColor:'#fff',
+              backgroundColor: '#fff',
               borderRadius: '.45rem',
-              padding:'32px',
+              padding: '32px',
               webkitBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
               mozBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
-              boxShadow:' 5px 5px 29px -12px rgba(0,0,0,0.52)'}}>
-          <Typography
+              boxShadow: ' 5px 5px 29px -12px rgba(0,0,0,0.52)'
+            }}
+            className={style.stripeBox}
+          >
+            <Typography
               component="h5"
               variant="h2"
               sx={{
-                color:'#252525',
+                color: '#252525',
                 textTransform: "uppercase",
                 fontWeight: "700",
                 fontSize: '20px',
               }}
             >
               Ingresa el Monto de Tu Donación
-          </Typography>
+            </Typography>
             <Box
-              sx={{display:'flex', flexDirection:'column', gap:'10px', marginTop:'10px'}}
+              sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}
             >
               <InputLabel id="demo-simple-select-label">Selecciona un Monto</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Selecciona"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={1000}>10$</MenuItem>
-                    <MenuItem value={2000}>20$</MenuItem>
-                    <MenuItem value={3000}>30$</MenuItem>
-                    <MenuItem value={5000}>50$</MenuItem>
-                    <MenuItem value={10000}>100$</MenuItem>
-                  </Select>
-              <Button component={Link} to="/stripe" variant="contained" sx={{textDecoration:'none'}}>Ir a Pagar</Button>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Selecciona"
+                onChange={handleChange}
+              >
+                <MenuItem value={1000}>10$</MenuItem>
+                <MenuItem value={2000}>20$</MenuItem>
+                <MenuItem value={3000}>30$</MenuItem>
+                <MenuItem value={5000}>50$</MenuItem>
+                <MenuItem value={10000}>100$</MenuItem>
+              </Select>
+              <Button component={Link} to="/stripe" variant="contained" sx={{ textDecoration: 'none' }}>Ir a Pagar</Button>
             </Box>
           </Grid>
         </Grid>
 
       </Container>
       <Container>
-        <Grid item md={12} sx={{ marginBottom: '-10px' }}>
+        <Grid item md={12} sx={{ marginBottom: '-10px' }} >
           <img src={imgDonaciones} alt='fondo donaciones' className={style.imageD} />
         </Grid>
         <Grid item md={12} sx={{ marginBottom: '-10px' }}>

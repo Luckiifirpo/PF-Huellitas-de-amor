@@ -95,7 +95,7 @@ const Footer = () => {
           </Grid>
 
         
-          <Grid item md={6} sx={{marginTop:'20px'}}>
+          <Grid item md={6} sx={{marginTop:'20px', marginRight:'30px'}}>
               <form onSubmit={formik.handleSubmit}>
                 <FormControl sx={{ m: 1, width: '28ch' }} variant="standard" >
                       <InputLabel htmlFor="standard-adornment-password" sx={{fontSize:'12px', color:'#fff', letterSpacing:'1px'}}>Email para Huellitas Newsletter</InputLabel>

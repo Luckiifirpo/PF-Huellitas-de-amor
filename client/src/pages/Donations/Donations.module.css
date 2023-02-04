@@ -7,3 +7,14 @@
     width: 700px;
     float: right;
 }
+
+@media(max-width:900px){
+    .stripeBox{
+        
+        margin-left: 30px !important;
+        margin-bottom: 50px !important;
+    }
+    .imageD{
+       width: 1px;
+    }
+}
