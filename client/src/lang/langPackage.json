@@ -288,6 +288,15 @@
             "buttons": {
                 "pagarAhora": "pagar ahora",
                 "procesando": "procesando ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Gracias por tu Donación",
+                    "frase": "Cada granito de arena cuenta"
+                },
+                "button": {
+                    "volverAlInicio": "volver al inicio"
+                }
             }
         }
     },
@@ -579,6 +588,15 @@
             "buttons": {
                 "pagarAhora": "pay now",
                 "procesando": "processing ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Thanks for your Donation",
+                    "frase": "Every grain of sand counts"
+                },
+                "button": {
+                    "volverAlInicio": "back to home"
+                }
             }
         }
     },
@@ -870,6 +888,15 @@
             "buttons": {
                 "pagarAhora": "pague agora",
                 "procesando": "em processamento ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Obrigado pela sua doação",
+                    "frase": "Cada grão de areia conta"
+                },
+                "button": {
+                    "volverAlInicio": "voltar ao inicio"
+                }
             }
         }
     }
