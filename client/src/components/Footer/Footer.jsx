@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
 import style from "./Footer.module.css";
 import logoBlanco from "../../assets/image/logoBlanco.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { postContactUs } from "../../redux/slices/contactUsSlice";
@@ -31,7 +31,7 @@ const validationSchema = yup.object({
 
 const Footer = () => {
 
-
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const initialValues = {
     name: "NewsLetter",
@@ -78,19 +78,19 @@ const Footer = () => {
           <Grid item md={2} >
            
               <Typography component={Link} to="/">
-                Inicio
+                {lang.navbar.links.inicio}
               </Typography>
               <Typography component={Link} to="/quienes-somos">
-                Quienes Somos
+                {lang.navbar.links.quienesSomos}
               </Typography>
               <Typography component={Link} to="/adopciones">
-                Adopciones
+                {lang.navbar.links.adopciones}
               </Typography>
               <Typography component={Link} to="/donaciones">
-                Donaciones
+                {lang.navbar.links.donaciones}
               </Typography>
               <Typography component={Link} to="/contacto">
-                Contacto
+                {lang.navbar.links.contacto}
               </Typography>
           </Grid>
 
@@ -98,7 +98,7 @@ const Footer = () => {
           <Grid item md={6} sx={{marginTop:'20px', marginRight:'30px'}}>
               <form onSubmit={formik.handleSubmit}>
                 <FormControl sx={{ m: 1, width: '28ch' }} variant="standard" >
-                      <InputLabel htmlFor="standard-adornment-password" sx={{fontSize:'12px', color:'#fff', letterSpacing:'1px'}}>Email para Huellitas Newsletter</InputLabel>
+                      <InputLabel htmlFor="standard-adornment-password" sx={{fontSize:'12px', color:'#fff', letterSpacing:'1px'}}>{lang.footer.inputs.newsletter}</InputLabel>
                       <Input
                         id="email"
                         variant="standard"

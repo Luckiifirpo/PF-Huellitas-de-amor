@@ -71,7 +71,7 @@ const Contact = () => {
     }
   };
   /**********************************************************/
-
+   
   useEffect(() => {
 
   }, [lang]);
@@ -80,9 +80,9 @@ const Contact = () => {
     <>
       <Box
         className={style.gridContact}
-        sx={{ marginBottom: "300px", marginTop: "150px" }}
+        sx={{ marginBottom: "300px", marginTop:{xs:"0px",md:"150px"}}}
       >
-        <Box className={style.gridContactImage}>
+        <Box className={style.gridContactImage} sx={{display:{md:"block",xs:"none"}}}>
           <img src={ImageContact} alt="" />
         </Box>
 
@@ -92,7 +92,7 @@ const Contact = () => {
               container
               justifyContent="center"
               alignItems="center"
-              sx={{ height: "100%" }}
+              sx={{ height: "100%", flexDirection:"column" }}
             >
               <Grid item md={12}>
                 <Typography
@@ -103,7 +103,7 @@ const Contact = () => {
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "200px",
+                    marginTop:{xs:"100px",sm:"150px",md:"200px"},
                   }}
                 >
                   {lang.contacto.titles.contactanos}
