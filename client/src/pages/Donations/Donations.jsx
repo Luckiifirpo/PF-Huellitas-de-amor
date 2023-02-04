@@ -40,8 +40,8 @@ const Donations = () => {
   return (
     <Box>
       <Container>
-        <Grid container marginTop={'120px'} spacing={4}     justifyContent="space-between"
-  alignItems="flex-start">
+        <Grid container marginTop={'120px'} spacing={4} justifyContent="space-between"
+          alignItems="flex-start">
           <Grid item md={6} sx={{ marginTop: '20px' }}>
             <Typography
               component="h4"
@@ -118,19 +118,22 @@ const Donations = () => {
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', margin: '20px 0 80px 0' }} onClick={(e) => handlerContacto(e)}>{lang.donaciones.buttons.contacto}</Button>
           </Grid>
-          <Grid item md={5} 
+          <Grid item md={5}
             sx={{
-              backgroundColor:'#fff',
+              backgroundColor: '#fff',
               borderRadius: '.45rem',
-              padding:'32px',
+              padding: '32px',
               webkitBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
               mozBoxShadow: '5px 5px 29px -12px rgba(0,0,0,0.52)',
-              boxShadow:' 5px 5px 29px -12px rgba(0,0,0,0.52)'}}>
-          <Typography
+              boxShadow: ' 5px 5px 29px -12px rgba(0,0,0,0.52)'
+            }}
+            className={style.stripeBox}
+          >
+            <Typography
               component="h5"
               variant="h2"
               sx={{
-                color:'#252525',
+                color: '#252525',
                 textTransform: "uppercase",
                 fontWeight: "700",
                 fontSize: '20px',
@@ -138,8 +141,9 @@ const Donations = () => {
             >
               {lang.donaciones.titles.ingresaElMonto}
           </Typography>
+
             <Box
-              sx={{display:'flex', flexDirection:'column', gap:'10px', marginTop:'10px'}}
+              sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}
             >
               <InputLabel id="demo-simple-select-label">{lang.donaciones.subtitles.seleccionaMonto}</InputLabel>
                   <Select
@@ -161,7 +165,7 @@ const Donations = () => {
 
       </Container>
       <Container>
-        <Grid item md={12} sx={{ marginBottom: '-10px' }}>
+        <Grid item md={12} sx={{ marginBottom: '-10px' }} >
           <img src={imgDonaciones} alt='fondo donaciones' className={style.imageD} />
         </Grid>
         <Grid item md={12} sx={{ marginBottom: '-10px' }}>
