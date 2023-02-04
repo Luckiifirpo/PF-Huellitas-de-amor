@@ -77,7 +77,7 @@ import style from './ForgotPassword.module.css';
                     >
                         <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
                             <Grid item>
-                            <TextField type="email" size="small" id="email-input" label={"ingresa tu email"} variant="standard" className={style.input_width} />
+                            <TextField type="email" size="small" id="email-input" label={"Ingresa tu email"} variant="standard" className={style.input_width} />
                             </Grid>
                                 
                             <Grid item>

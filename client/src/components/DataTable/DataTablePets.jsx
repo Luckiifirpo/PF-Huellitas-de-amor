@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import PutPetsAdoption from "./PutPetsAdoption";
+import PutAdoption from "./PutPetsAdoption";
 import { useParams } from "react-router-dom";
 
 const style = {
@@ -31,7 +31,7 @@ const style = {
 
 
 export default function DataTablePets() {
-  const params=useParams()
+ 
 const columns = [
   { field: 'image',
   headerName: 'Imagen',
@@ -116,7 +116,9 @@ const columns = [
         <GridActionsCellItem
           icon={< EditIcon />}
           label="Editar"
-          onClick={(e) => {handleOpen( <PutPetsAdoption src={currentPets.id}/>)}}
+          // onClick={(e) => {handleOpen( <PutAdoption src={currentPets.id} age={456}/>)}}
+          onClick={(e) => {handleOpen(params.id)}}
+          
           // onClick={deleteUser(params.id)}
         />,
         
@@ -133,14 +135,19 @@ const columns = [
   
   const [tableData, setTableData] = useState([])
 
-  const currentPets = useSelector((state) => state.pets);
+  const currentPets = useSelector((state) => state.pets.petsList);
   const [modalEditar, setModalEditar]= useState(false);
 
-
+  const [data, setData] = useState({})
   const [open, setOpen] = React.useState(false);
+
+  // const dataPets = currentPets.filter((e)=> e.id === params.id)[0]
   const handleOpen = (id) =>{
    setOpen(true)
-    console.log(currentPets)
+   setData(currentPets.filter((e)=> e.id === id)[0])
+   
+ 
+   console.log(data.description)
  
   } 
   const handleClose = () => setOpen(false);
@@ -181,8 +188,25 @@ const columns = [
         aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style}>
-           <PutPetsAdoption/> 
+          {/* { console.log(dataPets) */}
+           { data.hasOwnProperty("id") && <PutAdoption  
+           age={data.age} 
+           name={data.name} 
+            date={data.date}
+            species={data.species}
+            ageTime={data.ageTime}
+            weight={data.weight}
+            size={data.size}
+            gender={data.gender}
+            breed={data.breed}
+            description={data.description}
+           /> 
+          
+          
+          }
 
+           
+  
         </Box>
       </Modal>
     </div>
