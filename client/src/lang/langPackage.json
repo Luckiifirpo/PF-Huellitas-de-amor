@@ -234,7 +234,8 @@
                 "donaciones": "Donaciones",
                 "contacto": "Contacto",
                 "idioma": "Idioma",
-                "iniciarSesion": "Iniciar Sesion"
+                "iniciarSesion": "Iniciar Sesion",
+                "favoritos": "Favoritos"
             }
         },
         "userMenu": {
