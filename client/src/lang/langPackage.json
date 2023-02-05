@@ -302,6 +302,18 @@
         },
         "404": {
             "mensaje": "Ups... La página no ha sido encontrada"
+        },
+        "cambiarContraseña": {
+            "title": "contraseña",
+            "subtitle": "cambiar contraseña",
+            "inputs": {
+                "contraseñaAnterior": "Contraseña Anterior",
+                "nuevaContraseña": "Nueva Contraseña",
+                "confirmarContraseña": "Confirmar Nueva contraseña"
+            },
+            "button": {
+                "guardarContraseña": "Guardar nueva contraseña"
+            }
         }
     },
     "en": {
@@ -605,6 +617,18 @@
         },
         "404": {
             "mensaje": "Oops... The page was not found"
+        },
+        "cambiarContraseña": {
+            "title": "password",
+            "subtitle": "change password",
+            "inputs": {
+                "contraseñaAnterior": "Old Password",
+                "nuevaContraseña": "New Password",
+                "confirmarContraseña": "Confirm New Password"
+            },
+            "button": {
+                "guardarContraseña": "Save new password"
+            }
         }
     },
     "pt": {
@@ -908,6 +932,18 @@
         },
         "404": {
             "mensaje": "Opa... a página não foi encontrada"
+        },
+        "cambiarContraseña": {
+            "title": "senha",
+            "subtitle": "alterar a senha",
+            "inputs": {
+                "contraseñaAnterior": "Senha Antiga",
+                "nuevaContraseña": "Nova Senha",
+                "confirmarContraseña": "Confirme a Nova Senha"
+            },
+            "button": {
+                "guardarContraseña": "Salvar nova senha"
+            }
         }
     }
 }
