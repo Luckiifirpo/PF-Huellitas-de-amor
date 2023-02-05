@@ -1,6 +1,7 @@
 const {Op, Animal, Usuario, Review} = require("../../db");
 const {generateId} = require("../utils/utils")
 const {generateDate} = require("../utils/utils") 
+const { transporter } = require("../utils/mailer");
 
 const getAllAnimal = async (req, res) => {
     const { name } = req.query;
@@ -44,8 +45,9 @@ const getDetail = async(req,res) => {
 }
 
 const postAnimal = async (req, res) => {
-    const { name, species, age, weight, size, gender, breed, description, image, ageTime} = req.body;
-
+    const { name, email, species, age, weight, size, gender, breed, description, image, ageTime} = req.body;
+    const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
+    const fecha = new Date()
     const petAgeTime = ageTime ? ageTime : "years";
 
     const createdAnimal = await Animal.create({
@@ -65,6 +67,24 @@ const postAnimal = async (req, res) => {
     });
 
     try {
+        await transporter.sendMail({
+            from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: `Publicacion de mascota para dar en adopción`, // Subject line
+            html: `<!DOCTYPE html>
+            <html>
+            <body>
+            <h1>Hola, publicaste una nueva mascota!!!</h1>
+            <h2>Le buscaremos un hogar a ${name}</h2>
+            <img src = ${image} alt ="Mascota">
+            <h4>Gracias por tu tiempo</h4>
+            <h3>Fecha y hora de radicación del formulario: ${fecha}</h3>
+            <h6>No responder a este mensaje</h6>
+            <img src=${imageHuellitas} alt="Huellitas de amor">
+            </body>
+            </html>`, // html body
+          });
+          console.log(email);
         res.status(201).send(createdAnimal)
     } catch (error) {
         res.status(400).send({error: error.message})

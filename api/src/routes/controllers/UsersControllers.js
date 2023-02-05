@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
 const { transporter } = require("../utils/mailer");
 
+
 //const { transporter } = require('../utils/mailer');
 
 const compare = async (passwordPlain, hashPassword) => {
@@ -84,7 +85,7 @@ const postUser = async (req, res) => {
         </body>
         </html>`, // html body
       });
-      console.log(email)
+    //   console.log(email)
     try {
         res.cookie({ "token": token }).status(200).send(newUser)
     } catch (error) {
@@ -231,6 +232,8 @@ const forgotPassword = async (req, res) => {
 const resetpassword = async (req, res) => {
     const { id } = req.params;
     const { newPassword, newPassword2 } = req.body;
+    const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
+  const fecha = new Date()
     // console.log(reset);
     // console.log(newPassword);
     if (!newPassword || !newPassword2) {
@@ -240,16 +243,33 @@ const resetpassword = async (req, res) => {
     if(newPassword !== newPassword2) {
         return res.status(409).send({code: 'PasswordNotMatch', message: "Las contraseñas no coinciden"});
     }
-
+    // const email = await Usuario.findAll({where:{id:id}})
+    // console.log(id)
+    
     const user = await Usuario.findOne({ where: { reset: id } });
+    const email=user.dataValues.email;
 
-    // console.log(user)
+    // console.log(email)
     if (!user) {
         return res.status(400).json({ error: "User with this token does not existe" });
     }
     const token = await jwt.sign({ id: user._id }, process.env.RESET_PASSWORD_KEY, {
         expiresIn: '20m',
     });
+    await transporter.sendMail({
+        from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: `Restablecimiento de contraseña`, // Subject line
+        html: `<!DOCTYPE html>
+        <html>
+        <body>
+        <h1>Se acaba de registrar el cambio de su contraseña</h1>
+        <h3>Fecha y hora: ${fecha}</h3>
+        <h6>No responder a este mensaje</h6>
+        <img src=${imageHuellitas} alt="Huellitas de amor">
+        </body>
+        </html>`, // html body
+      });
     try {
         const salt = await bcrypt.genSalt(10);
         const password = await bcrypt.hash(newPassword, salt);
