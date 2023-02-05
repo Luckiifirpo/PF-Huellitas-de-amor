@@ -121,21 +121,38 @@ const ageTimeArray = [
   },
 ]
 
-const PutAdoption = (props) => {
+const PutAdoption = ({id,name, date, species, age, ageTime, weight, size, gender, breed, description}) => {
+
+  console.log(gender);
+
   const initialValues = {
-    name: "",
-    date: "",
-    species: "canine",
-    age: 0,
-    ageTime: "years",
-    weight: 0,
-    size: "small",
-    gender: "female",
-    breed: "",
-    description: "",
+    id: id ? id : "",
+    name: name ? name : "",
+    date: date ? date : "",
+    species: species ? species : "",
+    age: age ? age : 0,
+    ageTime: ageTime ? ageTime : "",
+    weight: weight ? weight : 0,
+    size: size ? size : "",
+    gender: gender ? gender : "",
+    breed: breed ? breed : "",
+    description: description ? description : "",
   };
+
+  console.log(age)
  
- 
+//  const [petDescription, setPetDescription] = useState({
+//   name: "",
+//   date: "",
+//   species: "",
+//   age: 0,
+//   ageTime: "",
+//   weight: 0,
+//   size: "",
+//   gender: "",
+//   breed: "",
+//   description: "",
+//  })
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -209,7 +226,7 @@ en donde debe hacerse para enviar el post a /animals */
 
       const data = await res.json();
       dispatch(
-        postPet({
+        updatePetInfo({
           ...values,
           image: data.secure_url,
         })
@@ -399,15 +416,16 @@ en donde debe hacerse para enviar el post a /animals */
                       </option>
                     ))}
                   </TextField>
+
                   <TextField
                     id="gender"
-                    name="gender"
                     select
                     label="Género"
                     value={formik.values.gender}
                     SelectProps={{
                       native: true,
                     }}
+                   
                     onChange={formik.handleChange}
                     error={
                       formik.touched.gender && Boolean(formik.errors.gender)
@@ -421,6 +439,7 @@ en donde debe hacerse para enviar el post a /animals */
                       </option>
                     ))}
                   </TextField>
+
                   <TextField
                     label="Raza:"
                     variant="standard"
@@ -431,6 +450,14 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.breed && Boolean(formik.errors.breed)}
                     helperText={formik.touched.breed && formik.errors.breed}
                   />
+                  {/* <Grid item sx={{ width: "100%" }}>
+                  <FormControlLabel control={<Checkbox name="hasAdoptionRequest" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAdoptionRequest) : false} />} label={lang.userInfoEditor.inputs.adopto} />
+                  </Grid> */}
+            
+
+
+
+
                   <TextField
                     label="Descripción:"
                     variant="standard"

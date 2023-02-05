@@ -58,11 +58,14 @@ export const userSlice = createSlice({
         },
         setLoginType: (state, action) => {
             state.loginType = action.payload;
+        },
+        setForgotType: (state, action) => {
+            state.forgotType = action.payload;
         }
 
     },
 })
-export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode, setForgotPassword, setResetPassword, setLoginType } = userSlice.actions;
+export const { setUserError, resetUserError, resetCurrentUser, setCurrentUser, signOut, setUserMessage, resetUserMessage, setUserBusyMode, setForgotPassword, setResetPassword, setLoginType, setForgotType } = userSlice.actions;
 
 export default userSlice.reducer;
 
@@ -159,10 +162,19 @@ export const updateUserInfo = (newData) => async (dispatch) => {
     }
 }
 
-export const postForgotPassword = (obj) => async (dispatch) => {
+export const updateUserInfoForAdminDashboard = (newData, callback) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
-
+        const response = await api.put(`/users/user_info/${newData.id}`, newData);
+        dispatch(setUserMessage({
+            title: "Actualizacion completada",
+            message: "Se han actualizado tus datos de usuario correctamente",
+            details: []
+        }));
+        
+        if(callback){
+            callback();
+        }
         const response = await api.post(`/users/forgot-password`,{email: obj});
         console.log(response.data + " respuesta servidor");
         dispatch(setUserBusyMode(false));
@@ -171,16 +183,58 @@ export const postForgotPassword = (obj) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/users/forgot-password" }
+            { request: "POST: http://localhost:3001/users//user_info/:user_id" }
         ])));
     }
 }
 
-export const PutresetPassword = (newData, password) => async (dispatch) => {
+export const postForgotPassword = (obj) => async (dispatch) => {
+    try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.post(`/users/forgot-password`,{email: obj});
+        //console.log(response.data + " respuesta servidor");
+        dispatch(setUserBusyMode(false));
+        dispatch(setForgotPassword(response.data));
+        dispatch(setForgotType("withEmail"));
+        dispatch(setUserMessage({
+            title: "Email ha sido enviado a tu correo",
+            message: "Se ha enviado a tu correo un link para restablecer tu contraseña",
+            details: []
+        }));
+    } catch (error) {
+        dispatch(setUserBusyMode(false));
+        if (error.response.data.code) {
+            const email_error_code = error.response.data.code;
+            switch (email_error_code) {
+                case "UserNotFound":
+                case "EmailIsRequerid":
+                    dispatch(setUserMessage({
+                        title: "Email Error",
+                        message: email_error_code === "UserNotFound"? 'User Not Found' : 'Email Is Required',
+                        details: []
+                    }));
+                    break;
+                default:
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                        { code: error.code },
+                        { request: "POST: http://localhost:3001/users/forgot-password" }
+                    ])));
+                    break;
+            }
+        } else {
+            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                { code: error.code },
+                { request: "POST: http://localhost:3001/users/forgot-password" }
+            ])));
+        }
+    }
+}
+
+export const PutresetPassword = (newData, password, password2) => async (dispatch) => {
     console.log(newData, password + " slice")
     try {
         dispatch(setUserBusyMode(true));
-        const response = await api.put(`/users/resetpassword/${newData}`, {newPassword: password});
+        const response = await api.put(`/users/resetpassword/${newData}`, { newPassword: password, newPassword2: password2});
         dispatch(setUserBusyMode(false));
         dispatch(setResetPassword(response.data));
         console.log(response.data)
@@ -192,10 +246,31 @@ export const PutresetPassword = (newData, password) => async (dispatch) => {
 
     } catch (error) {
         dispatch(setUserBusyMode(false));
-        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-            { code: error.code },
-            { request: "PUT: http://localhost:3001/users/resetpassword/:id" }
-        ])));
+        if (error.response.data.code) {
+            const Password_error_code = error.response.data.code;
+            switch (Password_error_code) {
+                case "PasswordIsRequerid":
+                case "PasswordNotMatch":
+                    dispatch(setUserMessage({
+                        title: "Password Error",
+                        message: Password_error_code === "PasswordIsRequerid"? 
+                        'debe ingresar una nueva contraseña que coincidan en Ambos campos' : 'Las contraseñas no coinciden',
+                        details: []
+                    }));
+                    break;
+                default:
+                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                        { code: error.code },
+                        { request: "PUT: http://localhost:3001/users/resetpassword" }
+                    ])));
+                    break;
+            }
+        } else {
+            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+                { code: error.code },
+                { request: "PUT: http://localhost:3001/users/resetpassword" }
+            ])));
+        }
     }
 }
 

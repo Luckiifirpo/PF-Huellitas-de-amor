@@ -128,9 +128,20 @@ const ageTimeArray = [
 ]
 
 const PostAdoption = (props) => {
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const lang = useSelector((state) => state.lang.currentLangData);
+  useEffect(() => {
+    if (!currentUser) {
+      dispatch(setToGoAfterLogin("/dar-en-adopcion"));
+      navigate("/iniciar-sesion");
+    }
+  }, [currentUser]);
   const initialValues = {
     name: "",
     // date: "",
+    email: currentUser ? currentUser["email"] : navigate("/iniciar-sesion"),
     species: "canine",
     age: 0,
     ageTime: "years",
@@ -140,11 +151,9 @@ const PostAdoption = (props) => {
     breed: "",
     description: "",
   };
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.users.currentUser);
-  const lang = useSelector((state) => state.lang.currentLangData);
+console.log(initialValues)
+console.log(currentUser)
+  
 
   const formik = useFormik({
     initialValues,
@@ -219,12 +228,7 @@ en donde debe hacerse para enviar el post a /animals */
   };
   /**********************************************************/
 
-  useEffect(() => {
-    if (!currentUser) {
-      dispatch(setToGoAfterLogin("/dar-en-adopcion"));
-      navigate("/iniciar-sesion");
-    }
-  }, [currentUser]);
+  
 
   return (
     <>

@@ -19,12 +19,8 @@ const ResetPassword = () => {
        e.preventDefault();
        let passwordInput = e.target.querySelector("#password-input");
        let rePasswordInput = e.target.querySelector("#repassword-input");
-      
-       if(passwordInput.value !== rePasswordInput.value){
-        return alert("Las contraseñas deben coincidir");
-       }
 
-       dispatch(PutresetPassword(id, passwordInput.value));
+       dispatch(PutresetPassword(id, passwordInput.value, rePasswordInput.value));
     }
 
      return(

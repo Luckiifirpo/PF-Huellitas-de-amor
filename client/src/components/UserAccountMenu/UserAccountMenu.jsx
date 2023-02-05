@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../redux/slices/userSlice";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { getFavorites } from "../../redux/slices/adoptionSlice";
 
 const UserAccountMenu = (props) => {
 
@@ -20,7 +21,9 @@ const UserAccountMenu = (props) => {
     };
 
     const HandleSignOut = () => {
-        dispatch(signOut())
+        dispatch(signOut()) 
+        localStorage.setItem('PetsFavorites', JSON.stringify([]))
+        dispatch(getFavorites()) 
     }
 
     const handleClose = () => {

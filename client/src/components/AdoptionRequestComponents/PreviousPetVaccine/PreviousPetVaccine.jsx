@@ -1,10 +1,14 @@
 import { Grid, IconButton, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
 
 const PreviousPetVaccine = (props) => {
 
-    const { item, data } = props;
+    const { item, data, adminMode } = props;
+    const [formErrors, setFormErrors] = useState({
+        name: !adminMode
+    });
 
     const OnChange = (event, value) => {
         const propertyName = event.target.name;
@@ -14,8 +18,17 @@ const PreviousPetVaccine = (props) => {
             propertyValue = parseFloat(propertyValue);
         }
 
-        if(event.target.name === "appliedOn"){
+        if (event.target.name === "appliedOn") {
             propertyValue = event.target.value;
+        }
+
+        if (formErrors.hasOwnProperty(propertyName)) {
+            const newFormErrors = {
+                ...formErrors,
+                [propertyName]: propertyValue ? false : true
+            }
+
+            setFormErrors(newFormErrors);
         }
 
         if (props.onChange) {
@@ -32,15 +45,15 @@ const PreviousPetVaccine = (props) => {
     return <Box>
         <Grid container spacing={1}>
             <Grid item md={6}>
-                <TextField size="small" onChange={OnChange} value={data.name} type={"text"} name="name" label={"Nombre:"} sx={{ width: "100%" }} />
+                <TextField size="small" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.name} type={"text"} name="name" label={"Nombre:"} sx={{ width: "100%" }} />
             </Grid>
-            <Grid item md={5}>
-            <TextField size="small" onChange={OnChange} value={data.appliedOn} type={"date"} name="appliedOn" label={"Fecha de Aplicacion:"} sx={{ width: "100%" }} />
+            <Grid item md={adminMode ? 6 : 5}>
+                <TextField size="small" disabled={adminMode} onChange={OnChange} value={data.appliedOn} type={"date"} name="appliedOn" label={"Fecha de Aplicacion:"} sx={{ width: "100%" }} />
             </Grid>
             <Grid item md={1} sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <IconButton onClick={RemoveIt}>
+                {adminMode ? null : <IconButton onClick={RemoveIt}>
                     <DeleteIcon />
-                </IconButton>
+                </IconButton>}
             </Grid>
         </Grid>
     </Box>

@@ -80,10 +80,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "si deseas apoyar nuestra causa",
-                "donacionesEInsumos": "donaciones de insumos"
+                "donacionesEInsumos": "donaciones de insumos",
+                "ingresaElMonto": "ingresa el monto de tu donación"
             },
             "buttons": {
-                "contacto": "contacto"
+                "contacto": "contacto",
+                "irAPagar": "ir a pagar"
             },
             "paragraphs": {
                 "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros."
@@ -93,6 +95,9 @@
                 "alimentos": "alimentos",
                 "higiene": "higiene",
                 "otros": "otros"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Selecciona un monto"
             }
         },
         "contacto": {
@@ -122,7 +127,9 @@
                 "direccion": "Direccion",
                 "correo": "Correo",
                 "empleado": "Empleado",
-                "ocupacion": "Ocupacion"
+                "ocupacion": "Ocupacion",
+                "adopto": "Adoptó",
+                "contraseña": "Contraseña"
             },
             "fotoPerfil": {
                 "fotoPerfil": "Foto de perfil",
@@ -130,7 +137,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Actualizar Datos"
-            }
+            },
+            "link": "Actualizar Contraseña"
         },
         "darEnAdopcion": {
             "titles": {
@@ -227,7 +235,8 @@
                 "donaciones": "Donaciones",
                 "contacto": "Contacto",
                 "idioma": "Idioma",
-                "iniciarSesion": "Iniciar Sesion"
+                "iniciarSesion": "Iniciar Sesion",
+                "favoritos": "Favoritos"
             }
         },
         "userMenu": {
@@ -265,6 +274,46 @@
             "buttons": {
                 "adopcion": "Adoptar",
                 "volver": "Volver"
+            }
+        },
+        "footer": {
+            "inputs": {
+                "newsletter": "Email para Huellitas Newsletter"
+            }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Número de Tarjeta",
+                "caducidad": "Caducidad",
+                "pais": "País"
+            },
+            "buttons": {
+                "pagarAhora": "pagar ahora",
+                "procesando": "procesando ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Gracias por tu Donación",
+                    "frase": "Cada granito de arena cuenta"
+                },
+                "button": {
+                    "volverAlInicio": "volver al inicio"
+                }
+            }
+        },
+        "404": {
+            "mensaje": "Ups... La página no ha sido encontrada"
+        },
+        "cambiarContraseña": {
+            "title": "contraseña",
+            "subtitle": "cambiar contraseña",
+            "inputs": {
+                "contraseñaAnterior": "Contraseña Anterior",
+                "nuevaContraseña": "Nueva Contraseña",
+                "confirmarContraseña": "Confirmar Nueva contraseña"
+            },
+            "button": {
+                "guardarContraseña": "Guardar nueva contraseña"
             }
         }
     },
@@ -349,10 +398,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "if you want to support our cause",
-                "donacionesEInsumos": "donation of supplies"
+                "donacionesEInsumos": "donation of supplies",
+                "ingresaElMonto": "enter the amount of your donation"
             },
             "buttons": {
-                "contacto": "Contact Us"
+                "contacto": "Contact Us",
+                "irAPagar": "go pay"
             },
             "paragraphs": {
                 "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us."
@@ -362,6 +413,9 @@
                 "alimentos": "foods",
                 "higiene": "hygiene",
                 "otros": "others"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Select an Amount"
             }
         },
         "contacto": {
@@ -399,7 +453,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Update data"
-            }
+            },
+            "link": "Change Password"
         },
         "darEnAdopcion": {
             "titles": {
@@ -496,7 +551,8 @@
                 "donaciones": "donations",
                 "contacto": "Contact",
                 "idioma": "Idiom",
-                "iniciarSesion": "Log in"
+                "iniciarSesion": "Log in",
+                "favoritos": "Favorites"
             }
         },
         "userMenu": {
@@ -528,12 +584,52 @@
                 "edad": "Age",
                 "tamaño": "Size",
                 "peso": "Weight",
-                "raza": "Race",
+                "raza": "Breed",
                 "publicado": "Posted"
             },
             "buttons": {
                 "adopcion": "Adopt",
                 "volver": "Return"
+            }
+        },
+        "footer": {
+            "inputs": {
+                "newsletter": "Email for Huellitas Newsletter"
+            }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Card Number",
+                "caducidad": "Expiration",
+                "pais": "Country"
+            },
+            "buttons": {
+                "pagarAhora": "pay now",
+                "procesando": "processing ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Thanks for your Donation",
+                    "frase": "Every grain of sand counts"
+                },
+                "button": {
+                    "volverAlInicio": "back to home"
+                }
+            }
+        },
+        "404": {
+            "mensaje": "Oops... The page was not found"
+        },
+        "cambiarContraseña": {
+            "title": "password",
+            "subtitle": "change password",
+            "inputs": {
+                "contraseñaAnterior": "Old Password",
+                "nuevaContraseña": "New Password",
+                "confirmarContraseña": "Confirm New Password"
+            },
+            "button": {
+                "guardarContraseña": "Save new password"
             }
         }
     },
@@ -618,10 +714,12 @@
         "donaciones": {
             "titles": {
                 "apoyaNuestraCausa": "se você quer apoiar nossa causa",
-                "donacionesEInsumos": "Doação de insumos"
+                "donacionesEInsumos": "Doação de insumos",
+                "ingresaElMonto": "insira o valor da sua doação"
             },
             "buttons": {
-                "contacto": "Contate-Nos"
+                "contacto": "Contate-Nos",
+                "irAPagar": "vá pagar"
             },
             "paragraphs": {
                 "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco."
@@ -631,6 +729,9 @@
                 "alimentos": "alimentos",
                 "higiene": "higiene",
                 "otros": "outras"
+            },
+            "subtitles": {
+                "seleccionaMonto": "Selecione uma Quantia"
             }
         },
         "contacto": {
@@ -668,7 +769,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Atualizar dados"
-            }
+            },
+            "link": "Atualizar Senha"
         },
         "darEnAdopcion": {
             "titles": {
@@ -765,7 +867,8 @@
                 "donaciones": "doações",
                 "contacto": "Contato",
                 "idioma": "Idioma",
-                "iniciarSesion": "Iniciar sessão"
+                "iniciarSesion": "Iniciar sessão",
+                "favoritos": "Favoritos"
             }
         },
         "userMenu": {
@@ -803,6 +906,46 @@
             "buttons": {
                 "adopcion": "Adotar",
                 "volver": "voltar"
+            }
+        },
+        "footer": {
+            "inputs": {
+                "newsletter": "E-mail para Boletim Huellitas"
+            }
+        },
+        "stripe": {
+            "subtitles": {
+                "numTarjeta": "Número de cartão",
+                "caducidad": "Caducity",
+                "pais": "País"
+            },
+            "buttons": {
+                "pagarAhora": "pague agora",
+                "procesando": "em processamento ..."
+            },
+            "completion": {
+                "paragraphs": {
+                    "agradecimiento": "Obrigado pela sua doação",
+                    "frase": "Cada grão de areia conta"
+                },
+                "button": {
+                    "volverAlInicio": "voltar ao inicio"
+                }
+            }
+        },
+        "404": {
+            "mensaje": "Opa... a página não foi encontrada"
+        },
+        "cambiarContraseña": {
+            "title": "senha",
+            "subtitle": "alterar a senha",
+            "inputs": {
+                "contraseñaAnterior": "Senha Antiga",
+                "nuevaContraseña": "Nova Senha",
+                "confirmarContraseña": "Confirme a Nova Senha"
+            },
+            "button": {
+                "guardarContraseña": "Salvar nova senha"
             }
         }
     }

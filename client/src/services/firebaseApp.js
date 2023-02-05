@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyB2h7PT1yEFGAq8__qWBTfFHGw7EeQ81Iw",
   authDomain: "huellitas-de-amor-auth.firebaseapp.com",
+  databaseURL: "https://huellitas-de-amor-auth-default-rtdb.firebaseio.com",
   projectId: "huellitas-de-amor-auth",
   storageBucket: "huellitas-de-amor-auth.appspot.com",
   messagingSenderId: "56874258349",

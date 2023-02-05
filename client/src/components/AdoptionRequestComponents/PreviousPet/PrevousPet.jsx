@@ -2,9 +2,21 @@ import { Button, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Paper,
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviousPetVaccine from "../PreviousPetVaccine/PreviousPetVaccine";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const PreviousPet = (props) => {
-    const { item, data } = props;
+    const { item, data, adminMode } = props;
+    const [formErrors, setFormErrors] = useState(adminMode ?
+        {
+            name: false,
+            species: false
+        } :
+        {
+            name: true,
+            species: true
+        });
+    const [haveErrors, setHaveErrors] = useState(false);
 
     const isAliveOptions = [
         { label: "yes", value: "yes", langKey: 'si', index: 0 },
@@ -25,6 +37,16 @@ const PreviousPet = (props) => {
         if (!isNaN(parseFloat(propertyValue))) {
             propertyValue = parseFloat(propertyValue);
         }
+
+        if (formErrors.hasOwnProperty(propertyName)) {
+            const newFormErrors = {
+                ...formErrors,
+                [propertyName]: propertyValue ? false : true
+            }
+
+            setFormErrors(newFormErrors);
+        }
+
 
         if (props.onChange) {
             props.onChange(data.id, propertyName, propertyValue);
@@ -47,27 +69,28 @@ const PreviousPet = (props) => {
                     </Typography>
                 </Grid>
                 <Grid item md={6} sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    <IconButton onClick={RemoveIt}>
+                    {adminMode ? null : <IconButton onClick={RemoveIt}>
                         <DeleteIcon />
-                    </IconButton>
+                    </IconButton>}
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="name" onChange={OnChange} value={data.name} label={"Nombre:"} sx={{ width: "100%" }} />
+                    <TextField type={"text"} size="small" name="name" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.name} label={"Nombre:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"number"} size="small" name="age" onChange={OnChange} value={data.age} label={"Edad:"} sx={{ width: "100%" }} />
+                    <TextField type={"number"} size="small" name="age" disabled={adminMode} onChange={OnChange} value={data.age} label={"Edad:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="species" onChange={OnChange} value={data.species} label={"Especie:"} sx={{ width: "100%" }} />
+                    <TextField type={"text"} size="small" name="species" error={formErrors.species} helperText={formErrors.species ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.species} label={"Especie:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="details" onChange={OnChange} value={data.details} label={"Detalles:"} sx={{ width: "100%" }} />
+                    <TextField type={"text"} size="small" name="details" disabled={adminMode} onChange={OnChange} value={data.details} label={"Detalles:"} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
                     <TextField
                         name="isAlive"
                         select
                         label={"Aun esta en vida:"}
+                        disabled={adminMode}
                         value={isAliveOptions.filter(e => {
                             return e.value === data.isAlive
                         })[0].label}
@@ -82,11 +105,12 @@ const PreviousPet = (props) => {
                                 {option.label}
                             </option>
                         ))}
+
                     </TextField>
                 </Grid>
                 <Grid item md={12}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox onChange={OnChange} name="stillPreserved" checked={data.stillPreserved} />} label="Aun lo conservo" />
+                        <FormControlLabel control={<Checkbox onChange={OnChange} disabled={adminMode} name="stillPreserved" checked={data.stillPreserved} />} label="Aun lo conservo" />
                     </FormGroup>
                 </Grid>
                 <Grid item md={12}>
@@ -94,13 +118,16 @@ const PreviousPet = (props) => {
                         Vacunas:
                     </Typography>
                 </Grid>
-                <Grid item md={12}>
-                    <Button onClick={AddVaccine} variant="outlined" size="small">Agregar</Button>
-                </Grid>
+                {
+                    adminMode ? null : 
+                    <Grid item md={12}>
+                        <Button onClick={AddVaccine} variant="outlined" size="small">Agregar</Button>
+                    </Grid>
+                }
                 {
                     data.vaccines.map((vaccineData, key) => {
                         return <Grid key={key} item md={12}>
-                            <PreviousPetVaccine data={vaccineData} petId={data.id} item={key} onRemove={props.onRemoveVaccine} onChange={props.onChangeVaccine} />
+                            <PreviousPetVaccine data={vaccineData} petId={data.id} item={key} onRemove={props.onRemoveVaccine} onChange={props.onChangeVaccine} adminMode={adminMode}/>
                         </Grid>
                     })
                 }

@@ -16,7 +16,7 @@ import { getAllPets } from "../redux/slices/petsSlice";
 import { useDispatch } from "react-redux";
 import ErrorDialog from "../components/Dialogs/ErrorDialog/ErrorDialog";
 import Favorite from "../pages/Favorites/Favorites";
-import FirebaseApp from "../services/firebaseApp";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { federatedLogin, resetCurrentUser, setCurrentUser, setLoginType, signOut } from "../redux/slices/userSlice";
 import api from "../services/api";
@@ -33,6 +33,7 @@ import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import AdoptionRequestForm from "../pages/AdoptionRequestForm/AdoptionRequestForm";
 import CambioContraseña from "../components/CambioContraseña/CambiarContraseña";
 import PutAdoption from "../components/DataTable/PutPetsAdoption";
+
 
 function App() {
 
@@ -65,7 +66,14 @@ function App() {
       } else {
         dispatch(signOut());
       }
-    })
+    });
+
+    const db = getDatabase();
+    const starCountRef = ref(db, 'changeId');
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      dispatch(getAllPets());
+    });
 
     /*else if (sessionStorage["user-id"]) {
       const user_id = sessionStorage["user-id"];
@@ -104,12 +112,12 @@ function App() {
           <Route path="/adoption-request/:pet_id" element={<AdoptionRequestForm />} />
           <Route path="/cambio-contraseña" element={<CambioContraseña />} />
         </Route>
-          <Route path="/gracias-por-tu-donacion" element={<Completion />} />
+        <Route path="/gracias-por-tu-donacion" element={<Completion />} />
         <Route path="/pet_info/:pet_id" element={<PetInfoCard />} />
-        <Route path="/iniciar-sesion" element={<Login />} />      
+        <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="/registro-usuario" element={<SignUp />} />
-        <Route path="/restore-password" element={<ForgotPassword/>}/>
-        <Route path="/reset-password/:id" element={<ResetPassword/>}  />
+        <Route path="/restore-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:id" element={<ResetPassword />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <ErrorDialog />

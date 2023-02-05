@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import api from "../../services/api";
 import ErrorManager from "../../resources/ErrorManager";
+import { getDatabase, ref, set } from "firebase/database";
 
 const initialState = {
     petsList: [],
     error: null,
     message: null,
     isBusy: false,
-    amountDonation:0,
+    amountDonation: 0,
 }
 
 export const petsSlice = createSlice({
@@ -24,7 +25,7 @@ export const petsSlice = createSlice({
                 age: obtainedPetData.age,
                 weight: obtainedPetData.weight,
                 size: obtainedPetData.size,
-                genre: obtainedPetData.gender,
+                gender: obtainedPetData.gender,
                 breed: obtainedPetData.breed,
                 description: obtainedPetData.description,
                 img: obtainedPetData.image,
@@ -45,8 +46,8 @@ export const petsSlice = createSlice({
                     age: obtainedPetData.age,
                     weight: obtainedPetData.weight,
                     size: obtainedPetData.size,
-                    genre: obtainedPetData.gender,
-                    breed: obtainedPetData.race,
+                    gender: obtainedPetData.gender,
+                    breed: obtainedPetData.breed,
                     description: obtainedPetData.description,
                     img: obtainedPetData.image,
                     isAdopted: obtainedPetData.isAdopted,
@@ -76,14 +77,14 @@ export const petsSlice = createSlice({
         setPetsBusyMode: (state, action) => {
             state.isBusy = action.payload;
         },
-        setAmountDonation:(state,action)=>{
+        setAmountDonation: (state, action) => {
             state.amountDonation = action.payload
-        }, 
+        },
     }
 });
 
-const { _postPet, _getAllPets,  } = petsSlice.actions;
-export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode,setAmountDonation } = petsSlice.actions;
+const { _postPet, _getAllPets, } = petsSlice.actions;
+export const { setPetsError, resetPetsError, setPetsMessage, resetPetsMessage, setPetsBusyMode, setAmountDonation } = petsSlice.actions;
 
 export default petsSlice.reducer
 
@@ -93,6 +94,11 @@ export const postPet = (obj) => async (dispatch) => {
         const response = await api.post("/animals", obj);
         dispatch(setPetsBusyMode(false));
         dispatch(_postPet(response.data));
+
+        //firebase refresh to change
+        const db = getDatabase();
+        set(ref(db, 'changeId'), Math.random());
+
     } catch (error) {
         dispatch(setPetsBusyMode(false));
         dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [

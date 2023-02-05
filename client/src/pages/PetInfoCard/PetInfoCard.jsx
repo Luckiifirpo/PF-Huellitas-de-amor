@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useSelector } from 'react-redux'
 import style from "./PetInfoCard.module.css";
@@ -14,9 +14,23 @@ const PetInfoCard = (props) => {
     const navigate = useNavigate();
     const { pet_id } = useParams();
     const lang = useSelector((state) => state.lang.currentLangData);
+    const currentUser = useSelector((state) => state.users.currentUser);
     const petData = useSelector((state) => state.pets.petsList.filter(petData => {
         return petData.id === pet_id
     })[0]);
+
+    const renderAdoptionButton = () => {
+        const buttonDisabled = (currentUser && currentUser.hasAdoptionRequest);
+
+        if (buttonDisabled) {
+            return <Tooltip title={"Espera a que la solicitud de adopcion que realizaste sea respondida"}>
+                <Button variant="contained" type="submit" color='disabledButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }}>{lang.petInfoCard.buttons.adopcion}</Button>
+            </Tooltip>
+        } else {
+            return <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }} onClick={(event) => { navigate("/adoption-request/" + pet_id) }}>{lang.petInfoCard.buttons.adopcion}</Button>
+        }
+
+    }
 
     useEffect(() => {
 
@@ -185,7 +199,7 @@ const PetInfoCard = (props) => {
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.genero}: </strong>
-                                                <span>{petData.genre}</span>
+                                                <span>{petData.gender}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.edad}: </strong>
@@ -266,7 +280,9 @@ const PetInfoCard = (props) => {
                                         },
                                         justifyContent: "center"
                                     }}>
-                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginRight: "5px" }} onClick={(event) => { navigate("/adoption-request/" + pet_id) }}>{lang.petInfoCard.buttons.adopcion}</Button>
+                                        {
+                                            renderAdoptionButton()
+                                        }
                                         <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', my: "20px", marginLeft: "5px" }} onClick={(event) => { navigate("/adopciones") }}>{lang.petInfoCard.buttons.volver}</Button>
                                     </Box>
                                 </Grid>

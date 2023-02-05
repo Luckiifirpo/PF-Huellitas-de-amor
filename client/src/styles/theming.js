@@ -11,7 +11,11 @@ const theme = createTheme({
         },
         yellowButton: {
           main: '#FFAB13',
-          contrastText: '#fff',
+          contrastText: '#fff'
+        },
+        disabledButton: {
+          main: '#c4c4c4',
+          contrastText: '#fff'
         }
       },
       

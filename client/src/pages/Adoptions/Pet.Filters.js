@@ -2,15 +2,15 @@ const Pet_Filters_Behavior = {
     Apply(petsData, filters) {
         let filtered_pets_data = petsData;
 
-        switch (filters.genreFilter.index) {
+        switch (filters.genderFilter.index) {
             case 1:
                 filtered_pets_data = filtered_pets_data.filter(e => {
-                    return e.genre.toLowerCase() === "male"
+                    return e.gender.toLowerCase() === "male"
                 });
                 break;
             case 2:
                 filtered_pets_data = filtered_pets_data.filter(e => {
-                    return e.genre.toLowerCase() === "female"
+                    return e.gender.toLowerCase() === "female"
                 });
                 break;
         }

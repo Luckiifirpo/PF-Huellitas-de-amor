@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -26,6 +26,8 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
+    "react-share": "^4.4.1",
+    "react-share-social": "^0.1.55",
     "react-social-login-buttons": "^3.6.1",
     "yup": "^0.32.11"
   },
