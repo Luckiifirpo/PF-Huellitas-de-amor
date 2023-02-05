@@ -26,6 +26,7 @@ const CambioContraseña = () => {
   const [passowrdConfig, setPassWordConfig] = useState({ oldPassword: null, newPassword: null, repeatedNewPassword: null })
   const currentUser = useSelector((state) => state.users.currentUser);
   const loginType = useSelector((state) => state.users.loginType);
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const [showPreviousPassword, setShowPreviousPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
@@ -124,13 +125,13 @@ const CambioContraseña = () => {
             <Grid item md={6} >
               <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: '15px', justifyContent: 'center', height: '100%', margin: '0px 70px' }}>
                 <Typography component="h1" variant="h4" align='center' sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
-                  CONTRASEÑA
+                  {lang.cambiarContraseña.title}
                 </Typography>
                 <Typography component="h4" variant="h6" align='center' sx={{ color: '#FF3055', fontWeight: '700' }}>
-                  cambiar contraseña
+                  {lang.cambiarContraseña.subtitle}
                 </Typography>
                 <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="contraseña-anterior">Contraseña Anterior</InputLabel>
+                  <InputLabel htmlFor="contraseña-anterior">{lang.cambiarContraseña.inputs.contraseñaAnterior}</InputLabel>
                   <FilledInput
                     onChange={handlerContraseñaAnterior}
                     id="contraseña-anterior"
@@ -151,7 +152,7 @@ const CambioContraseña = () => {
                   />
                 </FormControl>
                 <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="nueva-contraseña">Nueva Cotraseña</InputLabel>
+                  <InputLabel htmlFor="nueva-contraseña">{lang.cambiarContraseña.inputs.nuevaContraseña}</InputLabel>
                   <FilledInput
                     onChange={handlerNuevaContraseña}
                     id="nueva-contraseña"
@@ -172,7 +173,7 @@ const CambioContraseña = () => {
                   />
                 </FormControl>
                 <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="confirmar-nueva-contraseña">Confirmar Nueva Contraseña</InputLabel>
+                  <InputLabel htmlFor="confirmar-nueva-contraseña">{lang.cambiarContraseña.inputs.confirmarContraseña}</InputLabel>
                   <FilledInput
                     onChange={handlerRepetirContraseña}
                     id="confirmar-nueva-contraseña"
@@ -193,7 +194,7 @@ const CambioContraseña = () => {
                   />
                 </FormControl>
 
-                <Button onClick={handlerEnviarContraseña} variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginTop: '30px' }}>Guardar nueva contraseña</Button>
+                <Button onClick={handlerEnviarContraseña} variant="contained" color='info' size="large" sx={{ borderRadius: '20px', marginTop: '30px' }}>{lang.cambiarContraseña.button.guardarContraseña}</Button>
 
               </Box>
             </Grid>

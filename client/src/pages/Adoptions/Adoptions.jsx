@@ -183,6 +183,7 @@ const Adoptions = () => {
 
   }, [petsList, pets_data, globalState, lang]);
 
+  console.log({pets_data})
 
   return (
     <div>
@@ -373,9 +374,9 @@ const Adoptions = () => {
                     <ListItem>
                       <Autocomplete size="small" disablePortal
                         id="genre-filter"
-                        value={lang.adoptions.filtros.genero[globalState.filters.genreFilter.langKey]}
+                        value={lang.adoptions.filtros.genero[globalState.filters.genderFilter.langKey]}
                         sx={{ width: 300 }}
-                        options={getFiltersInCurrentLang().genreFilter}
+                        options={getFiltersInCurrentLang().genderFilter}
                         renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.genero} />}
                         onChange={AutocompleteFilterOnChange}
                         isOptionEqualToValue={(option, value) => {

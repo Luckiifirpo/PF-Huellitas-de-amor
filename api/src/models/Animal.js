@@ -15,7 +15,6 @@ module.exports = (sequelize) => {
     },
     postDate: {
       type: DataTypes.DATE,
-      allowNull: false,
       validate:{
         isDate: true
       }

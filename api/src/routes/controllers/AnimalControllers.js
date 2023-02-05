@@ -112,7 +112,7 @@ const updateAnimal = async (req, res) => {
 
         const animal = await Animal.findByPk(id)
         animal.name = name || animal.name;
-        animal.postDate = date || animal.date;
+        animal.postDate = date || animal.postDate;
         animal.species = species || animal.species;
         animal.age = age || animal.age;
         animal.weight = weight || animal.weight;
