@@ -183,7 +183,7 @@ const Adoptions = () => {
 
   }, [petsList, pets_data, globalState, lang]);
 
-  console.log({lang: lang.adoptions.filtros.genero, value: globalState.filters})
+  console.log({pets_data})
 
   return (
     <div>
