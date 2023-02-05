@@ -202,7 +202,7 @@ const UserInfoEditor = (props) => {
                                         </Grid>
 
                                         {loginType === "withEmailAndPassword" ? <Grid item sx={{ width: "100%" }}>
-                                            <Link to="/cambio-contraseña">Actualizar Contraseña</Link>
+                                            <Link to="/cambio-contraseña">{lang.userInfoEditor.link}</Link>
                                         </Grid> : null}
                                     </Grid>
                                 </Box>

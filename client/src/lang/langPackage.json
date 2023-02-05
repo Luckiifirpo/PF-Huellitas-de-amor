@@ -137,7 +137,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Actualizar Datos"
-            }
+            },
+            "link": "Actualizar Contraseña"
         },
         "darEnAdopcion": {
             "titles": {
@@ -452,7 +453,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Update data"
-            }
+            },
+            "link": "Change Password"
         },
         "darEnAdopcion": {
             "titles": {
@@ -767,7 +769,8 @@
             },
             "buttons": {
                 "actualizarDatos": "Atualizar dados"
-            }
+            },
+            "link": "Atualizar Senha"
         },
         "darEnAdopcion": {
             "titles": {
