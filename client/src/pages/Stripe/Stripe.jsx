@@ -16,6 +16,7 @@ function CheckoutForm() {
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const lang = useSelector((state) => state.lang.currentLangData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ function CheckoutForm() {
         disabled={isProcessing || !stripe || !elements} 
         id="submit">
         <span id="button-text">
-          {isProcessing ? "Procesando ... " : "Pagar Ahora"}
+          {isProcessing ? lang.stripe.buttons.procesando : lang.stripe.buttons.pagarAhora}
         </span>
       </Button>
       {/* Show any error or success messages */}

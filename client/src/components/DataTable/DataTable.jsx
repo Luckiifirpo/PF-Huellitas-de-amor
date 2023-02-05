@@ -99,7 +99,7 @@ export default function DataTable() {
 //     age: 2,
 //     weight: 25,
 //     size: "Big",
-//     genre: "Male",
+//     gender: "Male",
 //     breed: "Cacri",
 //     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
 //     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxZJlbDtw4byJKcug1ME7qlpG1jet3tHg1zA&usqp=CAU"},
@@ -111,7 +111,7 @@ export default function DataTable() {
 //       age: 8,
 //       weight: 10,
 //       size: "medium",
-//       genre: "female",
+//       gender: "female",
 //       breed: "Spaniel",
 //       description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto sit fugiat",
 //       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiEwsd1j4JLO9RoDf1e5DJOyRzJ6MHHC-sHpoD-i0DFjiQER8KvxTD7ZAbAQiKnOEpB4c&usqp=CAU"

@@ -18,12 +18,6 @@ module.exports = (sequelize) => {
         },
         age: {
             type: DataTypes.INTEGER,
-        }, 
-        email: {
-            type: DataTypes.STRING,
-            validate: {
-                isEmail: true,
-            }
         },
         phoneNumber: {
             type: DataTypes.STRING

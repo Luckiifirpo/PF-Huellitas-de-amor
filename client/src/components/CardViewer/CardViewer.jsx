@@ -18,7 +18,7 @@ const CardViewer = (props) => {
     }
 
     const create_pagination = () => {
-        const pets_page_chunks = CardViewer_Pagination_Behavior.Apply(cardsDataList, 6);
+        const pets_page_chunks = CardViewer_Pagination_Behavior.Apply(cardType, cardsDataList, 6);
         set_page_chunks(pets_page_chunks);
 
         if (pets_page_chunks.length && currentPage >= pets_page_chunks.length && onChangePage) {
@@ -44,7 +44,7 @@ const CardViewer = (props) => {
     return <Grid container>
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "20px" }}>
             {
-                cardsDataList && cardsDataList.length ? <Pagination count={page_chunks.length} page={currentPage} onChange={ChangePage} /> : null
+                page_chunks && page_chunks.length ? <Pagination count={page_chunks.length} page={currentPage} onChange={ChangePage} /> : null
             }
         </Grid>
         <Grid item xs={12}>
@@ -53,11 +53,12 @@ const CardViewer = (props) => {
                     {
 
                         page_chunks && page_chunks.length ? page_chunks[(currentPage - 1)].map((card_data, key) => {
-                            return <Grid key={key} item lg={4} sm={6} xs={12} alignSelf="stretch" sx={{display: "flex", justifyContent: "center"}}>
-                                {
-                                    render_card(card_data)
-                                }
-                            </Grid>
+                            return cardType === "pet_card" && card_data.isAdopted ? null :
+                                <Grid key={key} item lg={4} md={6} xs={12} alignSelf="stretch">
+                                    {
+                                        render_card(card_data)
+                                    }
+                                </Grid>
                         }) : <div className={style.empty_data_container}>
                             <Typography color="secondary" component="h1" variant="h4" style={{ marginTop: 30 }} sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
                                 {emptyListLabel}

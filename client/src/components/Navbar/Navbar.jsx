@@ -85,19 +85,19 @@ const Navbar = (props) => {
         {navItems.map((item) => (
           <ListItem key={item.name} disablePadding>
             <Button key={item.name} component={RouterLink} to={item.route}>
-              {item.name}
+              {lang.navbar.links[item.name]}
             </Button>
           </ListItem>
         ))}
         <ListItem disablePadding>
           <Button component={RouterLink} to="/favoritos">
             {/* {lang.navbar.links.inicio} */}
-            Favoritos
+            {lang.navbar.links.favoritos}
           </Button>
         </ListItem>
         <ListItem disablePadding>
           <Button component={RouterLink} to="/iniciar-sesion">
-            Iniciar sesion
+            {lang.navbar.links.iniciarSesion}
           </Button>
         </ListItem>
       </List>
@@ -140,8 +140,8 @@ const Navbar = (props) => {
               <LangMenu />
               {
                 currentUser ? <UserAccountMenu userData={currentUser} /> :
-                  <Button onClick={ToLogin}>
-                    Iniciar sesion
+                  <Button onClick={ToLogin} >
+                    {lang.navbar.links.iniciarSesion}
                   </Button>
               }
             </Box>

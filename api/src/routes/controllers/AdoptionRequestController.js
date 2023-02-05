@@ -140,16 +140,17 @@ const postAdoptionRequest = async (req, res) => {
         const petImage = pet.dataValues.image
         const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
         const fecha = new Date()
+
         user.setAdoptionRequest(newAdoptionRequest);
         pet.setAdoptionRequest(newAdoptionRequest);
 
         user.hasAdoptionRequest = true;
         user.save();
-        // console.log(email)
-        // console.log(name)
-        // console.log(petName)
-        // console.log(fecha)
-        // console.log(petImage)
+        console.log(email)
+        console.log(name)
+        console.log(petName)
+        console.log(fecha)
+        console.log(petImage)
         //console.log(user)
         // console.log(pet)
         await transporter.sendMail({
@@ -167,9 +168,9 @@ const postAdoptionRequest = async (req, res) => {
             <img src=${imageHuellitas} alt="Huellitas de amor">
             </body>
             </html>`, // html body
-          });
-        
-        
+        });
+
+
 
         res.status(200).json(await AdoptionRequest.findByPk(adoptionRequestId, {
             include: [{
@@ -204,16 +205,200 @@ const postAdoptionRequest = async (req, res) => {
     }
 }
 
-const getAdoptionRequest = async (req, res) => {
+const getAdoptionRequestById = async (req, res) => {
+    try {
+        const { id } = req.params;
 
+        const adoption_request = await AdoptionRequest.findByPk(id, {
+            include: [{
+                model: TenantsPsychologicalData,
+                as: "applicantsPsychologicalData"
+            }, {
+                model: PreviousPet,
+                as: "previousPet",
+                include: [{
+                    model: PreviousPetsVaccine,
+                    as: "previousPetVaccine"
+                }]
+            }, {
+                model: ApplicantsResidence,
+                as: "applicantsResidence"
+            }, {
+                model: PersonalReference,
+                as: "personalReference"
+            }, {
+                model: ResidencesTenant,
+                as: "residencesTenant",
+                include: [{
+                    model: TenantsPsychologicalData,
+                    as: "tenantPsychologicalData"
+                }]
+            }],
+
+        });
+
+        res.status(200).json(adoption_request);
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
 
 const getAllAdoptionRequests = async (req, res) => {
-    
+
+}
+
+const authorizeAdoptionRequest = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const adoption_request = await AdoptionRequest.findByPk(id, {
+            include: [
+                {
+                    model: Usuario,
+                    as: "applicant"
+                },
+                {
+                    model: Animal,
+                    as: "toBeAdopted"
+                }
+                ,
+                {
+                    model: TenantsPsychologicalData,
+                    as: "applicantsPsychologicalData"
+                }, {
+                    model: PreviousPet,
+                    as: "previousPet",
+                    include: [{
+                        model: PreviousPetsVaccine,
+                        as: "previousPetVaccine"
+                    }]
+                }, {
+                    model: ApplicantsResidence,
+                    as: "applicantsResidence"
+                }, {
+                    model: PersonalReference,
+                    as: "personalReference"
+                }, {
+                    model: ResidencesTenant,
+                    as: "residencesTenant",
+                    include: [{
+                        model: TenantsPsychologicalData,
+                        as: "tenantPsychologicalData"
+                    }]
+                }],
+
+        });
+
+        const adoptionRequestToDestroy = adoption_request.id;
+        const personalReferenceToDestroy = [];
+        const previousPetToDestroy = [];
+        const vaccinesToDestroy = [];
+        const residencesTenantToDestroy = [];
+        const psychologicalDataToDestroy = [];
+        const applicantsResidenceToDestroy = [];
+
+        psychologicalDataToDestroy.push(adoption_request.applicantsPsychologicalData.id);
+
+        adoption_request.personalReference.forEach(pr => {
+            personalReferenceToDestroy.push(pr.id);
+        });
+
+        adoption_request.previousPet.forEach(pp => {
+            previousPetToDestroy.push(pp.id);
+
+            pp.previousPetVaccine.forEach(v => {
+                vaccinesToDestroy.push(v.id);
+            });
+        });
+
+        adoption_request.residencesTenant.forEach(rt => {
+            residencesTenantToDestroy.push(rt.id);
+            psychologicalDataToDestroy.push(rt.tenantPsychologicalData.id);
+        });
+
+        adoption_request.applicantsResidence.forEach(ar => {
+            applicantsResidenceToDestroy.push(ar.id);
+        });
+
+        adoption_request.applicant.hasAdoptionRequest = false;
+        adoption_request.toBeAdopted.isAdopted = true;
+        adoption_request.applicant.save();
+        adoption_request.toBeAdopted.save();
+
+        adoption_request.applicant.setAdoptionRequest(null);
+        adoption_request.toBeAdopted.setAdoptionRequest(null);
+
+        for await (let toDestroy of vaccinesToDestroy){
+            await PreviousPetsVaccine.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        for await (let toDestroy of previousPetToDestroy){
+            await PreviousPet.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        for await (let toDestroy of personalReferenceToDestroy){
+            await PersonalReference.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        for await (let toDestroy of psychologicalDataToDestroy){
+            await TenantsPsychologicalData.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        for await (let toDestroy of residencesTenantToDestroy){
+            await ResidencesTenant.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        for await (let toDestroy of applicantsResidenceToDestroy){
+            await ApplicantsResidence.destroy({
+                where: {
+                    id: toDestroy
+                },
+                force: true
+            })
+        }
+
+        await AdoptionRequest.destroy({
+            where: {
+                id: adoptionRequestToDestroy
+            },
+            force: true
+        })
+
+        res.status(200).json({ message: "ok" });
+    } catch (error) {
+        res.status(400).json(error);
+    }
 }
 
 module.exports = {
     postAdoptionRequest,
-    getAdoptionRequest,
-    getAllAdoptionRequests
+    getAdoptionRequestById,
+    getAllAdoptionRequests,
+    authorizeAdoptionRequest
 };

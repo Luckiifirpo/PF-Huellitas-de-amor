@@ -199,7 +199,7 @@ const PetInfoCard = (props) => {
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.genero}: </strong>
-                                                <span>{petData.genre}</span>
+                                                <span>{petData.gender}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.edad}: </strong>

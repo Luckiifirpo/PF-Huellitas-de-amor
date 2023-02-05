@@ -3,10 +3,12 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import error404 from "../../assets/image/error404-img.png";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"
 import style from "./Error404.module.css";
 
 
 const Error404 = () => {
+  const lang = useSelector((state) => state.lang.currentLangData);
   const navigate = useNavigate()
   const handlerInicio = (e) => {
     navigate("/")
@@ -22,9 +24,9 @@ const Error404 = () => {
               404
             </Typography>
             <Typography component="p" sx={{ fontFamily: 'Outfit', fontSize: '30px', lineHeight: '36px', fontWeight: '400', color: '#3B57A9', textAlign: 'center' }}>
-              Ups... La página no ha sido encontrada (Error 404)
+              {lang[404].mensaje} (Error 404)
             </Typography>
-            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>volver al inicio</Button>
+            <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: '20px' }} onClick={(e) => handlerInicio(e)}>{lang.stripe.completion.button.volverAlInicio}</Button>
           </Grid>
           <Grid item md={6} style={{ padding: 40 }}>
             <img src={error404} alt='perrito sad' />

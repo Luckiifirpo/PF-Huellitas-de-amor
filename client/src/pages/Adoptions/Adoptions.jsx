@@ -15,7 +15,7 @@ import CardViewer from '../../components/CardViewer/CardViewer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const filterControlValues = {
-  genreFilter: [{ label: '', langKey: 'ambosGeneros', filter: "genreFilter", index: 0 }, { label: '', langKey: 'machos', filter: "genreFilter", index: 1 }, { label: '', langKey: 'hembras', filter: "genreFilter", index: 2 }],
+  genderFilter: [{ label: '', langKey: 'ambosGeneros', filter: "genderFilter", index: 0 }, { label: '', langKey: 'machos', filter: "genderFilter", index: 1 }, { label: '', langKey: 'hembras', filter: "genderFilter", index: 2 }],
   speciesFilter: [{ label: '', langKey: 'todasLasEspecies', filter: "speciesFilter", index: 0 }, { label: '', langKey: 'perros', filter: "speciesFilter", index: 1 }, { label: '', langKey: 'gatos', filter: "speciesFilter", index: 2 }, { label: '', langKey: 'otros', filter: "speciesFilter", index: 3 }],
   sizeFilter: [{ label: '', langKey: 'todosLosTamaños', filter: "sizeFilter", index: 0 }, { label: '', langKey: 'pequeños', filter: "sizeFilter", index: 1 }, { label: '', langKey: 'medianos', filter: "sizeFilter", index: 2 }, { label: '', langKey: 'grandes', filter: "sizeFilter", index: 3 }]
 }
@@ -56,7 +56,7 @@ const Adoptions = () => {
 
   const resetAdoptionFilters = (event) => {
     const new_filter_data = {
-      genreFilter: filterControlValues.genreFilter[0],
+      genderFilter: filterControlValues.genderFilter[0],
       speciesFilter: filterControlValues.speciesFilter[0],
       sizeFilter: filterControlValues.sizeFilter[0],
       ageFilter: [0, 30],
@@ -140,7 +140,7 @@ const Adoptions = () => {
 
   const getFiltersInCurrentLang = () => {
     const filtersInCurrentLang = {
-      genreFilter: filterControlValues.genreFilter.map(e => {
+      genderFilter: filterControlValues.genderFilter.map(e => {
         return {
           ...e,
           label: lang.adoptions.filtros.genero[e.langKey]
@@ -165,7 +165,7 @@ const Adoptions = () => {
 
   const getAppliedFiltersInCurrentLang = () => {
     const filtersInCurrentLang = {
-      genreFilter: globalState.filters,
+      genderFilter: globalState.filters,
       speciesFilter,
       sizeFilter
     }
@@ -248,10 +248,10 @@ const Adoptions = () => {
               <List>
                 <ListItem>
                   <Autocomplete size="small" disablePortal
-                    id="genre-filter"
-                    value={lang.adoptions.filtros.genero[globalState.filters.genreFilter.langKey]}
+                    id="gender-filter"
+                    value={lang.adoptions.filtros.genero[globalState.filters.genderFilter.langKey]}
                     sx={{ width: 300 }}
-                    options={getFiltersInCurrentLang().genreFilter}
+                    options={getFiltersInCurrentLang().genderFilter}
                     renderInput={(params) => <TextField {...params} label={lang.adoptions.filtros.inputs.genero} />}
                     onChange={AutocompleteFilterOnChange}
                     isOptionEqualToValue={(option, value) => {
