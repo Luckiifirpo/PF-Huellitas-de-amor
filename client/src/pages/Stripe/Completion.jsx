@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import React from 'react';
 import { Button, Grid } from "@mui/material";
 
-import fondogracias from "../../assets/image/fondogracias.png";
+import fondogracias from "../../assets/image/fondoGracias.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux"
 import style from './Stripe.module.css'

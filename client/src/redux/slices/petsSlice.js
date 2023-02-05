@@ -103,7 +103,7 @@ export const postPet = (obj) => async (dispatch) => {
         dispatch(setPetsBusyMode(false));
         dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/animals" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com/animals" }
         ])));
     }
 };
@@ -118,7 +118,7 @@ export const getAllPets = (obj) => async (dispatch) => {
         dispatch(setPetsBusyMode(false));
         dispatch(setPetsError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "GET: http://localhost:3001/animals" }
+            { request: "GET: https://huellitas-de-amor-server.onrender.com/animals" }
         ])));
     }
 };

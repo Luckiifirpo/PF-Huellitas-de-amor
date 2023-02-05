@@ -78,28 +78,10 @@ export const postUser = (obj) => async (dispatch) => {
         dispatch(setLoginType("withEmailAndPassword"));
     } catch (error) {
         dispatch(setUserBusyMode(false));
-        if (error.response.data.code) {
-            const signup_error_code = error.response.data.code;
-            switch (signup_error_code) {
-                case "EmailAlreadyExist":
-                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject({
-                        name: "SignUpError",
-                        code: signup_error_code
-                    }, [])));
-                    break;
-                default:
-                    dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-                        { code: error.code },
-                        { request: "POST: http://localhost:3001/auth/login" }
-                    ])));
-                    break;
-            }
-        } else {
-            dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
-                { code: error.code },
-                { request: "POST: http://localhost:3001/users" }
-            ])));
-        }
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "POST: http://localhost:3001/users" }
+        ])));
     }
 }
 
@@ -138,6 +120,7 @@ export const loginWithEmailAndPassword = (email, password) => async (dispatch) =
     }
 }
 
+
 export const federatedLogin = (token, userData) => async (dispatch) => {
     try {
         dispatch(setUserBusyMode(true));
@@ -153,7 +136,7 @@ export const federatedLogin = (token, userData) => async (dispatch) => {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
             { code: error.code },
-            { request: "POST: http://localhost:3001/auth/federated_login" }
+            { request: "POST: https://huellitas-de-amor-server.onrender.com/auth/federated_login" }
         ])));
     }
 }
@@ -192,7 +175,10 @@ export const updateUserInfoForAdminDashboard = (newData, callback) => async (dis
         if(callback){
             callback();
         }
-
+        const response = await api.post(`/users/forgot-password`,{email: obj});
+        console.log(response.data + " respuesta servidor");
+        dispatch(setUserBusyMode(false));
+        dispatch(setForgotPassword(response.data));
     } catch (error) {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
