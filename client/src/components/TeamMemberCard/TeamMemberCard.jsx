@@ -10,8 +10,8 @@ const TeamMemberCard = (props) => {
     
     return (
         <Card className={style.card} sx={{ width: "100%", height: "100%" }}>
-            <CardActionArea>
-                <Link to={"/team_member_info/" + data.id}>
+            {/* <CardActionArea>
+                <Link to={"/team_member_info/" + data.id}> */}
                     <CardMedia component="img"
                         sx={{ height: 194 }}
                         image={data ? data.img : ""}
@@ -29,8 +29,8 @@ const TeamMemberCard = (props) => {
                             }
                         </Typography>
                     </CardContent>
-                </Link>
-            </CardActionArea>
+                {/* </Link>
+            </CardActionArea> */}
             <CardActions style={{paddingTop: 5}} disableSpacing>
                 <IconButton aria-label="github" href={data.github} target="_blank">
                     <GitHubIcon color='secondary'/>
