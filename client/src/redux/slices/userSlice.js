@@ -175,7 +175,7 @@ export const updateUserInfoForAdminDashboard = (newData, callback) => async (dis
         if(callback){
             callback();
         }
-        // const response = await api.post(`/users/forgot-password`,{email: obj});
+        const response = await api.post(`/users/forgot-password`,{email: obj});
         console.log(response.data + " respuesta servidor");
         dispatch(setUserBusyMode(false));
         dispatch(setForgotPassword(response.data));
