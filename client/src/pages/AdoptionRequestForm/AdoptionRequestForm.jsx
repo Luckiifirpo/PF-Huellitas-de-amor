@@ -565,7 +565,9 @@ const AdoptionRequestForm = (props) => {
     }
 
     const RequestDataReview = () => {
-
+        if(props.RequestDataReview){
+            props.RequestDataReview(data);
+        }
     }
 
     const HaveErrors = () => {
