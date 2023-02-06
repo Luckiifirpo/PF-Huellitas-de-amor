@@ -73,6 +73,22 @@ const Adoptions = () => {
 
     if (sorted_pets_data.length !== pets_data.length || !isArrayEqual(sorted_pets_data, pets_data)) {
       set_pets_data(sorted_pets_data);
+    } else if (sorted_pets_data.length === pets_data.length) {
+      let isDifferent = false
+      for (let it = 0; it < sorted_pets_data.length; it++) {
+        const e1 = sorted_pets_data[it];
+        const e2 = pets_data[it];
+
+        if (!_.isEqual(e1, e2)) {
+          isDifferent = true;
+          break;
+        }
+      }
+
+      if (isDifferent) {
+        console.log(sorted_pets_data, pets_data);
+        set_pets_data(sorted_pets_data);
+      }
     }
     //create_pagination(sorted_pets_data);
   }
@@ -183,11 +199,9 @@ const Adoptions = () => {
 
   }, [petsList, pets_data, globalState, lang]);
 
-  console.log({pets_data})
-
   return (
     <div>
-      <Container sx={{ marginBottom: "30px", marginTop: {xs: "70px", sm: "130px"} }} >
+      <Container sx={{ marginBottom: "30px", marginTop: { xs: "70px", sm: "130px" } }} >
         <Grid container spacing={5} alignItems="flex-start">
           <Grid component={Box} item lg={2} display={{ xs: "none", lg: "block" }} />
           <Grid item lg={8} xs={12} display={{ xs: "none", lg: "block" }}>

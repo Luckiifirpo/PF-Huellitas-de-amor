@@ -288,7 +288,10 @@ export default function DataTableUsers() {
   }
 
   const SendRequestDataReviewEmail = () => {
-
+    emailEditorRef.current.editor.exportHtml(data => {
+      const { design, html } = data
+      console.log('exportHtml', html)
+    })
   }
 
   useEffect(() => {
