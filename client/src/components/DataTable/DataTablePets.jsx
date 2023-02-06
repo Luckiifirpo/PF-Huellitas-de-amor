@@ -151,10 +151,6 @@ const columns = [
   } 
   const handleClose = () => setOpen(false);
 
-
-
-
-
   useEffect(() => {
     fetch("http://localhost:3001/animals")
       .then((data) => data.json())
@@ -169,7 +165,7 @@ const columns = [
   //  },[])
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: "calc(100vh - 350px)", width: '100%', marginBottom: "13px" }}>
       <DataGrid
         rows={tableData}
         columns={columns}
