@@ -151,10 +151,7 @@ const PostAdoption = (props) => {
     breed: "",
     description: "",
   };
-console.log(initialValues)
-console.log(currentUser)
   
-
   const formik = useFormik({
     initialValues,
     validationSchema: validationSchema,
@@ -218,9 +215,10 @@ en donde debe hacerse para enviar el post a /animals */
         message: "Se han cargado tus datos correctamente",
         details: []
       }))
+      setFile(null);
       resetForm();
       setTimeout(() => {
-        navigate("/dar-en-adopcion");
+        navigate("/adopciones");
       }, 1000);
     } catch (error) {
       console.log({ error });
