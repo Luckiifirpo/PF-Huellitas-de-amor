@@ -282,7 +282,6 @@ export default function DataTableUsers() {
   }
   const UpdatedUserInfo = () => {
     hideModals();
-
     /*fetch("http://localhost:3001/users")
       .then((data) => data.json())
       .then((data) => UpdateTableDataUsers(data));
