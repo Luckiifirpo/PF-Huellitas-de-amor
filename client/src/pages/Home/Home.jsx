@@ -16,6 +16,7 @@ import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
 import { useNavigate } from "react-router-dom";
 
+
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Fab from '@mui/material/Fab';
@@ -102,10 +103,12 @@ const Home = () => {
       <Toolbar id="back-to-top-anchor" />
       <Box className={style.contenedorpadre} >
       <Container className={style.adoptar} >
-        <Grid container spacing={2} alignItems="center" marginTop={'50px'}>
-          <Grid item md={8}>
+        <Grid container spacing={2} alignItems="center" marginTop={'80px'} marginBottom={'100px'}>
+     
+          <Grid item md={8} padding={'20px'} >
             <img src={perritoHome} alt='perrito home' />
           </Grid>
+       
           <Grid item md={4}className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.meQuieresAdoptar}
@@ -147,9 +150,9 @@ const Home = () => {
       </Box>
 
       <Container className={style.darEnAdopcion}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item md={6}>
-            <img src={banner3} alt='banner home' />
+        <Grid container spacing={2} alignItems="center" marginTop={'100px'}>
+          <Grid item md={6} padding={'40px'}>
+            <img src={banner3} alt='banner home'/>
           </Grid>
           <Grid item md={6}className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
@@ -164,7 +167,7 @@ const Home = () => {
       </Container>
 
       <Container className={style.hazTuDonacion} >
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2} alignItems="center" marginBottom='50px'>
           <Grid item md={6} className={style.centradosgrid}>
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.hazTuDonacion}
@@ -183,7 +186,7 @@ const Home = () => {
         <Container className={style.masInformacion}>
           <Grid spacing={{ xs: 5, md: 0 }} container marginTop={'40px'}>
 
-            <Grid item md={6} sx={{  }}>
+            <Grid item md={6} >
               <img src={banner5} alt='fondo perro' className={style.imageInfo} />
             </Grid>
             <Grid item md={6} sx={{ marginTop: '20px' }} className={style.centradosgrid}>
