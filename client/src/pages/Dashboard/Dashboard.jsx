@@ -74,8 +74,10 @@ import { Grid, List, ListItemButton, ListItemIcon } from "@mui/material";
 import { Box } from "@mui/system";
 import PetsIcon from '@mui/icons-material/Pets';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import DataTableContactUs from '../../components/DataTable/DataTableContactUs';
 
 
 const Dashboard = (props) => {
@@ -92,6 +94,8 @@ const Dashboard = (props) => {
                 return <DataTablePets />
             case 1:
                 return <DataTableUsers />
+            case 2:
+                return <DataTableContactUs />
         }
     }
 
@@ -112,6 +116,12 @@ const Dashboard = (props) => {
                                 <AccountCircleIcon />
                             </ListItemIcon>
                             Usuarios
+                        </ListItemButton>
+                        <ListItemButton selected={selectedIndex === 2} onClick={(event) => selectListItems(event, 2)}>
+                            <ListItemIcon>
+                                <ContactMailIcon />
+                            </ListItemIcon>
+                            Contactanos
                         </ListItemButton>
                     </List>
 
