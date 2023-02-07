@@ -120,9 +120,9 @@ const PetCard = (props) => {
                         </IconButton>
                     )
                 }
-                <IconButton aria-label="share">
+                {/* <IconButton aria-label="share">
                     <ShareIcon />
-                </IconButton>
+                </IconButton> */}
                 
             </CardActions>
             <CardActions>
