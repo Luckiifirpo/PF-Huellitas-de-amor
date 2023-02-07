@@ -174,5 +174,6 @@ module.exports = {
     loginCtrl,
     federatedLoginCtrl,
     isAuthenticated,
-    getLogout
+    getLogout,
+    checkRole    
 }
