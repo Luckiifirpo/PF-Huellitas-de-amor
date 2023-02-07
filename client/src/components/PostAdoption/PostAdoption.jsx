@@ -247,21 +247,25 @@ en donde debe hacerse para enviar el post a /animals */
     <>
       <Box
         className={style.gridContact}
-        sx={{ marginBottom: "300px", marginTop: "150px" }}
+        sx={{ marginBottom: "100px", marginTop: "150px" }}
       >
-        <Box className={style.gridContactImage}>
+      {/* <Box className={style.gridContactImage}>
           <img src={ImagePostAdoption} alt="" />
-        </Box>
-
+        </Box> */}
+      
         <Container sx={{ height: "100%" }}>
+       
           <form onSubmit={formik.handleSubmit}>
+          
             <Grid
               container
+              spacing={5}
               justifyContent="center"
               alignItems="center"
               sx={{ height: "100%" }}
+              
             >
-              <Grid item md={12}>
+              <Grid item xs={12}>
                 <Typography
                   component="h1"
                   variant="h3"
@@ -270,13 +274,12 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "200px",
                   }}
                 >
                   {lang.darEnAdopcion.titles.darEnAdopcion}
                 </Typography>
               </Grid>
-              <Grid item md={6}>
+              <Grid item xs={12} md={6}>
                 <Box
                   sx={{
                     display: "flex",
@@ -284,7 +287,6 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
-                    margin: " 0 20px 0 150px",
                   }}
                 >
                   <TextField
@@ -322,62 +324,52 @@ en donde debe hacerse para enviar el post a /animals */
                       </option>
                     ))}
                   </TextField>
-                  <Box
-                    sx={{
-                      display: "flex",
+
+                  <TextField
+                    type="number"
+                    inputProps={{ min: 0 }}
+                    label={lang.darEnAdopcion.inputs.edad + ":"}
+                    variant="standard"
+                    id="age"
+                    name="age"
+                    value={formik.values.age}
+                    onChange={formik.handleChange}
+                    error={formik.touched.age && Boolean(formik.errors.age)}
+                    helperText={formik.touched.age && formik.errors.age}
+                  />
+                  <TextField
+                    type="number"
+                    select
+                    label={lang.darEnAdopcion.inputs.rango + ":"}
+                    variant="standard"
+                    id="ageTime"
+                    name="ageTime"
+                    value={formik.values.ageTime}
+                    SelectProps={{
+                      native: true,
                     }}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.ageTime && Boolean(formik.errors.ageTime)
+                    }
+                    helperText={formik.touched.ageTime && formik.errors.ageTime}
                   >
-                    <TextField
-                      sx={{
-                        width: "300px !important",
-                        marginRight: "30px",
-                      }}
-                      type="number"
-                      inputProps={{ min: 0}}
-                      label={lang.darEnAdopcion.inputs.edad + ":"}
-                      variant="standard"
-                      id="age"
-                      name="age"
-                      value={formik.values.age}
-                      onChange={formik.handleChange}
-                      error={formik.touched.age && Boolean(formik.errors.age)}
-                      helperText={formik.touched.age && formik.errors.age}
-                    />
-                    <TextField
-                      type="number"
-                      select
-                      label={lang.darEnAdopcion.inputs.rango + ":"}
-                      variant="standard"
-                      id="ageTime"
-                      name="ageTime"
-                      value={formik.values.ageTime}
-                      SelectProps={{
-                        native: true,
-                      }}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.ageTime && Boolean(formik.errors.ageTime)
-                      }
-                      helperText={
-                        formik.touched.ageTime && formik.errors.ageTime
-                      }
-                    >
-                      {ageTimeArray.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {
-                            lang.darEnAdopcion.values.rangoTiempo[
-                              option.label.toLowerCase()
-                            ]
-                          }
-                        </option>
-                      ))}
-                    </TextField>
-                  </Box>
+                    {ageTimeArray.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {
+                          lang.darEnAdopcion.values.rangoTiempo[
+                            option.label.toLowerCase()
+                          ]
+                        }
+                      </option>
+                    ))}
+                  </TextField>
+
                   <TextField
                     type="number"
                     label={lang.darEnAdopcion.inputs.peso + ":"}
                     variant="standard"
-                    inputProps={{ min: 0}}
+                    inputProps={{ min: 0 }}
                     id="weight"
                     name="weight"
                     value={formik.values.weight}
@@ -389,8 +381,21 @@ en donde debe hacerse para enviar el post a /animals */
                   />
                 </Box>
               </Grid>
-              <Grid item md={6}>
-                <IconButton
+              <Grid item xs={12} md={6}>
+               
+                {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
+                     si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
+                {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "15px",
+                    justifyContent: "center",
+                    height: "100%",
+                  }}
+                >
+                 <IconButton
                   color="primary"
                   aria-label="upload picture"
                   component="label"
@@ -402,19 +407,6 @@ en donde debe hacerse para enviar el post a /animals */
                   />
                   <PhotoCamera />
                 </IconButton>
-                {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
-                     si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
-                {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "15px",
-                    justifyContent: "center",
-                    height: "100%",
-                    margin: " 0 150px 0 20px",
-                  }}
-                >
                   <TextField
                     id="size"
                     select

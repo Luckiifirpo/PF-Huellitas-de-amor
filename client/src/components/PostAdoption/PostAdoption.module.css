@@ -1,4 +1,4 @@
-.gridContact{
+.gridPostAdoption{
     position: relative;
     height: 100vh;
     margin: 15px 0;
@@ -26,3 +26,12 @@
     width: 100%;
     object-fit: contain;
 }
+
+@media (max-width: 1200px) {
+    .gridContactImage img{
+      display: none;
+      /* object-fit: cover; */
+    }
+
+}  
+
