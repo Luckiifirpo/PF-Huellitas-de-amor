@@ -20,6 +20,7 @@ import UserAccountMenu from '../UserAccountMenu/UserAccountMenu';
 import { setToGoAfterLogin } from '../../redux/slices/navigationSlice';
 import LangMenu from '../LangMenu/LangMenu';
 import Badge from '@mui/material/Badge';
+import {Link} from "react-router-dom"
 
 
 const drawerWidth = 240;
@@ -96,9 +97,15 @@ const Navbar = (props) => {
           </Button>
         </ListItem>
         <ListItem disablePadding>
-          <Button component={RouterLink} to="/iniciar-sesion">
+          {/* <Button component={RouterLink} to="/iniciar-sesion">
             {lang.navbar.links.iniciarSesion}
-          </Button>
+          </Button> */}
+          {
+                currentUser ? <UserAccountMenu userData={currentUser} /> :
+                  <Button onClick={ToLogin} >
+                    {lang.navbar.links.iniciarSesion}
+                  </Button>
+              }
         </ListItem>
       </List>
     </Box>
@@ -124,7 +131,9 @@ const Navbar = (props) => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},justifyContent:"center",marginTop:{xs:"0px",md:"25px"}}}
             >
+              <Link to="/">
               <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
+              </Link>
             </Box>
             <Box sx={{ display: { xs: 'none', lg: 'flex' } }}>
               {navItems.map((item) => (

@@ -15,6 +15,7 @@ import banner4 from '../../assets/image/banner4.png'
 import banner5 from '../../assets/image/banner5.png'
 import style from "./Home.module.css"
 import { useNavigate } from "react-router-dom";
+import Link from '@mui/material/Link';
 
 
 import AOS from "aos";
@@ -141,12 +142,26 @@ const Home = () => {
               <Typography component="p" sx={{ margin: '15px 0px' }} data-aos="fade-right">
                 {lang.home.paragraphs.quienesSomos}
               </Typography>
+<<<<<<< HEAD
               <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginBottom: '20px' }} onClick={(e) => handlerQuienesSomos(e)} data-aos="fade-right">{lang.home.buttons.verMas} </Button>
               <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }} data-aos="fade-right">
                 <FacebookIcon />
                 <InstagramIcon />
                 <TwitterIcon />
                 <WhatsAppIcon />
+=======
+              <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginBottom: '20px' }} onClick={(e) => handlerQuienesSomos(e)}>{lang.home.buttons.verMas}</Button>
+              <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <Link href="https://www.facebook.com/" target="_blank" rel="noopener">
+                  <FacebookIcon sx={{backgroundColor:"#fff", borderRadius:"4px"}} />
+                </Link>
+                <Link href="https://www.instagram.com/" target="_blank" rel="noopener">
+                  <InstagramIcon sx={{backgroundColor:"#fff", borderRadius:"4px"}}/>
+                </Link>
+                <Link href="https://www.whatsapp.com/" target="_blank" rel="noopener">
+                  <WhatsAppIcon sx={{backgroundColor:"#fff", borderRadius:"4px"}}/>
+                </Link>
+>>>>>>> dev
                 <Typography component='span'>
                   @huellitasdeamor
                 </Typography>

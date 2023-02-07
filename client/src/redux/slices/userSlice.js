@@ -175,7 +175,10 @@ export const updateUserInfoForAdminDashboard = (newData, callback) => async (dis
         if(callback){
             callback();
         }
+<<<<<<< HEAD
       
+=======
+>>>>>>> dev
     } catch (error) {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [

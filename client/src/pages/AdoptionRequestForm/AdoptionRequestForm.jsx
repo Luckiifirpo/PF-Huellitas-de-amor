@@ -561,11 +561,15 @@ const AdoptionRequestForm = (props) => {
     }
 
     const RejectRequest = () => {
-
+        if(props.RejectAdoptionRequest){
+            props.RejectAdoptionRequest(data);
+        }
     }
 
     const RequestDataReview = () => {
-
+        if(props.RequestDataReview){
+            props.RequestDataReview(data);
+        }
     }
 
     const HaveErrors = () => {

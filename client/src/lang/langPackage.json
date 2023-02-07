@@ -88,7 +88,8 @@
                 "irAPagar": "ir a pagar"
             },
             "paragraphs": {
-                "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros."
+                "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros.",
+                "ayudaEconomica": "Puedes ayudarnos economicamente, el dinero sera destinado a las mascotas que aún no han podido ser adoptadas con insumos como comida, medicina, vacunas, entre otros."
             },
             "lists": {
                 "medicamentos": "medicamentos",
@@ -406,7 +407,8 @@
                 "irAPagar": "go pay"
             },
             "paragraphs": {
-                "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us."
+                "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us.",
+                "ayudaEconomica": "You can help us financially, the money will be destined to pets that have not yet been able to be adopted with supplies such as food, medicine, vaccines, among others."
             },
             "lists": {
                 "medicamentos": "medicines",
@@ -722,7 +724,8 @@
                 "irAPagar": "vá pagar"
             },
             "paragraphs": {
-                "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco."
+                "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco.",
+                "ayudaEconomica": "Você pode nos ajudar financeiramente, o dinheiro será destinado a animais de estimação que ainda não puderam ser adotados com insumos como alimentos, remédios, vacinas, entre outros."
             },
             "lists": {
                 "medicamentos": "medicação",

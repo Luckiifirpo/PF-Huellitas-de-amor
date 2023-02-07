@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const { Usuario, Animal, AdoptionRequest, ApplicantsResidence, PersonalReference, PreviousPet, PreviousPetsVaccine, ResidencesTenant, TenantsPsychologicalData } = require('../../db');
 const { generateId } = require("../utils/utils");
 const { transporter } = require("../utils/mailer");
+const approvedAdoptionRequestEmailTemplate = require('./htmlTemplates/approvedAdoptionRequestEmailTemplate');
 
 const postAdoptionRequest = async (req, res) => {
 
@@ -290,6 +291,14 @@ const authorizeAdoptionRequest = async (req, res) => {
 
         });
 
+        const userEmail = adoption_request.applicant.email;
+        const userName = adoption_request.applicant.name;
+        const petName = adoption_request.toBeAdopted.name;
+        const petImage = adoption_request.toBeAdopted.image;
+        let emailHTML = approvedAdoptionRequestEmailTemplate.replaceAll("{pet_name}", petName);
+        emailHTML = emailHTML.replaceAll("{user_name}", userName);
+        emailHTML = emailHTML.replaceAll("{pet_image}", petImage);
+
         const adoptionRequestToDestroy = adoption_request.id;
         const personalReferenceToDestroy = [];
         const previousPetToDestroy = [];
@@ -388,7 +397,14 @@ const authorizeAdoptionRequest = async (req, res) => {
                 id: adoptionRequestToDestroy
             },
             force: true
-        })
+        });
+
+        await transporter.sendMail({
+            from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+            to: userEmail, // list of receivers
+            subject: `Solicitud de adopción aprobada`, // Subject line
+            html: emailHTML, // html body
+        });
 
         res.status(200).json({ message: "ok" });
     } catch (error) {
@@ -396,9 +412,55 @@ const authorizeAdoptionRequest = async (req, res) => {
     }
 }
 
+const sendRequestDataReviewEmail = async (req, res) => {
+    try{
+        const {userId, emailHTML} = req.body;
+        const user = await Usuario.findByPk(userId);
+
+        if(user){
+            await transporter.sendMail({
+                from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+                to: user.email, // list of receivers
+                subject: `Solicitud de adopción en espera`, // Subject line
+                html: emailHTML, // html body
+            });
+            
+            res.status(200).send("ok");
+        } else {
+            res.status(404).send({error: "User with id not found"});
+        }
+    } catch (error){
+        res.status(400).json({error: error.message});
+    }
+}
+
+const rejectAdoptionRequest = async (req, res) => {
+    try{
+        const {userId, emailHTML} = req.body;
+        const user = await Usuario.findByPk(userId);
+
+        if(user){
+            await transporter.sendMail({
+                from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+                to: user.email, // list of receivers
+                subject: `Solicitud de adopción rechazada`, // Subject line
+                html: emailHTML, // html body
+            });
+            
+            res.status(200).send("ok");
+        } else {
+            res.status(404).send({error: "User with id not found"});
+        }
+    } catch (error){
+        res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = {
     postAdoptionRequest,
     getAdoptionRequestById,
     getAllAdoptionRequests,
-    authorizeAdoptionRequest
+    authorizeAdoptionRequest,
+    sendRequestDataReviewEmail,
+    rejectAdoptionRequest
 };

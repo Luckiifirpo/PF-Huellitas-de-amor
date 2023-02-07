@@ -59,6 +59,10 @@ module.exports = (sequelize) => {
     },
     hasAdoptionRequest: {
       type: DataTypes.BOOLEAN
+    },
+    role: {
+      type: DataTypes.ENUM("user", "admin"),
+      defaultValue: "user"
     }
   });
 };
