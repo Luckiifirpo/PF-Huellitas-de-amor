@@ -246,25 +246,21 @@ en donde debe hacerse para enviar el post a /animals */
   return (
     <>
       <Box
-        className={style.gridContact}
-        sx={{ marginBottom: "100px", marginTop: "150px" }}
+        className={style.gridPostAdoption}
+        sx={{ marginBottom: "100px", marginTop: "150px", paddingBottom: "200px" }}
       >
-      {/* <Box className={style.gridContactImage}>
-          <img src={ImagePostAdoption} alt="" />
-        </Box> */}
-      
-        <Container sx={{ height: "100%" }}>
-       
+        <Container className={style.containerPostAdoption} >
           <form onSubmit={formik.handleSubmit}>
-          
             <Grid
               container
               spacing={5}
               justifyContent="center"
               alignItems="center"
               sx={{ height: "100%" }}
-              
             >
+              <Box className={style.gridContactImage}>
+                {/* <img src={ImagePostAdoption} alt="" /> */}
+              </Box>
               <Grid item xs={12}>
                 <Typography
                   component="h1"
@@ -274,6 +270,7 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
+                    marginTop:"50px"
                   }}
                 >
                   {lang.darEnAdopcion.titles.darEnAdopcion}
@@ -287,6 +284,8 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
+                    marginRight:"60px",
+                    marginLeft:"60px"
                   }}
                 >
                   <TextField
@@ -382,7 +381,6 @@ en donde debe hacerse para enviar el post a /animals */
                 </Box>
               </Grid>
               <Grid item xs={12} md={6}>
-               
                 {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
                      si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
                 {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
@@ -393,20 +391,22 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
+                    marginRight:"60px",
+                    // marginLeft:"60px"
                   }}
                 >
-                 <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
-                  <input
-                    accept="image/*"
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
-                  />
-                  <PhotoCamera />
-                </IconButton>
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <input
+                      accept="image/*"
+                      type="file"
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <PhotoCamera />
+                  </IconButton>
                   <TextField
                     id="size"
                     select
@@ -490,7 +490,7 @@ en donde debe hacerse para enviar el post a /animals */
                 size="large"
                 sx={{
                   borderRadius: "20px",
-                  padding: "9px 150px",
+                  padding: "10px 60px",
                   marginTop: "50px",
                 }}
               >
