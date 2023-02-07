@@ -124,7 +124,7 @@ const updateAnimal = async (req, res) => {
         animal.isAdopted = isAdopted || animal.isAdopted
         await animal.save()
 
-        res.json(animal)
+        res.json(await Animal.findAll());
 
     } catch(error){
         return res.status(500).json({message: error.message})

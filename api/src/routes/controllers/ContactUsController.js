@@ -37,11 +37,11 @@ const postContactUs = async (req, res) => {
     id: generateId(),
     name,
     email,
-    description,
+    description
   });
 
   try {
-    if (name === "NewsLetter") {
+    if (name === "$NewsLetter$") {
       await transporter.sendMail({
         from: '"NewsLetter" <hdeamor2023@gmail.com>', // sender address
         to: email, // list of receivers
@@ -91,7 +91,26 @@ const postContactUs = async (req, res) => {
   //   } catch (error) {}
 };
 
+const contactUsReply = async (req, res) => {
+  try {
+    const { email, emailHTML } = req.body;
+    console.log(email);
+    console.log(emailHTML);
+    await transporter.sendMail({
+      from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: `Respuesta a tu solicitud de contacto`, // Subject line
+      html: emailHTML, // html body
+    });
+
+    res.status(200).send("ok");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 module.exports = {
   getContactUs,
   postContactUs,
+  contactUsReply
 };

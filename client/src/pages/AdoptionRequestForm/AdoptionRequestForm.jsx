@@ -561,7 +561,9 @@ const AdoptionRequestForm = (props) => {
     }
 
     const RejectRequest = () => {
-
+        if(props.RejectAdoptionRequest){
+            props.RejectAdoptionRequest(data);
+        }
     }
 
     const RequestDataReview = () => {

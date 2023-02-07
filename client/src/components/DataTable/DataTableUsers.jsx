@@ -9,12 +9,15 @@ import BlockIcon from '@mui/icons-material/Block';
 import PutUser from "./PutUser"
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { setUserBusyMode } from "../../redux/slices/userSlice";
+import { setUserError, setUserMessage, setUserBusyMode } from "../../redux/slices/userSlice";
 import api from "../../services/api";
 import AdoptionRequestForm from "../../pages/AdoptionRequestForm/AdoptionRequestForm";
 import EmailEditor from 'react-email-editor';
 
 import requestDataReviewEmailTemplate from "./EmailTemplates/RequestDataReview.json";
+import rejectedAdoptionRequestEmailTemplate from "./EmailTemplates/RejectedAdoptionRequest.json";
+
+import ErrorManager from "../../resources/ErrorManager";
 
 const style = {
   position: 'absolute',
@@ -122,7 +125,7 @@ export default function DataTableUsers() {
           <GridActionsCellItem
             icon={params.row.adoptionRequestId ? <VisibilityIcon /> : <BlockIcon />}
             label="Mostrar solicitud de adopcion"
-            onClick={params.row.adoptionRequestId ? (e) => openAdoptionRequestForm(params.row.adoptionRequestId, {name: params.row.name, surname: params.row.surname}) : null}
+            onClick={params.row.adoptionRequestId ? (e) => openAdoptionRequestForm(params.row.adoptionRequestId, { name: params.row.name, surname: params.row.surname }, params.row.id) : null}
           />
         ]
       }
@@ -154,19 +157,13 @@ export default function DataTableUsers() {
   const [openUser, setOpenUser] = React.useState(false);
   const [richTextEditorState, setRichTextEditorState] = useState({
     data: null,
-    visible: false
+    visible: false,
+    type: null
   });
   const currentPets = useSelector((state) => state.pets.petsList);
   const dispatch = useDispatch();
 
   const emailEditorRef = useRef(null);
-
-  const exportHtml = () => {
-    emailEditorRef.current.editor.exportHtml((data) => {
-      const { design, html } = data;
-      console.log('exportHtml', html);
-    });
-  };
 
   const handleOpenUser = (id) => {
     setOpenUser(true)
@@ -180,7 +177,7 @@ export default function DataTableUsers() {
     }
   }
 
-  const openAdoptionRequestForm = async (adoptionRequestId, userName) => {
+  const openAdoptionRequestForm = async (adoptionRequestId, userName, userId) => {
     try {
       dispatch(setUserBusyMode(true));
       const response = await api.get("/adoption_request/" + adoptionRequestId);
@@ -217,7 +214,10 @@ export default function DataTableUsers() {
       const newAdoptionRequestFormData = {
         petData,
         adoptionRequest,
-        userName
+        userData: {
+          ...userName,
+          id: userId
+        }
       }
 
       setAdoptionRequestFormData(newAdoptionRequestFormData);
@@ -250,25 +250,58 @@ export default function DataTableUsers() {
 
     setRichTextEditorState({
       data,
-      visible: true
+      visible: true,
+      type: "requestDataReview"
     });
   }
 
-  const onLoadEmailEditor = () => {
-    let strJSON = JSON.stringify(requestDataReviewEmailTemplate);
-    strJSON = strJSON.replace("{pet_image}", richTextEditorState.data.petData.img);
-    strJSON = strJSON.replaceAll("{pet_name}", richTextEditorState.data.petData.name);
-    strJSON = strJSON.replaceAll("{user_name}", richTextEditorState.data.userName.name);
-    console.log(richTextEditorState.data);
-    emailEditorRef.current.editor.loadDesign(JSON.parse(strJSON));
+  const RejectAdoptionRequest = (data) => {
+    hideModals();
+
+    setRichTextEditorState({
+      data,
+      visible: true,
+      type: "rejectAdoptionRequest"
+    });
+  }
+
+  const onReadyEmailEditor = () => {
+    if (richTextEditorState.type === "requestDataReview") {
+      let strJSON = JSON.stringify(requestDataReviewEmailTemplate);
+      strJSON = strJSON.replace("{pet_image}", richTextEditorState.data.petData.img);
+      strJSON = strJSON.replaceAll("{pet_name}", richTextEditorState.data.petData.name);
+      strJSON = strJSON.replaceAll("{user_name}", richTextEditorState.data.userData.name);
+      emailEditorRef.current.editor.loadDesign(JSON.parse(strJSON));
+    } else if (richTextEditorState.type === "rejectAdoptionRequest") {
+      let strJSON = JSON.stringify(rejectedAdoptionRequestEmailTemplate);
+      strJSON = strJSON.replace("{pet_image}", richTextEditorState.data.petData.img);
+      strJSON = strJSON.replaceAll("{pet_name}", richTextEditorState.data.petData.name);
+      strJSON = strJSON.replaceAll("{user_name}", richTextEditorState.data.userData.name);
+      emailEditorRef.current.editor.loadDesign(JSON.parse(strJSON));
+    }
   }
   const UpdatedUserInfo = () => {
     hideModals();
 
-    fetch("http://localhost:3001/users")
+    /*fetch("http://localhost:3001/users")
       .then((data) => data.json())
       .then((data) => UpdateTableDataUsers(data));
-    dispatch(setUserBusyMode(false));
+    dispatch(setUserBusyMode(false));*/
+
+    (async () => {
+      try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.get("/users");
+        UpdateTableDataUsers(response.data);
+        dispatch(setUserBusyMode(false));
+      } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+          { code: error.code },
+          { request: "GET: http://localhost:3001/users" }
+        ])));
+      }
+    })();
   }
 
   const hideModals = () => {
@@ -277,10 +310,11 @@ export default function DataTableUsers() {
     setAdoptionRequestFormData(null);
     setRichTextEditorState({
       data: null,
-      visible: false
+      visible: false,
+      type: null
     });
   }
-  
+
   const saveDesign = () => {
     emailEditorRef.current.editor.saveDesign(design => {
       console.log('saveDesign', JSON.stringify(design))
@@ -288,19 +322,94 @@ export default function DataTableUsers() {
   }
 
   const SendRequestDataReviewEmail = () => {
-    emailEditorRef.current.editor.exportHtml(data => {
-      const { design, html } = data
-      console.log('exportHtml', html)
+    emailEditorRef.current.editor.exportHtml(async data => {
+      try {
+        const { html } = data
+        const userId = richTextEditorState.data.userData.id;
+        hideModals();
+
+        dispatch(setUserBusyMode(true));
+        const response = await api.post("/adoption_request/send_request_data_review_email", {
+          userId,
+          emailHTML: html
+        });
+        dispatch(setUserMessage({
+          title: "Email enviado",
+          message: "Se ha enviado el email con la solicitud de revision al usuario",
+          details: []
+        }))
+        dispatch(setUserBusyMode(false));
+      } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+          { code: error.code },
+          { request: "POST: http://localhost:3001/adoption_request/send_request_data_review_email/" }
+        ])));
+      }
     })
   }
 
+  const SendRejectAdoptionRequestEmail = () => {
+    emailEditorRef.current.editor.exportHtml(async data => {
+      try {
+        const { html } = data
+        const userId = richTextEditorState.data.userData.id;
+        hideModals();
+
+        dispatch(setUserBusyMode(true));
+        const response = await api.post("/adoption_request/reject_adoption_request", {
+          userId,
+          emailHTML: html
+        });
+        dispatch(setUserMessage({
+          title: "Email enviado",
+          message: "Se ha enviado el email con la notificacion de rechazo al usuario",
+          details: []
+        }))
+        dispatch(setUserBusyMode(false));
+      } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+          { code: error.code },
+          { request: "POST: http://localhost:3001/adoption_request/reject_adoption_request/" }
+        ])));
+      }
+    })
+  }
+
+  const getOnSendEmailFunction = () => {
+    switch (richTextEditorState.type) {
+      case "requestDataReview":
+        return SendRequestDataReviewEmail;
+      case "rejectAdoptionRequest":
+        return SendRejectAdoptionRequestEmail;
+      default:
+        return null;
+    }
+  }
+
   useEffect(() => {
-    fetch("http://localhost:3001/users")
+    /*fetch("http://localhost:3001/users")
       .then((data) => data.json())
       .then((data) => {
         UpdateTableDataUsers(data);
         dispatch(setUserBusyMode(false));
-      })
+      })*/
+
+    (async () => {
+      try {
+        dispatch(setUserBusyMode(true));
+        const response = await api.get("/users");
+        UpdateTableDataUsers(response.data);
+        dispatch(setUserBusyMode(false));
+      } catch (error) {
+        dispatch(setUserBusyMode(false));
+        dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+          { code: error.code },
+          { request: "GET: http://localhost:3001/users" }
+        ])));
+      }
+    })();
   }, [])
 
   useEffect(() => {
@@ -312,8 +421,8 @@ export default function DataTableUsers() {
       <DataGrid
         rows={tableDataUsers}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={50}
+        rowsPerPageOptions={[50]}
         checkboxSelection
       />
 
@@ -362,7 +471,7 @@ export default function DataTableUsers() {
             aria-describedby="keep-mounted-modal-description">
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <Paper sx={{ width: "calc(100vw - 100px)", height: "calc(100vh - 100px)", marginTop: "50px", overflow: "auto" }}>
-                <AdoptionRequestForm data={adoptionRequestFormData} adminMode={true} UpdatedUserInfo={UpdatedUserInfo} RequestDataReview={RequestDataReview} />
+                <AdoptionRequestForm data={adoptionRequestFormData} adminMode={true} UpdatedUserInfo={UpdatedUserInfo} RequestDataReview={RequestDataReview} RejectAdoptionRequest={RejectAdoptionRequest} />
               </Paper>
             </Box>
           </Modal>
@@ -381,11 +490,13 @@ export default function DataTableUsers() {
             <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <Paper sx={{ width: "calc(100vw - 300px)", height: "calc(100vh - 100px)", marginTop: "50px", overflow: "auto", padding: "20px" }}>
                 <Box sx={{ borderStyle: "solid", borderColor: "silver", borderWidth: "1px", height: "calc(100% - 100px)" }}>
-                  <EmailEditor minHeight="100%" ref={emailEditorRef}  onLoad={onLoadEmailEditor}/>
+                  <EmailEditor minHeight="100%" ref={emailEditorRef} onReady={onReadyEmailEditor} />
                 </Box>
-                <Box sx={{paddingTop : "30px"}}>
-                  {/*<Button onClick={saveDesign}>Save Template</Button>*/}
-                  <Button onClick={SendRequestDataReviewEmail} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Enviar"}</Button>
+                <Box sx={{ paddingTop: "30px" }}>
+                  {/*
+                  <Button onClick={saveDesign}>Save Template</Button>
+                  /**/}
+                  <Button onClick={getOnSendEmailFunction()} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Enviar"}</Button>
                   <Button onClick={handleClose} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Cancelar"}</Button>
                 </Box>
               </Paper>
