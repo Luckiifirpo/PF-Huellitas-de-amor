@@ -61,6 +61,11 @@ export default function DataTableUsers() {
       width: 150
     },
     {
+      field: 'role',
+      headerName: 'Rol',
+      width: 80
+    },
+    {
       field: 'age',
       headerName: 'Edad',
       type: 'number',
@@ -167,6 +172,7 @@ export default function DataTableUsers() {
 
   const handleOpenUser = (id) => {
     setOpenUser(true)
+    // console.log("abrí el editor de usuario en dashboard")
     // setDataUser(currentUser.filter((e)=> e.id === id)[0]);
     const userToEdit = tableDataUsers.filter((e) => {
       return e.id === id;
