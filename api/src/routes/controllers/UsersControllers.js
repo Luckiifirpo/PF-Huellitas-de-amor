@@ -45,7 +45,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-    const { name, surname, age, direction, email, hasAJob, occupation, password } = req.body;
+    const { name, surname, age, direction, email, hasAJob, occupation, password, role } = req.body;
     const fecha = new Date()
     const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
     const emailExist = await Usuario.findOne({ where: { email } })
@@ -63,7 +63,8 @@ const postUser = async (req, res) => {
         email,
         hasAJob,
         occupation: "",
-        password: encrypted
+        password: encrypted,
+        role
     })
 
     const token = await jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
@@ -111,7 +112,7 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, surname, age, direction, email, hasAJob, occupation, photoURL } = req.body;
+        const { name, surname, age, direction, email, hasAJob, occupation, photoURL, role } = req.body;
 
         const usuario = await Usuario.findByPk(id)
         usuario.name = name || usuario.name;
@@ -123,6 +124,7 @@ const updateUser = async (req, res) => {
         usuario.occupation = occupation || usuario.occupation;
         usuario.password = usuario.password;
         usuario.photoURL = photoURL || usuario.photoURL
+        usuario.role = role || usuario.role
         await usuario.save();
 
         res.json(usuario)
