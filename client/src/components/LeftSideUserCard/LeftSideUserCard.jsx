@@ -38,13 +38,13 @@ const LeftSideUserCard = (props) => {
                 <Box>
                     <Paper>
                         <List>
-                            <ListItemButton>
+                            <ListItemButton href="/user-info-editor">
                                 <ListItemIcon>
                                     <SettingsIcon />
                                 </ListItemIcon>
                                 {lang.leftSideUserBar.labels.configuracion}
                             </ListItemButton>
-                            <ListItemButton>
+                            <ListItemButton href="/favoritos">
                                 <ListItemIcon>
                                     <FavoriteIcon />
                                 </ListItemIcon>

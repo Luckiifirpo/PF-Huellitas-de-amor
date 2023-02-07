@@ -95,7 +95,7 @@ const Login = (props) => {
             <Container style={{ minHeight: "100vh", display: "flex" }}>
                 <Grid container spacing={4} alignItems="center">
                     <Grid item lg={7}>
-                        <img src={login_img} />
+                        <img src={login_img} className={style.imgLogin}/>
                     </Grid>
                     <Grid item lg={1}>
 
