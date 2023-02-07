@@ -152,7 +152,7 @@ const columns = [
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/animals")
+    fetch("https://pf-huellitas-de-amor-production.up.railway.app/animals")
       .then((data) => data.json())
       .then((data) => {
         setTableData(data)
