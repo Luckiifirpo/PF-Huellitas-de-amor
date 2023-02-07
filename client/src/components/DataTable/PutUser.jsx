@@ -34,7 +34,8 @@ const PutUser = (props) => {
 
     const handle_change_input = (event) => {
         const input_name = event.target.name;
-        const input_value = input_name === "hasAJob" ? event.target.checked : event.target.value;
+        let input_value = input_name === "hasAJob" ? event.target.checked : event.target.value;
+            input_value = input_name === "role" ? (event.target.checked ? "admin" : "user") : input_value;
 
         const newLocalUserInfoData = {
             ...localUserInfoData,
@@ -75,7 +76,7 @@ const PutUser = (props) => {
             photoURL: newPhotoURL ? newPhotoURL : localUserInfoData.photoURL
         }
 
-        console.log(newUserInfoData);
+        // console.log(newUserInfoData);
 
         dispatch(updateUserInfoForAdminDashboard(newUserInfoData, UpdatedUserInfo));
     }
@@ -114,7 +115,7 @@ const PutUser = (props) => {
 
         return null;
     }
-
+    
     return <div style={{ minHeight: "calc(100vh - 267px)" }}>
         <Container style={{ marginBottom: 0, marginTop: 0}}>
             <Grid container spacing={5} alignItems="flex-start">
@@ -186,6 +187,9 @@ const PutUser = (props) => {
                                        
                                         <Grid item sx={{ width: "100%" }}>
                                             <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
+                                        </Grid>
+                                        <Grid item sx={{ width: "100%" }}>
+                                            <FormControlLabel control={<Checkbox name="role" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.role === "admin") : false} />} label="Administrador" />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
                                             <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
