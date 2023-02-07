@@ -217,9 +217,9 @@ const DataTableContactUs = (props) => {
                                     <EmailEditor minHeight="100%" ref={emailEditorRef} onReady={onReadyEmailEditor} />
                                 </Box>
                                 <Box sx={{ paddingTop: "30px" }}>
-                                    {/**/
+                                    {/*
                                         <Button onClick={saveDesign}>Save Template</Button>
-                                    /**/}
+                                    */}
                                     <Button onClick={sendEmail} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Enviar"}</Button>
                                     <Button onClick={handleClose} variant="contained" color='yellowButton' size="small" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, fontSize: "20px", marginLeft: "5px" }}>{"Cancelar"}</Button>
                                 </Box>
