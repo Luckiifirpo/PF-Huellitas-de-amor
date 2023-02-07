@@ -99,7 +99,7 @@ const PetCard = (props) => {
                         </Box>
                         <ul className={style.additional_info}>
                             <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.edad}: </span><span>{data.age} {lang.petCard.labels[data.ageTime]}</span></li>
-                            <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.genero}: </span><span>{lang.petCard.labels[data.gender]}</span></li>
+                            <li><span style={{ fontWeight: "bold " }}>{lang.petCard.labels.genero}: </span><span>{lang.petCard.labels[data.gender]}</span></li>
                         </ul>
                     </CardContent>
                 </Link>
