@@ -1,0 +1,447 @@
+{
+	"counters": {
+		"u_column": 5,
+		"u_row": 5,
+		"u_content_heading": 2,
+		"u_content_image": 2,
+		"u_content_text": 2
+	},
+	"body": {
+		"id": "2DpjLcpQKX",
+		"rows": [{
+			"id": "9uWsvLQNjb",
+			"cells": [1],
+			"columns": [{
+				"id": "4aOUSMuTiq",
+				"contents": [{
+					"id": "BTwdeHkdU7",
+					"type": "heading",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"headingType": "h1",
+						"fontSize": "22px",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_heading_1",
+							"htmlClassNames": "u_content_heading"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<strong>Solicitud de adopcion rechazada</strong>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"_meta": {
+						"htmlID": "u_column_1",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"hideDesktop": false,
+				"_meta": {
+					"htmlID": "u_row_1",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "bmB3rWh1Z-",
+			"cells": [1],
+			"columns": [{
+				"id": "EMT4AJmvLD",
+				"contents": [{
+					"id": "9kCIhc1O8u",
+					"type": "image",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"src": {
+							"url": "{pet_image}",
+							"width": 150,
+							"height": 150
+						},
+						"textAlign": "center",
+						"altText": "",
+						"action": {
+							"name": "web",
+							"values": {
+								"href": "",
+								"target": "_blank"
+							}
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_image_1",
+							"htmlClassNames": "u_content_image"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_2",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_2",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "b8ZcFm1sum",
+			"cells": [1],
+			"columns": [{
+				"id": "fS8UrhFOMm",
+				"contents": [{
+					"id": "cvqzKQ7LDa",
+					"type": "heading",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"headingType": "h1",
+						"fontSize": "22px",
+						"textAlign": "center",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_heading_2",
+							"htmlClassNames": "u_content_heading"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "Datos invalidos y/o irrelevantes"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_3",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_3",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "1a1PCuG3fo",
+			"cells": [1],
+			"columns": [{
+				"id": "6cwv_jFp-t",
+				"contents": [{
+					"id": "QIaTjb8Xkw",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_2",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">Estimado <strong>{user_name}</strong>, tu solicitud de adopcion ha sido rechazada porque los datos que ingresaste en la solicitud no son correctos, no pudieron ser comprobados, o son irrelevantes para el proceso de adopcon.</p>\n<ul>\n<li style=\"line-height: 19.6px;\">Bla bla bla</li>\n</ul>\n<p style=\"line-height: 140%;\">Puedes intentarlo un par de veces mas, asegurandote de ingresar datos reales y comprobables.</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_4",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_4",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "rVITa1gdy5",
+			"cells": [1],
+			"columns": [{
+				"id": "qzuoxj3THJ",
+				"contents": [{
+					"id": "95yygYsQho",
+					"type": "image",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"src": {
+							"url": "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100",
+							"width": 96,
+							"height": 96
+						},
+						"textAlign": "left",
+						"altText": "",
+						"action": {
+							"name": "web",
+							"values": {
+								"href": "",
+								"target": "_blank"
+							}
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_image_2",
+							"htmlClassNames": "u_content_image"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true
+					}
+				}, {
+					"id": "RFn-IwkXPJ",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_1",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">Huellitas de Amor. 2023.</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_5",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_5",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}],
+		"values": {
+			"popupPosition": "center",
+			"popupWidth": "600px",
+			"popupHeight": "auto",
+			"borderRadius": "10px",
+			"contentAlign": "center",
+			"contentVerticalAlign": "center",
+			"contentWidth": "500px",
+			"fontFamily": {
+				"label": "Arial",
+				"value": "arial,helvetica,sans-serif"
+			},
+			"textColor": "#000000",
+			"popupBackgroundColor": "#FFFFFF",
+			"popupBackgroundImage": {
+				"url": "",
+				"fullWidth": true,
+				"repeat": "no-repeat",
+				"size": "cover",
+				"position": "center"
+			},
+			"popupOverlay_backgroundColor": "rgba(0, 0, 0, 0.1)",
+			"popupCloseButton_position": "top-right",
+			"popupCloseButton_backgroundColor": "#DDDDDD",
+			"popupCloseButton_iconColor": "#000000",
+			"popupCloseButton_borderRadius": "0px",
+			"popupCloseButton_margin": "0px",
+			"popupCloseButton_action": {
+				"name": "close_popup",
+				"attrs": {
+					"onClick": "document.querySelector('.u-popup-container').style.display = 'none';"
+				}
+			},
+			"backgroundColor": "#ffffff",
+			"backgroundImage": {
+				"url": "",
+				"fullWidth": true,
+				"repeat": "no-repeat",
+				"size": "custom",
+				"position": "center"
+			},
+			"preheaderText": "",
+			"linkStyle": {
+				"body": true,
+				"linkColor": "#0000ee",
+				"linkHoverColor": "#0000ee",
+				"linkUnderline": true,
+				"linkHoverUnderline": true
+			},
+			"_meta": {
+				"htmlID": "u_body",
+				"htmlClassNames": "u_body"
+			}
+		}
+	},
+	"schemaVersion": 12
+}

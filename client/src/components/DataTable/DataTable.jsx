@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState} from 'react';
-import { getAllPets } from "../../redux/slices/petsSlice";
+import { getAllPets, setPetsBusyMode } from "../../redux/slices/petsSlice";
 
 
 
@@ -70,9 +70,24 @@ export default function DataTable() {
 
 
   useEffect(() => {
-    fetch("http://localhost:3001/animals")
+    /*fetch("http://localhost:3001/animals")
       .then((data) => data.json())
-      .then((data) => setTableData(data))
+      .then((data) => setTableData(data))*/
+
+      (async () => {
+        try {
+          dispatch(setPetsBusyMode(true));
+          const response = await api.get("/animals");
+          UpdateTableDataUsers(response.data);
+          dispatch(setPetsBusyMode(false));
+        } catch (error) {
+          dispatch(setPetsBusyMode(false));
+          dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
+            { code: error.code },
+            { request: "GET: http://localhost:3001/animals" }
+          ])));
+        }
+      })();
   }, [])
 
   // {

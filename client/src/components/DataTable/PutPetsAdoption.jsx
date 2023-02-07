@@ -12,7 +12,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { postPet } from "../../redux/slices/petsSlice";
+import { postPet, setPetsBusyMode, updatePetInfo } from "../../redux/slices/petsSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   CircularProgress,
@@ -26,7 +26,6 @@ import {
 } from "@mui/material";
 import { setError } from "../../redux/slices/errorsSlice";
 import ErrorManager from "../../resources/ErrorManager";
-import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import { useEffect } from "react";
 
 const validationSchema = yup.object({
@@ -121,10 +120,7 @@ const ageTimeArray = [
   },
 ]
 
-const PutAdoption = ({id,name, date, species, age, ageTime, weight, size, gender, breed, description}) => {
-
-  console.log(gender);
-
+const PutAdoption = ({ id, name, date, species, age, ageTime, weight, size, gender, breed, description, img, handleClose }) => {
   const initialValues = {
     id: id ? id : "",
     name: name ? name : "",
@@ -139,20 +135,18 @@ const PutAdoption = ({id,name, date, species, age, ageTime, weight, size, gender
     description: description ? description : "",
   };
 
-  console.log(age)
- 
-//  const [petDescription, setPetDescription] = useState({
-//   name: "",
-//   date: "",
-//   species: "",
-//   age: 0,
-//   ageTime: "",
-//   weight: 0,
-//   size: "",
-//   gender: "",
-//   breed: "",
-//   description: "",
-//  })
+  //  const [petDescription, setPetDescription] = useState({
+  //   name: "",
+  //   date: "",
+  //   species: "",
+  //   age: 0,
+  //   ageTime: "",
+  //   weight: 0,
+  //   size: "",
+  //   gender: "",
+  //   breed: "",
+  //   description: "",
+  //  })
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -175,7 +169,7 @@ Al momento de pasar a producción hay que eliminar los console.log
 También se modificaria cuando se añadan las actions y el reducer, ya que es ahi
 en donde debe hacerse para enviar el post a /animals */
   const [file, setFile] = useState(null);
-  const [uploadingData, setUploadingData] = useState(false);
+  //const [uploadingData, setUploadingData] = useState(false);
   const [finishedUploadStatus, setFinishedUploadStatus] = useState({
     visible: false,
     title: "",
@@ -196,50 +190,74 @@ en donde debe hacerse para enviar el post a /animals */
   const uploadData = async (values, resetForm) => {
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
 
-    const formData = new FormData();
-    formData.append("upload_preset", `${preset}`);
-    formData.append("file", file);
+    if (file !== null) {
+      const formData = new FormData();
+      formData.append("upload_preset", `${preset}`);
+      formData.append("file", file);
 
-    setUploadingData(true);
+      //setUploadingData(true);
+      dispatch(setPetsBusyMode (true));
+      try {
+        const res = await fetch(cloudinaryUrl, {
+          method: "POST",
+          body: formData,
+        });
 
-    try {
-      const res = await fetch(cloudinaryUrl, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        setUploadingData(false);
-        dispatch(
-          setError(
-            ErrorManager.CreateErrorInfoObject(
-              {
-                name: "CloudinaryUploadImageError",
-                code: "Unknown",
-              },
-              []
+        if (!res.ok) {
+          //setUploadingData(false);
+          dispatch(setPetsBusyMode(false));
+          dispatch(
+            setError(
+              ErrorManager.CreateErrorInfoObject(
+                {
+                  name: "CloudinaryUploadImageError",
+                  code: "Unknown",
+                },
+                []
+              )
             )
-          )
-        );
-        return null;
-      }
+          );
 
-      const data = await res.json();
-      dispatch(
-        updatePetInfo({
-          ...values,
-          image: data.secure_url,
-        })
-      );
-      setUploadingData(false);
-      setFinishedUploadStatus({
-        visible: true,
-        title: "Subida correcta de datos",
-        message:
-          "tus datos se han subido correctamente a nuestra base de datos",
-      });
-    } catch (error) {
-      console.log({ error });
+          if(handleClose){
+            handleClose();
+          }
+
+          return null;
+        }
+
+        const data = await res.json();
+        dispatch(
+          updatePetInfo({
+            ...values,
+            image: data.secure_url,
+          })
+        );
+
+        if(handleClose){
+          handleClose();
+        }
+        //setUploadingData(false);
+      } catch (error) {
+        console.log({ error });
+      }
+    } else {
+      try {
+        dispatch(setPetsBusyMode(true));
+        dispatch(
+          updatePetInfo({
+            ...values,
+            image: img,
+          })
+        );
+
+        if(handleClose){
+          handleClose();
+        }
+
+        //setUploadingData(false);
+      } catch (error) {
+        console.log({ error });
+      }
     }
   };
   /**********************************************************/
@@ -251,26 +269,25 @@ en donde debe hacerse para enviar el post a /animals */
   //   }
   // }, [currentUser]);
 
-  useEffect(()=>{
-    if(params.id){
-      setPetDescription(currentPets.find((pets)=>pets.id === params.id))
-      console.log(currentPets)
+  useEffect(() => {
+    if (params.id) {
+      setPetDescription(currentPets.find((pets) => pets.id === params.id))
     }
-  },[])
+  }, [])
 
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "30px", marginTop:"50px" }}>
+      <Box className={style.gridContact} sx={{ marginBottom: "30px", marginTop: "50px" }}>
 
-        <Container sx={{ }}>
+        <Container sx={{}}>
           <form onSubmit={formik.handleSubmit}>
             <Grid
               container
               justifyContent="center"
               alignItems="center"
-             
+
             >
-           
+
               <Grid item md={6}>
                 <Box
                   sx={{
@@ -425,7 +442,7 @@ en donde debe hacerse para enviar el post a /animals */
                     SelectProps={{
                       native: true,
                     }}
-                   
+
                     onChange={formik.handleChange}
                     error={
                       formik.touched.gender && Boolean(formik.errors.gender)
@@ -453,7 +470,7 @@ en donde debe hacerse para enviar el post a /animals */
                   {/* <Grid item sx={{ width: "100%" }}>
                   <FormControlLabel control={<Checkbox name="hasAdoptionRequest" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAdoptionRequest) : false} />} label={lang.userInfoEditor.inputs.adopto} />
                   </Grid> */}
-            
+
 
 
 
@@ -480,7 +497,7 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="yellowButton"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop:"60px" }}
+                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop: "60px" }}
               >
                 Actualizar
               </Button>
@@ -488,7 +505,7 @@ en donde debe hacerse para enviar el post a /animals */
           </form>
         </Container>
       </Box>
-      <Modal
+      {/*<Modal
         open={uploadingData}
         sx={{
           display: "flex",
@@ -530,7 +547,7 @@ en donde debe hacerse para enviar el post a /animals */
             Aceptar
           </Button>
         </DialogActions>
-      </Dialog>
+        </Dialog>*/}
     </>
   );
 };

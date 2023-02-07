@@ -1,0 +1,578 @@
+{
+	"counters": {
+		"u_column": 8,
+		"u_row": 7,
+		"u_content_image": 1,
+		"u_content_text": 6,
+		"u_content_heading": 3
+	},
+	"body": {
+		"id": "bXqU07vt3g",
+		"rows": [{
+			"id": "JxWZdk6Qrt",
+			"cells": [1],
+			"columns": [{
+				"id": "2XXPUXoicc",
+				"contents": [{
+					"id": "KT6Pu5AEwF",
+					"type": "heading",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"headingType": "h1",
+						"fontSize": "22px",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_heading_1",
+							"htmlClassNames": "u_content_heading"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<strong>Solicitud de Contacto</strong>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"_meta": {
+						"htmlID": "u_column_1",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"hideDesktop": false,
+				"_meta": {
+					"htmlID": "u_row_1",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "yDwSAtixuW",
+			"cells": [1],
+			"columns": [{
+				"id": "3oBGN5XbW_",
+				"contents": [{
+					"id": "MkEqdDkfUl",
+					"type": "heading",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"headingType": "h1",
+						"fontSize": "22px",
+						"textAlign": "center",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_heading_2",
+							"htmlClassNames": "u_content_heading"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "Gracias por contactarnos!"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_2",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_2",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "aCFPMKd58f",
+			"cells": [1],
+			"columns": [{
+				"id": "7w_eKCkTl7",
+				"contents": [{
+					"id": "YwMTSKUDLf",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_2",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">Estimado <strong>{user_name}</strong>, estamos muy complacidos de poder brindarte mas informacion respecto a nuestro centro de adopcion, nuestras mascotas y nuestros procesos de adopcion.</p>"
+					}
+				}, {
+					"id": "RjBhPHyN7n",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_3",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">En tu solicitud de contacto, nos envias la siguiente descripcion:</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_3",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_3",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "5OIpe_BI96",
+			"cells": [10, 90],
+			"columns": [{
+				"id": "xMOV0hhenB",
+				"contents": [{
+					"id": "c6U8icbCPL",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_5",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">&gt;</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_6",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}, {
+				"id": "lZhBZsXJx8",
+				"contents": [{
+					"id": "bRbm_SC_ko",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_4",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\"><span style=\"color: #7e8c8d; line-height: 19.6px;\">{user_description}</span></p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_7",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_6",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "qMJvwY0_yz",
+			"cells": [1],
+			"columns": [{
+				"id": "m4MdwbnLO7",
+				"contents": [{
+					"id": "wLcMVylztZ",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_6",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">En nuestro equipo de Huellitas, te respondemos:</p>\n<ul>\n<li style=\"line-height: 19.6px;\">Bla bla bla bla</li>\n</ul>\n<p style=\"line-height: 140%;\">Te invitamos a registrarte en nuestra pagina para que conozcas y te enamores de nuestras criaturas, ayudalas aportando a nuestra causa a traves diferentes tipos de donaciones y suscribete a nuestro boletin de noticias. Te esperamos!</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_8",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_7",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}, {
+			"id": "-FJ5LSOmXE",
+			"cells": [1],
+			"columns": [{
+				"id": "MA58jlZJUk",
+				"contents": [{
+					"id": "oCuy-D5Udd",
+					"type": "image",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"src": {
+							"url": "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100",
+							"width": 96,
+							"height": 96
+						},
+						"textAlign": "left",
+						"altText": "",
+						"action": {
+							"name": "web",
+							"values": {
+								"href": "",
+								"target": "_blank"
+							}
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_image_1",
+							"htmlClassNames": "u_content_image"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true
+					}
+				}, {
+					"id": "ZY-Mpa1EF-",
+					"type": "text",
+					"values": {
+						"containerPadding": "10px",
+						"anchor": "",
+						"textAlign": "left",
+						"lineHeight": "140%",
+						"linkStyle": {
+							"inherit": true,
+							"linkColor": "#0000ee",
+							"linkHoverColor": "#0000ee",
+							"linkUnderline": true,
+							"linkHoverUnderline": true
+						},
+						"displayCondition": null,
+						"_meta": {
+							"htmlID": "u_content_text_1",
+							"htmlClassNames": "u_content_text"
+						},
+						"selectable": true,
+						"draggable": true,
+						"duplicatable": true,
+						"deletable": true,
+						"hideable": true,
+						"text": "<p style=\"line-height: 140%;\">Huellitas De Amor. 2023</p>"
+					}
+				}],
+				"values": {
+					"backgroundColor": "",
+					"padding": "0px",
+					"border": {},
+					"borderRadius": "0px",
+					"_meta": {
+						"htmlID": "u_column_4",
+						"htmlClassNames": "u_column"
+					}
+				}
+			}],
+			"values": {
+				"displayCondition": null,
+				"columns": false,
+				"backgroundColor": "",
+				"columnsBackgroundColor": "",
+				"backgroundImage": {
+					"url": "",
+					"fullWidth": true,
+					"repeat": "no-repeat",
+					"size": "custom",
+					"position": "center"
+				},
+				"padding": "0px",
+				"anchor": "",
+				"_meta": {
+					"htmlID": "u_row_4",
+					"htmlClassNames": "u_row"
+				},
+				"selectable": true,
+				"draggable": true,
+				"duplicatable": true,
+				"deletable": true,
+				"hideable": true
+			}
+		}],
+		"values": {
+			"popupPosition": "center",
+			"popupWidth": "600px",
+			"popupHeight": "auto",
+			"borderRadius": "10px",
+			"contentAlign": "center",
+			"contentVerticalAlign": "center",
+			"contentWidth": "500px",
+			"fontFamily": {
+				"label": "Arial",
+				"value": "arial,helvetica,sans-serif"
+			},
+			"textColor": "#000000",
+			"popupBackgroundColor": "#FFFFFF",
+			"popupBackgroundImage": {
+				"url": "",
+				"fullWidth": true,
+				"repeat": "no-repeat",
+				"size": "cover",
+				"position": "center"
+			},
+			"popupOverlay_backgroundColor": "rgba(0, 0, 0, 0.1)",
+			"popupCloseButton_position": "top-right",
+			"popupCloseButton_backgroundColor": "#DDDDDD",
+			"popupCloseButton_iconColor": "#000000",
+			"popupCloseButton_borderRadius": "0px",
+			"popupCloseButton_margin": "0px",
+			"popupCloseButton_action": {
+				"name": "close_popup",
+				"attrs": {
+					"onClick": "document.querySelector('.u-popup-container').style.display = 'none';"
+				}
+			},
+			"backgroundColor": "#ffffff",
+			"backgroundImage": {
+				"url": "",
+				"fullWidth": true,
+				"repeat": "no-repeat",
+				"size": "custom",
+				"position": "center"
+			},
+			"preheaderText": "",
+			"linkStyle": {
+				"body": true,
+				"linkColor": "#0000ee",
+				"linkHoverColor": "#0000ee",
+				"linkUnderline": true,
+				"linkHoverUnderline": true
+			},
+			"_meta": {
+				"htmlID": "u_body",
+				"htmlClassNames": "u_body"
+			}
+		}
+	},
+	"schemaVersion": 12
+}
