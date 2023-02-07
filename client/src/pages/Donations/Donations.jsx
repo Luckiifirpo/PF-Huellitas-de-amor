@@ -56,7 +56,7 @@ const Donations = () => {
               {lang.donaciones.titles.apoyaNuestraCausa}
             </Typography>
             <Typography component="p" sx={{ margin: '10px 0px' }}>
-              Puedes ayudarnos economicamente, el dinero sera destinado a las mascotas que aún no han podido ser adoptadas con insumos como comida, medicina, vacunas, entre otros.
+              {lang.donaciones.paragraphs.ayudaEconomica}
             </Typography>
             {/* <Paper>
               <nav aria-label="main mailbox folders">

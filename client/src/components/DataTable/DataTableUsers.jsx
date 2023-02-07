@@ -265,7 +265,7 @@ export default function DataTableUsers() {
   const UpdatedUserInfo = () => {
     hideModals();
 
-    fetch("http://localhost:3001/users")
+    fetch("https://pf-huellitas-de-amor-production.up.railway.app/users")
       .then((data) => data.json())
       .then((data) => UpdateTableDataUsers(data));
     dispatch(setUserBusyMode(false));
@@ -295,7 +295,7 @@ export default function DataTableUsers() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3001/users")
+    fetch("https://pf-huellitas-de-amor-production.up.railway.app/users")
       .then((data) => data.json())
       .then((data) => {
         UpdateTableDataUsers(data);
