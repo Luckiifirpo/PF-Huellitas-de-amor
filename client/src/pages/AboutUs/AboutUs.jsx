@@ -109,7 +109,7 @@ const AboutUs = () => {
           spacing={2}
           alignItems="flex-start"
         >
-          <Grid item md={3}>
+          <Grid item md={3} marginTop={'50px'}>
             <Typography
               component="h4"
               variant="h4"

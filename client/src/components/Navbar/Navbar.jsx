@@ -147,7 +147,7 @@ const Navbar = (props) => {
             </Box>
           </Toolbar>
         </AppBar>
-        <Box component="nav">
+        <Box component="nav" >
           <Drawer
             container={container}
             variant="temporary"
@@ -156,7 +156,7 @@ const Navbar = (props) => {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
-            sx={{
+            sx={{ 
               display: { xs: 'block', lg: 'none' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}

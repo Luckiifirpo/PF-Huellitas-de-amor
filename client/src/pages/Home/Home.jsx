@@ -122,7 +122,7 @@ const Home = () => {
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>
               {lang.home.titles.meQuieresAdoptar}
             </Typography>
-            <Typography component="p" sx={{ margin: '10px 0px' }} data-aos="fade-left">
+            <Typography component="p" sx={{ margin: '10px 0px', fontWeight:'700'  }} color="secondary" data-aos="fade-left">
               {lang.home.paragraphs.meQuieresAdoptar}
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerAdopciones(e)} data-aos="fade-left">{lang.home.buttons.adoptame}</Button>
@@ -152,7 +152,7 @@ const Home = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item md={6} data-aos="fade-down-left">
+            <Grid item md={6} data-aos="fade-up-left">
               <img src={gatitoHome} alt=' gatito home' />
             </Grid>
           </Grid>
@@ -168,7 +168,7 @@ const Home = () => {
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }} data-aos="fade-left">
               {lang.home.titles.darEnAdopcion}
             </Typography>
-            <Typography component="p" sx={{ margin: '10px 0px' }} data-aos="zoom-in-up" >
+            <Typography component="p" sx={{ margin: '10px 0px', fontWeight:'700'  }} color="secondary" data-aos="zoom-in-up" >
               {lang.home.paragraphs.darEnAdopcion}
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerPostAdoption(e)} data-aos="zoom-out-left">{lang.home.buttons.publicar}</Button>
@@ -182,7 +182,7 @@ const Home = () => {
             <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }} data-aos="fade-right">
               {lang.home.titles.hazTuDonacion}
             </Typography>
-            <Typography component="p" sx={{ margin: '10px 0px' }} data-aos="zoom-in-up">
+            <Typography component="p" sx={{ margin: '10px 0px', fontWeight:'700'  }} color="secondary" data-aos="zoom-in-up">
               {lang.home.paragraphs.hazTuDonacion}
             </Typography>
             <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerDonar(e)} data-aos="zoom-in-right" >{lang.home.buttons.donaAhora}</Button>
@@ -203,7 +203,7 @@ const Home = () => {
               <Typography component="h1" variant="h2" sx={{ color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}data-aos="fade-down-left" >
                 {lang.home.titles.masInformacion}
               </Typography>
-              <Typography component="p" sx={{ margin: '10px 0px' }} data-aos="fade-left">
+              <Typography component="p" sx={{ margin: '10px 0px', fontWeight:'700' }} color="secondary" data-aos="fade-left">
                 {lang.home.paragraphs.masInformacion}
               </Typography>
               <Button variant="contained" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} onClick={(e) => handlerContacto(e)} data-aos="zoom-in-up">{lang.home.buttons.contacto}</Button>
