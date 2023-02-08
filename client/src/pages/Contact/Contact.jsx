@@ -80,7 +80,7 @@ const Contact = () => {
     <>
       <Box
         className={style.gridContact}
-        sx={{ marginBottom: "300px", marginTop:{xs:"0px",md:"150px"}}}
+        sx={{ marginBottom: "50px", marginTop:{xs:"0px",md:"150px"}}}
       >
         <Box className={style.gridContactImage} sx={{display:{md:"block",xs:"none"}}}>
           <img src={ImageContact} alt="" />

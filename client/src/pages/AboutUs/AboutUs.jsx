@@ -117,6 +117,7 @@ const AboutUs = () => {
                 color: "#FF3041",
                 textTransform: "uppercase",
                 fontWeight: "700",
+                marginTop: "50px"
               }}
             >
               {lang.quienesSomos.titles.quienesSomos}
