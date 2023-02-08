@@ -175,10 +175,6 @@ export const updateUserInfoForAdminDashboard = (newData, callback) => async (dis
         if(callback){
             callback();
         }
-//         const response = await api.post(`/users/forgot-password`,{email: obj});
-//         console.log(response.data + " respuesta servidor");
-//         dispatch(setUserBusyMode(false));
-//         dispatch(setForgotPassword(response.data));
     } catch (error) {
         dispatch(setUserBusyMode(false));
         dispatch(setUserError(ErrorManager.CreateErrorInfoObject(error, [
@@ -231,7 +227,7 @@ export const postForgotPassword = (obj) => async (dispatch) => {
 }
 
 export const PutresetPassword = (newData, password, password2) => async (dispatch) => {
-    console.log(newData, password + " slice")
+    // console.log(newData, password + " slice")
     try {
         dispatch(setUserBusyMode(true));
         const response = await api.put(`/users/resetpassword/${newData}`, { newPassword: password, newPassword2: password2});

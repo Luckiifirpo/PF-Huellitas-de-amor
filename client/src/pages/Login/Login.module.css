@@ -21,5 +21,9 @@
 }
 
 .login_div{
-    min-height: 100vh !important;
+    min-height: 100vh ;
 }
+
+/* @media only screen and (min-width: 460px) and (max-width: 1200px) {
+   
+} */

@@ -88,7 +88,8 @@
                 "irAPagar": "ir a pagar"
             },
             "paragraphs": {
-                "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros."
+                "donacionesEInsumos": "Si quieres realizar una donación de insumos (comida para perros, elementos de aseo, camas, cobijas, medicinas, etc) puedes ponerte en contacto con nosotros.",
+                "ayudaEconomica": "Puedes ayudarnos economicamente, el dinero sera destinado a las mascotas que aún no han podido ser adoptadas con insumos como comida, medicina, vacunas, entre otros."
             },
             "lists": {
                 "medicamentos": "medicamentos",
@@ -155,26 +156,26 @@
                 "descripcion": "Descripcion",
                 "rango": "Rango",
                 "rangoTiempo": {
-                    "años": "Años",
-                    "meses": "Meses"
+                    "months": "Meses",
+                    "years": "Años"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Felino",
-                    "canino": "Canino",
-                    "pez": "Pez",
-                    "roedor": "Roedor",
-                    "equino": "Equino",
-                    "bovino": "Bovino",
-                    "ovino": "Ovino",
-                    "caprino": "Caprino",
-                    "otro": "Otro"
+                    "feline": "Felino",
+                    "canine": "Canino",
+                    "fish": "Pez",
+                    "rodent": "Roedor",
+                    "equine": "Equino",
+                    "bovine": "Bovino",
+                    "ovine": "Ovino",
+                    "goat": "Caprino",
+                    "other": "Otro"
                 },
                 "tamaños": {
-                    "pequeño": "Pequeño",
-                    "mediano": "Mediano",
-                    "grande": "Grande"
+                    "small": "Pequeño",
+                    "medium": "Mediano",
+                    "big": "Grande"
                 },
                 "generos": {
                     "macho": "Macho",
@@ -315,6 +316,127 @@
             "button": {
                 "guardarContraseña": "Guardar nueva contraseña"
             }
+        },
+        "adoptionForm": {
+            "buttons": {
+                "agregar": "Agregar",
+                "enviar": "Enviar",
+                "autorizar": "Autorizar",
+                "rechazar": "Rechazar",
+                "solicitarRevision": "Solicitar revision de datos"
+            },
+            "alerts": {
+                "nuestrasMascotas": {
+                    "normal": "Nuestras criaturas son muy valiosas para nosotros, por lo tanto nos tomamos muy en serio su bienestar y las condiciones de vida que debe tener junto a las personas con las que les permitimos compartir y convivir.",
+                    "strong": "Es por eso que te solicitamos encarecidamente que nos brindes la mayor informacion en los campos solicitados en el siguiente formulario."
+                },
+                "warningNuestrasMascotas": {
+                    "first": "Si ingresas informacion falsa o irrelevante para este proceso, ",
+                    "strong": "tu solicitud sera descartada de manera inmediata.",
+                    "last": "Si ingresas informacion que no podamos comprobar o si decides omitir informacion en este formulario, sera mas dificil realizar el proceso de aprobacion"
+                },
+                "teAyudamosASaberSiEsParaTi": "Con la siguiente informacion, podremos saber si esta mascota es la que estas buscando, o si no, te ayudaremos a encontrar otra mascota indicada para ti. Entre mas datos nos proporciones mas facil sera concluir si esta es tu mascota.",
+                "warningTeAyudamosASaberSiEsParaTi": "Si decides omitir informacion que nos ayude a escoger el temperamento de tu proxima mascota, podrias toparte con situaciones inesperadas e indeseadas a la hora de interactuar con tu mascota.",
+                "referenciaPersonal": "Agrega por lo menos una referencia personal",
+                "warningAprobacion": "La aprobacion de la presente solicitud de adopcion esta sujeta al nivel legislativo en materia de proteccion animal aplicable para tu zona, region o pais. Tambien dependera de estudios que realizemos en tu zona de vivienda y areas aledañas, todo con la finalidad de garantizar una vida digna y de bienenstar a nuestras apreciadas criaturas.",
+                "infoAprobacion": "Al finalizar esta solicitud, estaremos contactandonos con usted via correo electronico, para agendar un espacio en su calendario, en el cual nos permita realizar una visita a usted en su residencia."
+            },
+            "titles": {
+                "datosPersonales": "DATOS PERSONALES:",
+                "actitudesConMascota": "TUS ACTITUDES CON UNA MASCOTA:",
+                "referenciasPersonales": "REFERENCIAS PERSONALES:",
+                "mascotasAnteriores": "MASCOTAS ANTERIORES:",
+                "inquilinosEnResidencia": "INQUILINOS EN TU RESIDENCIA:",
+                "sobreResidencia": "SOBRE TU RESIDENCIA:",
+                "sobreProximaResidencia": "SOBRE TU PROXIMA RESIDENCIA:"
+            },
+            "subtitles": {
+                "actitudesConMascota": "Imagina que ya tienes tu mascota. Cual seria tu reaccion frente a los siguientes comportamientos de tu mascota, o como reaccionas generalmente frente a este tipo de situaciones:",
+                "sobreResidencia": {
+                    "sobrePropietario": "Sobre el propietaro:",
+                    "detallesVivienda": "Detalles de tu vivienda:"
+                }
+            },
+            "inputs": {
+                "datosPersonales": {
+                    "telefono": "Telefono celular",
+                    "telTrabajoUOficina": "Tel. Trabajo u Oficina",
+                    "alergias": "Alergias:",
+                    "nivelEducativo": "Nivel Educativo:",
+                    "nivelEducativoOptions": {
+                        "ninguno": "ninguno",
+                        "tecnico": "tecnico",
+                        "tecnologo": "tecnologo",
+                        "profesional": "profesional"
+                    },
+                    "porQueQuieresAdoptar": "Por que quieres adoptar esta mascota?",
+                    "visitasAMiResidencia": "Estoy de acuerdo con que hagan visitas periodicas a mi residencia"
+                },
+                "actitudConMascota": {
+                    "ruidosa": "Frente a una mascota ruidosa:",
+                    "hiperactiva": "Frente a una mascota hiperactiva:",
+                    "calmada": "Frente a una mascota muy calmada:",
+                    "desobediente": "Frente a una mascota desobediente:",
+                    "desechos": "Frente a los desechos indeseados de una mascota:",
+                    "agresiva": "Frente a una mascota agresiva:",
+                    "pequeña": "Frente a una mascota pequeña:",
+                    "grande": "Frente a una mascota grande:"
+                },
+                "inquilinosEnResidencia": {
+                    "numInquilinos": "Numero de inquilinos:",
+                    "deAcuerdo": "Todos estan de acuerdo con la adopcion",
+                    "menoresDeDiez": "Niños menores de 10 años"
+                },
+                "sobreResidencia": {
+                    "soyPropietario": "Soy el propietario de esta vivienda",
+                    "nombrePropietario": "Nombre del propietario:",
+                    "apellidoPropietario": "Apellido del propietario:",
+                    "telefonopropietario": "Numero telefonico del propietario:",
+                    "piensoMudarme": "Pienso mudarme en los proximos meses",
+                    "conozcoDondeMeMudo": "Ya conozco la vivienda donde me voy a mudar",
+                    "tipoVivienda": "Tipo de vivienda:",
+                    "tipoViviendaOptions": {
+                        "separada": "Separada",
+                        "semiSeparada": "Semi separada",
+                        "duplex": "Duplex",
+                        "apartamento": "Apartamento",
+                        "viviendaMueble": "Vivienda Mueble"
+                    },
+                    "areaDondeEstaraMascota": "Area donde estara frecuentemente tu mascota (en metros cuadrados):",
+                    "cuentaConPatio": "La vivienda cuenta con un patio",
+                    "cuentaConJardin": "La vivienda cuenta con un jardin",
+                    "cuentaConTerraza": "La vivienda cuenta con una terraza",
+                    "cuentaConZonaDescubierta": "La vivienda cuenta con una zona descubierta" 
+                }
+            }
+        },
+        "personalReference": {
+            "title": "Referencia Personal",
+            "nombre": "Nombre:",
+            "apellido": "Apellido:",
+            "edad": "Edad:",
+            "correo": "Correo:",
+            "empleado": "Empleado",
+            "ocupacion": "Ocupacion:",
+            "parentesco": "Parentesco:"
+        },
+        "previousPet": {
+            "title": "Mascota",
+            "nombre": "Nombre:",
+            "edad": "Edad:",
+            "especie": "Especie:",
+            "aunVive": "Aun esta en vida:",
+            "aunViveOptions": {
+                "si": "Si",
+                "no": "No",
+                "noLoSe": "No lo sé"
+            },
+            "aunConservo": "Aun lo conservo",
+            "vacunas": "Vacunas:",
+            "agregarVacunas": {
+                "nombre": "Nombre:",
+                "fecha": "Fecha de Aplicación:"
+            }
         }
     },
     "en": {
@@ -406,7 +528,8 @@
                 "irAPagar": "go pay"
             },
             "paragraphs": {
-                "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us."
+                "donacionesEInsumos": "If you want to make a donation of supplies (dog food, toiletries, beds, blankets, medicines, etc.) you can contact us.",
+                "ayudaEconomica": "You can help us financially, the money will be destined to pets that have not yet been able to be adopted with supplies such as food, medicine, vaccines, among others."
             },
             "lists": {
                 "medicamentos": "medicines",
@@ -466,30 +589,30 @@
                 "especie": "Species",
                 "genero": "Gender",
                 "edad": "Age",
-                "raza": "Race",
+                "raza": "Breed",
                 "peso": "Weight",
                 "descripcion": "Description",
                 "rango": "Range",
                 "rangoTiempo": {
-                    "años": "Years",
-                    "meses": "Months"
+                    "years": "Years",
+                    "months": "Months"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Feline",
-                    "canino": "Canine",
-                    "pez": "Fish",
-                    "roedor": "Rodent",
-                    "equino": "Equine",
-                    "bovino": "Bovine",
-                    "ovino": "Sheep",
-                    "caprino": "Goat",
-                    "otro": "Other"
+                    "feline": "Feline",
+                    "canine": "Canine",
+                    "fish": "Fish",
+                    "rodent": "Rodent",
+                    "equine": "Equine",
+                    "bovine": "Bovine",
+                    "ovine": "Sheep",
+                    "goat": "Goat",
+                    "other": "Other"
                 },
                 "tamaños": {
-                    "prqueño": "Small",
-                    "mediano": "Medium",
+                    "small": "Small",
+                    "medium": "Medium",
                     "big": "Big"
                 },
                 "generos": {
@@ -631,6 +754,127 @@
             "button": {
                 "guardarContraseña": "Save new password"
             }
+        },
+        "adoptionForm": {
+            "buttons": {
+                "agregar": "Add",
+                "enviar": "Send",
+                "autorizar": "Authorize",
+                "rechazar": "Reject",
+                "solicitarRevision": "Request data review"
+            },
+            "alerts": {
+                "nuestrasMascotas": {
+                    "normal": "Our creatures are very valuable to us, therefore we take their well-being and the living conditions they should have very seriously with the people with whom we allow them to share and coexist.",
+                    "strong": "That is why we strongly request that you provide us with the most information in the fields requested in the following form."
+                },
+                "warningNuestrasMascotas": {
+                    "first": "If you enter false or irrelevant information for this process, ",
+                    "strong": "your request will be rejected immediately.",
+                    "last": "If you enter information that we cannot verify or if you decide to omit information from this form, it will be more difficult to complete the approval process."
+                },
+                "teAyudamosASaberSiEsParaTi": "With the following information, we can know if this pet is the one you are looking for, or if not, we will help you find another pet suitable for you. The more data you provide us, the easier it will be to conclude if this is your pet.",
+                "warningTeAyudamosASaberSiEsParaTi": "If you decide to omit information that helps us choose the temperament of your next pet, you may encounter unexpected and unwanted situations when interacting with your pet.",
+                "referenciaPersonal": "Add at least one personal reference",
+                "warningAprobacion": "The approval of this application for adoption is subject to the legislative level on animal protection applicable to your area, region or country. It will also depend on studies that we carry out in your housing area and surrounding areas, all in order to guarantee a dignified life and to welcome our beloved creatures.",
+                "infoAprobacion": "At the end of this request, we will be contacting you via email, to schedule a space in your calendar, in which you allow us to visit you at your residence."
+            },
+            "titles": {
+                "datosPersonales": "PERSONAL DATA:",
+                "actitudesConMascota": "YOUR ATTITUDES WITH A PET:",
+                "referenciasPersonales": "PERSONAL REFERENCES:",
+                "mascotasAnteriores": "PREVIOUS PETS:",
+                "inquilinosEnResidencia": "TENANTS IN YOUR RESIDENCE:",
+                "sobreResidencia": "ABOUT YOUR RESIDENCE:",
+                "sobreProximaResidencia": "ABOUT YOUR NEXT RESIDENCE:"
+            },
+            "subtitles": {
+                "actitudesConMascota": "Imagine you already have your pet. What would be your reaction to the following behaviors of your pet, or how you generally react to this type of situation:",
+                "sobreResidencia": {
+                    "sobrePropietario": "About the owner:",
+                    "detallesVivienda": "Details of your home:"
+                }
+            },
+            "inputs": {
+                "datosPersonales": {
+                    "telefono": "Cell phone",
+                    "telTrabajoUOficina": "Work Phone or Office",
+                    "alergias": "Allergies:",
+                    "nivelEducativo": "Educational Level:",
+                    "nivelEducativoOptions": {
+                        "ninguno": "None",
+                        "tecnico": "Technician",
+                        "tecnologo": "Technologist",
+                        "profesional": "Professional"
+                    },
+                    "porQueQuieresAdoptar": "Why do you want to adopt this pet?",
+                    "visitasAMiResidencia": "I agree to make periodic visits to my residence"
+                },
+                "actitudConMascota": {
+                    "ruidosa": "In front of a noisy pet:",
+                    "hiperactiva": "Facing a hyperactive pet:",
+                    "calmada": "In front of a very calm pet:",
+                    "desobediente": "Facing a disobedient pet:",
+                    "desechos": "Facing unwanted waste from a pet:",
+                    "agresiva": "Facing an aggressive pet:",
+                    "pequeña": "In front of a small pet:",
+                    "grande": "In front of a large pet:"
+                },
+                "inquilinosEnResidencia": {
+                    "numInquilinos": "Number of tenants:",
+                    "deAcuerdo": "Everyone agrees with adoption",
+                    "menoresDeDiez": "Children under 10 years old"
+                },
+                "sobreResidencia": {
+                    "soyPropietario": "I am the owner of this house",
+                    "nombrePropietario": "Owner's name:",
+                    "apellidoPropietario": "Owner's last name:",
+                    "telefonopropietario": "Owner's phone number:",
+                    "piensoMudarme": "I plan to move in the next few months",
+                    "conozcoDondeMeMudo": "I already know the house where I am going to move",
+                    "tipoVivienda": "Type of housing:",
+                    "tipoViviendaOptions": {
+                        "separada": "single detached",
+                        "semiSeparada": "semi detached",
+                        "duplex": "duplex",
+                        "apartamento": "in building apartment",
+                        "viviendaMueble": "movable dwelling"
+                    },
+                    "areaDondeEstaraMascota": "Area where your pet will frequently be (in square meters):",
+                    "cuentaConPatio": "The house has a patio",
+                    "cuentaConJardin": "The house has a garden",
+                    "cuentaConTerraza": "The house has a terrace",
+                    "cuentaConZonaDescubierta": "The house has an open area" 
+                }
+            }
+        },
+        "personalReference": {
+            "title": "Personal Reference",
+            "nombre": "Name:",
+            "apellido": "Surname:",
+            "edad": "Age:",
+            "correo": "Email:",
+            "empleado": "Employee",
+            "ocupacion": "Occupation:",
+            "parentesco": "Kinship:"
+        },
+        "previousPet": {
+            "title": "Mascot",
+            "nombre": "Name:",
+            "edad": "Age:",
+            "especie": "Specie:",
+            "aunVive": "He is still alive:",
+            "aunViveOptions": {
+                "si": "Yes",
+                "no": "No",
+                "noLoSe": "Unknow"
+            },
+            "aunConservo": "I still have it",
+            "vacunas": "Vaccines:",
+            "agregarVacunas": {
+                "nombre": "Name:",
+                "fecha": "Date of Application:"
+            }
         }
     },
     "pt": {
@@ -722,7 +966,8 @@
                 "irAPagar": "vá pagar"
             },
             "paragraphs": {
-                "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco."
+                "donacionesEInsumos": "Se você quiser fazer uma doação de suprimentos (ração para cães, artigos de higiene, camas, cobertores, remédios, etc.), entre em contato conosco.",
+                "ayudaEconomica": "Você pode nos ajudar financeiramente, o dinheiro será destinado a animais de estimação que ainda não puderam ser adotados com insumos como alimentos, remédios, vacinas, entre outros."
             },
             "lists": {
                 "medicamentos": "medicação",
@@ -787,21 +1032,21 @@
                 "descripcion": "Descrição",
                 "rango": "Alcance",
                 "rangoTiempo": {
-                    "años": "Anos",
-                    "meses": "Meses"
+                    "years": "Anos",
+                    "months": "Meses"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Felino",
-                    "canino": "Canino",
-                    "pez": "Peixe",
-                    "roedor": "Roedor",
-                    "equino": "Equino",
-                    "bovino": "Bovino",
-                    "ovino": "Ovelha",
-                    "caprino": "Cabra",
-                    "otro": "Outro"
+                    "feline": "Felino",
+                    "canine": "Canino",
+                    "fish": "Peixe",
+                    "rodent": "Roedor",
+                    "equine": "Equino",
+                    "bovine": "Bovino",
+                    "ovine": "Ovelha",
+                    "goat": "Cabra",
+                    "other": "Outro"
                 },
                 "tamaños": {
                     "pequeño": "Pequeno",
@@ -946,6 +1191,127 @@
             },
             "button": {
                 "guardarContraseña": "Salvar nova senha"
+            }
+        },
+        "adoptionForm": {
+            "buttons": {
+                "agregar": "Adicionar",
+                "enviar": "Enviar",
+                "autorizar": "Autorizar",
+                "rechazar": "Rejeitar",
+                "solicitarRevision": "Solicitar revisão de dados"
+            },
+            "alerts": {
+                "nuestrasMascotas": {
+                    "normal": "Nossas criaturas são muito valiosas para nós, portanto, levamos muito a sério seu bem-estar e as condições de vida que elas devem ter com as pessoas com quem permitimos que elas compartilhem e coexistam.",
+                    "strong": "É por isso que solicitamos enfaticamente que você nos forneça o máximo de informações nos campos solicitados no formulário a seguir."
+                },
+                "warningNuestrasMascotas": {
+                    "first": "Se você inserir informações falsas ou irrelevantes para este processo, ",
+                    "strong": "o seu pedido será rejeitado imediatamente.",
+                    "last": "Se você inserir informações que não podemos verificar ou se decidir omitir informações deste formulário, será mais difícil concluir o processo de aprovação."
+                },
+                "teAyudamosASaberSiEsParaTi": "Com as seguintes informações, podemos saber se este animal de estimação é o que você está procurando, ou se não, vamos ajudá-lo a encontrar outro animal de estimação adequado para você. Quanto mais dados você nos fornecer, mais fácil será concluir se este é o seu animal de estimação.",
+                "warningTeAyudamosASaberSiEsParaTi": "Se você decidir omitir informações que nos ajudam a escolher o temperamento do seu próximo animal de estimação, você pode encontrar situações inesperadas e indesejadas ao interagir com seu animal de estimação.",
+                "referenciaPersonal": "Adicionar pelo menos uma referência pessoal",
+                "warningAprobacion": "A aprovação deste pedido de adoção está sujeita ao nível legislativo sobre proteção animal aplicável à sua área, região ou país. Dependerá também dos estudos que realizarmos na vossa área de habitação e arredores, tudo para garantir uma vida digna e acolher as nossas amadas criaturas.",
+                "infoAprobacion": "No final deste pedido, entraremos em contacto consigo via e-mail, para agendar um espaço no seu calendário, no qual nos permita visitá-lo na sua residência."
+            },
+            "titles": {
+                "datosPersonales": "DADOS PESSOAIS:",
+                "actitudesConMascota": "SUAS ATITUDES COM UM ANIMAL DE ESTIMAÇÃO:",
+                "referenciasPersonales": "REFERÊNCIAS PESSOAIS:",
+                "mascotasAnteriores": "ANIMAIS DE ESTIMAÇÃO ANTERIORES:",
+                "inquilinosEnResidencia": "INQUILINOS EM SUA RESIDÊNCIA:",
+                "sobreResidencia": "SOBRE A SUA RESIDÊNCIA:",
+                "sobreProximaResidencia": "SOBRE A SUA PRÓXIMA RESIDÊNCIA:"
+            },
+            "subtitles": {
+                "actitudesConMascota": "Imagine que você já tem seu animal de estimação. Qual seria a sua reação aos seguintes comportamentos do seu animal de estimação, ou como você geralmente reage a esse tipo de situação?:",
+                "sobreResidencia": {
+                    "sobrePropietario": "Sobre o proprietário:",
+                    "detallesVivienda": "Detalhes da sua casa:"
+                }
+            },
+            "inputs": {
+                "datosPersonales": {
+                    "telefono": "Celular",
+                    "telTrabajoUOficina": "Telefone do Trabalho ou do Office",
+                    "alergias": "Alergias:",
+                    "nivelEducativo": "Nível Educacional:",
+                    "nivelEducativoOptions": {
+                        "ninguno": "nenhum",
+                        "tecnico": "técnico",
+                        "tecnologo": "tecnólogo",
+                        "profesional": "profissional"
+                    },
+                    "porQueQuieresAdoptar": "Por que você quer adotar este animal de estimação?",
+                    "visitasAMiResidencia": "Concordo em fazer visitas periódicas à minha residência"
+                },
+                "actitudConMascota": {
+                    "ruidosa": "Na frente de um animal de estimação barulhento:",
+                    "hiperactiva": "Enfrentando um animal de estimação hiperativo:",
+                    "calmada": "Na frente de um animal de estimação muito calmo:",
+                    "desobediente": "Enfrentando um animal de estimação desobediente:",
+                    "desechos": "Enfrentando resíduos indesejados de um animal de estimação:",
+                    "agresiva": "Enfrentando um animal de estimação agressivo:",
+                    "pequeña": "Na frente de um pequeno animal de estimação:",
+                    "grande": "Na frente de um animal de estimação grande:"
+                },
+                "inquilinosEnResidencia": {
+                    "numInquilinos": "Número de inquilinos:",
+                    "deAcuerdo": "Todos concordam com a adoção",
+                    "menoresDeDiez": "Crianças menores de 10 anos"
+                },
+                "sobreResidencia": {
+                    "soyPropietario": "Eu sou o proprietário desta casa",
+                    "nombrePropietario": "Nome do proprietário:",
+                    "apellidoPropietario": "Sobrenome do proprietário:",
+                    "telefonopropietario": "Número de telefone do proprietário:",
+                    "piensoMudarme": "Pretendo me mudar nos próximos meses",
+                    "conozcoDondeMeMudo": "Já conheço a casa para onde vou me mudar",
+                    "tipoVivienda": "Tipo de alojamento:",
+                    "tipoViviendaOptions": {
+                        "separada": "Separar",
+                        "semiSeparada": "Semi separado",
+                        "duplex": "Duplex",
+                        "apartamento": "Apartamento",
+                        "viviendaMueble": "Habitação Móvel"
+                    },
+                    "areaDondeEstaraMascota": "Área onde seu animal de estimação estará com frequência (em metros quadrados):",
+                    "cuentaConPatio": "A casa tem um pátio",
+                    "cuentaConJardin": "A casa tem um jardim",
+                    "cuentaConTerraza": "A casa tem um terraço",
+                    "cuentaConZonaDescubierta": "A casa tem uma área aberta" 
+                }
+            }
+        },
+        "personalReference": {
+            "title": "Referência Pessoal",
+            "nombre": "Nome:",
+            "apellido": "Sobrenome:",
+            "edad": "Idade:",
+            "correo": "Correio:",
+            "empleado": "Empregado",
+            "ocupacion": "Ocupação:",
+            "parentesco": "Parentesco:"
+        },
+        "previousPet": {
+            "title": "Mascote",
+            "nombre": "Nome:",
+            "edad": "Idade:",
+            "especie": "Espécie:",
+            "aunVive": "Ele ainda está vivo:",
+            "aunViveOptions": {
+                "si": "Sim",
+                "no": "Não",
+                "noLoSe": "Eu não sei"
+            },
+            "aunConservo": "Eu ainda tenho-o",
+            "vacunas": "Vacinas:",
+            "agregarVacunas": {
+                "nombre": "Nome:",
+                "fecha": "Data de aplicação:"
             }
         }
     }

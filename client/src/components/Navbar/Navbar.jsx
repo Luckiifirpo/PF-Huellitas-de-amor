@@ -20,6 +20,7 @@ import UserAccountMenu from '../UserAccountMenu/UserAccountMenu';
 import { setToGoAfterLogin } from '../../redux/slices/navigationSlice';
 import LangMenu from '../LangMenu/LangMenu';
 import Badge from '@mui/material/Badge';
+import {Link} from "react-router-dom"
 
 
 const drawerWidth = 240;
@@ -75,15 +76,18 @@ const Navbar = (props) => {
 
   }, [currentUser, lang]);
 
+  // console.log(lang)
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ padding: '10px 0px' }}>
         <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
       </Box>
       <Divider />
+      <Button  onClick={handleDrawerToggle} >x</Button>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
+          <ListItem  onClick={handleDrawerToggle} key={item.name} disablePadding>
             <Button key={item.name} component={RouterLink} to={item.route}>
               {lang.navbar.links[item.name]}
             </Button>
@@ -95,12 +99,22 @@ const Navbar = (props) => {
             {lang.navbar.links.favoritos}
           </Button>
         </ListItem>
+        <ListItem sx={{marginLeft:'-15px'}} disablePadding>
+          <LangMenu />
+        </ListItem>
         <ListItem disablePadding>
-          <Button component={RouterLink} to="/iniciar-sesion">
+          {/* <Button component={RouterLink} to="/iniciar-sesion">
             {lang.navbar.links.iniciarSesion}
-          </Button>
+          </Button> */}
+          {
+                currentUser ? <UserAccountMenu userData={currentUser} /> :
+                  <Button onClick={ToLogin} >
+                    {lang.navbar.links.iniciarSesion}
+                  </Button>
+              }
         </ListItem>
       </List>
+      
     </Box>
   );
 
@@ -122,9 +136,11 @@ const Navbar = (props) => {
             </IconButton>
             <Box
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},justifyContent:"center",marginTop:{xs:"0px",md:"25px"}}}
+              sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},marginTop:{xs:"0px",md:"25px"}}}
             >
+              <Link to="/">
               <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
+              </Link>
             </Box>
             <Box sx={{ display: { xs: 'none', lg: 'flex' } }}>
               {navItems.map((item) => (
@@ -133,7 +149,7 @@ const Navbar = (props) => {
                 </Button>
               ))}
               <Button component={RouterLink} to="/favoritos">
-                <Badge badgeContent={numberFavorites?.length} color="primary">
+                <Badge badgeContent={numberFavorites?.length} color="yellowButton">
                   <FavoriteIcon />
                 </Badge>
               </Button>

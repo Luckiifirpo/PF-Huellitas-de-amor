@@ -195,19 +195,19 @@ const PetInfoCard = (props) => {
                                         }}>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.especie}: </strong>
-                                                <span>{petData.species}</span>
+                                                <span>{lang.darEnAdopcion.values.especies[petData.species]}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.genero}: </strong>
-                                                <span>{petData.gender}</span>
+                                                <span>{lang.petCard.labels[petData.gender]}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.edad}: </strong>
-                                                <span>{petData.age}</span>
+                                                <span>{petData.age} </span><span>  {lang.darEnAdopcion.inputs.rangoTiempo[petData.ageTime]}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.tamaño}: </strong>
-                                                <span>{petData.size}</span>
+                                                <span>{lang.darEnAdopcion.values.tamaños[petData.size]}</span>
                                             </Typography>
                                             <Typography component="p">
                                                 <strong>{lang.petInfoCard.labels.peso}: </strong>

@@ -9,7 +9,7 @@ const LeftSideUserCard = (props) => {
 
     const currentUser = useSelector((state) => state.users.currentUser);
     const lang = useSelector((state) => state.lang.currentLangData);
-
+    // console.log(currentUser)
     useEffect(() => {
 
     }, [currentUser, lang]);
@@ -38,18 +38,28 @@ const LeftSideUserCard = (props) => {
                 <Box>
                     <Paper>
                         <List>
-                            <ListItemButton>
+                            <ListItemButton href="/user-info-editor">
                                 <ListItemIcon>
                                     <SettingsIcon />
                                 </ListItemIcon>
                                 {lang.leftSideUserBar.labels.configuracion}
                             </ListItemButton>
-                            <ListItemButton>
+                            <ListItemButton href="/favoritos">
                                 <ListItemIcon>
                                     <FavoriteIcon />
                                 </ListItemIcon>
                                 {lang.leftSideUserBar.labels.favoritos}
                             </ListItemButton>
+                            {
+                                currentUser?.role === "admin" ?
+                                <ListItemButton href="/dashboard">
+                                    <ListItemIcon>
+                                        <SettingsIcon />
+                                    </ListItemIcon>
+                                    Dashboard
+                                </ListItemButton>
+                                : null
+                            }
                         </List>
                     </Paper>
                 </Box>

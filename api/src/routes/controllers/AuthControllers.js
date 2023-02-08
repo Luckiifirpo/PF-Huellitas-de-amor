@@ -6,9 +6,38 @@ const jwt = require("jsonwebtoken");
 const mailer = require('./MailerController');
 const { transporter } = require("../utils/mailer");
 
+
+const verifyToken = async (token) => {
+    try{
+        return jwt.verify(token, process.env.SECRET_KEY)
+    }catch(error){
+        return null
+    }
+}
+
+
 const compare = async (passwordPlain, hashPassword) => {
     return await bcrypt.compare(passwordPlain, hashPassword)
 }
+
+
+const checkRole = (roles) => async (req, res, next) =>{
+    try{
+        const token = req.headers.authorization.split(" ").pop()
+        const tokenData = await verifyToken(token)
+        const userData = await Usuario.findById(tokenData._id)
+
+        if([].concat(roles).includes(userData.role)) {
+            next()
+        } else {
+            res.status(409)
+            res.send({error: "No tienes permisos"})
+        }
+    }catch(error){
+        return res.status(400).send({ error: error.message })
+    }
+}
+
 
 const isAuthenticated = async (req, res, next) => {
     try {
@@ -38,10 +67,10 @@ const loginCtrl = async (req, res) => {
         if (!user) return res.status(409).send({code: "UserNotFound", error: "Usuario o contraseña incorrectos" })
 
         const checkPassword = await compare(password, user.password);
-        // const tokenSession = await tokenSign(user);
+
         if (!checkPassword) return res.status(409).send({code: "InvalidPassword", error: "Usuario o contraseña incorrectos" })
 
-        const token = await jwt.sign({id: user._id}, process.env.SECRET_KEY, {
+        const token = await jwt.sign({id: user._id, role: user.role}, process.env.SECRET_KEY, {
             expiresIn: process.env.JWT_EXPIRE,
         });
         
@@ -122,7 +151,7 @@ const federatedLoginCtrl = async (req, res, next) => {
                 </body>
                 </html>`, // html body
               });
-              console.log(userData.email)
+            //   console.log(userData.email)
             return res.status(200).json(loggedUserData);
             
         }
@@ -145,5 +174,6 @@ module.exports = {
     loginCtrl,
     federatedLoginCtrl,
     isAuthenticated,
-    getLogout
+    getLogout,
+    checkRole    
 }

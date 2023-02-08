@@ -84,7 +84,7 @@ const postAnimal = async (req, res) => {
             </body>
             </html>`, // html body
           });
-          console.log(email);
+        //   console.log(email);
         res.status(201).send(createdAnimal)
     } catch (error) {
         res.status(400).send({error: error.message})
@@ -124,7 +124,7 @@ const updateAnimal = async (req, res) => {
         animal.isAdopted = isAdopted || animal.isAdopted
         await animal.save()
 
-        res.json(animal)
+        res.json(await Animal.findAll());
 
     } catch(error){
         return res.status(500).json({message: error.message})

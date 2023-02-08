@@ -1,12 +1,25 @@
 .logo{
-    width: 115px;
+    width: 60px;
     height: auto;
+    padding-top: 20px;
 }
 
-.input_width{
+/* .input_width{
     width: 300px;
-}
+} */
 
-.sign_up_div{
+/* .sign_up_div{
     min-height: 100vh !important;
+} */
+
+@media only screen and (min-width: 500px) and (max-width: 1200px) {
+   
+    .containerForm{
+        width: 500px;
+        margin-top: 100px;
+    }
+    .containerForm h1{
+        font-size: 30px !important;
+    }
+
 }
