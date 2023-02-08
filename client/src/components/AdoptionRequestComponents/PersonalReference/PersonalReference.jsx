@@ -2,6 +2,7 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Paper, TextFie
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux"
 
 
 /*
@@ -18,7 +19,7 @@ const personal_reference_template = {
 */
 
 const PersonalReference = (props) => {
-
+    const lang = useSelector((state) => state.lang.currentLangData);
     const { item, data, adminMode } = props;
     const [formErrors, setFormErrors] = useState(adminMode ? 
         {
@@ -66,7 +67,7 @@ const PersonalReference = (props) => {
             <Grid container spacing={2}>
                 <Grid item md={6}>
                     <Typography sx={{ color: '#FF3041', fontWeight: 'Bold', marginBottom: "10px" }}>
-                        Referencia Personal #{item + 1}:
+                        {lang.personalReference.title} #{item + 1}:
                         {/*lang.adoptionRequest.titles.datosPersonales*/}
                     </Typography>
                 </Grid>
@@ -76,27 +77,83 @@ const PersonalReference = (props) => {
                     </IconButton>}
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.name} type={"text"} name="name" label={"Nombre:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    error={formErrors.name} 
+                    helperText={formErrors.name ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.name} 
+                    type={"text"} 
+                    name="name" 
+                    label={lang.personalReference.nombre} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" error={formErrors.surname} helperText={formErrors.surname ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.surname} type={"text"} name="surname" label={"Apellido:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    error={formErrors.surname} 
+                    helperText={formErrors.surname ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.surname} 
+                    type={"text"} 
+                    name="surname" 
+                    label={lang.personalReference.apellido} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" error={formErrors.age} helperText={formErrors.age ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.age} type={"number"} name="age" label={"Edad:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    error={formErrors.age} 
+                    helperText={formErrors.age ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.age} 
+                    type={"number"} 
+                    name="age" 
+                    label={lang.personalReference.edad} sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" disabled={adminMode} onChange={OnChange} value={data.email} type={"email"} name="email" label={"Correo:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.email} 
+                    type={"email"} 
+                    name="email" 
+                    label={lang.personalReference.correo} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox disabled={adminMode} onChange={OnChange} name="hasAJob" checked={data.hasAJob} />} label="Empleado" />
+                        <FormControlLabel control={<Checkbox disabled={adminMode} onChange={OnChange} name="hasAJob" checked={data.hasAJob} />} 
+                        label={lang.personalReference.empleado} />
                     </FormGroup>
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" disabled={adminMode} onChange={OnChange} value={data.occupation} type={"text"} name="occupation" label={"Ocupacion:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.occupation} 
+                    type={"text"} 
+                    name="occupation" 
+                    label={lang.personalReference.ocupacion} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={6}>
-                    <TextField size="small" error={formErrors.relationship} helperText={formErrors.relationship ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.relationship} type={"text"} name="relationship" label={"Parentesco:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    size="small" 
+                    error={formErrors.relationship} 
+                    helperText={formErrors.relationship ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    nChange={OnChange} 
+                    value={data.relationship} 
+                    type={"text"} 
+                    name="relationship" 
+                    label={lang.personalReference.parentesco} 
+                    sx={{ width: "100%" }} />
                 </Grid>
             </Grid>
         </Paper>
