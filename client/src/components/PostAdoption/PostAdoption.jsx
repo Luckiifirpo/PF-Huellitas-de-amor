@@ -61,39 +61,39 @@ const speciesArray = [
   },
   {
     value: "feline",
-    label: "Felino",
+    label: "Feline",
   },
   {
     value: "canine",
-    label: "Canino",
+    label: "Canine",
   },
   {
     value: "fish",
-    label: "Pez",
+    label: "Fish",
   },
   {
     value: "rodent",
-    label: "Roedor",
+    label: "Rodent",
   },
   {
     value: "equine",
-    label: "Equino",
+    label: "Equine",
   },
   {
     value: "bovine",
-    label: "Bovino",
+    label: "Bovine",
   },
   {
     value: "ovine",
-    label: "Ovino",
+    label: "Ovine",
   },
   {
     value: "goat",
-    label: "Caprino",
+    label: "Goat",
   },
   {
     value: "other",
-    label: "Otro",
+    label: "Other",
   },
 ];
 
@@ -103,15 +103,15 @@ const sizesArray = [
   },
   {
     value: "small",
-    label: "Pequeño",
+    label: "Small",
   },
   {
     value: "medium",
-    label: "Mediano",
+    label: "Medium",
   },
   {
     value: "big",
-    label: "Grande",
+    label: "Big",
   },
 ];
 const genderArray = [
