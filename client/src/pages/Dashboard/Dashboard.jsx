@@ -70,22 +70,39 @@ import React, { useState } from 'react';
 
 import DataTablePets from '../../components/DataTable/DataTablePets';
 import DataTableUsers from '../../components/DataTable/DataTableUsers';
-import { Grid, List, ListItemButton, ListItemIcon } from "@mui/material";
+import { Grid, List, ListItemButton, ListItemIcon, } from "@mui/material";
 import { Box } from "@mui/system";
 import PetsIcon from '@mui/icons-material/Pets';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"
 import { useEffect } from "react";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import DataTableContactUs from '../../components/DataTable/DataTableContactUs';
 
 
 const Dashboard = (props) => {
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = useState(0);
 
+    
     const selectListItems = (event, index) => {
         setSelectedIndex(index);
+    }
+    const currentUser = useSelector((state) => state.users.currentUser);
+
+    useEffect(() => {
+        if (!currentUser) {
+          dispatch(setToGoAfterLogin("/dashboard"));
+          navigate("/iniciar-sesion");
+        }
+      }, [currentUser]);
+
+    if (currentUser && currentUser.role !== "admin") {
+        window.alert("No puedes acceder aquí")
+        navigate("/")
     }
 
     const renderTable = () => {
