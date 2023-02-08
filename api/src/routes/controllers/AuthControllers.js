@@ -151,7 +151,7 @@ const federatedLoginCtrl = async (req, res, next) => {
                 </body>
                 </html>`, // html body
               });
-              console.log(userData.email)
+            //   console.log(userData.email)
             return res.status(200).json(loggedUserData);
             
         }

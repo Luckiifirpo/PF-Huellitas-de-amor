@@ -86,7 +86,7 @@ const Adoptions = () => {
       }
 
       if (isDifferent) {
-        console.log(sorted_pets_data, pets_data);
+        // console.log(sorted_pets_data, pets_data);
         set_pets_data(sorted_pets_data);
       }
     }

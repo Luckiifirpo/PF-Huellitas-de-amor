@@ -66,7 +66,7 @@ const UserInfoEditor = (props) => {
             photoURL: newPhotoURL ? newPhotoURL : localUserInfoData.photoURL
         }
 
-        console.log(newUserInfoData);
+        // console.log(newUserInfoData);
 
         dispatch(updateUserInfo(newUserInfoData));
     }

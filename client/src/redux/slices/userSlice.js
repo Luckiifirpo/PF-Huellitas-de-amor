@@ -227,7 +227,7 @@ export const postForgotPassword = (obj) => async (dispatch) => {
 }
 
 export const PutresetPassword = (newData, password, password2) => async (dispatch) => {
-    console.log(newData, password + " slice")
+    // console.log(newData, password + " slice")
     try {
         dispatch(setUserBusyMode(true));
         const response = await api.put(`/users/resetpassword/${newData}`, { newPassword: password, newPassword2: password2});

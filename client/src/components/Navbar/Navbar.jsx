@@ -76,7 +76,7 @@ const Navbar = (props) => {
 
   }, [currentUser, lang]);
 
-  console.log(lang)
+  // console.log(lang)
 
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>

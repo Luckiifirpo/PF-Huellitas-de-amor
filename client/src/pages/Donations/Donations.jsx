@@ -33,7 +33,7 @@ const Donations = () => {
   const lang = useSelector((state) => state.lang.currentLangData);
 
   const handleChange = (event) => {
-    console.log(event)
+    // console.log(event)
     dispatch(setAmountDonation(event.target.value))
   }
 

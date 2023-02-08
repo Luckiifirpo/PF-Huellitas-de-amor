@@ -9,7 +9,7 @@ const LeftSideUserCard = (props) => {
 
     const currentUser = useSelector((state) => state.users.currentUser);
     const lang = useSelector((state) => state.lang.currentLangData);
-    console.log(currentUser)
+    // console.log(currentUser)
     useEffect(() => {
 
     }, [currentUser, lang]);
