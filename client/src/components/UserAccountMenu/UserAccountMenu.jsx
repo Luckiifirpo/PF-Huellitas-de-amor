@@ -45,7 +45,7 @@ const UserAccountMenu = (props) => {
                             <Avatar sx={{ width: 32, height: 32 }} src={userData.photoURL ? userData.photoURL : null}>{userData.photoURL ? "" : userData.name[0].toUpperCase()}</Avatar>
                         </Grid>
                         <Grid item sx={{display: "flex", alignItems: "center"}}>
-                            <Typography sx={{ minWidth: 100, color: "black" }}>{userData.name.split(" ")[0]}</Typography>
+                            <Typography sx={{ minWidth: 100, color: "#3B57A9", fontWeight:'700' }}>{userData.name.split(" ")[0]}</Typography>
                         </Grid>
                     </Grid>
                 </Button>

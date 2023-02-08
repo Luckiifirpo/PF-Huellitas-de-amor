@@ -37,7 +37,7 @@ const LangMenu = (props) => {
     return <React.Fragment>
         <Tooltip title="Language">
             <Button onClick={handleClick}>
-                <Typography sx={{ minWidth: 100, color: "black" }}>{langNames[langName]}</Typography>
+                <Typography sx={{ minWidth: 100, color: "primary", fontSize:'15px'}}>{langNames[langName]}</Typography>
             </Button>
         </Tooltip>
         <Menu
