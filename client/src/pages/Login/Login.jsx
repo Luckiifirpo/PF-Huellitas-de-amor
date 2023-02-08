@@ -92,18 +92,18 @@ const Login = (props) => {
 
     return (
         <div className={style.login_div}>
-            <Container style={{ minHeight: "100vh", display: "flex" }}>
-                <Grid container spacing={4} alignItems="center">
-                    <Grid item lg={7}>
+            <Container style={{ minHeight: "100vh", display: "flex", width:"100%"}}>
+                <Grid container spacing={4} alignItems="center" sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                    <Grid item lg={7} sx={{display:{lg:"block",xs:"none"}}}>
                         <img src={login_img} className={style.imgLogin}/>
                     </Grid>
                     <Grid item lg={1}>
 
                     </Grid>
-                    <Grid item lg={4}>
+                    <Grid item lg={4} md={8}>
                         <Paper style={{ paddingBottom: 20 }}>
                             <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
-                                <Grid item>
+                                <Grid item >
                                     <img className={style.logo} src={logo} />
                                 </Grid>
                                 <Grid item>
@@ -113,18 +113,18 @@ const Login = (props) => {
                                 </Grid>
                             </Grid>
                             <form onSubmit={LoginWithEmailAndPassword}>
-                                <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
-                                    <Grid item>
-                                        <TextField type="email" size="small" id="email-input" label={lang.iniciarSesion.inputs.correo} variant="standard" className={style.input_width} />
+                                <Grid container spacing={2} flexDirection={"column"} alignItems={"center"} sx={{padding:"80px"}}>
+                                    <Grid item sx={{width:"100%"}}>
+                                        <TextField sx={{width:"100%"}} type="email" size="small" id="email-input" label={lang.iniciarSesion.inputs.correo} variant="standard" className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
-                                        <TextField size="small" id="password-input" type="password" label={lang.iniciarSesion.inputs.contraseña} variant="standard" className={style.input_width} />
+                                    <Grid item sx={{width:"100%"}}>
+                                        <TextField sx={{width:"100%"}} size="small" id="password-input" type="password" label={lang.iniciarSesion.inputs.contraseña} variant="standard" className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%", display:"flex", justifyContent:"center"}}>
                                         <Link to="/restore-password" className={style.link}>{lang.iniciarSesion.labels.olvidoContraseña}</Link>
                                     </Grid>
-                                    <Grid item>
-                                        <Button type="submit" variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
+                                    <Grid item sx={{width:"100%"}}>
+                                        <Button type="submit" variant="contained" color='yellowButton' size="medium" sx={{ width:"100%", borderRadius: '20px' }} className={style.input_width}>{lang.iniciarSesion.buttons.continuar}</Button>
                                     </Grid>
                                 </Grid>
                             </form>

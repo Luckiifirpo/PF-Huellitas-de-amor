@@ -77,28 +77,29 @@ const SignUp = (props) => {
 
     return (
         <div className={style.sign_up_div} >
-            <Container style={{minHeight:"100vh", display: "flex"}}>
+            <Container style={{minHeight:"100vh", display: "flex", width:"100%"}} sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <form onSubmit={formik.handleSubmit} style={{display: "flex"}}>
-                    <Grid container spacing={4} alignItems="center">
-                        <Grid item lg={7}>
+                    <Grid container spacing={4} alignItems="center" sx={{padding:"80px"}} >
+                        <Grid item lg={7} sx={{display:{lg:"block",xs:"none"}}}>
                             <img src={sign_up_img} />
                         </Grid>
                         <Grid item lg={1}>
 
                         </Grid>
-                        <Grid item lg={4}>
+                        <Grid item lg={4}  md={8}>
                             <Paper style={{ paddingBottom: 20 }}>
                                 <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}} >
                                         <img className={style.logo} src={logo} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <Typography component="h1" sx={{ color: '#FF3041', fontWeight: 'Bold' }}>
                                             {lang.registrarse.titles.registrate}
                                         </Typography>
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <TextField 
+                                            sx={{width:"100%"}}
                                             size="small" 
                                             label={lang.registrarse.inputs.nombre + ":"} 
                                             id="name"
@@ -110,8 +111,9 @@ const SignUp = (props) => {
                                             helperText={formik.touched.name && formik.errors.name}
                                             className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <TextField 
+                                       sx={{width:"100%"}}
                                         size="small" 
                                         id="last-name-input" 
                                         label={lang.registrarse.inputs.apellido + ":"}  
@@ -123,8 +125,9 @@ const SignUp = (props) => {
                                         helperText={formik.touched.surname && formik.errors.surname}
                                         className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <TextField 
+                                        sx={{width:"100%"}}
                                         type="number" 
                                         size="small" 
                                         id="last-name-input" 
@@ -137,8 +140,9 @@ const SignUp = (props) => {
                                         helperText={formik.touched.age && formik.errors.age}
                                         className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <TextField 
+                                        sx={{width:"100%"}}
                                         size="small" 
                                         id="address-input" 
                                         label={lang.registrarse.inputs.direccion + ":"} 
@@ -150,8 +154,9 @@ const SignUp = (props) => {
                                         helperText={formik.touched.direction && formik.errors.direction}
                                         className={style.input_width} />
                                     </Grid>
-                                    <Grid item>
+                                    <Grid item sx={{width:"100%"}}>
                                         <TextField 
+                                        sx={{width:"100%"}}
                                         type="email" 
                                         size="small" 
                                         id="email-input" 
