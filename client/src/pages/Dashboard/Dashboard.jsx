@@ -80,6 +80,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react";
 import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import DataTableContactUs from '../../components/DataTable/DataTableContactUs';
+import Error404 from "../../pages/Error404/Error404"
 
 
 const Dashboard = (props) => {
@@ -93,17 +94,18 @@ const Dashboard = (props) => {
     }
     const currentUser = useSelector((state) => state.users.currentUser);
 
-    useEffect(() => {
-        if (!currentUser) {
-          dispatch(setToGoAfterLogin("/dashboard"));
-          navigate("/iniciar-sesion");
-        }
-      }, [currentUser]);
+    // useEffect(() => {
+    //     if (!currentUser) {
+    //       dispatch(setToGoAfterLogin("/dashboard"));
+    //       navigate("/iniciar-sesion");
+    //     }
+    //   }, [currentUser]);
 
-    if (currentUser && currentUser.role !== "admin") {
-        window.alert("No puedes acceder aquí")
-        navigate("/")
-    }
+    // if (currentUser) {
+    //     if(currentUser.role !== "admin")
+    //     navigate("/404")
+    //     window.alert("No puedes acceder aquí")
+    // }
 
     const renderTable = () => {
         switch(selectedIndex){
@@ -117,6 +119,7 @@ const Dashboard = (props) => {
     }
 
     return <Box sx={{ marginTop: '200px' }}>
+        {currentUser?.role === "admin" ? 
         <Grid container spacing={2}>
             <Grid item md={2}>
                 <Box>
@@ -154,8 +157,10 @@ const Dashboard = (props) => {
                         currentUser ? currentUser.name.split(" ")[0] : null
                     }
                 </Typography> */}
-            </Grid>
+            </Grid>    
         </Grid>
+        :
+        <Error404 />}
     </Box>
 }
 

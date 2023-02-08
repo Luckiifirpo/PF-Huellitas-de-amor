@@ -611,9 +611,9 @@
                     "otro": "Other"
                 },
                 "tamaños": {
-                    "prqueño": "Small",
+                    "pequeño": "Small",
                     "mediano": "Medium",
-                    "big": "Big"
+                    "grande": "Big"
                 },
                 "generos": {
                     "macho": "Male",

@@ -51,7 +51,7 @@ const LeftSideUserCard = (props) => {
                                 {lang.leftSideUserBar.labels.favoritos}
                             </ListItemButton>
                             {
-                                currentUser.role === "admin" ?
+                                currentUser?.role === "admin" ?
                                 <ListItemButton href="/dashboard">
                                     <ListItemIcon>
                                         <SettingsIcon />
