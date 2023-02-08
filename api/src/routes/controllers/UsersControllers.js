@@ -201,6 +201,10 @@ const forgotPassword = async (req, res) => {
 
     if (!user) return res.status(409).send({code: 'UserNotFound', error: 'Usuario no esta registrado'});
 
+    const token = await jwt.sign({ id: user._id }, process.env.RESET_PASSWORD_KEY, {
+        expiresIn: '5m',
+    });
+
     try {
 
         const reset1 = generateId();
@@ -225,7 +229,7 @@ const forgotPassword = async (req, res) => {
             `, // html body
         });
 
-        res.status(200).send("email enviado")
+        res.cookie({ "token": token }).status(200).send("email enviado")
     } catch (error) {
         res.status(500).send({ error: error.message });
     }
@@ -233,6 +237,7 @@ const forgotPassword = async (req, res) => {
 
 const resetpassword = async (req, res) => {
     const { id } = req.params;
+    const { token } = req.cookies;
     const { newPassword, newPassword2 } = req.body;
     const imageHuellitas = "https://lh3.googleusercontent.com/a/AEdFTp5y03Rs5TO_QAPI1GvXO0MXwrwxc5GnifUN53Xp=s96-c-rg-br100"
   const fecha = new Date()
@@ -243,7 +248,7 @@ const resetpassword = async (req, res) => {
     }
 
     if(newPassword !== newPassword2) {
-        return res.status(409).send({code: 'PasswordNotMatch', message: "Las contraseñas no coinciden"});
+        return res.status(409).send({code: 'PasswordIsRequerid', message: "Las contraseñas no coinciden"});
     }
     // const email = await Usuario.findAll({where:{id:id}})
     // console.log(id)
@@ -255,9 +260,14 @@ const resetpassword = async (req, res) => {
     if (!user) {
         return res.status(400).json({ error: "User with this token does not existe" });
     }
-    const token = await jwt.sign({ id: user._id }, process.env.RESET_PASSWORD_KEY, {
-        expiresIn: '20m',
+     await jwt.verify(token, process.env.RESET_PASSWORD_KEY, function(error, codedate){
+        if(error){
+            return res.status(409).send({code: 'Token', message: "User with this token does not existe"});
+        }
     });
+    
+    
+    
     await transporter.sendMail({
         from: '"Huellitas" <hdeamor2023@gmail.com>', // sender address
         to: email, // list of receivers
@@ -279,7 +289,7 @@ const resetpassword = async (req, res) => {
             password: password
         }
         );
-        res.cookie({ "token": token }).status(200).send("contraseña cambiada");
+        res.status(200).send("contraseña cambiada");
 
     } catch (error) {
         res.status(400).send({ error: error.message });

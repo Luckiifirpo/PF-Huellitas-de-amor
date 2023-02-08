@@ -204,6 +204,7 @@ export const postForgotPassword = (obj) => async (dispatch) => {
             switch (email_error_code) {
                 case "UserNotFound":
                 case "EmailIsRequerid":
+                
                     dispatch(setUserMessage({
                         title: "Email Error",
                         message: email_error_code === "UserNotFound"? 'User Not Found' : 'Email Is Required',
@@ -246,11 +247,11 @@ export const PutresetPassword = (newData, password, password2) => async (dispatc
             const Password_error_code = error.response.data.code;
             switch (Password_error_code) {
                 case "PasswordIsRequerid":
-                case "PasswordNotMatch":
+                case "Token":
                     dispatch(setUserMessage({
                         title: "Password Error",
                         message: Password_error_code === "PasswordIsRequerid"? 
-                        'debe ingresar una nueva contraseña que coincidan en Ambos campos' : 'Las contraseñas no coinciden',
+                        'debe ingresar una nueva contraseña que coincidan en Ambos campos' : 'tiempo expirado',
                         details: []
                     }));
                     break;

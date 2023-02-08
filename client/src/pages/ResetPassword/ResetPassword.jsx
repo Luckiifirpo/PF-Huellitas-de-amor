@@ -10,7 +10,7 @@ import style from './ResetPassword.module.css';
 import { useState } from "react";
 
 const ResetPassword = () => {
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
      const { id } = useParams();
@@ -21,6 +21,10 @@ const ResetPassword = () => {
        let rePasswordInput = e.target.querySelector("#repassword-input");
 
        dispatch(PutresetPassword(id, passwordInput.value, rePasswordInput.value));
+       setTimeout(() => {
+        navigate("/iniciar-sesion");
+      }, 1000);
+       
     }
 
      return(
