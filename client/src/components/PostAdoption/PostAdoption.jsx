@@ -8,7 +8,7 @@ import style from "./PostAdoption.module.css";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import AddAPhotoTwoToneIcon from "@mui/icons-material/AddAPhotoTwoTone";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 import * as yup from "yup";
 import ImagePostAdoption from "../../assets/image/fondoPostAdoption.png";
 import IconButton from "@mui/material/IconButton";
@@ -39,20 +39,26 @@ const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
   // date: yup.string("Publication Date").required("fecha es obligatoria"),
   species: yup.string("pet Species").required("Especie es obligatoria"),
-  age: yup.string("Enter pet age").required("edad es obligatoria").default(0),
+  age: yup.string("Enter pet age").required("edad es obligatoria").default(""),
   weight: yup
     .string("Enter pet weight")
     .required("Peso es obligatorio")
-    .default(0),
+    .default(""),
   size: yup.string("Enter pet size").required("tamaño es obligatorio"),
   gender: yup.string("Enter pet gender").required("Genero es obligatorio"),
   breed: yup.string("Enter pet breed").required("raza es obligatorio"),
   description: yup
     .string("Describe your pet")
     .default("Descripcion de mascota"),
+  ageTime: yup
+    .string("Enter ageTime")
+    .required("La edad en tiempo es requirida"),
 });
 
 const speciesArray = [
+  {
+    label: "",
+  },
   {
     value: "feline",
     label: "Felino",
@@ -93,6 +99,9 @@ const speciesArray = [
 
 const sizesArray = [
   {
+    label: "",
+  },
+  {
     value: "small",
     label: "Pequeño",
   },
@@ -107,6 +116,9 @@ const sizesArray = [
 ];
 const genderArray = [
   {
+    label: "",
+  },
+  {
     value: "female",
     label: "Hembra",
   },
@@ -118,6 +130,9 @@ const genderArray = [
 
 const ageTimeArray = [
   {
+    label: "",
+  },
+  {
     value: "months",
     label: "Meses",
   },
@@ -125,7 +140,7 @@ const ageTimeArray = [
     value: "years",
     label: "Años",
   },
-]
+];
 
 const PostAdoption = (props) => {
   const currentUser = useSelector((state) => state.users.currentUser);
@@ -142,16 +157,16 @@ const PostAdoption = (props) => {
     name: "",
     // date: "",
     email: currentUser ? currentUser["email"] : navigate("/iniciar-sesion"),
-    species: "canine",
-    age: 0,
-    ageTime: "years",
-    weight: 0,
-    size: "small",
-    gender: "female",
+    species: "",
+    age: "",
+    ageTime: "",
+    weight: "",
+    size: "",
+    gender: "",
     breed: "",
     description: "",
   };
-  
+
   const formik = useFormik({
     initialValues,
     validationSchema: validationSchema,
@@ -210,11 +225,13 @@ en donde debe hacerse para enviar el post a /animals */
         })
       );
       dispatch(setAdoptionsBusyMode(false));
-      dispatch(setMessage({
-        title: "Completado",
-        message: "Se han cargado tus datos correctamente",
-        details: []
-      }))
+      dispatch(
+        setMessage({
+          title: "Completado",
+          message: "Se han cargado tus datos correctamente",
+          details: [],
+        })
+      );
       setFile(null);
       resetForm();
       setTimeout(() => {
@@ -226,24 +243,25 @@ en donde debe hacerse para enviar el post a /animals */
   };
   /**********************************************************/
 
-  
-
   return (
     <>
-      <Box className={style.gridContact} sx={{ marginBottom: "300px", marginTop: "150px" }}>
-        <Box className={style.gridContactImage}>
-          <img src={ImagePostAdoption} alt="" />
-        </Box>
-
-        <Container sx={{ height: "100%" }}>
+      <Box
+        className={style.gridPostAdoption}
+        sx={{ marginBottom: "100px", marginTop: "150px", paddingBottom: "200px" }}
+      >
+        <Container className={style.containerPostAdoption} >
           <form onSubmit={formik.handleSubmit}>
             <Grid
               container
+              spacing={5}
               justifyContent="center"
               alignItems="center"
               sx={{ height: "100%" }}
             >
-              <Grid item md={12}>
+              <Box className={style.gridContactImage}>
+                {/* <img src={ImagePostAdoption} alt="" /> */}
+              </Box>
+              <Grid item xs={12}>
                 <Typography
                   component="h1"
                   variant="h3"
@@ -252,13 +270,13 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "200px",
+                    marginTop:"50px"
                   }}
                 >
                   {lang.darEnAdopcion.titles.darEnAdopcion}
                 </Typography>
               </Grid>
-              <Grid item md={6}>
+              <Grid item xs={12} md={6}>
                 <Box
                   sx={{
                     display: "flex",
@@ -266,7 +284,8 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
-                    margin: " 0 20px 0 150px",
+                    marginRight:"60px",
+                    marginLeft:"60px"
                   }}
                 >
                   <TextField
@@ -279,20 +298,11 @@ en donde debe hacerse para enviar el post a /animals */
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                   />
-                  {/* <TextField
-                    type="date"
-                    variant="standard"
-                    id="date"
-                    name="date"
-                    value={formik.values.date}
-                    onChange={formik.handleChange}
-                    error={formik.touched.date && Boolean(formik.errors.date)}
-                    helperText={formik.touched.date && formik.errors.date}
-                  /> */}
-                  {/* <TextField
-                    id="especie"
+                  <TextField
+                    id="species"
                     select
-                    label="Especie"
+                    label={lang.darEnAdopcion.inputs.especie + ":"}
+                    value={formik.values.species}
                     SelectProps={{
                       native: true,
                     }}
@@ -303,73 +313,62 @@ en donde debe hacerse para enviar el post a /animals */
                     helperText={formik.touched.species && formik.errors.species}
                     variant="standard"
                   >
-                    {speciesarray.map((option) => (
+                    {speciesArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {
+                          lang.darEnAdopcion.values.especies[
+                            option.label.toLowerCase()
+                          ]
+                        }
                       </option>
                     ))}
-                  </TextField> */}
+                  </TextField>
+
                   <TextField
-                    id="species"
+                    type="number"
+                    inputProps={{ min: 0 }}
+                    label={lang.darEnAdopcion.inputs.edad + ":"}
+                    variant="standard"
+                    id="age"
+                    name="age"
+                    value={formik.values.age}
+                    onChange={formik.handleChange}
+                    error={formik.touched.age && Boolean(formik.errors.age)}
+                    helperText={formik.touched.age && formik.errors.age}
+                  />
+                  <TextField
+                    type="number"
                     select
-                    label={lang.darEnAdopcion.inputs.especie + ":"}
-                    value={formik.values.species}
+                    label={lang.darEnAdopcion.inputs.rango + ":"}
+                    variant="standard"
+                    id="ageTime"
+                    name="ageTime"
+                    value={formik.values.ageTime}
                     SelectProps={{
                       native: true,
                     }}
                     onChange={formik.handleChange}
-                    error={formik.touched.species && Boolean(formik.errors.species)}
-                    helperText={formik.touched.species && formik.errors.species}
-                    variant="standard"
+                    error={
+                      formik.touched.ageTime && Boolean(formik.errors.ageTime)
+                    }
+                    helperText={formik.touched.ageTime && formik.errors.ageTime}
                   >
-                    {speciesArray.map((option) => (
+                    {ageTimeArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {lang.darEnAdopcion.values.especies[option.label.toLowerCase()]}
+                        {
+                          lang.darEnAdopcion.values.rangoTiempo[
+                            option.label.toLowerCase()
+                          ]
+                        }
                       </option>
                     ))}
                   </TextField>
-                  <Box sx={{
-                    display: "flex",
-                  }}>
-                    <TextField
-                      sx={{
-                        width: "300px !important",
-                        marginRight: "30px"
-                      }}
-                      type="number"
-                      label={lang.darEnAdopcion.inputs.edad + ":"}
-                      variant="standard"
-                      id="age"
-                      name="age"
-                      value={formik.values.age}
-                      onChange={formik.handleChange}
-                      error={formik.touched.age && Boolean(formik.errors.age)}
-                      helperText={formik.touched.age && formik.errors.age}
-                    />
-                    <TextField
-                      type="number"
-                      select
-                      label={lang.darEnAdopcion.inputs.rango + ":"}
-                      variant="standard"
-                      id="ageTime"
-                      name="ageTime"
-                      value={formik.values.ageTime}
-                      SelectProps={{
-                        native: true,
-                      }}
-                      onChange={formik.handleChange}
-                      error={formik.touched.ageTime && Boolean(formik.errors.ageTime)}
-                      helperText={formik.touched.ageTime && formik.errors.ageTime}
-                    >{ageTimeArray.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {lang.darEnAdopcion.values.rangoTiempo[option.label.toLowerCase()]}
-                      </option>
-                    ))}</TextField>
-                  </Box>
+
                   <TextField
                     type="number"
                     label={lang.darEnAdopcion.inputs.peso + ":"}
                     variant="standard"
+                    inputProps={{ min: 0 }}
                     id="weight"
                     name="weight"
                     value={formik.values.weight}
@@ -381,19 +380,7 @@ en donde debe hacerse para enviar el post a /animals */
                   />
                 </Box>
               </Grid>
-              <Grid item md={6}>
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
-                  <input
-                    accept="image/*"
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
-                  />
-                  <PhotoCamera />
-                </IconButton>
+              <Grid item xs={12} md={6}>
                 {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
                      si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
                 {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
@@ -404,9 +391,22 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
-                    margin: " 0 150px 0 20px",
+                    marginRight:"60px",
+                    // marginLeft:"60px"
                   }}
                 >
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <input
+                      accept="image/*"
+                      type="file"
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <PhotoCamera />
+                  </IconButton>
                   <TextField
                     id="size"
                     select
@@ -422,7 +422,11 @@ en donde debe hacerse para enviar el post a /animals */
                   >
                     {sizesArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {lang.darEnAdopcion.values.tamaños[option.label.toLowerCase()]}
+                        {
+                          lang.darEnAdopcion.values.tamaños[
+                            option.label.toLowerCase()
+                          ]
+                        }
                       </option>
                     ))}
                   </TextField>
@@ -444,7 +448,11 @@ en donde debe hacerse para enviar el post a /animals */
                   >
                     {genderArray.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {lang.darEnAdopcion.values.generos[option.label.toLowerCase()]}
+                        {
+                          lang.darEnAdopcion.values.generos[
+                            option.label.toLowerCase()
+                          ]
+                        }
                       </option>
                     ))}
                   </TextField>
@@ -480,7 +488,11 @@ en donde debe hacerse para enviar el post a /animals */
                 variant="contained"
                 color="yellowButton"
                 size="large"
-                sx={{ borderRadius: "20px", padding: "9px 150px", marginTop: "50px" }}
+                sx={{
+                  borderRadius: "20px",
+                  padding: "10px 60px",
+                  marginTop: "50px",
+                }}
               >
                 {lang.darEnAdopcion.buttons.publicar}
               </Button>
