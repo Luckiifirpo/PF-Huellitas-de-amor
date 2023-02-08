@@ -4,10 +4,11 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PersonalReference from "../../components/AdoptionRequestComponents/PersonalReference/PersonalReference";
 import PreviousPet from "../../components/AdoptionRequestComponents/PreviousPet/PrevousPet";
 import ResidencesTenant from "../../components/AdoptionRequestComponents/ResidencesTenant/ResidencesTenant";
+import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import { createAdoptionRequest, setUserBusyMode, setUserError, setUserMessage } from "../../redux/slices/userSlice";
 import ErrorManager from "../../resources/ErrorManager";
 import api from "../../services/api";
@@ -122,6 +123,7 @@ const AdoptionRequestForm = (props) => {
     const currentUser = useSelector((state) => state.users.currentUser);
     const dispatch = useDispatch();
     const { pet_id } = useParams();
+    const navigate = useNavigate();
     const [formErrors, setFormErrors] = useState(adminMode ? {
         phoneNumber: false,
         workplacePhoneNumber: false,
@@ -616,8 +618,11 @@ const AdoptionRequestForm = (props) => {
     }
 
     useEffect(() => {
-
-    }, [localState]);
+        if(!currentUser){
+            dispatch(setToGoAfterLogin("/dashboard"));
+            navigate("/iniciar-sesion");
+        }
+    }, [localState, currentUser]);
 
     return <Container style={{ marginTop: '150px', marginBottom: '10px', color: '#FF3041' }}>
         <Grid container spacing={4}>
