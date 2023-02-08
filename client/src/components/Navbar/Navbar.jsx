@@ -136,7 +136,7 @@ const Navbar = (props) => {
             </IconButton>
             <Box
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},justifyContent:"center",marginTop:{xs:"0px",md:"25px"}}}
+              sx={{ flexGrow: 1, display: { xs: 'none', sm:'flex'},marginTop:{xs:"0px",md:"25px"}}}
             >
               <Link to="/">
               <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
