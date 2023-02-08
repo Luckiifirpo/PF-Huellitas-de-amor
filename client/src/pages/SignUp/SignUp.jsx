@@ -77,19 +77,17 @@ const SignUp = (props) => {
 
     return (
         <div className={style.sign_up_div} >
-            <Container style={{minHeight:"100vh", display: "flex", width:"100%"}} sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <Container  sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <form onSubmit={formik.handleSubmit} style={{display: "flex"}}>
-                    <Grid container spacing={4} alignItems="center" sx={{padding:"80px"}} >
+                    <Grid container spacing={4} alignItems="center"  >
                         <Grid item lg={7} sx={{display:{lg:"block",xs:"none"}}}>
-                            <img src={sign_up_img} />
+                            <img src={sign_up_img}  />
                         </Grid>
-                        <Grid item lg={1}>
-
-                        </Grid>
-                        <Grid item lg={4}  md={8}>
-                            <Paper style={{ paddingBottom: 20 }}>
-                                <Grid container spacing={2} flexDirection={"column"} alignItems={"center"}>
-                                    <Grid item sx={{width:"100%"}} >
+                        
+                        <Grid item lg={4} className={style.containerForm}>
+                            <Paper style={{ padding: "8px 20px" }}>
+                                <Grid container spacing={2} flexDirection={"column"} alignItems={"center"} >
+                                    <Grid item sx={{}} >
                                         <img className={style.logo} src={logo} />
                                     </Grid>
                                     <Grid item sx={{width:"100%"}}>
@@ -207,7 +205,7 @@ const SignUp = (props) => {
                                         className={style.input_width} />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px', marginTop: 8 }} className={style.input_width}>{lang.registrarse.buttons.crearCuenta}</Button>
+                                        <Button variant="contained" type="submit" color='yellowButton' size="large" sx={{ borderRadius: '20px' }} className={style.input_width}>{lang.registrarse.buttons.crearCuenta}</Button>
                                     </Grid>
                                 </Grid>
                             </Paper>
