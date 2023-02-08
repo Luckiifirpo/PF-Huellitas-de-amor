@@ -156,7 +156,7 @@ const PostAdoption = (props) => {
   const initialValues = {
     name: "",
     // date: "",
-    email: currentUser ? currentUser["email"] : navigate("/iniciar-sesion"),
+    email: currentUser ? currentUser["email"] : "",
     species: "",
     age: "",
     ageTime: "",
@@ -203,6 +203,7 @@ en donde debe hacerse para enviar el post a /animals */
       });
 
       if (!res.ok) {
+        dispatch(setAdoptionsBusyMode(true));
         dispatch(
           setError(
             ErrorManager.CreateErrorInfoObject(
@@ -270,7 +271,7 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop:"50px"
+                    marginTop: "50px"
                   }}
                 >
                   {lang.darEnAdopcion.titles.darEnAdopcion}
@@ -284,8 +285,8 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
-                    marginRight:"60px",
-                    marginLeft:"60px"
+                    marginRight: "60px",
+                    marginLeft: "60px"
                   }}
                 >
                   <TextField
@@ -317,7 +318,7 @@ en donde debe hacerse para enviar el post a /animals */
                       <option key={option.value} value={option.value}>
                         {
                           lang.darEnAdopcion.values.especies[
-                            option.label.toLowerCase()
+                          option.label.toLowerCase()
                           ]
                         }
                       </option>
@@ -357,7 +358,7 @@ en donde debe hacerse para enviar el post a /animals */
                       <option key={option.value} value={option.value}>
                         {
                           lang.darEnAdopcion.values.rangoTiempo[
-                            option.label.toLowerCase()
+                          option.label.toLowerCase()
                           ]
                         }
                       </option>
@@ -391,7 +392,7 @@ en donde debe hacerse para enviar el post a /animals */
                     gap: "15px",
                     justifyContent: "center",
                     height: "100%",
-                    marginRight:"60px",
+                    marginRight: "60px",
                     // marginLeft:"60px"
                   }}
                 >
@@ -424,7 +425,7 @@ en donde debe hacerse para enviar el post a /animals */
                       <option key={option.value} value={option.value}>
                         {
                           lang.darEnAdopcion.values.tamaños[
-                            option.label.toLowerCase()
+                          option.label.toLowerCase()
                           ]
                         }
                       </option>
@@ -450,7 +451,7 @@ en donde debe hacerse para enviar el post a /animals */
                       <option key={option.value} value={option.value}>
                         {
                           lang.darEnAdopcion.values.generos[
-                            option.label.toLowerCase()
+                          option.label.toLowerCase()
                           ]
                         }
                       </option>
