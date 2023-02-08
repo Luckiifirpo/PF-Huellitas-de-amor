@@ -668,10 +668,11 @@ const AdoptionRequestForm = (props) => {
                     <Paper sx={{ padding: "20px" }}>
                         <Stack spacing={2}>
                             <Alert severity="info">
-                                {lang.adoptionForm.alerts.nuestrasMascotas}
+                                {lang.adoptionForm.alerts.nuestrasMascotas.normal}<strong>{lang.adoptionForm.alerts.nuestrasMascotas.strong}</strong>
                             </Alert>
                             <Alert severity="warning">
-                                {lang.adoptionForm.alerts.warningNuestrasMascotas}
+                                {lang.adoptionForm.alerts.warningNuestrasMascotas.first} <strong>{lang.adoptionForm.alerts.warningNuestrasMascotas.strong}</strong><br />
+                                {lang.adoptionForm.alerts.warningNuestrasMascotas.last}
                             </Alert>
                         </Stack>
                     </Paper>
