@@ -148,7 +148,7 @@ const PersonalReference = (props) => {
                     error={formErrors.relationship} 
                     helperText={formErrors.relationship ? "Valor Invalido" : null} 
                     disabled={adminMode} 
-                    nChange={OnChange} 
+                    onChange={OnChange} 
                     value={data.relationship} 
                     type={"text"} 
                     name="relationship" 
