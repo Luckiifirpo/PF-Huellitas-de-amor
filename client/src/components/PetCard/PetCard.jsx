@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
+import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Hidden, IconButton, Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavorite, setFavorites, getFavorites } from "../../redux/slices/adoptionSlice";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import {
@@ -17,29 +17,30 @@ import {
     TelegramShareButton,
     TwitterShareButton,
     WhatsappShareButton,
-  } from "react-share";
-  import {
+} from "react-share";
+import {
     EmailIcon,
     FacebookIcon,
     LinkedinIcon,
     TelegramIcon,
     TwitterIcon,
     WhatsappIcon,
-  } from "react-share";
+} from "react-share";
+import { Box } from "@mui/system";
 
 
 
 const PetCard = (props) => {
 
-    const { data, modeAction} = props;
+    const { data, modeAction } = props;
     const [toggle, setToggle] = useState(false)
     const [open, setOpen] = useState(false);
     const [openRemove, setOpenRemove] = useState(false);
     const dispatch = useDispatch()
-    const petsData = useSelector( state => state.adoptions.favoritesPets);
+    const petsData = useSelector(state => state.adoptions.favoritesPets);
     const lang = useSelector((state) => state.lang.currentLangData);
     const handleFavorites = () => {
-        setToggle( state => !state)
+        setToggle(state => !state)
         if (!toggle) {
             setOpen(true)
             dispatch(setFavorites(data))
@@ -54,21 +55,21 @@ const PetCard = (props) => {
         dispatch(deleteFavorite(data.id))
         dispatch(getFavorites())
     }
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getFavorites())
-    },[dispatch, lang])
+    }, [dispatch, lang])
 
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-        return;
+            return;
         }
         setOpen(false);
         setOpenRemove(false)
     };
 
     return (
-        <Card className={style.card} sx={{ width: "100%", height: "100%" }}>
+        <Card className={style.card} sx={{ width: "100%", height: "100%", maxHeight: "460px" }}>
             <CardActionArea>
                 <Link to={"/pet_info/" + data.id}>
                     <CardHeader avatar={
@@ -89,63 +90,65 @@ const PetCard = (props) => {
                         alt={(data ? data.name : "") + " image"}>
                     </CardMedia>
                     <CardContent style={{ paddingBottom: 1 }}>
-                        <Typography variant="body2" color="text.secondary">
-                            {
-                                data ? data.description : null
-                            }
-                        </Typography>
+                        <Box sx={{maxHeight: "40px", overflow: "hidden"}}>
+                            <Typography variant="body2" color="text.secondary">
+                                {
+                                    data ? data.description : null
+                                }
+                            </Typography>
+                        </Box>
                         <ul className={style.additional_info}>
                             <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.edad}: </span><span>{data.age} {lang.petCard.labels[data.ageTime]}</span></li>
-                            <li><span style={{ fontWeight: "bold" }}>{lang.petCard.labels.genero}: </span><span>{lang.petCard.labels[data.gender]}</span></li>
+                            <li><span style={{ fontWeight: "bold " }}>{lang.petCard.labels.genero}: </span><span>{lang.petCard.labels[data.gender]}</span></li>
                         </ul>
                     </CardContent>
                 </Link>
             </CardActionArea>
-            <CardActions style={{ paddingTop: 5  }} disableSpacing>
+            <CardActions style={{ paddingTop: 5 }} disableSpacing>
                 {
-                    modeAction ? 
-                    (
-                        <>
-                            <IconButton aria-label="add to favorites" onClick={handleFavorites}>
-                                <FavoriteIcon {...petsData?.some(pet => pet.id === data.id) ? {color:"primary"} : {color:"inherit"}} />
+                    modeAction ?
+                        (
+                            <>
+                                <IconButton aria-label="add to favorites" onClick={handleFavorites}>
+                                    <FavoriteIcon {...petsData?.some(pet => pet.id === data.id) ? { color: "primary" } : { color: "inherit" }} />
+                                </IconButton>
+
+                            </>
+
+                        )
+                        :
+                        (
+                            <IconButton aria-label="remove to favorites" onClick={handleDeleteFavorite} >
+                                <DeleteIcon />
                             </IconButton>
-
-                      </>
-
-                    )
-                    : 
-                    (
-                        <IconButton aria-label="remove to favorites" onClick={handleDeleteFavorite} >
-                            <DeleteIcon />
-                        </IconButton>
-                    )
+                        )
                 }
                 {/* <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton> */}
-                
+
             </CardActions>
             <CardActions>
-            <FacebookShareButton url={"/pet_info/" + data.id} quote={'adopta esta hermosa mascota'} hashtag={'#huellitasDeAmor'}>
-                    <FacebookIcon size={30} round/>
+                <FacebookShareButton url={"/pet_info/" + data.id} quote={'adopta esta hermosa mascota'} hashtag={'#huellitasDeAmor'}>
+                    <FacebookIcon size={30} round />
                 </FacebookShareButton>
-                <WhatsappShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'} separator={'  '}>
-                    <WhatsappIcon size={30} round/>
+                <WhatsappShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'} separator={'  '}>
+                    <WhatsappIcon size={30} round />
                 </WhatsappShareButton>
-                <LinkedinShareButton url={"/pet_info/" + data.id}  
-                   title={'adopta esta hermosa mascota'} 
-                   summary={'Esta aplicación web tiene como objetivo conectar personas con posibles mascotas en adopción'} 
-                   source={'huellitasDeAmor'}>
-                <LinkedinIcon size={30} round/>
+                <LinkedinShareButton url={"/pet_info/" + data.id}
+                    title={'adopta esta hermosa mascota'}
+                    summary={'Esta aplicación web tiene como objetivo conectar personas con posibles mascotas en adopción'}
+                    source={'huellitasDeAmor'}>
+                    <LinkedinIcon size={30} round />
                 </LinkedinShareButton>
-                <TelegramShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'}>
-                    <TelegramIcon size={30} round/>
+                <TelegramShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'}>
+                    <TelegramIcon size={30} round />
                 </TelegramShareButton>
-                <TwitterShareButton url={"/pet_info/" + data.id}  title={'adopta esta hermosa mascota'} hashtag={['#huellitasDeAmor']} related={[]}>
-                    <TwitterIcon size={30} round/>
+                <TwitterShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'} hashtag={['#huellitasDeAmor']} related={[]}>
+                    <TwitterIcon size={30} round />
                 </TwitterShareButton>
-                <EmailShareButton url={"/pet_info/" + data.id}  subject={'Adopcion de Mascota'} body={'Adopta a esta hermosa mascota'} separator={' '}>
-                    <EmailIcon size={30} round/>
+                <EmailShareButton url={"/pet_info/" + data.id} subject={'Adopcion de Mascota'} body={'Adopta a esta hermosa mascota'} separator={' '}>
+                    <EmailIcon size={30} round />
                 </EmailShareButton>
             </CardActions>
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>

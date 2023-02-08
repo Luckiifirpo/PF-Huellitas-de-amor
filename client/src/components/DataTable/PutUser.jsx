@@ -184,7 +184,6 @@ const PutUser = (props) => {
                                         <Grid item sx={{ width: "100%" }}>
                                             <FormControlLabel control={<Checkbox name="hasAJob" onChange={handle_change_input} checked={localUserInfoData ? (localUserInfoData.hasAJob) : false} />} label={lang.userInfoEditor.inputs.empleado} />
                                         </Grid>
-                                       
                                         <Grid item sx={{ width: "100%" }}>
                                             <TextField name="occupation" value={localUserInfoData ? localUserInfoData.occupation : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.ocupacion} sx={{ width: "100%" }} disabled={localUserInfoData ? !localUserInfoData.hasAJob : true} />
                                         </Grid>
