@@ -215,7 +215,7 @@ export default function DataTableUsers() {
         return e.id === toBeAdoptedId
       })[0];
 
-      console.log(adoptionRequest);
+      // console.log(adoptionRequest);
 
       const newAdoptionRequestFormData = {
         petData,

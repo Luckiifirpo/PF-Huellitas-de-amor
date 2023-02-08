@@ -32,7 +32,7 @@ const Login = (props) => {
         const emailInput = e.target.querySelector("#email-input");
         const passwordInput = e.target.querySelector("#password-input");
 
-        console.log(emailInput.value, value);
+        // console.log(emailInput.value, value);
         dispatch(loginWithEmailAndPassword(emailInput.value, passwordInput.value));
     }
 

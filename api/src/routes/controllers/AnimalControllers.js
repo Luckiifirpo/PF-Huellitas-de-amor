@@ -84,7 +84,7 @@ const postAnimal = async (req, res) => {
             </body>
             </html>`, // html body
           });
-          console.log(email);
+        //   console.log(email);
         res.status(201).send(createdAnimal)
     } catch (error) {
         res.status(400).send({error: error.message})

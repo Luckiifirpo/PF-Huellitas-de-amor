@@ -34,7 +34,7 @@ const Footer = () => {
   const lang = useSelector((state) => state.lang.currentLangData);
 
   const initialValues = {
-    name: "$NewsLetter$",
+    name: "NewsLetter",
     email: "",
     description: "Bienvenido",
   };

@@ -147,11 +147,11 @@ const postAdoptionRequest = async (req, res) => {
 
         user.hasAdoptionRequest = true;
         user.save();
-        console.log(email)
-        console.log(name)
-        console.log(petName)
-        console.log(fecha)
-        console.log(petImage)
+        // console.log(email)
+        // console.log(name)
+        // console.log(petName)
+        // console.log(fecha)
+        // console.log(petImage)
         //console.log(user)
         // console.log(pet)
         await transporter.sendMail({

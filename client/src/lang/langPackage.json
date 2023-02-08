@@ -156,26 +156,26 @@
                 "descripcion": "Descripcion",
                 "rango": "Rango",
                 "rangoTiempo": {
-                    "años": "Años",
-                    "meses": "Meses"
+                    "months": "Meses",
+                    "years": "Años"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Felino",
-                    "canino": "Canino",
-                    "pez": "Pez",
-                    "roedor": "Roedor",
-                    "equino": "Equino",
-                    "bovino": "Bovino",
-                    "ovino": "Ovino",
-                    "caprino": "Caprino",
-                    "otro": "Otro"
+                    "feline": "Felino",
+                    "canine": "Canino",
+                    "fish": "Pez",
+                    "rodent": "Roedor",
+                    "equine": "Equino",
+                    "bovine": "Bovino",
+                    "ovine": "Ovino",
+                    "goat": "Caprino",
+                    "other": "Otro"
                 },
                 "tamaños": {
-                    "pequeño": "Pequeño",
-                    "mediano": "Mediano",
-                    "grande": "Grande"
+                    "small": "Pequeño",
+                    "medium": "Mediano",
+                    "big": "Grande"
                 },
                 "generos": {
                     "macho": "Macho",
@@ -589,31 +589,31 @@
                 "especie": "Species",
                 "genero": "Gender",
                 "edad": "Age",
-                "raza": "Race",
+                "raza": "Breed",
                 "peso": "Weight",
                 "descripcion": "Description",
                 "rango": "Range",
                 "rangoTiempo": {
-                    "años": "Years",
-                    "meses": "Months"
+                    "years": "Years",
+                    "months": "Months"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Feline",
-                    "canino": "Canine",
-                    "pez": "Fish",
-                    "roedor": "Rodent",
-                    "equino": "Equine",
-                    "bovino": "Bovine",
-                    "ovino": "Sheep",
-                    "caprino": "Goat",
-                    "otro": "Other"
+                    "feline": "Feline",
+                    "canine": "Canine",
+                    "fish": "Fish",
+                    "rodent": "Rodent",
+                    "equine": "Equine",
+                    "bovine": "Bovine",
+                    "ovine": "Sheep",
+                    "goat": "Goat",
+                    "other": "Other"
                 },
                 "tamaños": {
-                    "pequeño": "Small",
-                    "mediano": "Medium",
-                    "grande": "Big"
+                    "small": "Small",
+                    "medium": "Medium",
+                    "big": "Big"
                 },
                 "generos": {
                     "macho": "Male",
@@ -1032,21 +1032,21 @@
                 "descripcion": "Descrição",
                 "rango": "Alcance",
                 "rangoTiempo": {
-                    "años": "Anos",
-                    "meses": "Meses"
+                    "years": "Anos",
+                    "months": "Meses"
                 }
             },
             "values": {
                 "especies": {
-                    "felino": "Felino",
-                    "canino": "Canino",
-                    "pez": "Peixe",
-                    "roedor": "Roedor",
-                    "equino": "Equino",
-                    "bovino": "Bovino",
-                    "ovino": "Ovelha",
-                    "caprino": "Cabra",
-                    "otro": "Outro"
+                    "feline": "Felino",
+                    "canine": "Canino",
+                    "fish": "Peixe",
+                    "rodent": "Roedor",
+                    "equine": "Equino",
+                    "bovine": "Bovino",
+                    "ovine": "Ovelha",
+                    "goat": "Cabra",
+                    "other": "Outro"
                 },
                 "tamaños": {
                     "pequeño": "Pequeno",

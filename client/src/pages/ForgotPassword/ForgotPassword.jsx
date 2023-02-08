@@ -25,7 +25,7 @@ import style from './ForgotPassword.module.css';
         const userForgotPassword =  (e, value) => {
            e.preventDefault();
            const emailInput = document.querySelector("#email-input");
-           console.log(emailInput.value + " state")
+        //    console.log(emailInput.value + " state")
 
            dispatch(postForgotPassword(emailInput.value));
         }
