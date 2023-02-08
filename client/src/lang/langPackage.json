@@ -316,6 +316,120 @@
             "button": {
                 "guardarContraseña": "Guardar nueva contraseña"
             }
+        },
+        "adoptionForm": {
+            "buttons": {
+                "agregar": "Agregar",
+                "enviar": "Enviar",
+                "autorizar": "Autorizar",
+                "rechazar": "Rechazar",
+                "solicitarRevision": "Solicitar revision de datos"
+            },
+            "alerts": {
+                "nuestrasMascotas": "Nuestras criaturas son muy valiosas para nosotros, por lo tanto nos tomamos muy en serio su bienestar y las condiciones de vida que debe tener junto a las personas con las que les permitimos compartir y convivir. <strong>Es por eso que te solicitamos encarecidamente que nos brindes la mayor informacion en los campos solicitados en el siguiente formulario.</strong>",
+                "warningNuestrasMascotas": "Si ingresas informacion falsa o irrelevante para este proceso, <strong>tu solicitud sera descartada de manera inmediata.</strong><br /> Si ingresas informacion que no podamos comprobar o si decides omitir informacion en este formulario, sera mas dificil realizar el proceso de aprobacion",
+                "teAyudamosASaberSiEsParaTi": "Con la siguiente informacion, podremos saber si esta mascota es la que estas buscando, o si no, te ayudaremos a encontrar otra mascota indicada para ti. Entre mas datos nos proporciones mas facil sera concluir si esta es tu mascota.",
+                "warningTeAyudamosASaberSiEsParaTi": "Si decides omitir informacion que nos ayude a escoger el temperamento de tu proxima mascota, podrias toparte con situaciones inesperadas e indeseadas a la hora de interactuar con tu mascota.",
+                "referenciaPersonal": "Agrega por lo menos una referencia personal",
+                "warningAprobacion": "La aprobacion de la presente solicitud de adopcion esta sujeta al nivel legislativo en materia de proteccion animal aplicable para tu zona, region o pais. Tambien dependera de estudios que realizemos en tu zona de vivienda y areas aledañas, todo con la finalidad de garantizar una vida digna y de bienenstar a nuestras apreciadas criaturas.",
+                "infoAprobacion": "Al finalizar esta solicitud, estaremos contactandonos con usted via correo electronico, para agendar un espacio en su calendario, en el cual nos permita realizar una visita a usted en su residencia."
+            },
+            "titles": {
+                "datosPersonales": "DATOS PERSONALES:",
+                "actitudesConMascota": "TUS ACTITUDES CON UNA MASCOTA:",
+                "referenciasPersonales": "REFERENCIAS PERSONALES:",
+                "mascotasAnteriores": "MASCOTAS ANTERIORES:",
+                "inquilinosEnResidencia": "INQUILINOS EN TU RESIDENCIA:",
+                "sobreResidencia": "SOBRE TU RESIDENCIA:",
+                "sobreProximaResidencia": "SOBRE TU PROXIMA RESIDENCIA:"
+            },
+            "subtitles": {
+                "actitudesConMascota": "Imagina que ya tienes tu mascota. Cual seria tu reaccion frente a los siguientes comportamientos de tu mascota, o como reaccionas generalmente frente a este tipo de situaciones:",
+                "sobreResidencia": {
+                    "sobrePropietario": "Sobre el propietaro:",
+                    "detallesVivienda": "Detalles de tu vivienda:"
+                }
+            },
+            "inputs": {
+                "datosPersonales": {
+                    "telefono": "Telefono celular",
+                    "telTrabajoUOficina": "Tel. Trabajo u Oficina",
+                    "alergias": "Alergias:",
+                    "nivelEducativo": "Nivel Educativo:",
+                    "nivelEducativoOptions": {
+                        "ninguno": "ninguno",
+                        "tecnico": "tecnico",
+                        "tecnologo": "tecnologo",
+                        "profesional": "profesional"
+                    },
+                    "porQueQuieresAdoptar": "Por que quieres adoptar esta mascota?",
+                    "visitasAMiResidencia": "Estoy de acuerdo con que hagan visitas periodicas a mi residencia"
+                },
+                "actitudConMascota": {
+                    "ruidosa": "Frente a una mascota ruidosa:",
+                    "hiperactiva": "Frente a una mascota hiperactiva:",
+                    "calmada": "Frente a una mascota muy calmada:",
+                    "desobediente": "Frente a una mascota desobediente:",
+                    "desechos": "Frente a los desechos indeseados de una mascota:",
+                    "agresiva": "Frente a una mascota agresiva:",
+                    "pequeña": "Frente a una mascota pequeña:",
+                    "grande": "Frente a una mascota grande:"
+                },
+                "inquilinosEnResidencia": {
+                    "numInquilinos": "Numero de inquilinos:",
+                    "deAcuerdo": "Todos estan de acuerdo con la adopcion",
+                    "menoresDeDiez": "Niños menores de 10 años"
+                },
+                "sobreResidencia": {
+                    "soyPropietario": "Soy el propietario de esta vivienda",
+                    "nombrePropietario": "Nombre del propietario:",
+                    "apellidoPropietario": "Apellido del propietario:",
+                    "telefonopropietario": "Numero telefonico del propietario:",
+                    "piensoMudarme": "Pienso mudarme en los proximos meses",
+                    "conozcoDondeMeMudo": "Ya conozco la vivienda donde me voy a mudar",
+                    "tipoVivienda": "Tipo de vivienda:",
+                    "tipoViviendaOptions": {
+                        "separada": "Separada",
+                        "semiSeparada": "Semi separada",
+                        "duplex": "Duplex",
+                        "apartamento": "Apartamento",
+                        "viviendaMueble": "Vivienda Mueble"
+                    },
+                    "areaDondeEstaraMascota": "Area donde estara frecuentemente tu mascota (en metros cuadrados):",
+                    "cuentaConPatio": "La vivienda cuenta con un patio",
+                    "cuentaConJardin": "La vivienda cuenta con un jardin",
+                    "cuentaConTerraza": "La vivienda cuenta con una terraza",
+                    "cuentaConZonaDescubierta": "La vivienda cuenta con una zona descubierta" 
+                }
+            }
+        },
+        "personalReference": {
+            "title": "Referencia Personal",
+            "nombre": "Nombre:",
+            "apellido": "Apellido:",
+            "edad": "Edad:",
+            "correo": "Correo:",
+            "empleado": "Empleado",
+            "ocupacion": "Ocupacion:",
+            "parentesco": "Parentesco:"
+        },
+        "previousPet": {
+            "title": "Mascota",
+            "nombre": "Nombre:",
+            "edad": "Edad:",
+            "especie": "Especie:",
+            "aunVive": "Aun esta en vida:",
+            "aunViveOptions": {
+                "si": "Si",
+                "no": "No",
+                "noLoSe": "No lo sé"
+            },
+            "aunConservo": "Aun lo conservo",
+            "vacunas": "Vacunas:",
+            "agregarVacunas": {
+                "nombre": "Nombre:",
+                "fecha": "Fecha de Aplicación:"
+            }
         }
     },
     "en": {

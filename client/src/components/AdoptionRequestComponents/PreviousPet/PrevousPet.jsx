@@ -2,10 +2,11 @@ import { Button, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Paper,
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PreviousPetVaccine from "../PreviousPetVaccine/PreviousPetVaccine";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const PreviousPet = (props) => {
+    const lang = useSelector((state) => state.lang.currentLangData);
     const { item, data, adminMode } = props;
     const [formErrors, setFormErrors] = useState(adminMode ?
         {
@@ -19,9 +20,9 @@ const PreviousPet = (props) => {
     const [haveErrors, setHaveErrors] = useState(false);
 
     const isAliveOptions = [
-        { label: "yes", value: "yes", langKey: 'si', index: 0 },
-        { label: "no", value: "no", langKey: 'no', index: 1 },
-        { label: "unknown", value: "unknown", langKey: 'desconocido', index: 2 }
+        { label: lang.previousPet.aunViveOptions.si, value: "yes", langKey: 'si', index: 0 },
+        { label: lang.previousPet.aunViveOptions.no, value: "no", langKey: 'no', index: 1 },
+        { label: lang.previousPet.aunViveOptions.noLoSe, value: "unknown", langKey: 'desconocido', index: 2 }
     ]
 
     const RemoveIt = () => {
@@ -64,7 +65,7 @@ const PreviousPet = (props) => {
             <Grid container spacing={1}>
                 <Grid item md={6}>
                     <Typography sx={{ color: '#FF3041', fontWeight: 'Bold', marginBottom: "10px" }}>
-                        Mascota #{item + 1}:
+                        {lang.previousPet.title} #{item + 1}:
                         {/*lang.adoptionRequest.titles.datosPersonales*/}
                     </Typography>
                 </Grid>
@@ -74,22 +75,58 @@ const PreviousPet = (props) => {
                     </IconButton>}
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="name" error={formErrors.name} helperText={formErrors.name ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.name} label={"Nombre:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    type={"text"} 
+                    size="small" 
+                    name="name" 
+                    error={formErrors.name} 
+                    helperText={formErrors.name ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.name} 
+                    label={lang.previousPet.nombre} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"number"} size="small" name="age" disabled={adminMode} onChange={OnChange} value={data.age} label={"Edad:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    type={"number"} 
+                    size="small" 
+                    name="age" 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.age} 
+                    label={lang.previousPet.edad} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="species" error={formErrors.species} helperText={formErrors.species ? "Valor Invalido" : null} disabled={adminMode} onChange={OnChange} value={data.species} label={"Especie:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    type={"text"} 
+                    size="small" 
+                    name="species" 
+                    error={formErrors.species} 
+                    helperText={formErrors.species ? "Valor Invalido" : null} 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.species} 
+                    label={lang.previousPet.especie} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
-                    <TextField type={"text"} size="small" name="details" disabled={adminMode} onChange={OnChange} value={data.details} label={"Detalles:"} sx={{ width: "100%" }} />
+                    <TextField 
+                    type={"text"} 
+                    size="small" 
+                    name="details" 
+                    disabled={adminMode} 
+                    onChange={OnChange} 
+                    value={data.details} 
+                    label={lang.previousPet.detalles} 
+                    sx={{ width: "100%" }} />
                 </Grid>
                 <Grid item md={12}>
                     <TextField
                         name="isAlive"
                         select
-                        label={"Aun esta en vida:"}
+                        label={lang.previousPet.aunVive}
                         disabled={adminMode}
                         value={isAliveOptions.filter(e => {
                             return e.value === data.isAlive
@@ -110,18 +147,20 @@ const PreviousPet = (props) => {
                 </Grid>
                 <Grid item md={12}>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox onChange={OnChange} disabled={adminMode} name="stillPreserved" checked={data.stillPreserved} />} label="Aun lo conservo" />
+                        <FormControlLabel control={<Checkbox onChange={OnChange} disabled={adminMode} name="stillPreserved" checked={data.stillPreserved} />} 
+                        label={lang.previousPet.aunConservo} />
                     </FormGroup>
                 </Grid>
                 <Grid item md={12}>
                     <Typography sx={{ color: '#FF3041', fontWeight: 'Bold', marginBottom: "10px" }}>
-                        Vacunas:
+                        {lang.previousPet.vacunas}
                     </Typography>
                 </Grid>
                 {
                     adminMode ? null : 
                     <Grid item md={12}>
-                        <Button onClick={AddVaccine} variant="outlined" size="small">Agregar</Button>
+                        <Button onClick={AddVaccine} variant="outlined" size="small">
+                        {lang.adoptionForm.buttons.agregar}r</Button>
                     </Grid>
                 }
                 {
