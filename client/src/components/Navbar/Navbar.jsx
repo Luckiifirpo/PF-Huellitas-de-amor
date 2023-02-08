@@ -76,15 +76,18 @@ const Navbar = (props) => {
 
   }, [currentUser, lang]);
 
+  console.log(lang)
+
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }}>
       <Box sx={{ padding: '10px 0px' }}>
         <img className='logo' src={Logo} alt="Logo Huellitas de amor" />
       </Box>
       <Divider />
+      <Button  onClick={handleDrawerToggle} >x</Button>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
+          <ListItem  onClick={handleDrawerToggle} key={item.name} disablePadding>
             <Button key={item.name} component={RouterLink} to={item.route}>
               {lang.navbar.links[item.name]}
             </Button>
@@ -95,6 +98,9 @@ const Navbar = (props) => {
             {/* {lang.navbar.links.inicio} */}
             {lang.navbar.links.favoritos}
           </Button>
+        </ListItem>
+        <ListItem sx={{marginLeft:'-15px'}} disablePadding>
+          <LangMenu />
         </ListItem>
         <ListItem disablePadding>
           {/* <Button component={RouterLink} to="/iniciar-sesion">
@@ -108,6 +114,7 @@ const Navbar = (props) => {
               }
         </ListItem>
       </List>
+      
     </Box>
   );
 
@@ -142,7 +149,7 @@ const Navbar = (props) => {
                 </Button>
               ))}
               <Button component={RouterLink} to="/favoritos">
-                <Badge badgeContent={numberFavorites?.length} color="primary">
+                <Badge badgeContent={numberFavorites?.length} color="yellowButton">
                   <FavoriteIcon />
                 </Badge>
               </Button>
