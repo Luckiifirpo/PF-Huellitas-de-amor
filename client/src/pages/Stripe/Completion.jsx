@@ -23,7 +23,7 @@ function Completion(props) {
          <Container style={{ minHeight: "100vh", display: "flex" }}>
             <Grid container spacing={2} alignItems={"center"} textAlign={"center"}>
                <Grid item md={6} style={{ padding: 40 }}>
-                  <img style={{ width: '50vh', marginLeft:'-150px'}} src={fondogracias} alt='gatito feliz' />
+                  <img className={style.fondoGracias} style={{ width: '50vh', marginLeft:'-150px'}} src={fondogracias} alt='gatito feliz' />
                </Grid>
                <Grid item md={6} alignItems="center" sx={{paddingRight:'40px'}}>
                   <Typography component="h1" variant="h1" sx={{ fontSize: '70px', lineHeight: '90px', color: '#FF3041', textTransform: 'uppercase', fontWeight: '700' }}>

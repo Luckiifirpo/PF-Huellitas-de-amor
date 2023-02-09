@@ -133,14 +133,14 @@ const UserInfoEditor = (props) => {
                 </Grid>
                 <Grid item md={8}>
                     <Box>
-                        <Grid container>
-                            <Grid item md={6} sx={{ paddingRight: "20px" }}>
+                        <Grid container spacing={2}>
+                            <Grid item md={6}>
                                 <Box>
                                     <Grid container spacing={2}>
-                                        <Grid item sx={{ width: "100%" }}>
+                                        <Grid item sx={{ order:{xs:5,md:0}, width: "100%" }}>
                                             <TextField name="name" value={localUserInfoData ? localUserInfoData.name : ""} onChange={handle_change_input} label={lang.userInfoEditor.inputs.nombre} sx={{ width: "100%" }} />
                                         </Grid>
-                                        <Grid item sx={{ width: "100%" }}>
+                                        <Grid item sx={{order:{xs:4,md:0}, width: "100%" }}>
                                             <TextField name="age" value={localUserInfoData ? localUserInfoData.age : 0} type={"number"} onChange={handle_change_input} label={lang.userInfoEditor.inputs.edad} sx={{ width: "100%" }} />
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
@@ -179,13 +179,13 @@ const UserInfoEditor = (props) => {
                                                 </CardActionArea>
                                             </Card>
                                         </Grid>
-                                        <Grid item sx={{ width: "100%" }}>
-                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
+                                        <Grid item sx={{ display:{xs:'none',md:'block'}, width: "100%" }}>
+                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, marginBottom:'15px' }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
                                         </Grid>
                                     </Grid>
                                 </Box>
                             </Grid>
-                            <Grid item md={6} sx={{ paddingLeft: "20px" }}>
+                            <Grid item md={6}>
                                 <Box>
                                     <Grid container spacing={2}>
                                         <Grid item sx={{ width: "100%" }}>
@@ -204,6 +204,10 @@ const UserInfoEditor = (props) => {
                                         {loginType === "withEmailAndPassword" ? <Grid item sx={{ width: "100%" }}>
                                             <Link to="/cambio-contraseña">{lang.userInfoEditor.link}</Link>
                                         </Grid> : null}
+
+                                        <Grid item sx={{ display:{xs:'block',md:'none'}, width: "100%" }}>
+                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, marginBottom:'15px' }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
+                                        </Grid>
                                     </Grid>
                                 </Box>
                             </Grid>
