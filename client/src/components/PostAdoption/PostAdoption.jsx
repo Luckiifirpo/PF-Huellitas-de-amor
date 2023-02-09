@@ -398,9 +398,7 @@ en donde debe hacerse para enviar el post a /animals */
                 >
                   <IconButton
                     aria-label="upload picture"
-                    color='yellowButton' 
-                    size="large" 
-                    sx={{ borderRadius: '20px' }}
+                    color='primary' 
                     component="label"
                   >
                     <input
@@ -408,7 +406,7 @@ en donde debe hacerse para enviar el post a /animals */
                       type="file"
                       onChange={(e) => setFile(e.target.files[0])}
                     />
-//                     <PhotoCamera />
+                     <PhotoCamera />
                   </IconButton>
                   <TextField
                     id="size"
