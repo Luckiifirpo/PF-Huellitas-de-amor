@@ -272,7 +272,7 @@ en donde debe hacerse para enviar el post a /animals */
           <form onSubmit={formik.handleSubmit} style={{display: "flex", justifyContent: "center"}}>
             <Grid
               container
-              spacing={5}
+              spacing={2}
               justifyContent="center"
               alignItems="center"
               sx={{ height: "100%", width: {md: "1000px"}, position: "relative"}}
@@ -289,7 +289,7 @@ en donde debe hacerse para enviar el post a /animals */
                     color: "#FF3041",
                     textTransform: "uppercase",
                     fontWeight: "700",
-                    marginTop: "50px"
+                    marginTop: {sx: "50px", md: "120px"}
                   }}
                 >
                   {lang.darEnAdopcion.titles.darEnAdopcion}
