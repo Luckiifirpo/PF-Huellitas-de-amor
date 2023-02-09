@@ -31,7 +31,7 @@ import { Box } from "@mui/system";
 
 
 const PetCard = (props) => {
-    const CLIENT_URL = `https://huellitas-de-amor.vercel.app/`
+    const CLIENT_URL = `https://huellitas-de-amor.vercel.app`
     const { data, modeAction } = props;
     const [toggle, setToggle] = useState(false)
     const [open, setOpen] = useState(false);
