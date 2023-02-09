@@ -31,7 +31,7 @@ import { Box } from "@mui/system";
 
 
 const PetCard = (props) => {
-
+    const { CLIENT_URL } = process.env
     const { data, modeAction } = props;
     const [toggle, setToggle] = useState(false)
     const [open, setOpen] = useState(false);
@@ -129,25 +129,25 @@ const PetCard = (props) => {
 
             </CardActions>
             <CardActions>
-                <FacebookShareButton url={"/pet_info/" + data.id} quote={'adopta esta hermosa mascota'} hashtag={'#huellitasDeAmor'}>
+                <FacebookShareButton url={`${CLIENT_URL}/pet_info/${data.id}`} quote={'adopta esta hermosa mascota'} hashtag={'#huellitasDeAmor'}>
                     <FacebookIcon size={30} round />
                 </FacebookShareButton>
-                <WhatsappShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'} separator={'  '}>
+                <WhatsappShareButton url={`${CLIENT_URL}/pet_info/${data.id}`} title={'adopta esta hermosa mascota'} separator={'  '}>
                     <WhatsappIcon size={30} round />
                 </WhatsappShareButton>
-                <LinkedinShareButton url={"/pet_info/" + data.id}
+                <LinkedinShareButton url={`${CLIENT_URL}/pet_info/${data.id}`}
                     title={'adopta esta hermosa mascota'}
                     summary={'Esta aplicación web tiene como objetivo conectar personas con posibles mascotas en adopción'}
                     source={'huellitasDeAmor'}>
                     <LinkedinIcon size={30} round />
                 </LinkedinShareButton>
-                <TelegramShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'}>
+                <TelegramShareButton url={`${CLIENT_URL}/pet_info/${data.id}`} title={'adopta esta hermosa mascota'}>
                     <TelegramIcon size={30} round />
                 </TelegramShareButton>
-                <TwitterShareButton url={"/pet_info/" + data.id} title={'adopta esta hermosa mascota'} hashtag={['#huellitasDeAmor']} related={[]}>
+                <TwitterShareButton url={`${CLIENT_URL}/pet_info/${data.id}`} title={'adopta esta hermosa mascota'} hashtag={['#huellitasDeAmor']} related={[]}>
                     <TwitterIcon size={30} round />
                 </TwitterShareButton>
-                <EmailShareButton url={"/pet_info/" + data.id} subject={'Adopcion de Mascota'} body={'Adopta a esta hermosa mascota'} separator={' '}>
+                <EmailShareButton url={`${CLIENT_URL}/pet_info/${data.id}`} subject={'Adopcion de Mascota'} body={'Adopta a esta hermosa mascota'} separator={' '}>
                     <EmailIcon size={30} round />
                 </EmailShareButton>
             </CardActions>
