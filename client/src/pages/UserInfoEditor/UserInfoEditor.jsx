@@ -180,7 +180,7 @@ const UserInfoEditor = (props) => {
                                             </Card>
                                         </Grid>
                                         <Grid item sx={{ width: "100%" }}>
-                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5 }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
+                                            <Button onClick={update_user_info} variant="contained" color='yellowButton' size="medium" sx={{ borderRadius: '20px', paddingLeft: 5, paddingRight: 5, marginBottom:'15px' }}>{lang.userInfoEditor.buttons.actualizarDatos}</Button>
                                         </Grid>
                                     </Grid>
                                 </Box>
