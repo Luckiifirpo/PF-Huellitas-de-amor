@@ -20,27 +20,27 @@ import { useEffect } from "react";
 const validationSchema = yup.object({
     email: yup
         .string('Enter your email')
-        .email('Enter a valid email')
-        .required('Email is required'),
+        .email('Ingresa un email corecto')
+        .required('Email es requerido'),
     name: yup
         .string('Enter your name')
-        .required('name is required'),
+        .required('Nombre es requerido'),
     surname: yup
         .string('Enter your surname')
-        .required('surname is required'),
+        .required('Apellido es requerido'),
     age: yup
         .string('Enter your age')
-        .required('age is required'),
+        .required('Edad es requerida'),
     direction: yup
         .string('Enter your address')
-        .required('address is required'),
+        .required('Direccion es requerida'),
     hasAJob: yup
         .string('Are yoe working?')
-        .required('work is required'),
+        .required('Selecciona una opción'),
     password: yup
         .string('Enter your password')
-        .min(8, 'Password should be of minimum 8 characters length')
-        .required('Password is required'),
+        .min(8, 'Ocho caracteres como mínimo en la contraseña')
+        .required('Contraseña es requerida'),
 });
 
 const SignUp = (props) => {
@@ -127,6 +127,7 @@ const SignUp = (props) => {
                                         <TextField 
                                         sx={{width:"100%"}}
                                         type="number" 
+                                        inputProps={{ min: 0 }}
                                         size="small" 
                                         id="last-name-input" 
                                         label={lang.registrarse.inputs.edad + ":"} 

@@ -12,7 +12,7 @@ import { useState } from "react";
 const ResetPassword = () => {
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
      const { id } = useParams();
     
     const userResetPassword =  (e, value) => {
@@ -21,6 +21,7 @@ const ResetPassword = () => {
        let rePasswordInput = e.target.querySelector("#repassword-input");
 
        dispatch(PutresetPassword(id, passwordInput.value, rePasswordInput.value));
+        navigate("/")
     }
 
      return(

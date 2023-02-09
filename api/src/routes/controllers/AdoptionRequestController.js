@@ -147,6 +147,9 @@ const postAdoptionRequest = async (req, res) => {
 
         user.hasAdoptionRequest = true;
         user.save();
+        
+        pet.isAdopted = true,
+        pet.save();
         // console.log(email)
         // console.log(name)
         // console.log(petName)

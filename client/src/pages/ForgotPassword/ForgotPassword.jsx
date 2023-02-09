@@ -27,7 +27,7 @@ import style from './ForgotPassword.module.css';
            const emailInput = document.querySelector("#email-input");
         //    console.log(emailInput.value + " state")
 
-           dispatch(postForgotPassword(emailInput.value));
+           dispatch(postForgotPassword(emailInput.value)).then(navigate("/"));
         }
 
         return(

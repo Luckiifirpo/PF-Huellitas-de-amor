@@ -116,10 +116,9 @@ export default function DataTablePets() {
 
     },
     {
-      field: 'IsAdopted',
+      field: 'isAdopted',
       headerName: 'Adoptado',
       type: 'boolean',
-      editable: true,
       width: 90
     },
     {
