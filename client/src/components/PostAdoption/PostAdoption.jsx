@@ -19,6 +19,11 @@ import { useFormik } from "formik";
 import { postPet } from "../../redux/slices/petsSlice";
 import { useNavigate } from "react-router-dom";
 import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
   CircularProgress,
   Dialog,
   DialogActions,
@@ -34,6 +39,7 @@ import { setToGoAfterLogin } from "../../redux/slices/navigationSlice";
 import { useEffect } from "react";
 import { setAdoptionsBusyMode } from "../../redux/slices/adoptionSlice";
 import { setMessage } from "../../redux/slices/messageInfoSlice";
+import no_image from "../../assets/image/no-image.png";
 
 const validationSchema = yup.object({
   name: yup.string("Enter Dogs name").required("El nombre es obligatorio"),
@@ -244,20 +250,32 @@ en donde debe hacerse para enviar el post a /animals */
   };
   /**********************************************************/
 
+  const openImageFileDialog = (event) => {
+    var post_adoption_image_input = document.querySelector("#post-adoption-image-input");
+    post_adoption_image_input.click();
+  }
+
+  const selectImage = (event) => {
+    const file = event.target.files[0];
+    setFile(file);
+  }
+
   return (
     <>
-      <Box
+      {/*<Box
         className={style.gridPostAdoption}
-        sx={{ marginBottom: "100px", marginTop: "150px", paddingBottom: "200px" }}
+        sx={{ marginBottom: "100px", marginTop: "150px", paddingBottom: "200px", width: {lg: "1000px"} }}
       >
-        <Container className={style.containerPostAdoption} >
-          <form onSubmit={formik.handleSubmit}>
+        
+  </Box>*/}
+  <Container className={style.containerPostAdoption} sx={{ marginBottom: "100px", marginTop: "280px", paddingBottom: "200px", width: {lg: "1000px"} }}>
+          <form onSubmit={formik.handleSubmit} style={{display: "flex", justifyContent: "center"}}>
             <Grid
               container
               spacing={5}
               justifyContent="center"
               alignItems="center"
-              sx={{ height: "100%" }}
+              sx={{ height: "100%", width: {md: "1000px"}, position: "relative"}}
             >
               <Box className={style.gridContactImage}>
                 {/* <img src={ImagePostAdoption} alt="" /> */}
@@ -278,211 +296,215 @@ en donde debe hacerse para enviar el post a /animals */
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "15px",
-                    justifyContent: "center",
-                    height: "100%",
-                    marginRight: "60px",
-                    marginLeft: "60px"
-                  }}
-                >
-                  <TextField
-                    id="name"
-                    label={lang.darEnAdopcion.inputs.nombre + ":"}
-                    variant="standard"
-                    name="name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    error={formik.touched.name && Boolean(formik.errors.name)}
-                    helperText={formik.touched.name && formik.errors.name}
-                  />
-                  <TextField
-                    id="species"
-                    select
-                    label={lang.darEnAdopcion.inputs.especie + ":"}
-                    value={formik.values.species}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.species && Boolean(formik.errors.species)
-                    }
-                    helperText={formik.touched.species && formik.errors.species}
-                    variant="standard"
-                  >
-                    {speciesArray.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {
-                          lang.darEnAdopcion.values.especies[
-                          option.label.toLowerCase()
-                          ]
-                        }
-                      </option>
-                    ))}
-                  </TextField>
-
-                  <TextField
-                    type="number"
-                    inputProps={{ min: 0 }}
-                    label={lang.darEnAdopcion.inputs.edad + ":"}
-                    variant="standard"
-                    id="age"
-                    name="age"
-                    value={formik.values.age}
-                    onChange={formik.handleChange}
-                    error={formik.touched.age && Boolean(formik.errors.age)}
-                    helperText={formik.touched.age && formik.errors.age}
-                  />
-                  <TextField
-                    type="number"
-                    select
-                    label={lang.darEnAdopcion.inputs.rango + ":"}
-                    variant="standard"
-                    id="ageTime"
-                    name="ageTime"
-                    value={formik.values.ageTime}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.ageTime && Boolean(formik.errors.ageTime)
-                    }
-                    helperText={formik.touched.ageTime && formik.errors.ageTime}
-                  >
-                    {ageTimeArray.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {
-                          lang.darEnAdopcion.values.rangoTiempo[
-                          option.label.toLowerCase()
-                          ]
-                        }
-                      </option>
-                    ))}
-                  </TextField>
-
-                  <TextField
-                    type="number"
-                    label={lang.darEnAdopcion.inputs.peso + ":"}
-                    variant="standard"
-                    inputProps={{ min: 0 }}
-                    id="weight"
-                    name="weight"
-                    value={formik.values.weight}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.weight && Boolean(formik.errors.weight)
-                    }
-                    helperText={formik.touched.weight && formik.errors.weight}
-                  />
-                </Box>
+                <TextField
+                  id="name"
+                  sx={{width: "100%"}}
+                  label={lang.darEnAdopcion.inputs.nombre + ":"}
+                  variant="standard"
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
+                />
               </Grid>
               <Grid item xs={12} md={6}>
-                {/* La linea de abajo genera una preview de la imagen que se eligió para subir,
-                     si quieren implementarlo quedaria bastante bien, yo no lo hago porque me da miedo el mui jajajaj*/}
-                {/* { file ? <img alt="Preview" height="60" src={URL.createObjectURL(file)} /> : null } */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "15px",
-                    justifyContent: "center",
-                    height: "100%",
-                    marginRight: "60px",
-                    // marginLeft:"60px"
+                <TextField
+                  id="size"
+                  sx={{width: "100%"}}
+                  select
+                  label={lang.darEnAdopcion.inputs.tamaño + ":"}
+                  value={formik.values.size}
+                  SelectProps={{
+                    native: true,
                   }}
+                  onChange={formik.handleChange}
+                  error={formik.touched.size && Boolean(formik.errors.size)}
+                  helperText={formik.touched.size && formik.errors.size}
+                  variant="standard"
                 >
-                  <IconButton
-                    aria-label="upload picture"
-                    color='primary' 
-                    component="label"
-                  >
-                    <input
-                      accept="image/*"
-                      type="file"
-                      onChange={(e) => setFile(e.target.files[0])}
-                    />
-                     <PhotoCamera />
-                  </IconButton>
-                  <TextField
-                    id="size"
-                    select
-                    label={lang.darEnAdopcion.inputs.tamaño + ":"}
-                    value={formik.values.size}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    onChange={formik.handleChange}
-                    error={formik.touched.size && Boolean(formik.errors.size)}
-                    helperText={formik.touched.size && formik.errors.size}
-                    variant="standard"
-                  >
-                    {sizesArray.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {
-                          lang.darEnAdopcion.values.tamaños[
-                          option.label.toLowerCase()
-                          ]
-                        }
-                      </option>
-                    ))}
-                  </TextField>
-                  <TextField
-                    id="gender"
-                    name="gender"
-                    select
-                    label={lang.darEnAdopcion.inputs.genero + ":"}
-                    value={formik.values.gender}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.gender && Boolean(formik.errors.gender)
-                    }
-                    helperText={formik.touched.gender && formik.errors.gender}
-                    variant="standard"
-                  >
-                    {genderArray.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {
-                          lang.darEnAdopcion.values.generos[
-                          option.label.toLowerCase()
-                          ]
-                        }
-                      </option>
-                    ))}
-                  </TextField>
-                  <TextField
-                    label={lang.darEnAdopcion.inputs.raza + ":"}
-                    variant="standard"
-                    id="breed"
-                    name="breed"
-                    value={formik.values.breed}
-                    onChange={formik.handleChange}
-                    error={formik.touched.breed && Boolean(formik.errors.breed)}
-                    helperText={formik.touched.breed && formik.errors.breed}
-                  />
-                  <TextField
-                    label={lang.darEnAdopcion.inputs.descripcion + ":"}
-                    variant="standard"
-                    id="description"
-                    name="description"
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.description &&
-                      Boolean(formik.errors.description)
-                    }
-                    helperText={
-                      formik.touched.description && formik.errors.description
-                    }
-                  />
-                </Box>
+                  {sizesArray.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {
+                        lang.darEnAdopcion.values.tamaños[
+                        option.label.toLowerCase()
+                        ]
+                      }
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  id="species"
+                  sx={{width: "100%"}}
+                  select
+                  label={lang.darEnAdopcion.inputs.especie + ":"}
+                  value={formik.values.species}
+                  SelectProps={{
+                    native: true,
+                  }}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.species && Boolean(formik.errors.species)
+                  }
+                  helperText={formik.touched.species && formik.errors.species}
+                  variant="standard"
+                >
+                  {speciesArray.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {
+                        lang.darEnAdopcion.values.especies[
+                        option.label.toLowerCase()
+                        ]
+                      }
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  id="gender"
+                  sx={{width: "100%"}}
+                  name="gender"
+                  select
+                  label={lang.darEnAdopcion.inputs.genero + ":"}
+                  value={formik.values.gender}
+                  SelectProps={{
+                    native: true,
+                  }}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.gender && Boolean(formik.errors.gender)
+                  }
+                  helperText={formik.touched.gender && formik.errors.gender}
+                  variant="standard"
+                >
+                  {genderArray.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {
+                        lang.darEnAdopcion.values.generos[
+                        option.label.toLowerCase()
+                        ]
+                      }
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  type="number"
+                  sx={{width: "100%"}}
+                  inputProps={{ min: 0 }}
+                  label={lang.darEnAdopcion.inputs.edad + ":"}
+                  variant="standard"
+                  id="age"
+                  name="age"
+                  value={formik.values.age}
+                  onChange={formik.handleChange}
+                  error={formik.touched.age && Boolean(formik.errors.age)}
+                  helperText={formik.touched.age && formik.errors.age}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label={lang.darEnAdopcion.inputs.raza + ":"}
+                  sx={{width: "100%"}}
+                  variant="standard"
+                  id="breed"
+                  name="breed"
+                  value={formik.values.breed}
+                  onChange={formik.handleChange}
+                  error={formik.touched.breed && Boolean(formik.errors.breed)}
+                  helperText={formik.touched.breed && formik.errors.breed}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  type="number"
+                  sx={{width: "100%"}}
+                  select
+                  label={lang.darEnAdopcion.inputs.rango + ":"}
+                  variant="standard"
+                  id="ageTime"
+                  name="ageTime"
+                  value={formik.values.ageTime}
+                  SelectProps={{
+                    native: true,
+                  }}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.ageTime && Boolean(formik.errors.ageTime)
+                  }
+                  helperText={formik.touched.ageTime && formik.errors.ageTime}
+                >
+                  {ageTimeArray.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {
+                        lang.darEnAdopcion.values.rangoTiempo[
+                        option.label.toLowerCase()
+                        ]
+                      }
+                    </option>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label={lang.darEnAdopcion.inputs.descripcion + ":"}
+                  sx={{width: "100%"}}
+                  variant="standard"
+                  id="description"
+                  name="description"
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.description &&
+                    Boolean(formik.errors.description)
+                  }
+                  helperText={
+                    formik.touched.description && formik.errors.description
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  type="number"
+                  sx={{width: "100%"}}
+                  label={lang.darEnAdopcion.inputs.peso + ":"}
+                  variant="standard"
+                  inputProps={{ min: 0 }}
+                  id="weight"
+                  name="weight"
+                  value={formik.values.weight}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.weight && Boolean(formik.errors.weight)
+                  }
+                  helperText={formik.touched.weight && formik.errors.weight}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Card>
+                  <CardActionArea sx={{ display: "flex", justifyContent: "flex-start" }} onClick={openImageFileDialog}>
+                    <CardMedia component="img" sx={{ width: "80px", height: "auto" }} image={file ? URL.createObjectURL(file) : no_image}></CardMedia>
+                    <CardContent>
+                      <Typography variant="h5" component="h5">
+                        Foto
+                      </Typography>
+                      <Typography component="p">
+                        {file ? file.name : "Ninguna foto seleccionada"}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+                <input
+                  id="post-adoption-image-input"
+                  accept="image/*"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={selectImage}
+                />
               </Grid>
               <Button
                 type="submit"
@@ -500,7 +522,6 @@ en donde debe hacerse para enviar el post a /animals */
             </Grid>
           </form>
         </Container>
-      </Box>
     </>
   );
 };
