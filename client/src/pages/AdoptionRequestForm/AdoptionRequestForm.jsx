@@ -537,6 +537,7 @@ const AdoptionRequestForm = (props) => {
         }
 
         dispatch(createAdoptionRequest(adoptionRequestData));
+        navigate("/")
     }
 
     const AuthorizeRequest = async () => {

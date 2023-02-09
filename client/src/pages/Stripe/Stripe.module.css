@@ -9,3 +9,20 @@
 .page_gracias_div{
     min-height: 100vh !important;
 }
+
+@media only screen and (min-width: 299px) and (max-width: 900px) {
+  
+ .page_gracias_div{
+    margin-top: -200px;
+ }
+ .page_gracias_div .fondoGracias {
+    display: none;
+ }
+ .page_gracias_div h1{
+    font-size: 5vh !important;
+ }
+ .page_gracias_div p{
+    font-size: 2vh !important;
+ }
+
+}
