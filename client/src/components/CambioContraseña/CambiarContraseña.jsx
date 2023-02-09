@@ -68,7 +68,8 @@ const CambioContraseña = () => {
           title: "Actualizacion completada",
           message: "Se han actualizado tus datos de usuario correctamente",
           details: []
-        })).then(navigate("/");
+        }));
+        navigate("/")
 
       } catch (error) {
         dispatch(setUserBusyMode(false));
