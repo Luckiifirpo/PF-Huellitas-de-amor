@@ -272,7 +272,7 @@ en donde debe hacerse para enviar el post a /animals */
           <form onSubmit={formik.handleSubmit} style={{display: "flex", justifyContent: "center"}}>
             <Grid
               container
-              spacing={5}
+              spacing={6}
               justifyContent="center"
               alignItems="center"
               sx={{ height: "100%", width: {md: "1000px"}, position: "relative"}}
