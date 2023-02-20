@@ -1,9 +1,8 @@
 import { initializeApp } from "firebase/app";
-import dotenv from "dotenv"
-dotenv.config()
+
 // console.log(import.meta.env)
 const { APPID_FIREBASE, MESSAGINGSENDERID_FIREBASE, STORAGEBUCKET_FIREBASE, PROJECTID_FIREBASE,
-  DATABASEURL_FIREBASE, AUTHDOMAIN_FIREBASE, APIKEY_FIREBASE } = process.env
+  DATABASEURL_FIREBASE, AUTHDOMAIN_FIREBASE, APIKEY_FIREBASE } = import.meta.env
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
