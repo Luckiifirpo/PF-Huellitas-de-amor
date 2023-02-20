@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^1.46.0",
     "aos": "^2.3.4",
     "axios": "^1.2.2",
+    "dotenv": "^16.0.3",
     "firebase": "^9.16.0",
     "firebase-tools": "^11.21.0",
     "formik": "^2.2.9",
